@@ -1,0 +1,367 @@
+//
+//  HomeVC.m
+//  Base_iOS
+//
+//  Created by 蔡卓越 on 2017/8/3.
+//  Copyright © 2017年 caizhuoyue. All rights reserved.
+//
+
+#import "HomeVC.h"
+#import "GoodView.h"
+#import "NSAttributedString+add.h"
+
+#import "TLUserLoginVC.h"
+#import "NavigationController.h"
+#import "TabbarViewController.h"
+#import "SelectMoneyVC.h"
+#import "ManualAuditVC.h"
+#import "MyQuotaVC.h"
+#import "LoanFailureVC.h"
+#import "LoanVC.h"
+#import "LoanOrderDetailVC.h"
+#import "RepaymentVC.h"
+#import "NoticeVC.h"
+
+#import "TLPageDataHelper.h"
+
+#import "GoodModel.h"
+
+@interface HomeVC ()
+
+@property (nonatomic, strong) TLPageDataHelper *helper;
+
+@property (nonatomic, strong) NSArray <GoodModel *>*goods;
+
+@property (nonatomic, strong) GoodView *goodView;
+
+@property (nonatomic, assign) BOOL isFirst;
+
+@property (nonatomic, strong) OrderModel *order;
+
+@end
+
+@implementation HomeVC
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIColor createImageWithColor:kWhiteColor] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    
+    [self reuqestGoods];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    self.navigationItem.titleView = [UIButton buttonWithTitle:@"九州宝" titleColor:kTextColor backgroundColor:kClearColor titleFont:kWidth(18.0)];
+
+    [UIBarButtonItem addRightItemWithImageName:@"消息" frame:CGRectMake(0, 0, 18, 13) vc:self action:@selector(notice)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loanStatusDidChange:) name:kLoanStatusChangeNotificaiton object:nil];
+ 
+    _isFirst = YES;
+}
+
+- (void)initGoodView {
+
+    BaseWeakSelf;
+    
+    CGFloat leftMargin = 15;
+    
+    CGFloat topMargin = 10;
+    
+    CGFloat viewW = kScreenWidth - 2*leftMargin;
+    
+    CGFloat viewH = kWidth(135);
+    
+    CGFloat y = 0;
+    
+    self.bgSV.height -= 49;
+
+    self.bgSV.backgroundColor = kBackgroundColor;
+    
+    for (int i = 0; i < self.goods.count; i++) {
+        
+        GoodView *goodView = [[GoodView alloc] initWithFrame:CGRectMake(leftMargin, topMargin + i*(topMargin + viewH), viewW, viewH)];
+        
+        goodView.tag = 1220 + i;
+        
+        goodView.goodModel = self.goods[i];
+
+        goodView.loanBlock = ^(LoanType loanType, GoodModel *good) {
+            
+            [weakSelf loanEventWithType:loanType good:good];
+        };
+        
+        self.goodView = goodView;
+        
+        [self.bgSV addSubview:goodView];
+        
+        y = goodView.yy;
+        
+    }
+    
+    UILabel *promptLbl = [UILabel labelWithText:@"" textColor:kTextColor2 textFont:kWidth(11.0)];
+    
+    promptLbl.frame = CGRectMake(0, y + 10, kScreenWidth, kWidth(15));
+    
+    promptLbl.textAlignment = NSTextAlignmentCenter;
+    
+    NSAttributedString *promptAttrStr = [NSAttributedString getAttributedStringWithImgStr:@"产品" index:0 string:@" 更多产品敬请期待"];
+    
+    promptLbl.attributedText = promptAttrStr;
+    
+    [self.bgSV addSubview:promptLbl];
+    
+    self.bgSV.contentSize = CGSizeMake(kScreenWidth, promptLbl.yy + 5);
+
+}
+
+#pragma mark - Events
+- (void)loanEventWithType:(LoanType)loanType good:(GoodModel *)good {
+
+    BaseWeakSelf;
+    
+    switch (loanType) {
+        case LoanTypeFirstStep:
+        {
+            if (![TLUser user].isLogin) {
+                
+                TLUserLoginVC *loginVC = [TLUserLoginVC new];
+                
+                loginVC.loginSuccess = ^{
+                    
+                    [weakSelf loanStatusWithGood:good];
+
+                };
+                
+                NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
+                
+                [weakSelf.navigationController presentViewController:navi animated:YES completion:nil];
+                
+                return ;
+            }
+            
+            [self loanStatusWithGood:good];
+            
+        }break;
+            
+        case LoanTypeSecondStep:
+        {
+            
+        }break;
+            
+        case LoanTypeCancel:
+        {
+            [TLAlert alertWithTitle:@"" msg:@"真的要取消这次借款申请？" confirmMsg:@"确定" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+                
+            } confirm:^(UIAlertAction *action) {
+                
+                TLNetworking *http = [TLNetworking new];
+                
+                http.code = @"623021";
+                
+                http.parameters[@"applyUser"] = [TLUser user].userId;
+                http.parameters[@"productCode"] = good.code;
+                
+                [http postWithSuccess:^(id responseObject) {
+                    
+                    [TLAlert alertWithSucces:@"取消成功"];
+                    
+                    [self reuqestGoods];
+                    
+                } failure:^(NSError *error) {
+                    
+                    
+                }];
+            }];
+            
+        }break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)loanStatusDidChange:(NSNotification *)notification {
+
+
+}
+
+- (void)loanStatusWithGood:(GoodModel *)good {
+
+    if ([good.isLocked isEqualToString:@"1"]) {
+        
+        return ;
+    }
+    
+    NSInteger status = [good.userProductStatus integerValue];
+    
+    switch (status) {
+        case 0:
+        {
+            SelectMoneyVC *moneyVC = [SelectMoneyVC new];
+            
+            moneyVC.title = @"产品详情";
+            
+            moneyVC.selectType = SelectGoodTypeAuth;
+            
+            moneyVC.code = good.code;
+            
+            [self.navigationController pushViewController:moneyVC animated:YES];
+            
+        
+        }break;
+            
+        case 1:
+        {
+        
+            TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+            
+            tabbarVC.currentIndex = 1;
+            
+        }break;
+          
+        case 2:
+        {
+            
+            ManualAuditVC *auditVC = [ManualAuditVC new];
+            
+            auditVC.title = @"人工审核";
+            
+            [self.navigationController pushViewController:auditVC animated:YES];
+            
+            
+        }break;
+            
+        case 3:
+        {
+            
+            LoanFailureVC *failureVC = [LoanFailureVC new];
+            
+            failureVC.good = good;
+            
+            [self.navigationController pushViewController:failureVC animated:YES];
+            
+        }break;
+            
+        case 4:
+        {
+            
+            MyQuotaVC *quotaVC = [[MyQuotaVC alloc] init];
+            
+            quotaVC.title = @"我的额度";
+            
+            [self.navigationController pushViewController:quotaVC animated:YES];
+        }break;
+            
+        case 5:
+        {
+            LoanVC *loanVC = [LoanVC new];
+            
+            [self.navigationController pushViewController:loanVC animated:YES];
+
+        }break;
+        
+        case 6:
+        {
+            [self requestOrderWithCode:good.borrowCode];
+            
+        }break;
+            
+        case 7:
+        {
+            [self requestOrderWithCode:good.borrowCode];
+
+        }break;
+            
+        default:
+            break;
+    }
+    
+}
+
+- (void)notice {
+
+    NoticeVC *noticeVC = [NoticeVC new];
+    
+    [self.navigationController pushViewController:noticeVC animated:YES];
+}
+
+#pragma mark - Data
+- (void)reuqestGoods {
+
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    if (_isFirst) {
+        
+        helper.showView = self.view;
+
+    }
+    
+    helper.code = @"623012";
+    helper.parameters[@"userId"] = [TLUser user].userId;
+    
+    [helper modelClass:[GoodModel class]];
+    
+    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        
+        if (objs.count > 0) {
+            
+            self.goods = objs;
+            
+            _isFirst = NO;
+            
+            if (!self.goodView) {
+                
+                [self initGoodView];
+                
+            } else {
+            
+                //已存在，刷新状态
+                for (int i = 0; i < self.goods.count; i++) {
+                    
+                    GoodView *goodView = [self.bgSV viewWithTag:1220 + i];
+                    
+                    goodView.goodModel = self.goods[i];
+                    
+                }
+            }
+            
+        }
+        
+    } failure:^(NSError *error) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self reuqestGoods];
+        });
+        
+    }];
+    
+}
+
+- (void)requestOrderWithCode:(NSString *)code {
+
+    LoanOrderDetailVC *detailVC = [[LoanOrderDetailVC alloc] init];
+    
+    detailVC.code = code;
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
+
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+
+@end

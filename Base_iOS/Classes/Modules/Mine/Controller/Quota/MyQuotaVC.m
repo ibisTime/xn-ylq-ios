@@ -1,0 +1,100 @@
+//
+//  MyQuotaVC.m
+//  Base_iOS
+//
+//  Created by 蔡卓越 on 2017/8/9.
+//  Copyright © 2017年 caizhuoyue. All rights reserved.
+//
+
+#import "MyQuotaVC.h"
+
+#import "UIView+Custom.h"
+
+#import "MyQuotaView.h"
+
+#import "QuotaModel.h"
+
+#import "SelectMoneyVC.h"
+//#import "SignContractVC.h"
+
+@interface MyQuotaVC ()
+
+@property (nonatomic, strong) MyQuotaView *quotaView;
+
+@property (nonatomic, strong) UIButton *quotaBtn;
+
+@end
+
+@implementation MyQuotaVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.title = @"我的额度";
+    
+    [self initQuotaView];
+    
+    [self requestQuota];
+}
+
+#pragma mark - Init
+- (void)initQuotaView {
+
+    self.quotaView = [[MyQuotaView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 160)];
+    
+    self.quotaView.backgroundColor = kAppCustomMainColor;
+    
+    [self.view addSubview:self.quotaView];
+    
+    CGFloat quotaBtnH = 45;
+    
+    self.quotaBtn = [UIButton buttonWithTitle:@"使用额度" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
+    
+    self.quotaBtn.frame = CGRectMake(15, self.quotaView.yy + 44, kScreenWidth - 30, quotaBtnH);
+    
+    [self.quotaBtn addTarget:self action:@selector(clickUseQuota:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:self.quotaBtn];
+}
+
+#pragma mark - Data
+
+- (void)requestQuota {
+    
+    //--//
+    //刷新额度
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"623051";
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        QuotaModel *model = [QuotaModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        self.quotaView.quotaModel = model;
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
+
+#pragma mark - Events
+- (void)clickUseQuota:(UIButton *)sender {
+    
+    SelectMoneyVC *moneyVC = [SelectMoneyVC new];
+    
+    moneyVC.title = @"额度使用";
+    
+    moneyVC.selectType = SelectGoodTypeSign;
+    
+    [self.navigationController pushViewController:moneyVC animated:YES];
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+@end

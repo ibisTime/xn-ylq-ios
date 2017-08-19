@@ -58,9 +58,14 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-    [self requestUserInfo];
+    if ([TLUser user].userId) {
+        
+        [self requestUserInfo];
+        
+        [self requestCouponList];
+    }
     
-    [self requestCouponList];
+    
     //--//
 }
 
@@ -98,9 +103,9 @@
     mineTableView.rowHeight = 45;
     mineTableView.separatorColor = UITableViewCellSeparatorStyleNone;
     mineTableView.backgroundColor = [UIColor colorWithHexString:@"#f1f4f7"];
-
-    self.mineTableView = mineTableView;
+    mineTableView.scrollEnabled = NO;
     
+    self.mineTableView = mineTableView;
     
     //tableview的header
     MineHeaderView *mineHeaderView = [[MineHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
@@ -143,7 +148,7 @@
     helper.code = @"623147";
     
     helper.parameters[@"userId"] = [TLUser user].userId;
-
+    
     helper.parameters[@"status"] = @"0";
     
     [helper modelClass:[CouponModel class]];
@@ -155,6 +160,7 @@
     } failure:^(NSError *error) {
         
     }];
+    
 }
 
 #pragma mark- 通知处理

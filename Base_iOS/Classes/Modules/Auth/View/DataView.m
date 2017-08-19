@@ -46,9 +46,9 @@
 
     NSArray *topTitleArr = @[@"信息认证", @"可选认证"];
     
-    NSArray *contentArr = @[@[@"身份认证", @"个人信息", @"芝麻分", @"运营商认证"], @[@"微信认证", @"通讯录认证", @""]];
+    NSArray *contentArr = @[@[@"身份认证", @"个人信息", @"芝麻分", @"运营商认证"], @[@"通讯录认证", @"微信认证", @""]];
     
-    NSArray *unAuthImgArr = @[@[@"身份认证未认证", @"个人信息未认证", @"芝麻分未认证", @"运营商认证未认证"], @[@"微信未认证", @"通讯录未认证", @""]];
+    NSArray *unAuthImgArr = @[@[@"身份认证未认证", @"个人信息未认证", @"芝麻分未认证", @"运营商认证未认证"], @[@"通讯录未认证", @"微信未认证", @""]];
     
     NSArray *typeArr = @[@[@(DataTypeSFRZ), @(DataTypeBaseInfo), @(DataTypeZMF), @(DataTypeYYSRZ)], @[@(DataTypeTXLRZ), @(DataTypeWXRZ), @(DataTypeWXRZ)]];
     
@@ -183,9 +183,9 @@
                 
                 optionAuthView.backgroundColor = kWhiteColor;
                 
-                optionAuthView.imgW = i == 0 ? 35: 26;
+                optionAuthView.imgW = i == 0 ? 26: 35;
                 
-                optionAuthView.imgH = i == 0 ? 29: 33;
+                optionAuthView.imgH = i == 0 ? 33: 29;
 
                 if (i != 2) {
                     
@@ -232,19 +232,7 @@
 
     _authModel = authModel;
     
-    NSArray *imgArr = @[@[@"身份认证", @"个人信息认证", @"芝麻分认证", @"运营商认证"], @[@"微信认证", @"通讯录认证", @""]];
-    
-    NSArray *unAuthImgArr = @[@[@"身份认证未认证", @"个人信息未认证", @"芝麻分未认证", @"运营商认证未认证"], @[@"微信未认证", @"通讯录未认证", @""]];
-    
-    AuthStatusType identifierType = [authModel.infoIdentifyFlag isEqualToString:@"0"] ? AuthStatusTypeAuthentication: AuthStatusTypeAuthenticated;
-    
-    AuthStatusType basicType = [authModel.infoAntifraudFlag isEqualToString:@"0"] ? AuthStatusTypeAuthentication: AuthStatusTypeCommit;
-    
-    AuthStatusType zmScoreType = [authModel.infoZMCreditFlag isEqualToString:@"0"] ? AuthStatusTypeAuthentication: AuthStatusTypeAuthenticated;
-    
-    AuthStatusType yysType = [authModel.infoCarrierFlag isEqualToString:@"0"] ? AuthStatusTypeAuthentication: AuthStatusTypeAuthenticated;
-    
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 7; i++) {
         
         switch (i) {
             case 0:
@@ -253,9 +241,9 @@
 
                 SectionModel *section = view.section;
 
-                section.authType = identifierType;
+                section.flag = authModel.infoIdentifyFlag;
                 
-                section.img = [authModel.infoIdentifyFlag isEqualToString:@"0"] ? unAuthImgArr[0][i]: imgArr[0][i];
+                section.type = DataTypeSFRZ;
                 
                 view.section = section;
                 
@@ -268,9 +256,9 @@
                 
                 SectionModel *section = view.section;
                 
-                section.authType = basicType;
+                section.flag = [authModel.infoAntifraudFlag isEqualToString:@"1"] ? @"3": authModel.infoAntifraudFlag;
                 
-                section.img = [authModel.infoAntifraudFlag isEqualToString:@"0"] ? unAuthImgArr[0][i]: imgArr[0][i];
+                section.type = DataTypeBaseInfo;
                 
                 view.section = section;
             }
@@ -282,9 +270,9 @@
                 
                 SectionModel *section = view.section;
                 
-                section.authType = zmScoreType;
+                section.flag = authModel.infoZMCreditFlag;
                 
-                section.img = [authModel.infoZMCreditFlag isEqualToString:@"0"] ? unAuthImgArr[0][i]: imgArr[0][i];
+                section.type = DataTypeZMF;
                 
                 view.section = section;
 
@@ -295,16 +283,14 @@
             {
                 BaseAuthView *view = self.viewArr[i];
                 
-                
                 SectionModel *section = view.section;
                 
-                section.authType = yysType;
+                section.flag = authModel.infoCarrierFlag;
 
-                section.img = [authModel.infoCarrierFlag isEqualToString:@"0"] ? unAuthImgArr[0][i]: imgArr[0][i];
-
+                section.type = DataTypeYYSRZ;
+                
                 view.section = section;
 
-                
             }
                 break;
                 
@@ -312,13 +298,13 @@
             {
                 OptionAuthView *view = self.viewArr[i];
                 
-                view.section.authType = AuthStatusTypeAuthentication;
-                
                 SectionModel *section = view.section;
                 
-                NSAttributedString *authAttrStr = [NSAttributedString getAttributedStringWithImgStr:section.authStatusImg index:section.authStatusStr.length + 1 string:[NSString stringWithFormat:@"%@  ", section.authStatusStr]];
+                section.flag = @"0";
                 
-                view.textLabel.attributedText = authAttrStr;
+                section.type = DataTypeTXLRZ;
+                
+                view.section = section;
             }
                 break;
                 
@@ -326,13 +312,13 @@
             {
                 OptionAuthView *view = self.viewArr[i];
                 
-                view.section.authType = AuthStatusTypeAuthentication;
-                
                 SectionModel *section = view.section;
                 
-                NSAttributedString *authAttrStr = [NSAttributedString getAttributedStringWithImgStr:section.authStatusImg index:section.authStatusStr.length + 1 string:[NSString stringWithFormat:@"%@  ", section.authStatusStr]];
+                section.flag = @"0";
                 
-                view.textLabel.attributedText = authAttrStr;
+                section.type = DataTypeWXRZ;
+                
+                view.section = section;
                 
             }
                 break;

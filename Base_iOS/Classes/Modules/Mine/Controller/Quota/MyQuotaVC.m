@@ -23,6 +23,8 @@
 
 @property (nonatomic, strong) UIButton *quotaBtn;
 
+@property (nonatomic, strong) QuotaModel *quota;
+
 @end
 
 @implementation MyQuotaVC
@@ -48,7 +50,7 @@
     
     CGFloat quotaBtnH = 45;
     
-    self.quotaBtn = [UIButton buttonWithTitle:@"使用额度" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
+    self.quotaBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
     
     self.quotaBtn.frame = CGRectMake(15, self.quotaView.yy + 44, kScreenWidth - 30, quotaBtnH);
     
@@ -69,9 +71,13 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        QuotaModel *model = [QuotaModel mj_objectWithKeyValues:responseObject[@"data"]];
+        self.quota = [QuotaModel mj_objectWithKeyValues:responseObject[@"data"]];
         
-        self.quotaView.quotaModel = model;
+        self.quotaView.quotaModel = self.quota;
+        
+        NSString *title = self.quota.validDays > 0 ? @"使用额度": @"重新申请额度";
+        
+        [self.quotaBtn setTitle:title forState:UIControlStateNormal];
         
     } failure:^(NSError *error) {
         
@@ -82,13 +88,36 @@
 #pragma mark - Events
 - (void)clickUseQuota:(UIButton *)sender {
     
-    SelectMoneyVC *moneyVC = [SelectMoneyVC new];
+    [self requestGood];
     
-    moneyVC.title = @"额度使用";
+}
+
+- (void)requestGood {
     
-    moneyVC.selectType = SelectGoodTypeSign;
+    TLNetworking *http = [TLNetworking new];
     
-    [self.navigationController pushViewController:moneyVC animated:YES];
+    http.code = @"623013";
+    
+    http.parameters[@"userId"] = [TLUser user].userId;
+
+    [http postWithSuccess:^(id responseObject) {
+    
+        if([responseObject[@"errorCode"] isEqual:@"0"]){ //成功
+            
+            SelectMoneyVC *moneyVC = [SelectMoneyVC new];
+            
+            moneyVC.title = @"额度使用";
+            
+            moneyVC.selectType = SelectGoodTypeSign;
+            
+            [self.navigationController pushViewController:moneyVC animated:YES];
+            
+        }
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
     
 }
 

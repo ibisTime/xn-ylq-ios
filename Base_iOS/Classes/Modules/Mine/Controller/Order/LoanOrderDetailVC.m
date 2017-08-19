@@ -110,6 +110,14 @@
     
     repaymentVC.order = self.order;
     
+    repaymentVC.paySucces = ^{
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        });
+    };
+    
     [self.navigationController pushViewController:repaymentVC animated:YES];
 }
 

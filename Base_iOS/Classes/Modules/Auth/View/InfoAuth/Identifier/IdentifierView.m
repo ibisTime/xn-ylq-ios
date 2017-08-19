@@ -153,15 +153,11 @@
     
     [imgView sd_setImageWithURL:[NSURL URLWithString:[picFlag.identifyPic convertImageUrl]] placeholderImage:[UIImage imageNamed:@"身份证上传"]];
     
-    AuthStatusType identifierType = [authModel.infoIdentifyPicFlag isEqualToString:@"0"] ? AuthStatusTypeAuthentication: AuthStatusTypeCommit;
-    
-    AuthStatusType faceType = [authModel.infoIdentifyFaceFlag isEqualToString:@"0"] ? AuthStatusTypeAuthentication: AuthStatusTypeAuthenticated;
-    
     for (int i = 0; i < _datas.count; i++) {
         
         SectionModel *section = _datas[i];
         
-        section.authType = i == 0 ? identifierType: faceType;
+        section.flag = i == 0 ? authModel.infoIdentifyPicFlag: authModel.infoIdentifyFaceFlag;
         
         UILabel *textLabel = self.textLabelArr[i];
         
@@ -169,6 +165,7 @@
         
         textLabel.attributedText = authAttrStr;
         
+        textLabel.textColor = section.color;
     }
     
 }

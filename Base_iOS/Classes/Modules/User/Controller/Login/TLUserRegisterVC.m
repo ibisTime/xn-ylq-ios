@@ -50,6 +50,7 @@
     [super viewWillAppear:animated];
     
     CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
+    
     if (authStatus == kCLAuthorizationStatusDenied) { //定位权限不可用可用
         
         [self setUpUI];
@@ -70,11 +71,13 @@
         
         return;
         
+    } else if (authStatus == kCLAuthorizationStatusNotDetermined) {
+    
+        [self setUpUI];
+
     }
     
     [self.sysLocationManager startUpdatingLocation];
-
-
 }
 
 - (void)viewDidLoad {
@@ -139,9 +142,10 @@
     addressTf.placeHolder = @"当前位置-自动定位";
 //    referrer.keyboardType = UIKeyboardTypeNumberPad;
     addressTf.leftIconView.image = [UIImage imageNamed:@"定位"];
+    addressTf.enabled = NO;
+    
     [bgView addSubview:addressTf];
     self.addressTf = addressTf;
-    
     
     for (int i = 0; i < count; i++) {
         
@@ -330,11 +334,15 @@
         return;
     }
   
-    if (!(self.province && self.city && self.area)) {
+    if ([self.addressTf.text valid]) {
         
-        [TLAlert alertWithInfo:@"请选择省市区"];
-        return;
+        if (!(self.province && self.city && self.area)) {
+            
+            [TLAlert alertWithInfo:@"请选择省市区"];
+            return;
+        }
     }
+    
     
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;

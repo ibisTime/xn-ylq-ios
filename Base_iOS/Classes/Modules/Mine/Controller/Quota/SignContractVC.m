@@ -53,7 +53,7 @@
     
     NSString *day = [NSString stringWithFormat:@"%ld天", _good.duration];
     
-    CGFloat totalMoney =[_good.xsRate doubleValue] + [_good.lxRate doubleValue] + [_good.fwRate doubleValue] + [_good.glRate doubleValue];
+    CGFloat totalMoney =[_good.xsAmount doubleValue] + [_good.lxAmount doubleValue] + [_good.fwAmount doubleValue] + [_good.glAmount doubleValue];
 
     NSString *total = [NSString stringWithFormat:@"%@元", [@(totalMoney) convertToSimpleRealMoney]];
     
@@ -65,7 +65,11 @@
     
     NSString *repaymentDateStr = [NSString stringFromDate:repaymentDate formatter:@"yyyy年M月d日"];
     
-    NSString *yqStr = [NSString stringWithFormat:@"7天内逾期, %@元每天\n7天后逾期, %@元每天", [_good.yqRate1 convertToSimpleRealMoney], [_good.yqRate2 convertToSimpleRealMoney]];
+    CGFloat yqAmount1 = [_good.yqRate1 doubleValue]*[_good.amount doubleValue];
+    
+    CGFloat yqAmount2 = [_good.yqRate2 doubleValue]*[_good.amount doubleValue];
+    
+    NSString *yqStr = [NSString stringWithFormat:@"7天内逾期, %@元每天\n7天后逾期, %@元每天", [@(yqAmount1) convertToSimpleRealMoney], [@(yqAmount2) convertToSimpleRealMoney]];
     
     NSArray *contentArr = @[realName, money, day, total, plan, repaymentDateStr, yqStr];
     

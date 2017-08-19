@@ -65,9 +65,13 @@ typedef NS_ENUM(NSInteger, AuthStatusType) {
 
 @property (nonatomic, copy) NSString *img;
 
+@property (nonatomic, strong) UIColor *color;
+
 @property (nonatomic, assign) DataType type;        //认证类型
 
 @property (nonatomic, assign) AuthStatusType authType;
+
+@property (nonatomic, copy) NSString *flag;
 
 @property (nonatomic, copy) NSString *authStatusStr;
 

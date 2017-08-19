@@ -141,7 +141,8 @@
     
     self.totalLbl.text = [_quotaModel.sxAmount convertToSimpleRealMoney];
     
-    self.contentLbl.text = [NSString stringWithFormat:@"还有7天，当前额度失效"];
+    self.contentLbl.text = [NSString stringWithFormat:@"还有%ld天，当前额度失效", _quotaModel.validDays];
+    
 }
 
 @end

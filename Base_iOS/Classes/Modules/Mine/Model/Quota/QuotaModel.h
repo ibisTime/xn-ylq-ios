@@ -14,4 +14,6 @@
 
 @property (nonatomic, copy) NSString *vaildDatetime;
 
+@property (nonatomic, assign) NSInteger validDays;
+
 @end

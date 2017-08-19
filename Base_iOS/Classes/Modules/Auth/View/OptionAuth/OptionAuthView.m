@@ -80,18 +80,11 @@
     
     self.label.text = section.title;
     
-    UIImage *image = [UIImage imageNamed:section.authStatusImg];
-    
-    CGFloat scale = kScreenWidth > 375 ? 3: 2;
-    
-    CGFloat fixelW = CGImageGetWidth(image.CGImage)/(scale*1.0);
-    CGFloat fixelH = CGImageGetHeight(image.CGImage)/(scale*1.0);
-    
-    CGFloat topMargin = (kWidth(15) - fixelH)/2.0;
-    
-    NSAttributedString *authAttrStr = [NSAttributedString getAttributedStringWithImgStr:section.authStatusStr bounds:CGRectMake(0, topMargin, fixelW, fixelH) string:[NSString stringWithFormat:@"%@  ", section.authStatusStr]];
+    NSAttributedString *authAttrStr = [NSAttributedString getAttributedStringWithImgStr:section.authStatusImg index:section.authStatusStr.length + 1 string:[NSString stringWithFormat:@"%@  ", section.authStatusStr]];
     
     self.textLabel.attributedText = authAttrStr;
+    
+    self.textLabel.textColor = _section.color;
     
 }
 

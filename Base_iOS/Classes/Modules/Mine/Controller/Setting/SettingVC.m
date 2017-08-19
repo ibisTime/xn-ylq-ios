@@ -184,13 +184,13 @@
     }];
     
     //
-    SettingModel *bankCard = [SettingModel new];
-    bankCard.text = @"我的银行卡";
-    [bankCard setAction:^{
-        
-        ZHBankCardListVC *vc = [[ZHBankCardListVC alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
+//    SettingModel *bankCard = [SettingModel new];
+//    bankCard.text = @"我的银行卡";
+//    [bankCard setAction:^{
+//        
+//        ZHBankCardListVC *vc = [[ZHBankCardListVC alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }];
     
     SettingModel *aboutUs = [SettingModel new];
     aboutUs.text = @"关于我们";
@@ -205,7 +205,7 @@
     
     self.group = [SettingGroup new];
     
-    self.group.groups = @[@[changeMobile, changeLoginPwd, changePhone], @[bankCard, aboutUs]];
+    self.group.groups = @[@[changeMobile, changeLoginPwd, changePhone], @[aboutUs]];
     
 }
 

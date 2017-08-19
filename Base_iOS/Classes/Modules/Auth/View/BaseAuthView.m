@@ -82,6 +82,8 @@
 
     self.textLabel.attributedText = authAttrStr;
     
+    self.textLabel.textColor = _section.color;
+    
 }
 
 @end

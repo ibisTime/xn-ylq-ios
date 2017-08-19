@@ -275,7 +275,6 @@
 
 - (void)startCalculatedPrice {
 
-    ;
     self.fastFeeLbl.text = [NSString stringWithFormat:@"快速信审费：%@元", [_good.xsAmount convertToSimpleRealMoney]];
     
     self.accountManageFeeLbl.text = [NSString stringWithFormat:@"账户管理费：%@元", [_good.glAmount convertToSimpleRealMoney]];
@@ -343,7 +342,7 @@
 
 - (void)selectCoupon:(UIButton *)sender {
 
-    if (self.coupons.count == 0) {
+    if (self.coupons.count == 1) {
         
         [TLAlert alertWithInfo:@"暂无可使用优惠券"];
 

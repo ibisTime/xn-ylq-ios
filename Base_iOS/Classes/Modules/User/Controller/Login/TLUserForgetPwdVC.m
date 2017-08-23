@@ -25,41 +25,27 @@
     
     self.navigationItem.titleView = [UILabel labelWithTitle:@"找回密码"];
     
-    self.view.backgroundColor = kWhiteColor;
-    
     [self initSubviews];
     
 }
 
 - (void)initSubviews {
+    
+    self.view.backgroundColor = kBackgroundColor;
 
-    UIImageView *iconIV = [[UIImageView alloc] init];
-    
-    iconIV.image = [UIImage imageNamed:@"icon"];
-    
-    iconIV.layer.cornerRadius = 5;
-    iconIV.clipsToBounds = YES;
-    
-    [self.view addSubview:iconIV];
-    [iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.mas_equalTo(0);
-        make.top.mas_equalTo(40);
-        make.width.height.mas_equalTo(66);
-        
-    }];
-    
     CGFloat margin = ACCOUNT_MARGIN;
     CGFloat w = kScreenWidth - 2*margin;
     CGFloat h = ACCOUNT_HEIGHT;
     CGFloat middleMargin = ACCOUNT_MIDDLE_MARGIN;
     
+    CGFloat btnMargin = 15;
+
     UIView *bgView = [[UIView alloc] init];
     
     [self.view addSubview:bgView];
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.mas_equalTo(iconIV.mas_bottom).mas_equalTo(52);
+        make.top.mas_equalTo(20);
         make.left.mas_equalTo(0);
         make.height.mas_equalTo(4*h + 2);
         make.width.mas_equalTo(w + margin);
@@ -70,7 +56,7 @@
     AccountTf *phoneTf = [[AccountTf alloc] initWithFrame:CGRectMake(margin, 0, w, h)];
     phoneTf.placeHolder = @"请输入手机号";
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
-    phoneTf.leftIconView.image = [UIImage imageNamed:@"手机"];
+    phoneTf.leftIconView.image = [UIImage imageNamed:@"用户名"];
     [bgView addSubview:phoneTf];
     self.phoneTf = phoneTf;
     
@@ -78,7 +64,7 @@
     CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(margin, phoneTf.yy + middleMargin, w, h)];
     [bgView addSubview:captchaView];
     captchaView.captchaTf.placeHolder = @"请输入验证码";
-    captchaView.captchaTf.leftIconView.image = [UIImage imageNamed:@"手机"];
+    captchaView.captchaTf.leftIconView.image = [UIImage imageNamed:@"验证码"];
     [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
     self.captchaView = captchaView;
     
@@ -123,10 +109,10 @@
     [self.view addSubview:confirmBtn];
     [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(margin);
-        make.height.mas_equalTo(h + 4);
-        make.right.mas_equalTo(-margin);
-        make.top.mas_equalTo(bgView.mas_bottom).mas_equalTo(45);
+        make.left.mas_equalTo(btnMargin);
+        make.width.mas_equalTo(kScreenWidth - 2*btnMargin);
+        make.height.mas_equalTo(h);
+        make.top.mas_equalTo(bgView.mas_bottom).mas_equalTo(35);
         
     }];
 }

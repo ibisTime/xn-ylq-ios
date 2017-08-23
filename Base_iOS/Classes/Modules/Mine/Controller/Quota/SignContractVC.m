@@ -29,7 +29,7 @@
 
     UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
     
-    [self.view addSubview:topView];
+    [self.bgSV addSubview:topView];
     
     UILabel *textLbl = [UILabel labelWithText:@"" textColor:kTextColor textFont:18];
     
@@ -37,7 +37,7 @@
     
     textLbl.center = topView.center;
     
-    NSAttributedString *textArrt = [NSAttributedString getAttributedStringWithImgStr:@"logo" index:0 string:[NSString stringWithFormat:@"  %@", @"借款协议"]];
+    NSAttributedString *textArrt = [NSAttributedString getAttributedStringWithImgStr:@"logo" index:0 string:[NSString stringWithFormat:@"  %@", @"借款协议"] labelHeight:textLbl.height];
     
     textLbl.textAlignment = NSTextAlignmentCenter;
     
@@ -45,39 +45,45 @@
     
     [topView addSubview:textLbl];
     
-    NSArray *textArr = @[@"借款人:", @"借款金额:", @"借款时限:", @"综合费用:", @"还款方案:", @"还款日期:", @"逾期政策:"];
-    
+    NSArray *textArr = @[@"借款人:", @"借款金额:", @"借款时限:", @"综合费用:", @"实到金额:", @"还款方案:", @"还款日期:", @"逾期政策:"];
+    //借款人
     NSString *realName = [TLUser user].realName;
-
+    //借款金额
     NSString *money = [NSString stringWithFormat:@"%@元", [_good.amount convertToSimpleRealMoney]];
-    
+    //借款时限
     NSString *day = [NSString stringWithFormat:@"%ld天", _good.duration];
-    
+    //综合费用
     CGFloat totalMoney =[_good.xsAmount doubleValue] + [_good.lxAmount doubleValue] + [_good.fwAmount doubleValue] + [_good.glAmount doubleValue];
 
     NSString *total = [NSString stringWithFormat:@"%@元", [@(totalMoney) convertToSimpleRealMoney]];
     
-    NSString *plan = [NSString stringWithFormat:@"一次性还款%@元", [_good.amount convertToSimpleRealMoney]];
+    CGFloat couponFee = _coupon ? [_coupon.amount doubleValue]: 0;
+    //实到金额=总额-综合费用+优惠券金额
+    CGFloat effectAmount = [_good.amount doubleValue] - totalMoney + couponFee;
     
+    NSString *effectAmountStr = [NSString stringWithFormat:@"%@元", [@(effectAmount) convertToSimpleRealMoney]];
+    //还款方案
+    NSString *plan = [NSString stringWithFormat:@"一次性还款%@元", [_good.amount convertToSimpleRealMoney]];
+    //还款日期
     NSDate *currentDate = [NSDate date];
     
     NSDate *repaymentDate = [currentDate dateByAddingTimeInterval:7*24*60*60];
     
     NSString *repaymentDateStr = [NSString stringFromDate:repaymentDate formatter:@"yyyy年M月d日"];
-    
+    //逾期政策
     CGFloat yqAmount1 = [_good.yqRate1 doubleValue]*[_good.amount doubleValue];
     
     CGFloat yqAmount2 = [_good.yqRate2 doubleValue]*[_good.amount doubleValue];
     
     NSString *yqStr = [NSString stringWithFormat:@"7天内逾期, %@元每天\n7天后逾期, %@元每天", [@(yqAmount1) convertToSimpleRealMoney], [@(yqAmount2) convertToSimpleRealMoney]];
     
-    NSArray *contentArr = @[realName, money, day, total, plan, repaymentDateStr, yqStr];
+    NSArray *contentArr = @[realName, money, day, total, effectAmountStr, plan, repaymentDateStr, yqStr];
     
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, topView.yy, kScreenWidth, 300)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, topView.yy, kScreenWidth, 330)];
     
     contentView.backgroundColor = kWhiteColor;
     
-    [self.view addSubview:contentView];
+    [self.bgSV addSubview:contentView];
     
     for (int i = 0; i < textArr.count; i++) {
         
@@ -91,7 +97,7 @@
         
         contentLbl.numberOfLines = 0;
         
-        CGFloat contentH = i == 6 ? 35: 14;
+        CGFloat contentH = i == textArr.count - 1 ? 35: 14;
         
         contentLbl.frame = CGRectMake(titleLbl.xx + 20, 24 + i*(14+22), 200, contentH);
         
@@ -104,17 +110,17 @@
     
     selectBtn.tag = 1250;
     
-    selectBtn.frame = CGRectMake(kWidth(100), contentView.yy + 30, 14, 14);
+    selectBtn.frame = CGRectMake(kWidth(100), contentView.yy + kWidth(30), 14, 14);
     
     [selectBtn addTarget:self action:@selector(clickSelect:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:selectBtn];
+    [self.bgSV addSubview:selectBtn];
     
     UILabel *agreeLbl = [UILabel labelWithText:@"我同意" textColor:kTextColor textFont:12];
     
     agreeLbl.frame = CGRectMake(selectBtn.xx + 7, selectBtn.y, 40, 12);
     
-    [self.view addSubview:agreeLbl];
+    [self.bgSV addSubview:agreeLbl];
     
     UIButton *agreeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"《%@-借款协议》", [TLUser user].realName] titleColor:[UIColor colorWithHexString:@"#4385b3"] backgroundColor:kClearColor titleFont:12];
 
@@ -124,7 +130,7 @@
     
     [agreeBtn addTarget:self action:@selector(agreement) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:agreeBtn];
+    [self.bgSV addSubview:agreeBtn];
     [agreeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.width.mas_lessThanOrEqualTo(200);
@@ -136,11 +142,14 @@
     //确认借款
     UIButton *confirmBtn = [UIButton buttonWithTitle:@"确认借款" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:18 cornerRadius:22.5];
     
-    confirmBtn.frame = CGRectMake(15, agreeLbl.yy + 30, kScreenWidth - 30, 45);
+    confirmBtn.frame = CGRectMake(15, agreeLbl.yy + kWidth(30), kScreenWidth - 30, 45);
     
     [confirmBtn addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:confirmBtn];
+    [self.bgSV addSubview:confirmBtn];
+    
+    self.bgSV.contentSize = CGSizeMake(kScreenWidth, confirmBtn.yy + kWidth(30));
+    
 }
 
 #pragma mark - Events
@@ -158,7 +167,7 @@
     
     [self.navigationController pushViewController:htmlVC animated:YES];
 }
-
+//签约
 - (void)confirm {
 
     UIButton *btn = [self.view viewWithTag:1250];
@@ -173,7 +182,7 @@
     
     http.code = @"623070";
     http.parameters[@"userId"] = [TLUser user].userId;
-    http.parameters[@"couponId"] = self.coupon.code;
+    http.parameters[@"couponId"] = self.coupon.couponId;
     
     [http postWithSuccess:^(id responseObject) {
         

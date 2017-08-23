@@ -38,6 +38,10 @@
 
 @property (nonatomic, copy) NSString *accountNumber;
 
+@property (nonatomic, strong) UILabel *mobileLbl;
+
+@property (nonatomic, strong) UILabel *serviceTimeLbl;
+
 @end
 
 @implementation MineVC
@@ -63,6 +67,10 @@
         [self requestUserInfo];
         
         [self requestCouponList];
+        
+        [self requestServiceTime];
+        
+        [self requestServiceMobile];
     }
     
     
@@ -80,11 +88,9 @@
     
     [self initTableView];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserInfoChange object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserLoginNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
+    [self initServiceInfo];
+
+    [self addNotification];
     
 }
 
@@ -114,6 +120,32 @@
     
     self.headerView = mineHeaderView;
     
+}
+
+- (void)initServiceInfo {
+
+    CGFloat serviceH = 60;
+    
+    UIView *serviceView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 64 - 49 - serviceH, kScreenWidth, serviceH)];
+    
+    [self.view addSubview:serviceView];
+    
+    self.mobileLbl = [UILabel labelWithFrame:CGRectMake(0, 0, kScreenWidth, 16) textAligment:NSTextAlignmentCenter backgroundColor:kClearColor font:Font(15) textColor:kTextColor];
+    
+    [serviceView addSubview:self.mobileLbl];
+    
+    self.serviceTimeLbl = [UILabel labelWithFrame:CGRectMake(0, self.mobileLbl.yy + 10, kScreenWidth, 12) textAligment:NSTextAlignmentCenter backgroundColor:kClearColor font:Font(12) textColor:kTextColor2];
+    
+    [serviceView addSubview:self.serviceTimeLbl];
+}
+
+- (void)addNotification {
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserInfoChange object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserLoginNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
 }
 
 #pragma mark - Data
@@ -163,11 +195,47 @@
     
 }
 
+- (void)requestServiceTime {
+    
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = @"805917";
+    
+    http.parameters[@"ckey"] = @"time";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.serviceTimeLbl.text = [NSString stringWithFormat:@"服务时间: %@", responseObject[@"data"][@"cvalue"]];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void)requestServiceMobile {
+    
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = @"805917";
+    
+    http.parameters[@"ckey"] = @"telephone";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSAttributedString *mobileAttr = [NSAttributedString getAttributedStringWithImgStr:@"电话" index:0 string:[NSString stringWithFormat:@" %@", responseObject[@"data"][@"cvalue"]] labelHeight:self.mobileLbl.height];
+        
+        self.mobileLbl.attributedText = mobileAttr;
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark- 通知处理
 - (void)loginOut {
     
     //
-    [self.headerView.userPhoto sd_setImageWithURL:nil placeholderImage:USER_PLACEHOLDER_SMALL];
+    [self.headerView.userPhoto sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:PLACEHOLDER_SMALL]];
     
     //
     [self.headerView reset];

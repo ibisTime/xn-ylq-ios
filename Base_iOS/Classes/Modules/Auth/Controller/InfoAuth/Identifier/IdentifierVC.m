@@ -218,7 +218,9 @@
                         
                         UIImageView *imgView = [weakSelf.identifierView viewWithTag:1300];
                         
-                        imgView.image = image;
+                        imgView.image = nil;
+                        
+                        weakSelf.identifierView.identifierIV.image = image;
                         
                     } failure:^(NSError *error) {
                         

@@ -88,7 +88,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        self.htmlStr = responseObject[@"data"][@"note"];
+        self.htmlStr = responseObject[@"data"][@"cvalue"];
         
         [self initWebView];
         

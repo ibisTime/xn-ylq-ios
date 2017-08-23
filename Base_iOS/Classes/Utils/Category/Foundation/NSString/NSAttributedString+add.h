@@ -14,6 +14,6 @@
 
 + (NSAttributedString *)getAttributedStringWithImgStr:(NSString *)imgStr bounds:(CGRect)bounds string:(NSString *)string;
 
-+ (NSAttributedString *)getAttributedStringWithImgStr:(NSString *)imgStr index:(NSInteger)index string:(NSString *)string;
++ (NSAttributedString *)getAttributedStringWithImgStr:(NSString *)imgStr index:(NSInteger)index string:(NSString *)string labelHeight:(CGFloat)height;
 
 @end

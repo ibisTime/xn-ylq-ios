@@ -170,18 +170,18 @@
     }];
     
     //
-    SettingModel *changePhone = [SettingModel new];
-    
-    changePhone.text = [[TLUser user].tradepwdFlag boolValue] == NO ? @"设置支付密码": @"修改支付密码";
-    [changePhone setAction:^{
-        
-        TLPwdType pwdType = [[TLUser user].tradepwdFlag boolValue] == NO ? TLPwdTypeSetTrade: TLPwdTypeTradeReset;
-
-        TLPwdRelatedVC *pwdAboutVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-        
-        [self.navigationController pushViewController:pwdAboutVC animated:YES];
-
-    }];
+//    SettingModel *changePayPwd = [SettingModel new];
+//    
+//    changePayPwd.text = [[TLUser user].tradepwdFlag boolValue] == NO ? @"设置支付密码": @"修改支付密码";
+//    [changePayPwd setAction:^{
+//        
+//        TLPwdType pwdType = [[TLUser user].tradepwdFlag boolValue] == NO ? TLPwdTypeSetTrade: TLPwdTypeTradeReset;
+//
+//        TLPwdRelatedVC *pwdAboutVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+//        
+//        [self.navigationController pushViewController:pwdAboutVC animated:YES];
+//
+//    }];
     
     //
 //    SettingModel *bankCard = [SettingModel new];
@@ -205,7 +205,7 @@
     
     self.group = [SettingGroup new];
     
-    self.group.groups = @[@[changeMobile, changeLoginPwd, changePhone], @[aboutUs]];
+    self.group.groups = @[@[changeMobile, changeLoginPwd], @[aboutUs]];
     
 }
 

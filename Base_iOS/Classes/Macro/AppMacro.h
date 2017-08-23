@@ -36,7 +36,7 @@ if(x == nil || [x isKindOfClass:[NSNull class] ]) \
 #pragma mark - Image
 
 #define USER_PLACEHOLDER_SMALL [UIImage imageNamed:@"icon"]
-#define PLACEHOLDER_SMALL @"icon"
+#define PLACEHOLDER_SMALL @"头像"
 #define kCancelIcon @"cancel"
 
 

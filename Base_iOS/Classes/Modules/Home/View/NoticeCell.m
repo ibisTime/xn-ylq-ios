@@ -118,7 +118,7 @@
     NSString *date = [_notice.pushedDatetime convertToDetailDate];
     
     
-    NSAttributedString *timeAttr = [NSAttributedString getAttributedStringWithImgStr:@"消息时间" index:0 string:[NSString stringWithFormat:@"  %@", date]];
+    NSAttributedString *timeAttr = [NSAttributedString getAttributedStringWithImgStr:@"消息时间" index:0 string:[NSString stringWithFormat:@"  %@", date] labelHeight:self.timeLabel.height];
     
     self.timeLabel.attributedText = timeAttr;
     

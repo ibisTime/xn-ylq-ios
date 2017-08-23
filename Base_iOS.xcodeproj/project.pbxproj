@@ -69,6 +69,9 @@
 		211F66881F3AF49800B10E9E /* ZMOPScoreResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F66861F3AF49800B10E9E /* ZMOPScoreResultVC.m */; };
 		211F66971F3B090C00B10E9E /* BankCardAuthResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F66961F3B090C00B10E9E /* BankCardAuthResultVC.m */; };
 		211F669B1F3B0B9500B10E9E /* MyQuotaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F669A1F3B0B9500B10E9E /* MyQuotaVC.m */; };
+		211F6EDE1F4AC0C3007BB638 /* AppDelegate+BaiduMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F6EDD1F4AC0C3007BB638 /* AppDelegate+BaiduMap.m */; };
+		211F6EE41F4ACBA8007BB638 /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F6EE31F4ACBA8007BB638 /* UpdateModel.m */; };
+		211F6EE81F4B0756007BB638 /* KeyValueApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F6EE71F4B0756007BB638 /* KeyValueApi.m */; };
 		21216FCB1F380E30007C9855 /* TLBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21216FAE1F380E2F007C9855 /* TLBaseModel.m */; };
 		21216FCC1F380E30007C9855 /* TLThirdUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 21216FB01F380E30007C9855 /* TLThirdUser.m */; };
 		21216FCD1F380E30007C9855 /* TLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 21216FB21F380E30007C9855 /* TLUser.m */; };
@@ -395,6 +398,12 @@
 		211F66961F3B090C00B10E9E /* BankCardAuthResultVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardAuthResultVC.m; sourceTree = "<group>"; };
 		211F66991F3B0B9500B10E9E /* MyQuotaVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQuotaVC.h; sourceTree = "<group>"; };
 		211F669A1F3B0B9500B10E9E /* MyQuotaVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQuotaVC.m; sourceTree = "<group>"; };
+		211F6EDC1F4AC0C3007BB638 /* AppDelegate+BaiduMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+BaiduMap.h"; sourceTree = "<group>"; };
+		211F6EDD1F4AC0C3007BB638 /* AppDelegate+BaiduMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+BaiduMap.m"; sourceTree = "<group>"; };
+		211F6EE21F4ACBA8007BB638 /* UpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateModel.h; sourceTree = "<group>"; };
+		211F6EE31F4ACBA8007BB638 /* UpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateModel.m; sourceTree = "<group>"; };
+		211F6EE61F4B0756007BB638 /* KeyValueApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyValueApi.h; sourceTree = "<group>"; };
+		211F6EE71F4B0756007BB638 /* KeyValueApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyValueApi.m; sourceTree = "<group>"; };
 		21216FAD1F380E2F007C9855 /* TLBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBaseModel.h; sourceTree = "<group>"; };
 		21216FAE1F380E2F007C9855 /* TLBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLBaseModel.m; sourceTree = "<group>"; };
 		21216FAF1F380E2F007C9855 /* TLThirdUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLThirdUser.h; sourceTree = "<group>"; };
@@ -1231,6 +1240,15 @@
 			path = Quota;
 			sourceTree = "<group>";
 		};
+		211F6EE51F4B0724007BB638 /* BaseApi */ = {
+			isa = PBXGroup;
+			children = (
+				211F6EE61F4B0756007BB638 /* KeyValueApi.h */,
+				211F6EE71F4B0756007BB638 /* KeyValueApi.m */,
+			);
+			path = BaseApi;
+			sourceTree = "<group>";
+		};
 		21212A6F1F18CA880091A493 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1626,6 +1644,8 @@
 				21F82B5A1F17719D0019B176 /* AppDelegate.mm */,
 				21F82B571F17719D0019B176 /* AppDelegate+Launch.h */,
 				21F82B581F17719D0019B176 /* AppDelegate+Launch.m */,
+				211F6EDC1F4AC0C3007BB638 /* AppDelegate+BaiduMap.h */,
+				211F6EDD1F4AC0C3007BB638 /* AppDelegate+BaiduMap.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -1633,6 +1653,7 @@
 		21F82B5B1F17719D0019B176 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				211F6EE51F4B0724007BB638 /* BaseApi */,
 				21F82B5C1F17719D0019B176 /* BaseModel */,
 				21F82B681F17719D0019B176 /* BaseView */,
 				21F82B5F1F17719D0019B176 /* BaseVC */,
@@ -1653,6 +1674,8 @@
 				21076C361F395E6700725C76 /* SettingGroup.m */,
 				21076C371F395E6700725C76 /* SettingModel.h */,
 				21076C381F395E6700725C76 /* SettingModel.m */,
+				211F6EE21F4ACBA8007BB638 /* UpdateModel.h */,
+				211F6EE31F4ACBA8007BB638 /* UpdateModel.m */,
 			);
 			path = BaseModel;
 			sourceTree = "<group>";
@@ -2603,7 +2626,7 @@
 				TargetAttributes = {
 					21F827CE1F1742E80019B176 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 7N9TTQ5LT4;
+						DevelopmentTeam = V9JFY59G9V;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -2778,6 +2801,7 @@
 				214EEDA51F3F0C5B008A02F9 /* KeyValueModel.m in Sources */,
 				210F43FF1F3D3FEE0002052E /* JobInfoVC.m in Sources */,
 				211F66971F3B090C00B10E9E /* BankCardAuthResultVC.m in Sources */,
+				211F6EE81F4B0756007BB638 /* KeyValueApi.m in Sources */,
 				21FB307E1F26E9EF0028ADEE /* TLTextView.m in Sources */,
 				21216FCE1F380E30007C9855 /* TLUserExt.m in Sources */,
 				2126897C1F3C463600225267 /* OptionAuthView.m in Sources */,
@@ -2841,6 +2865,7 @@
 				21FB30C31F26E9EF0028ADEE /* UIScrollView+UITouch.m in Sources */,
 				21216FDB1F380EAB007C9855 /* ZHAddressChooseView.m in Sources */,
 				211709131F42C970002EBF79 /* SettingCell.m in Sources */,
+				211F6EE41F4ACBA8007BB638 /* UpdateModel.m in Sources */,
 				2122F7A91F43E5D200A379C7 /* OverdueTableView.m in Sources */,
 				21FB30CC1F26E9EF0028ADEE /* UIViewController+MethodSwizzling.m in Sources */,
 				2151A1201F4441B2002483CD /* CouponListVC.m in Sources */,
@@ -2912,6 +2937,7 @@
 				211709261F42EA38002EBF79 /* LoanOrderDetailVC.m in Sources */,
 				2126894E1F3C44A100225267 /* ZMOPScoreVC.m in Sources */,
 				21F82C991F17719D0019B176 /* AppDelegate+Launch.m in Sources */,
+				211F6EDE1F4AC0C3007BB638 /* AppDelegate+BaiduMap.m in Sources */,
 				21FB30C91F26E9EF0028ADEE /* UIViewExt.m in Sources */,
 				21FB30AC1F26E9EF0028ADEE /* NSArray+Custom.m in Sources */,
 				21FB30A41F26E9EF0028ADEE /* ZipImg.m in Sources */,
@@ -3024,7 +3050,8 @@
 			baseConfigurationReference = 63F0FF5CA6D8C7CAF539F595 /* Pods-Base_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7N9TTQ5LT4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = V9JFY59G9V;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3059,8 +3086,9 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/Base_iOS/Extension/MoxieSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.ylq.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.ylq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3070,7 +3098,8 @@
 			baseConfigurationReference = 1D92F7998FE0FF842471AF8F /* Pods-Base_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7N9TTQ5LT4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = V9JFY59G9V;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3105,8 +3134,9 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/Base_iOS/Extension/MoxieSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.ylq.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.ylq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

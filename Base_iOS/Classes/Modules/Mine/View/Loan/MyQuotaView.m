@@ -43,7 +43,7 @@
     
     [self addSubview:textLbl];
     
-    self.totalLbl = [UILabel labelWithText:@"800" textColor:kWhiteColor textFont:32];
+    self.totalLbl = [UILabel labelWithText:@"0" textColor:kWhiteColor textFont:32];
     
     self.totalLbl.frame = CGRectMake(0, textLbl.yy + 12, 200, 33);
     
@@ -141,7 +141,18 @@
     
     self.totalLbl.text = [_quotaModel.sxAmount convertToSimpleRealMoney];
     
-    self.contentLbl.text = [NSString stringWithFormat:@"还有%ld天，当前额度失效", _quotaModel.validDays];
+    NSString *vaildDays = @"";
+    
+    if (_quotaModel.validDays <= 0) {
+        
+        vaildDays = @"当前额度已失效, 请重新申请";
+        
+    } else {
+    
+        vaildDays = [NSString stringWithFormat:@"还有%ld天，当前额度失效", _quotaModel.validDays];
+    }
+    
+    self.contentLbl.text = vaildDays;
     
 }
 

@@ -182,7 +182,7 @@
     
     self.levelLbl.text = [NSString stringWithFormat:@"LV%@", _goodModel.level];
     
-    self.conditionLbl.text = _goodModel.slogan;
+    self.conditionLbl.text = [_goodModel.isLocked isEqualToString:@"0"] ? @"极速放款": _goodModel.slogan;
 
     if ([_goodModel.isLocked isEqualToString:@"0"]) {
         
@@ -194,7 +194,7 @@
         
         self.alpha = 1;
 
-        if ([_goodModel.userProductStatus isEqualToString:@"1"] || [_goodModel.userProductStatus isEqualToString:@"2"] || [_goodModel.userProductStatus isEqualToString:@"4"]) {
+        if ([_goodModel.userProductStatus isEqualToString:@"1"] || [_goodModel.userProductStatus isEqualToString:@"2"]) {
             
             self.conditionLbl.hidden = YES;
             

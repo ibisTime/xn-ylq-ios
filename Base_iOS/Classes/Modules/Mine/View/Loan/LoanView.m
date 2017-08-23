@@ -78,7 +78,7 @@
 
 - (void)initProcessView {
 
-    NSArray *titleArr = @[@"额度使用", @"签约成功", @"放款中"];
+    NSArray *titleArr = @[@"额度使用", @"签约成功", @"已放款"];
 
     NSArray *imgArr = @[@"期望额度", @"签约成功", @"unselect"];
     
@@ -142,11 +142,13 @@
     }
 }
 
-- (void)setLoanModel:(LoanModel *)loanModel {
+- (void)setOrderModel:(OrderModel *)orderModel {
 
-    _loanModel = loanModel;
+    _orderModel = orderModel;
     
-    [self.quotaLbl labelWithString:@"800元" title:@"元" font:Font(kWidth(16)) color:kTextColor];
+    NSString *amount = [NSString stringWithFormat:@"%@元", [_orderModel.amount convertToSimpleRealMoney]];
+    
+    [self.quotaLbl labelWithString:amount title:@"元" font:Font(kWidth(16)) color:kTextColor];
 }
 
 @end

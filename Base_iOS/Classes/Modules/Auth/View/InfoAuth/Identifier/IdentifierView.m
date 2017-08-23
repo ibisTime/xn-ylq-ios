@@ -8,8 +8,9 @@
 
 #import "IdentifierView.h"
 #import "NSAttributedString+add.h"
+#import "UIView+Custom.h"
 
-#define kIVWidth 100
+#define kIVWidth 140
 
 @interface IdentifierView ()
 
@@ -63,24 +64,37 @@
         [self addSubview:bgView];
 
         UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickIV:)];
-        
+    
         [bgView addGestureRecognizer:tapGR];
+        
+        UIImageView *bgIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, kWidth(36), kWidth(kIVWidth), kWidth(kIVWidth))];
+        
+        bgIV.centerX = centerX;
+
+        [bgView addSubview:bgIV];
+        //画虚线
+        [bgIV drawAroundLine:3 lineSpacing:3 lineColor:kLineColor];
+        
+        if (i == 0) {
+            
+            self.identifierIV = bgIV;
+        }
+        
+        CGFloat ivH = i == 0 ? 56: 70;
         
         UIImageView *iv = [[UIImageView alloc] init];
         
-        iv.frame = CGRectMake(0, kWidth(30), kWidth(kIVWidth), kWidth(kIVWidth));
-        
-        iv.centerX = centerX;
+        iv.frame = CGRectMake(kWidth(35), kWidth((140 - ivH)/2.0), kWidth(70), kWidth(ivH));
         
         iv.tag = 1300 + i;
         
-        [bgView addSubview:iv];
+        [bgIV addSubview:iv];
         
         [self.ivArr addObject:iv];
         
         UILabel *label = [UILabel labelWithText:@"" textColor:kTextColor textFont:kWidth(14.0)];
         
-        label.frame = CGRectMake(0, iv.yy + kWidth(23), 110, 15);
+        label.frame = CGRectMake(0, bgIV.yy + kWidth(23), 110, 15);
         
         label.centerX = centerX;
         
@@ -149,9 +163,14 @@
     
     InfoIdentifyPic *picFlag = self.authModel.infoIdentifyPic;
     
-    UIImageView *imgView = [self viewWithTag:1300];
-    
-    [imgView sd_setImageWithURL:[NSURL URLWithString:[picFlag.identifyPic convertImageUrl]] placeholderImage:[UIImage imageNamed:@"身份证上传"]];
+    if (picFlag.identifyPic) {
+        
+        UIImageView *imgView = [self viewWithTag:1300];
+        
+        imgView.image = nil;
+    }
+
+    [self.identifierIV sd_setImageWithURL:[NSURL URLWithString:[picFlag.identifyPic convertImageUrl]] placeholderImage:[UIImage imageNamed:@""]];
     
     for (int i = 0; i < _datas.count; i++) {
         
@@ -161,7 +180,7 @@
         
         UILabel *textLabel = self.textLabelArr[i];
         
-        NSAttributedString *authAttrStr = [NSAttributedString getAttributedStringWithImgStr:section.authStatusImg index:section.authStatusStr.length + 1 string:[NSString stringWithFormat:@"%@  ", section.authStatusStr]];
+        NSAttributedString *authAttrStr = [NSAttributedString getAttributedStringWithImgStr:section.authStatusImg index:section.authStatusStr.length + 1 string:[NSString stringWithFormat:@"%@  ", section.authStatusStr] labelHeight:textLabel.height];
         
         textLabel.attributedText = authAttrStr;
         

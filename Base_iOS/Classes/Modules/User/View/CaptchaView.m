@@ -23,16 +23,14 @@
 - (void)setUpUIWith:(CGRect)frame
 {
     
-    self.captchaTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-    self.captchaTf.keyboardType = UIKeyboardTypeNumberPad;
-
-    [self addSubview:self.captchaTf];
-    self.captchaTf.rightViewMode = UITextFieldViewModeAlways;
+    CGFloat btnW = 100;
     
-    CGFloat btnW = 90;
-
+    CGFloat rightMargin = btnW + 15;
+    
     //获得验证码按钮
-    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth - 15 - btnW, 0, 90, frame.size.height)];
+    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth - rightMargin, 0, rightMargin, frame.size.height)];
+    
+    rightView.backgroundColor = kWhiteColor;
     
     TLTimeButton *captchaBtn = [[TLTimeButton alloc] initWithFrame:CGRectMake(0, 0, btnW, frame.size.height - 15) totalTime:60.0];
     
@@ -45,13 +43,20 @@
     [captchaBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     [captchaBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
-
+    
     captchaBtn.centerY = rightView.height/2.0;
     [rightView addSubview:captchaBtn];
     
-    self.captchaBtn = captchaBtn;
+    [self addSubview:rightView];
 
-    [self.captchaTf addSubview:rightView];
+    self.captchaBtn = captchaBtn;
+    
+    self.captchaTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, 0, frame.size.width - rightMargin, frame.size.height)];
+    self.captchaTf.keyboardType = UIKeyboardTypeNumberPad;
+//    self.captchaTf.rightViewMode = UITextFieldViewModeAlways;
+
+    [self addSubview:self.captchaTf];
+    
     
     //    //2.1 添加分割线
     //    UIView *sLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 2, 20)];

@@ -32,16 +32,17 @@
 + (void)alertWithMsg:(NSString * )message;
 + (void)alertWithMsg:(NSString * )message viewCtrl:(UIViewController *)vc;
 
-+ (void)alertWithTitile:(NSString *)title
-                message:(NSString *)message;
++ (void)alertWithTitle:(NSString *)title
+               message:(NSString *)message;
 
 
-+ (void)alertWithTitile:(NSString *)title
-                message:(NSString *)message
-          confirmAction:(void(^)())confirmAction;
++ (void)alertWithTitle:(NSString *)title
+               message:(NSString *)message
+         confirmAction:(void(^)())confirmAction;
 
++ (void)alertWithTitle:(NSString *)title message:(NSString *)message confirmMsg:(NSString *)confirmMsg confirmAction:(void(^)())confirmAction;
 
-//+ (void)alertWithTitile:(NSString *)title
+//+ (void)alertWithTitle:(NSString *)title
 //                message:(NSString *)message
 //             controller:(UIViewController *)controller
 //             completion:(void (^)(void))completion;
@@ -53,7 +54,7 @@
                                 maker:(UIViewController *)viewCtrl
                                cancle:(void(^)(UIAlertAction *action))cancle
                               confirm:(void(^)(UIAlertAction *action))confirm;
-    
+
 
 + (UIAlertController *)alertWithTitle:(NSString *)title
                                   msg:(NSString *)msg

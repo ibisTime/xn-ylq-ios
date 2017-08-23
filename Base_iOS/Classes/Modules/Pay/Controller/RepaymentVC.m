@@ -63,7 +63,7 @@
         _amountTf.delegate = self;
         _amountTf.keyboardType = UIKeyboardTypeDecimalPad;
         
-        _amountTf.text = [self.order.amount convertToSimpleRealMoney];
+        _amountTf.text = [self.order.totalAmount convertToSimpleRealMoney];
         
         _amountTf.enabled = NO;
     }

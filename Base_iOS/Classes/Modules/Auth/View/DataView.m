@@ -351,7 +351,8 @@
 //    BOOL isZMScore = [self.authModel.infoZMCreditFlag boolValue];
 //    
 //    BOOL isYYS = [self.authModel.infoCarrierFlag boolValue];
-//    
+
+//
 //    NSInteger i;
 //    
 //    NSInteger j;

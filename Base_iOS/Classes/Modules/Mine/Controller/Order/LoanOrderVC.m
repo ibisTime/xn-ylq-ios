@@ -61,7 +61,7 @@
 
     UIScrollView *switchSV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.segmentView.yy + 0.5, kScreenWidth, kScreenHeight - 64 - self.segmentView.yy)];
     switchSV.pagingEnabled = YES;
-    switchSV.contentSize = CGSizeMake(kScreenWidth * 3, switchSV.height);
+    switchSV.contentSize = CGSizeMake(4*kScreenWidth, switchSV.height);
     switchSV.scrollEnabled = NO;
 
     [self.view addSubview:switchSV];

@@ -18,7 +18,7 @@
 
 @property (nonatomic, copy) NSString *remark;
 
-@property (nonatomic, copy) NSString *code;
+@property (nonatomic, copy) NSString *couponId;
 
 @property (nonatomic, assign) NSInteger validDays;
 

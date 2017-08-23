@@ -50,39 +50,42 @@
     
     [self.view addSubview:self.tableView];
     
-    //    [self.tableView reloadData_tl];
-    
 }
 
 - (void)initPlaceHolderView {
     
+    NSString *prompt = _statusType == CouponStatusTypeUse ? @"您目前没有优惠券": @"您目前没有不可使用优惠券";
+    
     self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+
+    if (_statusType == CouponStatusTypeUse) {
+        
+        UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 60)];
+        
+        topView.backgroundColor = kWhiteColor;
+        
+        [self.placeHolderView addSubview:topView];
+        
+        UIImageView *iconIV = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 16, 16)];
+        
+        iconIV.image = kImage(@"提示");
+        
+        iconIV.centerY = 30;
+        
+        [topView addSubview:iconIV];
+        
+        UILabel *promptLbl = [UILabel labelWithText:@"" textColor:kTextColor3 textFont:12];
+        
+        promptLbl.numberOfLines = 0;
+        
+        [promptLbl labelWithTextString:@"您目前没有可用的优惠券，可通过以下途径获取:\n1、邀请好友；2、首次完成有奖调研。" lineSpace:5];
+        
+        promptLbl.frame = CGRectMake(40, 0, kScreenWidth - 40, 60);
+        
+        [topView addSubview:promptLbl];
+    }
     
-    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 60)];
-    
-    topView.backgroundColor = kWhiteColor;
-    
-    [self.placeHolderView addSubview:topView];
-    
-    UIImageView *iconIV = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 16, 16)];
-    
-    iconIV.image = kImage(@"提示");
-    
-    iconIV.centerY = 30;
-    
-    [topView addSubview:iconIV];
-    
-    UILabel *promptLbl = [UILabel labelWithText:@"" textColor:kTextColor3 textFont:12];
-    
-    promptLbl.numberOfLines = 0;
-    
-    [promptLbl labelWithTextString:@"您目前没有可用的优惠券，可通过以下途径获取:\n1、邀请好友；2、首次完成有奖调研。" lineSpace:5];
-    
-    promptLbl.frame = CGRectMake(40, 0, kScreenWidth - 40, 60);
-    
-    [topView addSubview:promptLbl];
-    
-    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, topView.yy + 90, 80, 80)];
+    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60 + 90, 80, 80)];
     
     couponIV.image = kImage(@"暂无优惠券");
     
@@ -90,7 +93,7 @@
     
     [self.placeHolderView addSubview:couponIV];
     
-    UILabel *textLbl = [UILabel labelWithText:@"您目前没有优惠券" textColor:kTextColor textFont:15];
+    UILabel *textLbl = [UILabel labelWithText:prompt textColor:kTextColor textFont:15];
     
     textLbl.frame = CGRectMake(0, couponIV.yy + 20, kScreenWidth, 15);
     
@@ -109,8 +112,9 @@
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
+    helper.showView = self.view;
     helper.code = @"623147";
-        helper.parameters[@"userId"] = [TLUser user].userId;
+    helper.parameters[@"userId"] = [TLUser user].userId;
     helper.parameters[@"status"] = status;
     
     [helper modelClass:[CouponModel class]];
@@ -141,6 +145,24 @@
     }];
     
     [self.tableView endRefreshingWithNoMoreData_tl];
+}
+
+//优惠券提示
+- (void)requestCouponPrompt {
+    
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = @"805917";
+    
+    http.parameters[@"ckey"] = @"telephone";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+    
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - UITableViewDataSource

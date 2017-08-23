@@ -153,7 +153,7 @@
           if ([responseObject[@"errorCode"] isEqual:@"4"]) {
               //token错误  4
               
-              [TLAlert alertWithTitile:nil message:@"为了您的账户安全，请重新登录" confirmAction:^{
+              [TLAlert alertWithTitle:nil message:@"为了您的账户安全，请重新登录" confirmAction:^{
 //                  [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
               }];
               return;

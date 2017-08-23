@@ -25,6 +25,7 @@
 #import "TLPageDataHelper.h"
 
 #import "GoodModel.h"
+#import "UpdateModel.h"
 
 @interface HomeVC ()
 
@@ -38,16 +39,24 @@
 
 @property (nonatomic, strong) OrderModel *order;
 
+@property (nonatomic, strong) NSArray <UpdateModel *>*updates;
+
 @end
 
 @implementation HomeVC
+
+- (void)viewDidAppear:(BOOL)animated {
+
+    [super viewDidAppear:animated];
+    
+}
 
 - (void)viewWillAppear:(BOOL)animated {
 
     [super viewWillAppear:animated];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIColor createImageWithColor:kWhiteColor] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
-
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
@@ -66,6 +75,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loanStatusDidChange:) name:kLoanStatusChangeNotificaiton object:nil];
  
     _isFirst = YES;
+    
+    [self configUpdate];
+
 }
 
 - (void)initGoodView {
@@ -82,7 +94,7 @@
     
     CGFloat y = 0;
     
-    self.bgSV.height -= 49;
+    self.bgSV.height = kScreenHeight - 64 - 49;
 
     self.bgSV.backgroundColor = kBackgroundColor;
     
@@ -113,7 +125,7 @@
     
     promptLbl.textAlignment = NSTextAlignmentCenter;
     
-    NSAttributedString *promptAttrStr = [NSAttributedString getAttributedStringWithImgStr:@"产品" index:0 string:@" 更多产品敬请期待"];
+    NSAttributedString *promptAttrStr = [NSAttributedString getAttributedStringWithImgStr:@"产品" index:0 string:@" 更多产品敬请期待" labelHeight:kWidth(15)];
     
     promptLbl.attributedText = promptAttrStr;
     
@@ -318,21 +330,12 @@
             
             _isFirst = NO;
             
-            if (!self.goodView) {
+            for (UIView *subview in self.bgSV.subviews) {
                 
-                [self initGoodView];
-                
-            } else {
-            
-                //已存在，刷新状态
-                for (int i = 0; i < self.goods.count; i++) {
-                    
-                    GoodView *goodView = [self.bgSV viewWithTag:1220 + i];
-                    
-                    goodView.goodModel = self.goods[i];
-                    
-                }
+                [subview removeFromSuperview];
             }
+            
+            [self initGoodView];
             
         }
         
@@ -355,6 +358,55 @@
     
     [self.navigationController pushViewController:detailVC animated:YES];
 
+}
+
+#pragma mark - Config
+- (void)configUpdate {
+    
+    //1:iOS 2:安卓
+    TLNetworking *http = [[TLNetworking alloc] init];
+    
+    http.code = @"805918";
+    http.parameters[@"type"] = @"ios-c";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        UpdateModel *update = [UpdateModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        //获取当前版本号
+        NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        
+        if (![currentVersion isEqualToString:update.version]) {
+            //1：强制，0：不强制
+            if ([update.forceUpdate isEqualToString:@"0"]) {
+                
+                [TLAlert alertWithTitle:@"更新提醒" msg:update.note confirmMsg:@"立即升级" cancleMsg:@"稍后提醒" cancle:^(UIAlertAction *action) {
+                    
+                } confirm:^(UIAlertAction *action) {
+                    
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.downloadUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+                    
+                }];
+                
+            } else {
+                
+                [TLAlert alertWithTitle:@"更新提醒" message:update.note confirmMsg:@"立即升级" confirmAction:^{
+                    
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.downloadUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        
+                        exit(0);
+                        
+                    });
+                }];
+            }
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

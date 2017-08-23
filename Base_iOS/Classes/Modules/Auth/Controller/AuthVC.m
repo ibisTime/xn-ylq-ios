@@ -71,8 +71,6 @@
 
     [self initDataView];
     
-    [self initMXSDK];
-    
 }
 
 #pragma mark - Init
@@ -135,7 +133,6 @@
     [MoxieSDK shared].mxUserId = kMoXieUserID;
     [MoxieSDK shared].mxApiKey = kMoXieApiKey;
     [MoxieSDK shared].fromController = self;
-    //    [MoxieSDK shared].cacheDisable = YES;
     
     [MoxieSDK shared].backImageName = @"返回";
     
@@ -185,6 +182,32 @@
     
     switch (section.type) {
             
+        case DataTypeSFRZ:
+        {
+            if (![TLUser user].isLogin) {
+                
+                TLUserLoginVC *loginVC = [TLUserLoginVC new];
+                
+                loginVC.loginSuccess = ^{
+                    
+                    IdentifierVC *identifierAuthVC = [IdentifierVC new];
+                    
+                    [self.navigationController pushViewController:identifierAuthVC animated:YES];
+                };
+                
+                NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
+                
+                [weakSelf.navigationController presentViewController:navi animated:YES completion:nil];
+                
+                return ;
+            }
+            
+            IdentifierVC *identifierAuthVC = [IdentifierVC new];
+            
+            [self.navigationController pushViewController:identifierAuthVC animated:YES];
+            
+        }break;
+            
         case DataTypeBaseInfo:
         {
             
@@ -206,6 +229,15 @@
                 [weakSelf.navigationController presentViewController:navi animated:YES completion:nil];
                 
                 return ;
+            }
+            
+            BOOL isIdent = [self.authModel.infoIdentifyFlag boolValue];
+
+            if (!isIdent) {
+                
+                [TLAlert alertWithInfo:@"请先进行身份认证"];
+                
+                return;
             }
             
             BaseInfoVC *baseInfoVC = [BaseInfoVC new];
@@ -238,6 +270,14 @@
                 return ;
             }
             
+            BOOL isBasic = [self.authModel.infoBasicFlag boolValue];
+
+            if (!isBasic) {
+                
+                [TLAlert alertWithInfo:@"请先提交个人信息"];
+                return;
+            }
+            
             ZMOPScoreVC *zmopScoreVC = [ZMOPScoreVC new];
             
             zmopScoreVC.title = section.title;
@@ -245,32 +285,6 @@
             zmopScoreVC.authModel = self.authModel;
             
             [self.navigationController pushViewController:zmopScoreVC animated:YES];
-            
-        }break;
-            
-        case DataTypeSFRZ:
-        {
-            if (![TLUser user].isLogin) {
-                
-                TLUserLoginVC *loginVC = [TLUserLoginVC new];
-                
-                loginVC.loginSuccess = ^{
-                    
-                    IdentifierVC *identifierAuthVC = [IdentifierVC new];
-                    
-                    [self.navigationController pushViewController:identifierAuthVC animated:YES];
-                };
-                
-                NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
-                
-                [weakSelf.navigationController presentViewController:navi animated:YES completion:nil];
-                
-                return ;
-            }
-            
-            IdentifierVC *identifierAuthVC = [IdentifierVC new];
-            
-            [self.navigationController pushViewController:identifierAuthVC animated:YES];
             
         }break;
             
@@ -282,6 +296,8 @@
                 
                 loginVC.loginSuccess = ^{
                     
+                    [self initMXSDK];
+
                     [MoxieSDK shared].taskType = @"carrier";
                     
                     [[MoxieSDK shared] startFunction];
@@ -308,6 +324,17 @@
             //
             //                [self.navigationController pushViewController:operatorAuthVC animated:YES];
             //            }
+            
+            BOOL isZMScore = [self.authModel.infoZMCreditFlag boolValue];
+
+            if (!isZMScore) {
+                
+                [TLAlert alertWithInfo:@"请先认证芝麻分"];
+                return;
+            }
+            
+            [self initMXSDK];
+
             [MoxieSDK shared].taskType = @"carrier";
             
             [[MoxieSDK shared] startFunction];
@@ -334,11 +361,6 @@
             }
             
             [TLAlert alertWithInfo:@"正在研发中，敬请期待"];
-//            ZMFoucsNameVC *foucsNameVC = [ZMFoucsNameVC new];
-//
-//            foucsNameVC.title = section.title;
-//
-//            [self.navigationController pushViewController:foucsNameVC animated:YES];
             
         }break;
             
@@ -361,12 +383,6 @@
                 return ;
             }
             [TLAlert alertWithInfo:@"正在研发中，敬请期待"];
-
-//            ZMCheatFoucsNameVC *cheatFoucsNameVC = [ZMCheatFoucsNameVC new];
-//
-//            cheatFoucsNameVC.title = section.title;
-//            
-//            [self.navigationController pushViewController:cheatFoucsNameVC animated:YES];
             
         }break;
             

@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LoanModel.h"
+#import "OrderModel.h"
 
 typedef void(^LoanBlock)();
 
 @interface LoanView : UIView
 
-@property (nonatomic, strong) LoanModel *loanModel;
+@property (nonatomic, strong) OrderModel *orderModel;
 
 @property (nonatomic, copy) LoanBlock loanBlock;
 

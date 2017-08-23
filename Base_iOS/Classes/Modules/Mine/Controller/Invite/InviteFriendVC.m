@@ -19,6 +19,8 @@
 
 @property (nonatomic, copy) NSString *shareUrl;
 
+@property (nonatomic, strong) UILabel *activityRuleLbl;     //活动规则
+
 @end
 
 @implementation InviteFriendVC
@@ -58,6 +60,34 @@
     
     [self.centerView addSubview:textLbl];
     
+    CGFloat leftMargin = 15;
+    
+    //活动规则
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(leftMargin, 40, kScreenWidth - 2*leftMargin, 100)];
+    
+    bgView.tag = 1200;
+    
+    bgView.layer.borderWidth = 1;
+    
+    bgView.layer.borderColor = kTextColor3.CGColor;
+    
+    bgView.backgroundColor = [UIColor colorWithHexString:@"#fdfbed"];
+    
+    [self.centerView addSubview:bgView];
+    
+    UILabel *promptLbl = [UILabel labelWithText:@"" textColor:[UIColor zh_themeColor] textFont:13.0];
+    
+    promptLbl.backgroundColor = kClearColor;
+    
+    promptLbl.numberOfLines = 0;
+    
+    promptLbl.frame = CGRectMake(leftMargin, 15, bgView.width - 2*leftMargin, 70);
+    
+    [bgView addSubview:promptLbl];
+    
+    self.activityRuleLbl = promptLbl;
+    
+    //底部按钮
     UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 64 - 65, kScreenWidth, 65)];
     
     bottomView.backgroundColor = kWhiteColor;
@@ -80,20 +110,15 @@
     //注意事项
     //
     CGFloat height = ([_remark componentsSeparatedByString:@"\n"].count+1)*25;
+
+    [self.activityRuleLbl labelWithTextString:_remark lineSpace:10];
     
-    UILabel *promptLbl = [UILabel labelWithText:@"" textColor:[UIColor zh_themeColor] textFont:13.0];
+    self.activityRuleLbl.height = height;
     
-    promptLbl.backgroundColor = kTextColor3;
+    UIView *bgView = [self.view viewWithTag:1200];
     
-    [promptLbl labelWithTextString:_remark lineSpace:10];
-    
-    promptLbl.backgroundColor = kClearColor;
-    
-    promptLbl.numberOfLines = 0;
-    
-    promptLbl.frame = CGRectMake(15, 40, kScreenWidth - 2*15, height);
-    
-    [self.centerView addSubview:promptLbl];
+    bgView.height = height + 30;
+
     //
 }
 

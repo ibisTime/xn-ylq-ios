@@ -14,6 +14,7 @@
 
 #import "TabbarViewController.h"
 #import "SignContractVC.h"
+#import "ManualAuditVC.h"
 
 #import "CouponModel.h"
 #import "GoodModel.h"
@@ -118,7 +119,7 @@
         
         textLbl.centerX = (1+2*i)*kScreenWidth/4.0;
         
-        NSAttributedString *textAttrStr = [NSAttributedString getAttributedStringWithImgStr:imgArr[i] index:0 string:[NSString stringWithFormat:@" %@", titleArr[i]]];
+        NSAttributedString *textAttrStr = [NSAttributedString getAttributedStringWithImgStr:imgArr[i] index:0 string:[NSString stringWithFormat:@" %@", titleArr[i]] labelHeight:textLbl.height];
         
         textLbl.attributedText = textAttrStr;
         
@@ -141,6 +142,8 @@
     BaseWeakSelf;
     
     self.couponBtn = [[PickerTextField alloc] initWithFrame:CGRectMake(0, 110, 150, 40) leftTitle:@"" titleWidth:0 placeholder:@""];
+    
+    self.couponBtn.clearButtonMode = UITextFieldViewModeNever;
     
     self.couponBtn.text = @"请选择优惠券";
     
@@ -253,7 +256,7 @@
     
     promptLbl.textAlignment = NSTextAlignmentCenter;
     
-    NSAttributedString *promptAttrStr = [NSAttributedString getAttributedStringWithImgStr:@"禁止学生贷款" index:0 string:[NSString stringWithFormat:@" %@", @"本平台禁止学生借款"]];
+    NSAttributedString *promptAttrStr = [NSAttributedString getAttributedStringWithImgStr:@"禁止学生贷款" index:0 string:[NSString stringWithFormat:@" %@", @"本平台禁止学生借款"] labelHeight:promptLbl.height];
     
     promptLbl.attributedText = promptAttrStr;
     
@@ -310,17 +313,31 @@
         
         TLNetworking *http = [TLNetworking new];
         
+        http.showView = self.view;
         http.code = @"623020";
         http.parameters[@"applyUser"] = [TLUser user].userId;
         http.parameters[@"productCode"] = _good.code;
         
         [http postWithSuccess:^(id responseObject) {
             
-            TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+            NSString *status = responseObject[@"data"][@"status"];
             
-            tabbarVC.currentIndex = 1;
+            if ([status isEqualToString:@"1"]) {
+                
+                TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+                
+                tabbarVC.currentIndex = 1;
+                
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+            } else if ([status isEqualToString:@"2"]) {
             
-            [self.navigationController popToRootViewControllerAnimated:YES];
+                ManualAuditVC *auditVC = [ManualAuditVC new];
+                
+                auditVC.title = @"人工审核";
+                
+                [self.navigationController pushViewController:auditVC animated:YES];
+            }
             
         } failure:^(NSError *error) {
             
@@ -357,7 +374,8 @@
     helper.code = @"623148";
     helper.isList = YES;
     
-    helper.parameters[@"productCode"] = _good.code;
+    helper.parameters[@"amount"] = [NSString stringWithFormat:@"%lld", [_good.amount longLongValue]];
+    
     helper.parameters[@"userId"] = [TLUser user].userId;
     
     [helper modelClass:[CouponModel class]];
@@ -372,7 +390,7 @@
         
         for (CouponModel *coupon in self.coupons) {
             
-            NSString *time = [coupon.updateDatetime convertDate];
+            NSString *time = [coupon.invalidDatetime convertDate];
             
             NSString *title = [NSString stringWithFormat:@"减免%@元 %@到期", [coupon.amount convertToSimpleRealMoney], time];
             
@@ -391,6 +409,8 @@
     NSString *code = _selectType == SelectGoodTypeAuth ? @"623011": @"623013";
     
     TLNetworking *http = [TLNetworking new];
+    
+    http.showView = self.view;
     
     http.code = code;
     

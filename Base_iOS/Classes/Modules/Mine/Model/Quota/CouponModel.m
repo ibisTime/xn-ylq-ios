@@ -10,4 +10,13 @@
 
 @implementation CouponModel
 
++ (NSString *)mj_replacedKeyFromPropertyName121:(NSString *)propertyName {
+
+    if ([propertyName isEqualToString:@"couponId"]) {
+        
+        return @"id";
+    }
+    return propertyName;
+}
+
 @end

@@ -31,7 +31,7 @@
     return attr;
 }
 
-+ (NSAttributedString *)getAttributedStringWithImgStr:(NSString *)imgStr index:(NSInteger)index string:(NSString *)string {
++ (NSAttributedString *)getAttributedStringWithImgStr:(NSString *)imgStr index:(NSInteger)index string:(NSString *)string labelHeight:(CGFloat)height {
     
     UIImage *image = [UIImage imageNamed:imgStr];
     
@@ -40,7 +40,7 @@
     CGFloat fixelW = CGImageGetWidth(image.CGImage)/(scale*1.0);
     CGFloat fixelH = CGImageGetHeight(image.CGImage)/(scale*1.0);
     
-    CGFloat topM = (fixelH - kWidth(15))/2.0;
+    CGFloat topM = (fixelH - height)/2.0;
     
     NSAttributedString *attrStr = [NSAttributedString convertImg:[UIImage imageNamed:imgStr] bounds:CGRectMake(0, topM, fixelW, fixelH)];
     

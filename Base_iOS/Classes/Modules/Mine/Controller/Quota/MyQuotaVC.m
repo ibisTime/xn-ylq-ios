@@ -50,7 +50,7 @@
     
     CGFloat quotaBtnH = 45;
     
-    self.quotaBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
+    self.quotaBtn = [UIButton buttonWithTitle:@"使用额度" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
     
     self.quotaBtn.frame = CGRectMake(15, self.quotaView.yy + 44, kScreenWidth - 30, quotaBtnH);
     

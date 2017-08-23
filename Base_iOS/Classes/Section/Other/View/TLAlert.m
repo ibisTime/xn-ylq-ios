@@ -14,25 +14,25 @@
 
 //info
 + (void)alertWithInfo:(NSString *)msg {
-
+    
     [SVProgressHUD showInfoWithStatus:msg];
     [SVProgressHUD dismissWithDelay:2];
 }
 
 //error
 + (void)alertWithError:(NSString *)msg {
-
+    
     [SVProgressHUD showErrorWithStatus:msg];
     [SVProgressHUD dismissWithDelay:3];
-
+    
 }
 
 //success
 + (void)alertWithSucces:(NSString *)msg {
-
+    
     [SVProgressHUD showSuccessWithStatus:msg];
     [SVProgressHUD dismissWithDelay:2];
-
+    
 }
 
 //+ (void)alertHUDWithMsg:(NSString *)msg {
@@ -40,17 +40,17 @@
 ////    [TLProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
 //    [TLProgressHUD showInfoWithStatus:msg];
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        
+//
 //        [TLProgressHUD dismissWithCompletion:^{
-//            
+//
 //        }];
-//        
+//
 //    });
-//    
+//
 //
 //}
 //
-////+ (void)alertHUDWithMsg:(NSString *)msg maskType:(SVProgressHUDMaskType)maskType 
+////+ (void)alertHUDWithMsg:(NSString *)msg maskType:(SVProgressHUDMaskType)maskType
 //
 //+ (void)alertWithHUDText:(NSString *)text {
 //
@@ -72,14 +72,14 @@
 //    hud.mode = MBProgressHUDModeText;
 //    hud.label.text = text;
 //    //    hud.label.textColor = [UIColor whiteColor];
-//    
+//
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(sec * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [hud hideAnimated:YES];
 //        if (complection) {
 //            complection();
 //        }
 //    });
-//    
+//
 ////    return nil;
 //
 //
@@ -88,7 +88,7 @@
 
 #pragma mark- 基于系统的alertController
 + (void)alertWithMsg:(NSString * )message viewCtrl:(UIViewController *)vc {
-
+    
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     //取消行为
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -96,21 +96,21 @@
     
     [alertController addAction:action2];
     [vc presentViewController:alertController animated:YES completion:nil];
-
-
+    
+    
 }
 
 + (void)alertWithMsg:(NSString * )message
 {
-    [self alertWithTitile:nil message:message confirmAction:nil];
+    [self alertWithTitle:nil message:message confirmAction:nil];
 }
 
-+ (void)alertWithTitile:(NSString *)title message:(NSString *)message
++ (void)alertWithTitle:(NSString *)title message:(NSString *)message
 {
-    [self alertWithTitile:title message:message confirmAction:nil];
+    [self alertWithTitle:title message:message confirmAction:nil];
 }
 
-+ (void)alertWithTitile:(NSString *)title message:(NSString *)message confirmAction:(void(^)())confirmAction;
++ (void)alertWithTitle:(NSString *)title message:(NSString *)message confirmAction:(void(^)())confirmAction;
 {
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -139,7 +139,40 @@
         [rootViewController presentViewController:alertController animated:YES completion:nil];
         
     }
-  
+    
+    
+}
+
++ (void)alertWithTitle:(NSString *)title message:(NSString *)message confirmMsg:(NSString *)confirmMsg confirmAction:(void(^)())confirmAction
+{
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    //取消行为
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:confirmMsg style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        if (confirmAction) {
+            confirmAction();
+        }
+    }];
+    
+    
+    [alertController addAction:action2];
+    //rootViewController 展示
+    
+    
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController ;
+    
+    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+        
+        UITabBarController *tbc = (UITabBarController *)rootViewController;
+        [tbc.selectedViewController  presentViewController:alertController animated:YES completion:nil];
+        
+    } else {
+        
+        [rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+    }
+    
     
 }
 
@@ -149,7 +182,7 @@
                             cancleMsg:(NSString *)cancleMsg
                                cancle:(void(^)(UIAlertAction *action))cancle
                               confirm:(void(^)(UIAlertAction *action))confirm {
-
+    
     return  [self alertWithTitle:title msg:msg confirmMsg:confirmMsg cancleMsg:cancleMsg maker:nil cancle:cancle confirm:confirm];
 }
 
@@ -160,7 +193,7 @@
                                 maker:(UIViewController *)viewCtrl
                                cancle:(void(^)(UIAlertAction *action))cancle
                               confirm:(void(^)(UIAlertAction *action))confirm{
-
+    
     //
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
     
@@ -189,7 +222,7 @@
     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     
     if (viewCtrl) {
-          [viewCtrl presentViewController:alertController animated:YES completion:nil];
+        [viewCtrl presentViewController:alertController animated:YES completion:nil];
         
         
     } else if([rootViewController isKindOfClass:[UITabBarController class]]) {
@@ -204,7 +237,7 @@
         
     }
     return alertController;
-
+    
 }
 
 //带有 删除 和 确认的提示
@@ -217,7 +250,7 @@
 {
     
     return [self alertWithTitle:title msg:message confirmMsg:confirmMsg cancleMsg:cancleMsg cancle:cancle confirm:confirm];
-
+    
     
 }
 

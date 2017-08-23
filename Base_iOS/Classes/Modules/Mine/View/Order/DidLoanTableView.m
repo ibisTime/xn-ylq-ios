@@ -80,7 +80,7 @@
     
     _order = order;
     
-    self.titleArr = @[@"签约时间", @"合同编号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"利息", @"优惠券减免", @"到期还款额"];
+    self.titleArr = @[@"签约时间", @"合同编号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"到期还款额"];
 
     //签约时间
     NSString *signDate = [_order.signDatetime convertDate];
@@ -102,12 +102,14 @@
     NSString *glAmount = [_order.glAmount convertToSimpleRealMoney];
     //利息
     NSString *lxAmount = [_order.lxAmount convertToSimpleRealMoney];
+    //服务费
+    NSString *fwAmount = [_order.fwAmount convertToSimpleRealMoney];
     //优惠券减免
     NSString *couponAmount = [_order.yhAmount convertToSimpleRealMoney];
     //到期还款额
     NSString *totalAmount = [_order.totalAmount convertToSimpleRealMoney];
     
-    self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, couponAmount, totalAmount];
+    self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, totalAmount];
 
     self.quotaLbl.text = [_order.amount convertToSimpleRealMoney];
 }
@@ -134,6 +136,8 @@
     
     cell.rightLabel.text = self.contentArr[indexPath.row];
     
+    cell.rightLabel.textColor = indexPath.row == self.contentArr.count - 1 ? kAppCustomMainColor: kTextColor;
+
     return cell;
     
 }

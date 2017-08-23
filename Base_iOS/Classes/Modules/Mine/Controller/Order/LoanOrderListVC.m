@@ -151,24 +151,6 @@
     [self.tableView endRefreshingWithNoMoreData_tl];
 }
 
-- (void)qx
-{
-    
-    //取消订单
-    TLNetworking *http = [TLNetworking new];
-    http.showView = self.view;
-    http.code = @"808052";
-    http.parameters[@"code"] = @"";
-    http.parameters[@"token"] = [TLUser user].token;
-    [http postWithSuccess:^(id responseObject) {
-        
-    } failure:^(NSError *error) {
-        
-    }];
-    
-    
-}
-
 #pragma mark- datasourece
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -202,15 +184,13 @@
 #pragma mark- delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    BaseWeakSelf;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     LoanOrderDetailVC *vc = [[LoanOrderDetailVC alloc] init];
     
     vc.order = self.orderGroups[indexPath.section];
     
     [self.navigationController pushViewController:vc animated:YES];
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 

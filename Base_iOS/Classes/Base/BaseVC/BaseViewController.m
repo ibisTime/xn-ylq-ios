@@ -37,9 +37,6 @@
     
     [self setViewEdgeInset];
     
-    // 设置导航栏背景色
-    [self.navigationController.navigationBar setBackgroundImage:[UIColor createImageWithColor:kAppCustomMainColor] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
-    
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     
 }
@@ -50,6 +47,9 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    // 设置导航栏背景色
+    [self.navigationController.navigationBar setBackgroundImage:[UIColor createImageWithColor:kAppCustomMainColor] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 

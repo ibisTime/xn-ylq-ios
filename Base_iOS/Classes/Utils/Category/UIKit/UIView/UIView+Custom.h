@@ -12,6 +12,10 @@
 //制作半圆
 - (CALayer *)getLayerWithDirection:(NSString *)direction size:(CGSize)size;
 
+//画一条线
 - (void)drawDashLine:(int)lineLength lineSpacing:(int)lineSpacing lineColor:(UIColor *)lineColor;
+
+//画整个视图
+- (void)drawAroundLine:(int)lineLength lineSpacing:(int)lineSpacing lineColor:(UIColor *)lineColor;
 
 @end

@@ -79,7 +79,7 @@
     
     remarkLbl.centerX = centerX;
     
-    NSAttributedString *promptAttrStr = [NSAttributedString getAttributedStringWithImgStr:@"款项在路上" index:0 string:[NSString stringWithFormat:@" %@", @"款项已经在路上"]];
+    NSAttributedString *promptAttrStr = [NSAttributedString getAttributedStringWithImgStr:@"款项在路上" index:0 string:[NSString stringWithFormat:@" %@", @"款项已经在路上"] labelHeight:remarkLbl.height];
 
     remarkLbl.attributedText = promptAttrStr;
     

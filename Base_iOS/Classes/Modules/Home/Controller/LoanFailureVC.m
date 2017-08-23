@@ -60,7 +60,7 @@
     
     textLbl.textAlignment = NSTextAlignmentCenter;
     
-    NSAttributedString *textAttr = [NSAttributedString getAttributedStringWithImgStr:@"禁止学生贷款" index:0 string:[NSString stringWithFormat:@"  %@", @"申请失败, 原因："]];
+    NSAttributedString *textAttr = [NSAttributedString getAttributedStringWithImgStr:@"禁止学生贷款" index:0 string:[NSString stringWithFormat:@"  %@", @"申请失败, 原因："] labelHeight:textLbl.height];
     
     textLbl.attributedText = textAttr;
     

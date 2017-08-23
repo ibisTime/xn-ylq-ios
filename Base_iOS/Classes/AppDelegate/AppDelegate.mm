@@ -16,6 +16,7 @@
 #import <ZMCreditSDK/ALCreditService.h>
 
 #import "AppDelegate+Launch.h"
+#import "AppDelegate+BaiduMap.h"
 
 #import "NavigationController.h"
 #import "TabbarViewController.h"
@@ -41,6 +42,9 @@
     
     //配置芝麻信用
     [self configZMOP];
+    
+    //配置地图
+    [self configMapKit];
     
     //配置魔蝎
 //    [self configMoXie];

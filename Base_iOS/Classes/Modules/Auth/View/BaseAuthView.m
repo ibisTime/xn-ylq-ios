@@ -77,8 +77,8 @@
     self.iv.image = [UIImage imageNamed:section.img];
     
     self.label.text = section.title;
-    
-    NSAttributedString *authAttrStr = [NSAttributedString getAttributedStringWithImgStr:section.authStatusImg index:section.authStatusStr.length + 1 string:[NSString stringWithFormat:@"%@  ", section.authStatusStr]];
+        
+    NSAttributedString *authAttrStr = [NSAttributedString getAttributedStringWithImgStr:section.authStatusImg index:section.authStatusStr.length + 1 string:[NSString stringWithFormat:@"%@  ", section.authStatusStr] labelHeight:self.textLabel.height];
 
     self.textLabel.attributedText = authAttrStr;
     

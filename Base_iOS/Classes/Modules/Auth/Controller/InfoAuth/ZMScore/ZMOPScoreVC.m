@@ -70,7 +70,7 @@
     
     [self.view addSubview:self.realName];
     
-    self.idCard = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.realName.yy, kScreenWidth, 50) leftTitle:@"身份证号码" titleWidth:105 placeholder:@"请输入身份证号码"];
+    self.idCard = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.realName.yy + 1, kScreenWidth, 50) leftTitle:@"身份证号码" titleWidth:105 placeholder:@"请输入身份证号码"];
     
     self.idCard.text = identify.idNo ? identify.idNo: nil;
     
@@ -83,7 +83,6 @@
     [confirmBtn addTarget:self action:@selector(confirmIDCard:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:confirmBtn];
-    
     
 }
 

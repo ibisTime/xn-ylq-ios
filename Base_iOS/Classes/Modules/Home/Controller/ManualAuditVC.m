@@ -81,7 +81,7 @@
 #pragma mark - Events
 - (void)clickCommit {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)back {

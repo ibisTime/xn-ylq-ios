@@ -89,7 +89,6 @@
     self.phoneTf = phoneTf;
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     
-    
     //密码
     AccountTf *pwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, phoneTf.yy + 1, w, h)];
     pwdTf.secureTextEntry = YES;

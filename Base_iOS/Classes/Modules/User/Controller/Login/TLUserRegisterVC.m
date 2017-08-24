@@ -49,12 +49,19 @@
 
     [super viewWillAppear:animated];
     
+}
+
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    self.navigationItem.titleView = [UILabel labelWithTitle:@"注册"];
+    
     CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
     
     if (authStatus == kCLAuthorizationStatusDenied) { //定位权限不可用可用
         
         [self setUpUI];
-
+        
         if (![TLAuthHelper isEnableLocation]) {
             
             [TLAlert alertWithTitle:@"" msg:@"为了更好的为您服务,请在设置中打开定位服务" confirmMsg:@"设置" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
@@ -72,19 +79,12 @@
         return;
         
     } else if (authStatus == kCLAuthorizationStatusNotDetermined) {
-    
+        
         [self setUpUI];
-
+        
     }
     
     [self.sysLocationManager startUpdatingLocation];
-}
-
-- (void)viewDidLoad {
-    
-    [super viewDidLoad];
-    self.navigationItem.titleView = [UILabel labelWithTitle:@"注册"];
-    
 }
 
 #pragma mark - Events
@@ -346,7 +346,7 @@
     
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
-    http.code = USER_REG_CODE;
+    http.code = USER_INVITE_REG_CODE;
     http.parameters[@"mobile"] = self.phoneTf.text;
     http.parameters[@"loginPwd"] = self.pwdTf.text;
     http.parameters[@"loginPwdStrength"] = @"2";

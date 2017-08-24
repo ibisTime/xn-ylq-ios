@@ -25,14 +25,14 @@
 @property (nonatomic, copy) NSString *infoIdentifyFaceFlag; //人脸识别
 
 
+@property (nonatomic, copy) NSString *infoIdentifyFlag;     //身份认证标识
+
+@property (nonatomic, copy) NSString *infoAntifraudFlag;    //	基本信息全部提交标识
+@property (nonatomic, copy) NSString *infoZMCreditFlag;     //芝麻分
 
 @property (nonatomic, copy) NSString *infoCarrierFlag;      //运营商
 
-@property (nonatomic, copy) NSString *infoZMCreditFlag;     //芝麻分
-
-@property (nonatomic, copy) NSString *infoAntifraudFlag;    //	基本信息全部提交标识
-@property (nonatomic, copy) NSString *infoIdentifyFlag;     //身份认证标识
-
+@property (nonatomic, copy) NSString *infoAddressBookFlag;  //通讯录
 
 @property (nonatomic, strong) InfoBasic *infoBasic;
 
@@ -61,7 +61,7 @@
 
 @property (nonatomic, copy) NSString *qq;
 
-@property (nonatomic, assign) NSInteger childrenNum;
+@property (nonatomic, copy) NSString *childrenNum;
 
 @property (nonatomic, copy) NSString *provinceCity;
 

@@ -59,7 +59,7 @@
     
     UILabel *textLabel = [UILabel labelWithText:@"" textColor:kAppCustomMainColor textFont:kWidth(11.0)];
     
-    textLabel.frame = CGRectMake(0, label.yy + 6, 100, kWidth(15));
+    textLabel.frame = CGRectMake(0, label.yy + 6, 100, kWidth(13));
     
     textLabel.centerX = centerX;
     

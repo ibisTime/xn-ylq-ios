@@ -72,6 +72,9 @@
 		211F6EDE1F4AC0C3007BB638 /* AppDelegate+BaiduMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F6EDD1F4AC0C3007BB638 /* AppDelegate+BaiduMap.m */; };
 		211F6EE41F4ACBA8007BB638 /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F6EE31F4ACBA8007BB638 /* UpdateModel.m */; };
 		211F6EE81F4B0756007BB638 /* KeyValueApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F6EE71F4B0756007BB638 /* KeyValueApi.m */; };
+		211F70821F4D314D007BB638 /* MailListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F70811F4D314D007BB638 /* MailListVC.m */; };
+		211F70851F4D4987007BB638 /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F70841F4D4987007BB638 /* ContactModel.m */; };
+		211F70881F4D4B55007BB638 /* ContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F70871F4D4B55007BB638 /* ContactManager.m */; };
 		21216FCB1F380E30007C9855 /* TLBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21216FAE1F380E2F007C9855 /* TLBaseModel.m */; };
 		21216FCC1F380E30007C9855 /* TLThirdUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 21216FB01F380E30007C9855 /* TLThirdUser.m */; };
 		21216FCD1F380E30007C9855 /* TLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 21216FB21F380E30007C9855 /* TLUser.m */; };
@@ -404,6 +407,12 @@
 		211F6EE31F4ACBA8007BB638 /* UpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateModel.m; sourceTree = "<group>"; };
 		211F6EE61F4B0756007BB638 /* KeyValueApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyValueApi.h; sourceTree = "<group>"; };
 		211F6EE71F4B0756007BB638 /* KeyValueApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyValueApi.m; sourceTree = "<group>"; };
+		211F70801F4D314D007BB638 /* MailListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailListVC.h; sourceTree = "<group>"; };
+		211F70811F4D314D007BB638 /* MailListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailListVC.m; sourceTree = "<group>"; };
+		211F70831F4D4987007BB638 /* ContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactModel.h; sourceTree = "<group>"; };
+		211F70841F4D4987007BB638 /* ContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactModel.m; sourceTree = "<group>"; };
+		211F70861F4D4B55007BB638 /* ContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactManager.h; sourceTree = "<group>"; };
+		211F70871F4D4B55007BB638 /* ContactManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactManager.m; sourceTree = "<group>"; };
 		21216FAD1F380E2F007C9855 /* TLBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBaseModel.h; sourceTree = "<group>"; };
 		21216FAE1F380E2F007C9855 /* TLBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLBaseModel.m; sourceTree = "<group>"; };
 		21216FAF1F380E2F007C9855 /* TLThirdUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLThirdUser.h; sourceTree = "<group>"; };
@@ -1249,6 +1258,15 @@
 			path = BaseApi;
 			sourceTree = "<group>";
 		};
+		211F707F1F4D3118007BB638 /* MailList */ = {
+			isa = PBXGroup;
+			children = (
+				211F70801F4D314D007BB638 /* MailListVC.h */,
+				211F70811F4D314D007BB638 /* MailListVC.m */,
+			);
+			path = MailList;
+			sourceTree = "<group>";
+		};
 		21212A6F1F18CA880091A493 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1408,6 +1426,7 @@
 		212689371F3C42E700225267 /* OptionAuth */ = {
 			isa = PBXGroup;
 			children = (
+				211F707F1F4D3118007BB638 /* MailList */,
 			);
 			path = OptionAuth;
 			sourceTree = "<group>";
@@ -1508,6 +1527,10 @@
 		212689661F3C45F100225267 /* OptionAuth */ = {
 			isa = PBXGroup;
 			children = (
+				211F70831F4D4987007BB638 /* ContactModel.h */,
+				211F70841F4D4987007BB638 /* ContactModel.m */,
+				211F70861F4D4B55007BB638 /* ContactManager.h */,
+				211F70871F4D4B55007BB638 /* ContactManager.m */,
 			);
 			path = OptionAuth;
 			sourceTree = "<group>";
@@ -2840,6 +2863,7 @@
 				212689671F3C45F100225267 /* DataModel.m in Sources */,
 				21FB30791F26E9EF0028ADEE /* TLPlaceholderView.m in Sources */,
 				212170051F380FB9007C9855 /* TLPwdRelatedVC.m in Sources */,
+				211F70881F4D4B55007BB638 /* ContactManager.m in Sources */,
 				212A45581F4683CE0059AB4E /* NoticeModel.m in Sources */,
 				21216FFB1F380FB9007C9855 /* ZHAddAddressVC.m in Sources */,
 				21FB30771F26E9EF0028ADEE /* TLImagePicker.m in Sources */,
@@ -2915,6 +2939,7 @@
 				21FB30AD1F26E9EF0028ADEE /* NSDictionary+Custom.m in Sources */,
 				2151A1231F445DF1002483CD /* LoanFailureVC.m in Sources */,
 				21158E491F1C502400A07266 /* BarButton.m in Sources */,
+				211F70821F4D314D007BB638 /* MailListVC.m in Sources */,
 				212170041F380FB9007C9855 /* TLChangeMobileVC.m in Sources */,
 				21FB30831F26E9EF0028ADEE /* WTReTextField.m in Sources */,
 				21216FFE1F380FB9007C9855 /* TLAccountBaseVC.m in Sources */,
@@ -2947,6 +2972,7 @@
 				21FB30AA1F26E9EF0028ADEE /* AppConfig.m in Sources */,
 				212689681F3C45F100225267 /* BaseInfoGroup.m in Sources */,
 				21FB30C11F26E9EF0028ADEE /* UILabel+Custom.m in Sources */,
+				211F70851F4D4987007BB638 /* ContactModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

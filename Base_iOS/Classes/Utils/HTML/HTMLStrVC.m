@@ -38,7 +38,7 @@
             
         case HTMLTypeAboutUs: {
             
-            ckey = @"aboutus";
+            ckey = @"aboutUs";
             
             name = @"关于我们";
             
@@ -46,7 +46,7 @@
             
         case HTMLTypeRegProtocol: {
             
-            ckey = @"reg_protocol";
+            ckey = @"regProtocol";
             
             name = @"九州宝用户协议";
             
@@ -76,6 +76,21 @@
             
         } break;
             
+        case HTMLTypeAuthProtocol: {
+            
+            ckey = @"addressBookProtocol";
+            
+            name = @"通讯录授权协议";
+            
+        } break;
+        
+        case HTMLTypeInfoRule: {
+            
+            ckey = @"infoCollectRule";
+            
+            name = @"信息收集及使用规则";
+            
+        } break;
     }
 
     self.navigationItem.titleView = [UILabel labelWithTitle:name];

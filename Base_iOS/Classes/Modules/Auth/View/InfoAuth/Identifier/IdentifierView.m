@@ -152,6 +152,14 @@
         
         label.text = section.title;
         
+        UILabel *textLabel = self.textLabelArr[i];
+        
+        NSAttributedString *authAttrStr = [NSAttributedString getAttributedStringWithImgStr:section.authStatusImg index:section.authStatusStr.length + 1 string:[NSString stringWithFormat:@"%@  ", section.authStatusStr] labelHeight:textLabel.height];
+        
+        textLabel.attributedText = authAttrStr;
+        
+        textLabel.textColor = section.color;
+        
     }
 }
 

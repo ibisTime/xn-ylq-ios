@@ -115,13 +115,6 @@
     
     self.titleLabel.text = _notice.smsTitle;
     
-    NSString *date = [_notice.pushedDatetime convertToDetailDate];
-    
-    
-    NSAttributedString *timeAttr = [NSAttributedString getAttributedStringWithImgStr:@"消息时间" index:0 string:[NSString stringWithFormat:@"  %@", date] labelHeight:self.timeLabel.height];
-    
-    self.timeLabel.attributedText = timeAttr;
-    
     self.contentLabel.text = _notice.smsContent;
     
     self.contentLabel.height = _notice.contentHeight;
@@ -129,7 +122,14 @@
     _notice.cellHeight = 45 + 15 + _notice.contentHeight + 15 + 35;
     
     self.bgView.height = _notice.cellHeight;
+    //时间
+    NSString *date = [_notice.pushedDatetime convertToDetailDate];
     
+    NSAttributedString *timeAttr = [NSAttributedString getAttributedStringWithImgStr:@"消息时间" index:0 string:[NSString stringWithFormat:@"  %@", date] labelHeight:self.timeLabel.height];
+    
+    self.timeLabel.attributedText = timeAttr;
+    
+    self.bottomView.y = self.contentLabel.yy + 15;
 }
 
 @end

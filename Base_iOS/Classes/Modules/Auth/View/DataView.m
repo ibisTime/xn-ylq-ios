@@ -90,7 +90,7 @@
             
             section.type = [dataModel.typeArr[i] integerValue];
             
-            section.authType = AuthStatusTypeAuthentication;
+            section.flag = @"0";
             
             [sections addObject:section];
             
@@ -187,17 +187,16 @@
                 
                 optionAuthView.imgH = i == 0 ? 33: 29;
 
-                if (i != 2) {
+                if (i == 0) {
                     
                     optionAuthView.section = data.sections[i];
-
+                    
+                    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectTestType:)];
+                    
+                    [optionAuthView addGestureRecognizer:tapGR];
                 }
                 
                 [bgView addSubview:optionAuthView];
-                
-                UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectTestType:)];
-                
-                [optionAuthView addGestureRecognizer:tapGR];
                 
                 [self.viewArr addObject:optionAuthView];
 
@@ -300,7 +299,7 @@
                 
                 SectionModel *section = view.section;
                 
-                section.flag = @"0";
+                section.flag = authModel.infoAddressBookFlag;
                 
                 section.type = DataTypeTXLRZ;
                 
@@ -310,15 +309,15 @@
                 
             case 5:
             {
-                OptionAuthView *view = self.viewArr[i];
-                
-                SectionModel *section = view.section;
-                
-                section.flag = @"0";
-                
-                section.type = DataTypeWXRZ;
-                
-                view.section = section;
+//                OptionAuthView *view = self.viewArr[i];
+//                
+//                SectionModel *section = view.section;
+//                
+//                section.flag = @"0";
+//                
+//                section.type = DataTypeWXRZ;
+//                
+//                view.section = section;
                 
             }
                 break;
@@ -346,7 +345,7 @@
     
 //    BOOL isIdent = [self.authModel.infoIdentifyFlag boolValue];
 //    
-//    BOOL isBasic = [self.authModel.infoBasicFlag boolValue];
+//    BOOL isBasic = [self.authModel.infoAntifraudFlag boolValue];
 //    
 //    BOOL isZMScore = [self.authModel.infoZMCreditFlag boolValue];
 //    

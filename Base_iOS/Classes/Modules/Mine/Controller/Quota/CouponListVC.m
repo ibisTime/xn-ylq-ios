@@ -20,6 +20,8 @@
 
 @property (nonatomic, strong) UIView *placeHolderView;
 
+@property (nonatomic, strong) UILabel *promptLbl;
+
 @end
 
 @implementation CouponListVC
@@ -36,7 +38,10 @@
     
     [self initTableView];
     
+    [self requestCouponPrompt];
+
     [self requestCouponList];
+    
 }
 
 #pragma mark - Init
@@ -59,30 +64,32 @@
     self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
 
     if (_statusType == CouponStatusTypeUse) {
-        
+    
         UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 60)];
+        
+        topView.tag = 1200;
         
         topView.backgroundColor = kWhiteColor;
         
         [self.placeHolderView addSubview:topView];
         
         UIImageView *iconIV = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 16, 16)];
-        
+    
+        iconIV.tag = 1201;
+    
         iconIV.image = kImage(@"提示");
-        
-        iconIV.centerY = 30;
-        
+    
         [topView addSubview:iconIV];
         
         UILabel *promptLbl = [UILabel labelWithText:@"" textColor:kTextColor3 textFont:12];
         
         promptLbl.numberOfLines = 0;
         
-        [promptLbl labelWithTextString:@"您目前没有可用的优惠券，可通过以下途径获取:\n1、邀请好友；2、首次完成有奖调研。" lineSpace:5];
-        
         promptLbl.frame = CGRectMake(40, 0, kScreenWidth - 40, 60);
         
         [topView addSubview:promptLbl];
+        
+        self.promptLbl = promptLbl;
     }
     
     UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60 + 90, 80, 80)];
@@ -154,11 +161,25 @@
     http.showView = self.view;
     http.code = @"805917";
     
-    http.parameters[@"ckey"] = @"telephone";
+    http.parameters[@"ckey"] = @"couponRule";
     
     [http postWithSuccess:^(id responseObject) {
         
-    
+        NSString *promptStr = responseObject[@"data"][@"cvalue"];
+        
+        CGFloat height = ([promptStr componentsSeparatedByString:@"\n"].count+1)*20;
+
+        [self.promptLbl labelWithTextString:promptStr lineSpace:5];
+        
+        self.promptLbl.height = height;
+
+        UIView *bgView = [self.placeHolderView viewWithTag:1200];
+        
+        bgView.height = height;
+        
+        UIImageView *iconIV = [bgView viewWithTag:1201];
+        
+        iconIV.centerY = bgView.height/2.0;
         
     } failure:^(NSError *error) {
         

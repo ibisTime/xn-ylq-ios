@@ -129,7 +129,11 @@
     //子女个数
     self.childernNumTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.marriageTF.yy + 1, kScreenWidth, 45) leftTitle:@"子女个数" titleWidth:titleWidth placeholder:@"请输入子女数量"];
     
-    self.childernNumTF.text = [NSString stringWithFormat:@"%ld", infoBasic.childrenNum];
+    
+//    self.childernNumTF.text = [NSString stringWithFormat:@"%ld", infoBasic.childrenNum];
+    self.childernNumTF.text = infoBasic.childrenNum;
+    
+    self.childernNumTF.keyboardType = UIKeyboardTypeNumberPad;
     
     [self.view addSubview:self.childernNumTF];
     
@@ -171,6 +175,8 @@
     
     self.qqTF.text = infoBasic.qq;
     
+    self.qqTF.keyboardType = UIKeyboardTypeNumberPad;
+
     [self.view addSubview:self.qqTF];
     
     //电子邮箱

@@ -81,12 +81,14 @@
     
     NSString *result = [notification.object isEqualToString:@"1"] ? @"认证成功": @"认证失败";
 
+    [TLAlert alertWithSucces:result];
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [TLAlert alertWithSucces:result];
         
+        [self.navigationController popViewControllerAnimated:YES];
+
     });
     
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Events
@@ -122,14 +124,10 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"623045";
-//    http.parameters[@"idKind"] = @"1";
     http.parameters[@"idNo"] = self.idCard.text;
     http.parameters[@"realName"] = self.realName.text;
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"returnUrl"] = @"jiuzhoubao://certi.back";
-
-//    http.parameters[@"remark"] = @"芝麻认证";
-//    http.parameters[@"localCheck"] = @"0";
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -137,6 +135,7 @@
             
             NSString *bizNo = responseObject[@"data"][@"bizNo"];
             
+            //不跳支付宝
 //                        NSString *merchantID = responseObject[@"data"][@"merchantId"];
 //            
 //                        [self startAuthWithBizNo:bizNo merchantID:merchantID];

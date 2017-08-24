@@ -45,7 +45,7 @@
     
     [topView addSubview:textLbl];
     
-    NSArray *textArr = @[@"借款人:", @"借款金额:", @"借款时限:", @"综合费用:", @"实到金额:", @"还款方案:", @"还款日期:", @"逾期政策:"];
+    NSArray *textArr = @[@"借款人:", @"借款金额:", @"借款时限:", @"综合费用:", @"实到金额:", @"还款方案:", @"逾期政策:"];
     //借款人
     NSString *realName = [TLUser user].realName;
     //借款金额
@@ -64,12 +64,12 @@
     NSString *effectAmountStr = [NSString stringWithFormat:@"%@元", [@(effectAmount) convertToSimpleRealMoney]];
     //还款方案
     NSString *plan = [NSString stringWithFormat:@"一次性还款%@元", [_good.amount convertToSimpleRealMoney]];
-    //还款日期
-    NSDate *currentDate = [NSDate date];
-    
-    NSDate *repaymentDate = [currentDate dateByAddingTimeInterval:7*24*60*60];
-    
-    NSString *repaymentDateStr = [NSString stringFromDate:repaymentDate formatter:@"yyyy年M月d日"];
+//    //还款日期
+//    NSDate *currentDate = [NSDate date];
+//    
+//    NSDate *repaymentDate = [currentDate dateByAddingTimeInterval:7*24*60*60];
+//    
+//    NSString *repaymentDateStr = [NSString stringFromDate:repaymentDate formatter:@"yyyy年M月d日"];
     //逾期政策
     CGFloat yqAmount1 = [_good.yqRate1 doubleValue]*[_good.amount doubleValue];
     
@@ -77,7 +77,7 @@
     
     NSString *yqStr = [NSString stringWithFormat:@"7天内逾期, %@元每天\n7天后逾期, %@元每天", [@(yqAmount1) convertToSimpleRealMoney], [@(yqAmount2) convertToSimpleRealMoney]];
     
-    NSArray *contentArr = @[realName, money, day, total, effectAmountStr, plan, repaymentDateStr, yqStr];
+    NSArray *contentArr = @[realName, money, day, total, effectAmountStr, plan, yqStr];
     
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, topView.yy, kScreenWidth, 330)];
     

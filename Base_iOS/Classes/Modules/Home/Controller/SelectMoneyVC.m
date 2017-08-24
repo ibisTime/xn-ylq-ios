@@ -31,7 +31,6 @@
 @property (nonatomic, strong) UIButton *btnArr;
 
 @property (nonatomic, strong) PickerTextField *couponBtn;          //选择优惠券
-
 @property (nonatomic, strong) UILabel *fastFeeLbl;          //快速信审费
 
 @property (nonatomic, strong) UILabel *interestFeeLbl;      //利息
@@ -115,7 +114,7 @@
         
         textLbl.textAlignment = NSTextAlignmentCenter;
         
-        textLbl.frame = CGRectMake(0, 25, bgView.width, 30);
+        textLbl.frame = CGRectMake(0, 25, bgView.width, 20);
         
         textLbl.centerX = (1+2*i)*kScreenWidth/4.0;
         
@@ -252,7 +251,7 @@
     
     UILabel *promptLbl = [UILabel labelWithText:@"" textColor:kTextColor3 textFont:11.0];
     
-    promptLbl.frame = CGRectMake(0, self.contentView.yy + 15, kScreenWidth, 12);
+    promptLbl.frame = CGRectMake(0, self.contentView.yy + 15, kScreenWidth, 16);
     
     promptLbl.textAlignment = NSTextAlignmentCenter;
     
@@ -324,11 +323,16 @@
             
             if ([status isEqualToString:@"1"]) {
                 
-                TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+                [TLAlert alertWithInfo:@"您的信息未认证，请先完成认证"];
                 
-                tabbarVC.currentIndex = 1;
-                
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
+                    TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+                    
+                    tabbarVC.currentIndex = 1;
+                    
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                });
                 
             } else if ([status isEqualToString:@"2"]) {
             
@@ -357,9 +361,9 @@
     
 }
 
-- (void)selectCoupon:(UIButton *)sender {
+- (void)selectCoupon:(UITapGestureRecognizer *)sender {
 
-    if (self.coupons.count == 1) {
+    if (self.coupons.count == 0) {
         
         [TLAlert alertWithInfo:@"暂无可使用优惠券"];
 
@@ -383,21 +387,31 @@
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         
         self.coupons = objs;
-        
-        NSMutableArray *titleArr = [NSMutableArray array];
-        
-        [titleArr addObject:@"请选择优惠券"];
-        
-        for (CouponModel *coupon in self.coupons) {
+        //有无优惠券
+        if (self.coupons.count == 0) {
             
-            NSString *time = [coupon.invalidDatetime convertDate];
+            UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectCoupon:)];
             
-            NSString *title = [NSString stringWithFormat:@"减免%@元 %@到期", [coupon.amount convertToSimpleRealMoney], time];
+            [self.couponBtn addGestureRecognizer:tapGR];
             
-            [titleArr addObject:title];
+        } else {
+        
+            NSMutableArray *titleArr = [NSMutableArray array];
+            
+            [titleArr addObject:@"请选择优惠券"];
+            
+            for (CouponModel *coupon in self.coupons) {
+                
+                NSString *time = [coupon.invalidDatetime convertDate];
+                
+                NSString *title = [NSString stringWithFormat:@"减免%@元 %@到期", [coupon.amount convertToSimpleRealMoney], time];
+                
+                [titleArr addObject:title];
+            }
+            
+            self.couponBtn.tagNames = titleArr;
         }
         
-        self.couponBtn.tagNames = titleArr;
         
     } failure:^(NSError *error) {
         

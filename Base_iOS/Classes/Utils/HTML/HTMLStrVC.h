@@ -14,6 +14,8 @@ typedef NS_ENUM(NSUInteger, HTMLType) {
     HTMLTypeHelpCenter,     //帮助中心
     HTMLTypeCouponExplain,  //优惠券说明
     HTMLTypeBorrowProtocol, //借款协议
+    HTMLTypeAuthProtocol,   //通讯录授权协议
+    HTMLTypeInfoRule,       //信息收集及使用规则
 };
 
 @interface HTMLStrVC : TLBaseVC

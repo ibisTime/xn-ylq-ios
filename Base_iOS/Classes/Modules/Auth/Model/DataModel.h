@@ -18,14 +18,6 @@ typedef NS_ENUM(NSInteger, DataType) {//认证类型
     DataTypeWXRZ,           //微信认证
 };
 
-typedef NS_ENUM(NSInteger, AuthStatusType) {
-
-    AuthStatusTypeAuthentication = 0,    //前往提交
-    AuthStatusTypeCommit,               //已提交
-    AuthStatusTypeAuthenticated,       //已认证
-    AuthStatusTypeExpired,              //已过期
-};
-
 @class SectionModel;
 
 @interface DataModel : BaseModel
@@ -69,9 +61,7 @@ typedef NS_ENUM(NSInteger, AuthStatusType) {
 
 @property (nonatomic, assign) DataType type;        //认证类型
 
-@property (nonatomic, assign) AuthStatusType authType;
-
-@property (nonatomic, copy) NSString *flag;
+@property (nonatomic, copy) NSString *flag;         //认证状态
 
 @property (nonatomic, copy) NSString *authStatusStr;
 

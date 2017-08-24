@@ -12,7 +12,7 @@
 
 - (CGFloat)contentHeight {
 
-    CGSize contentSize = [self.smsContent calculateStringSize:CGSizeMake(kScreenWidth - 30, MAXFLOAT) font:Font(15.0)];
+    CGSize contentSize = [self.smsContent calculateStringSize:CGSizeMake(kScreenWidth - 60, MAXFLOAT) font:Font(15.0)];
 
     return contentSize.height;
 }

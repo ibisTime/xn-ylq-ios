@@ -299,6 +299,15 @@
 
 }
 
+- (NSString *)vaildString {
+
+    if (self == nil || [self isKindOfClass:[NSNull class]]) {
+        
+        return @"";
+    }
+    
+    return self;
+}
 
 - (CGSize)calculateStringSize:(CGSize)size font:(UIFont *)font
 {

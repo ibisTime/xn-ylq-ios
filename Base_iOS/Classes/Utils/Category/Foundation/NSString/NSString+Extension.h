@@ -41,6 +41,8 @@
 - (NSString *)md5String;
 //基本验证 不为nil ， 且长度不为0
 - (BOOL)valid;
+//判断字符串是否为空
+- (NSString *)vaildString;
 
 //处理图片的url
 - (NSString *)convertThumbnailImageUrl;

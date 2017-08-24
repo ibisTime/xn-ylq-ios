@@ -210,17 +210,8 @@
             
         };
         
-        //登入
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin) name:kUserLoginNotification object:nil];
         
     }];
-}
-
-- (void)userLogin {
-    
-    //注册推送别名
-    //    [JPUSHService setAlias:[ZHUser user].userId callbackSelector:nil object:nil];
-//    self.window.rootViewController = [[NavigationController alloc] initWithRootViewController:[[HomeVC alloc] init]];
 }
 
 @end

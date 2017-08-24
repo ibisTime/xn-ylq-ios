@@ -194,7 +194,7 @@
         
         self.alpha = 1;
 
-        if ([_goodModel.userProductStatus isEqualToString:@"1"] || [_goodModel.userProductStatus isEqualToString:@"2"]) {
+        if ([_goodModel.userProductStatus isEqualToString:@"1"] || [_goodModel.userProductStatus isEqualToString:@"2"] || [_goodModel.userProductStatus isEqualToString:@"3"]) {
             
             self.conditionLbl.hidden = YES;
             

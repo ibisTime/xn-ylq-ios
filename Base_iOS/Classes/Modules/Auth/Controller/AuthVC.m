@@ -15,6 +15,7 @@
 #import "MXOperatorAuthVC.h"
 #import "IdentifierVC.h"
 #import "ManualAuditVC.h"
+#import "MailListVC.h"
 
 #import "TLUserLoginVC.h"
 #import "NavigationController.h"
@@ -180,6 +181,14 @@
     BaseWeakSelf;
     //认证是否完成,是（点击哪个就进入哪个）否：按认证顺序来
     
+    BOOL isIdent = [self.authModel.infoIdentifyFlag boolValue];
+
+    BOOL isBasic = [self.authModel.infoAntifraudFlag boolValue];
+
+    BOOL isZMScore = [self.authModel.infoZMCreditFlag boolValue];
+
+    BOOL isYYS = [self.authModel.infoCarrierFlag boolValue];
+
     switch (section.type) {
             
         case DataTypeSFRZ:
@@ -217,6 +226,13 @@
                 
                 loginVC.loginSuccess = ^{
                     
+                    if (!isIdent) {
+                        
+                        [TLAlert alertWithInfo:@"请先进行身份认证"];
+                        
+                        return;
+                    }
+                    
                     BaseInfoVC *baseInfoVC = [BaseInfoVC new];
                     
                     baseInfoVC.title = section.title;
@@ -231,8 +247,6 @@
                 return ;
             }
             
-            BOOL isIdent = [self.authModel.infoIdentifyFlag boolValue];
-
             if (!isIdent) {
                 
                 [TLAlert alertWithInfo:@"请先进行身份认证"];
@@ -256,6 +270,18 @@
                 
                 loginVC.loginSuccess = ^{
                     
+                    if (!isIdent) {
+                        
+                        [TLAlert alertWithInfo:@"请先进行身份认证"];
+                        
+                        return;
+                        
+                    } else if (!isBasic) {
+                        
+                        [TLAlert alertWithInfo:@"请先提交个人信息"];
+                        return;
+                    }
+                    
                     ZMOPScoreVC *zmopScoreVC = [ZMOPScoreVC new];
                     
                     zmopScoreVC.title = section.title;
@@ -270,9 +296,13 @@
                 return ;
             }
             
-            BOOL isBasic = [self.authModel.infoBasicFlag boolValue];
-
-            if (!isBasic) {
+            if (!isIdent) {
+                
+                [TLAlert alertWithInfo:@"请先进行身份认证"];
+                
+                return;
+                
+            } else if (!isBasic) {
                 
                 [TLAlert alertWithInfo:@"请先提交个人信息"];
                 return;
@@ -295,6 +325,23 @@
                 TLUserLoginVC *loginVC = [TLUserLoginVC new];
                 
                 loginVC.loginSuccess = ^{
+                    
+                    if (!isIdent) {
+                        
+                        [TLAlert alertWithInfo:@"请先进行身份认证"];
+                        
+                        return;
+                        
+                    } else if (!isBasic) {
+                        
+                        [TLAlert alertWithInfo:@"请先提交个人信息"];
+                        return;
+                        
+                    }else if (!isZMScore) {
+                        
+                        [TLAlert alertWithInfo:@"请先认证芝麻分"];
+                        return;
+                    }
                     
                     [self initMXSDK];
 
@@ -325,9 +372,18 @@
             //                [self.navigationController pushViewController:operatorAuthVC animated:YES];
             //            }
             
-            BOOL isZMScore = [self.authModel.infoZMCreditFlag boolValue];
-
-            if (!isZMScore) {
+            if (!isIdent) {
+                
+                [TLAlert alertWithInfo:@"请先进行身份认证"];
+                
+                return;
+                
+            } else if (!isBasic) {
+                
+                [TLAlert alertWithInfo:@"请先提交个人信息"];
+                return;
+                
+            }else if (!isZMScore) {
                 
                 [TLAlert alertWithInfo:@"请先认证芝麻分"];
                 return;
@@ -349,8 +405,30 @@
                 
                 loginVC.loginSuccess = ^{
                     
-                    [TLAlert alertWithInfo:@"正在研发中，敬请期待"];
-
+                    if (!isIdent) {
+                        
+                        [TLAlert alertWithInfo:@"请先进行身份认证"];
+                        return;
+                        
+                    } else if (!isBasic) {
+                        
+                        [TLAlert alertWithInfo:@"请先提交个人信息"];
+                        return;
+                        
+                    }else if (!isZMScore) {
+                        
+                        [TLAlert alertWithInfo:@"请先认证芝麻分"];
+                        return;
+                        
+                    } else if (!isYYS) {
+                        
+                        [TLAlert alertWithInfo:@"请先认证运营商"];
+                        return;
+                    }
+                    
+                    MailListVC *mailListVC = [MailListVC new];
+                    
+                    [self.navigationController pushViewController:mailListVC animated:YES];
                 };
                 
                 NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
@@ -360,7 +438,30 @@
                 return ;
             }
             
-            [TLAlert alertWithInfo:@"正在研发中，敬请期待"];
+            if (!isIdent) {
+                
+                [TLAlert alertWithInfo:@"请先进行身份认证"];
+                return;
+                
+            } else if (!isBasic) {
+                
+                [TLAlert alertWithInfo:@"请先提交个人信息"];
+                return;
+                
+            }else if (!isZMScore) {
+                
+                [TLAlert alertWithInfo:@"请先认证芝麻分"];
+                return;
+                
+            } else if (!isYYS) {
+            
+                [TLAlert alertWithInfo:@"请先认证运营商"];
+                return;
+            }
+            
+            MailListVC *mailListVC = [MailListVC new];
+            
+            [self.navigationController pushViewController:mailListVC animated:YES];
             
         }break;
             
@@ -372,6 +473,27 @@
                 
                 loginVC.loginSuccess = ^{
                     
+                    if (!isIdent) {
+                        
+                        [TLAlert alertWithInfo:@"请先进行身份认证"];
+                        return;
+                        
+                    } else if (!isBasic) {
+                        
+                        [TLAlert alertWithInfo:@"请先提交个人信息"];
+                        return;
+                        
+                    }else if (!isZMScore) {
+                        
+                        [TLAlert alertWithInfo:@"请先认证芝麻分"];
+                        return;
+                        
+                    } else if (!isYYS) {
+                        
+                        [TLAlert alertWithInfo:@"请先认证运营商"];
+                        return;
+                    }
+                    
                     [TLAlert alertWithInfo:@"正在研发中，敬请期待"];
 
                 };
@@ -382,6 +504,28 @@
                 
                 return ;
             }
+            
+            if (!isIdent) {
+                
+                [TLAlert alertWithInfo:@"请先进行身份认证"];
+                return;
+                
+            } else if (!isBasic) {
+                
+                [TLAlert alertWithInfo:@"请先提交个人信息"];
+                return;
+                
+            }else if (!isZMScore) {
+                
+                [TLAlert alertWithInfo:@"请先认证芝麻分"];
+                return;
+                
+            } else if (!isYYS) {
+                
+                [TLAlert alertWithInfo:@"请先认证运营商"];
+                return;
+            }
+            
             [TLAlert alertWithInfo:@"正在研发中，敬请期待"];
             
         }break;
@@ -413,12 +557,6 @@
     NSString *account = resultDictionary[@"account"];
     NSLog(@"get import result---code:%d,taskType:%@,taskId:%@,searchId:%@,message:%@,account:%@",code,taskType,taskId,searchId,message,account);
     
-//    [TLUser user].message = message;
-//    
-//    NSDictionary *userInfo = @{@"message": message};
-//    
-//    [[TLUser user] saveUserInfo:userInfo];
-    
     if(code == 2) {
         //继续查询该任务进展
         
@@ -430,7 +568,7 @@
         [TLProgressHUD show];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
+            //魔蝎运营商认证
             TLNetworking *http = [TLNetworking new];
             
             http.code = @"623048";
@@ -439,6 +577,7 @@
             
             [http postWithSuccess:^(id responseObject) {
                 
+                //认证结果查询
                 TLNetworking *http = [TLNetworking new];
                 
                 http.code = @"623050";

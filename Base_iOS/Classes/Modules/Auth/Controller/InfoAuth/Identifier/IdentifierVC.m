@@ -74,7 +74,7 @@
     
     identifierModel.img = @"身份证上传";
     
-    identifierModel.authType = AuthStatusTypeCommit;
+    identifierModel.flag = @"0";
     
     [self.datas addObject:identifierModel];
     
@@ -84,7 +84,7 @@
     
     faceModel.img = @"人脸识别";
     
-    faceModel.authType = AuthStatusTypeCommit;
+    faceModel.flag = @"0";
     
     [self.datas addObject:faceModel];
     

@@ -15,7 +15,7 @@
 #import "QuotaModel.h"
 
 #import "SelectMoneyVC.h"
-//#import "SignContractVC.h"
+#import "TabbarViewController.h"
 
 @interface MyQuotaVC ()
 
@@ -88,7 +88,18 @@
 #pragma mark - Events
 - (void)clickUseQuota:(UIButton *)sender {
     
-    [self requestGood];
+    if (self.quota.validDays > 0) {
+        
+        [self requestGood];
+
+    } else {
+    
+        TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+        
+        tabbarVC.currentIndex = 0;
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
     
 }
 

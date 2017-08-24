@@ -13,8 +13,8 @@
 #define CAPTCHA_CODE @"805950"
 
 //用户
-#define USER_REG_CODE @"623800"             //注册805041
-#define USER_INVITE_REG_CODE @"805154"      //邀请注册
+#define USER_REG_CODE @"805041"             //注册
+#define USER_INVITE_REG_CODE @"623800"      //邀请注册
 #define USER_LOGIN_CODE @"805050"           //登录
 #define USER_FIND_PWD_CODE @"805063"        //忘记密码
 

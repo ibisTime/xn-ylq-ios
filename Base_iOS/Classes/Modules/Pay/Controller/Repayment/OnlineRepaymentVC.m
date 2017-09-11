@@ -1,19 +1,20 @@
 //
-//  RepaymentVC.m
+//  OnlineRepaymentVC.m
 //  Base_iOS
 //
-//  Created by 蔡卓越 on 2017/8/17.
+//  Created by 蔡卓越 on 2017/9/6.
 //  Copyright © 2017年 caizhuoyue. All rights reserved.
 //
 
-#import "RepaymentVC.h"
+#import "OnlineRepaymentVC.h"
+
 #import "PayInfoCell.h"
 #import "PayFuncModel.h"
 
 #import "TLWXManager.h"
 #import "TLAlipayManager.h"
 
-@interface RepaymentVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+@interface OnlineRepaymentVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 @property (nonatomic,strong) TLTextField *amountTf;
 
@@ -23,19 +24,12 @@
 
 @end
 
-@implementation RepaymentVC
-
-- (void)dealloc {
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-}
+@implementation OnlineRepaymentVC
 
 - (void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
     
-    [self.amountTf becomeFirstResponder];
 }
 
 - (void)viewDidLoad {
@@ -44,11 +38,11 @@
     self.title = @"还款";
     
     [self beginLoad];
-
+    
     [self initSubviews];
-
+    
     self.edgesForExtendedLayout = UIRectEdgeNone;
-
+    
 }
 
 #pragma mark - Init
@@ -57,7 +51,7 @@
     
     if (!_amountTf) {
         
-        _amountTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 50) leftTitle:@"还款金额" titleWidth:100 placeholder:@"请输入还款金额"];
+        _amountTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 50) leftTitle:@"还款金额" titleWidth:100 placeholder:@""];
         
         _amountTf.backgroundColor = [UIColor whiteColor];
         _amountTf.delegate = self;
@@ -83,14 +77,13 @@
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
     
-    
     //按钮
     UIButton *payBtn = [UIButton buttonWithTitle:@"确定还款" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:18 cornerRadius:22.5];
     
     payBtn.frame = CGRectMake(15, 40, kScreenWidth - 30, 45);
     
     [payBtn addTarget:self action:@selector(repayment) forControlEvents:UIControlEventTouchUpInside];
-
+    
     [footerView addSubview:payBtn];
     
     self.tableView.tableFooterView = footerView;
@@ -129,7 +122,7 @@
 }
 
 - (void)repayment {
-
+    
     __block PayType type;
     
     [self.pays enumerateObjectsUsingBlock:^(PayFuncModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -164,10 +157,16 @@
             
         }break;
             
+        case PayTypeOther: {
+            
+            payType = @"1";
+            
+        }break;
+            
     }
     
     [self shopPay:payType payPwd:nil];
-
+    
 }
 
 #pragma mark- 优店支付, 余额支付需要支付密码
@@ -176,7 +175,7 @@
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = @"623072";
-//    http.parameters[@"userId"] = [TLUser user].userId;
+    //    http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"code"] = self.order.code;
     http.parameters[@"payType"] = payType;
     
@@ -193,7 +192,7 @@
             
         } else {
             
-            [TLAlert alertWithSucces:@"支付成功"];
+            [TLAlert alertWithSucces:@"还款成功"];
             
             if (self.paySucces) {
                 self.paySucces();
@@ -211,7 +210,7 @@
 - (void)aliPayWithInfo:(NSDictionary *)info {
     
     BaseWeakSelf;
-
+    
     //支付宝回调
     [TLAlipayManager payWithOrderStr:info[@"signOrder"]];
     
@@ -221,7 +220,7 @@
         
         if (isSuccess) {
             
-            [TLAlert alertWithSucces:@"支付成功"];
+            [TLAlert alertWithSucces:@"还款成功"];
             
             if (weakSelf.paySucces) {
                 weakSelf.paySucces();
@@ -229,18 +228,18 @@
             
         } else {
             
-            [TLAlert alertWithError:@"支付失败"];
+            [TLAlert alertWithError:@"还款失败"];
         }
         
     }];
-
+    
     
 }
 
 - (void)wxPayWithInfo:(NSDictionary *)info {
     
     BaseWeakSelf;
-
+    
     NSDictionary *dict = info;
     //调起微信支付
     PayReq* req             = [[PayReq alloc] init];
@@ -255,7 +254,7 @@
         
     } else {
         
-        [TLAlert alertWithError:@"支付失败"];
+        [TLAlert alertWithError:@"还款失败"];
     }
     //回调
     [TLWXManager manager].wxPay = ^(BOOL isSuccess,int errorCode){
@@ -263,7 +262,7 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             if (isSuccess) {
-                [TLAlert alertWithSucces:@"支付成功"];
+                [TLAlert alertWithSucces:@"还款成功"];
                 
                 if (weakSelf.paySucces) {
                     
@@ -272,7 +271,7 @@
                 
             } else {
                 
-                [TLAlert alertWithError:@"支付失败"];
+                [TLAlert alertWithError:@"还款失败"];
             }
             
         });
@@ -284,8 +283,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 2;
-
+    return self.pays.count;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -365,11 +364,15 @@
     return headView;
 }
 
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 @end

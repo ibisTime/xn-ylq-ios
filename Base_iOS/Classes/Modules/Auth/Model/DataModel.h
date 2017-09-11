@@ -16,6 +16,8 @@ typedef NS_ENUM(NSInteger, DataType) {//认证类型
     DataTypeYYSRZ,          //运营商认证
     DataTypeTXLRZ,          //通讯录认证
     DataTypeWXRZ,           //微信认证
+    DataTypeSCSFZ,          //上传身份证
+    DataTypeRLSB,           //人脸识别
 };
 
 @class SectionModel;

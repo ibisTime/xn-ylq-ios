@@ -40,6 +40,7 @@
 
 @property (nonatomic, strong) TLImagePicker *imagePicker;
 
+@property (nonatomic, copy) NSString *isBorrowFlag;            //是否有借款
 @end
 
 @implementation SettingVC
@@ -68,6 +69,8 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoChange) name:kUserInfoChange object:nil];
 
+    //当前是否有借款
+    [self requestCurrentLoan];
     
 }
 
@@ -154,9 +157,17 @@
     changeMobile.text = @"修改手机号";
     [changeMobile setAction:^{
         
-        TLChangeMobileVC *changeMobileVC = [[TLChangeMobileVC alloc] init];
-        [weakSelf.navigationController pushViewController:changeMobileVC animated:YES];
+        //0:没有  1:有
+        if ([weakSelf.isBorrowFlag isEqualToString:@"1"]) {
+            
+            [TLAlert alertWithInfo:@"您现在已有借款, 不能修改手机号"];
+            
+        } else {
         
+            TLChangeMobileVC *changeMobileVC = [[TLChangeMobileVC alloc] init];
+            [weakSelf.navigationController pushViewController:changeMobileVC animated:YES];
+        }
+    
     }];
     
     //
@@ -184,13 +195,13 @@
 //    }];
     
     //
-//    SettingModel *bankCard = [SettingModel new];
-//    bankCard.text = @"我的银行卡";
-//    [bankCard setAction:^{
-//        
-//        ZHBankCardListVC *vc = [[ZHBankCardListVC alloc] init];
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }];
+    SettingModel *bankCard = [SettingModel new];
+    bankCard.text = @"我的银行卡";
+    [bankCard setAction:^{
+        
+        ZHBankCardListVC *vc = [[ZHBankCardListVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
     
     SettingModel *aboutUs = [SettingModel new];
     aboutUs.text = @"关于我们";
@@ -205,7 +216,7 @@
     
     self.group = [SettingGroup new];
     
-    self.group.groups = @[@[changeMobile, changeLoginPwd], @[aboutUs]];
+    self.group.groups = @[@[changeMobile, changeLoginPwd, bankCard], @[aboutUs]];
     
 }
 
@@ -318,6 +329,24 @@
         
     };
     [_imagePicker picker];
+}
+
+#pragma mark - Data
+- (void)requestCurrentLoan {
+
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"623091";
+    
+    http.parameters[@"userId"] = [TLUser user].userId;
+    [http postWithSuccess:^(id responseObject) {
+        
+        _isBorrowFlag = responseObject[@"data"][@"isBorrowFlag"];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 #pragma mark - UITableViewDataSource

@@ -18,7 +18,7 @@
 #define USER_LOGIN_CODE @"805050"           //登录
 #define USER_FIND_PWD_CODE @"805063"        //忘记密码
 
-#define USER_CAHNGE_MOBILE @"805070"        //修改手机号
+#define USER_CAHNGE_MOBILE @"805061"        //修改手机号
 #define USER_CHANGE_LOGIN_NAME @"805150"    //修改登录名
 #define USER_SET_TRADE_PWD @"805066"        //设置交易密码
 #define USER_FIND_TRADE_PWD @"805068"       // 找回交易密码

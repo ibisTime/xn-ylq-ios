@@ -72,8 +72,6 @@
 
     [UIBarButtonItem addRightItemWithImageName:@"消息" frame:CGRectMake(0, 0, 18, 13) vc:self action:@selector(notice)];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loanStatusDidChange:) name:kLoanStatusChangeNotificaiton object:nil];
- 
     _isFirst = YES;
     
     [self configUpdate];
@@ -143,24 +141,16 @@
     switch (loanType) {
         case LoanTypeFirstStep:
         {
-            if (![TLUser user].isLogin) {
+            if ([good.isLocked isEqualToString:@"0"]) {
                 
-                TLUserLoginVC *loginVC = [TLUserLoginVC new];
-                
-                loginVC.loginSuccess = ^{
-                    
-                    [weakSelf loanStatusWithGood:good];
+                [self loanStatusWithGood:good];
 
-                };
-                
-                NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
-                
-                [weakSelf.navigationController presentViewController:navi animated:YES completion:nil];
-                
-                return ;
-            }
+            } else if ([good.isLocked isEqualToString:@"1"]) {
             
-            [self loanStatusWithGood:good];
+                [TLAlert alertWithTitle:@"" message:@"尊敬的用户,该款产品,您还不能申请" confirmMsg:@"OK" confirmAction:^{
+                    
+                }];
+            }
             
         }break;
             
@@ -201,17 +191,7 @@
     }
 }
 
-- (void)loanStatusDidChange:(NSNotification *)notification {
-
-
-}
-
 - (void)loanStatusWithGood:(GoodModel *)good {
-
-    if ([good.isLocked isEqualToString:@"1"]) {
-        
-        return ;
-    }
     
     NSInteger status = [good.userProductStatus integerValue];
     
@@ -341,7 +321,7 @@
         
     } failure:^(NSError *error) {
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             [self reuqestGoods];
         });

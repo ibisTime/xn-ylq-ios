@@ -20,9 +20,6 @@
 
 @property (nonatomic, strong) SortBar *headView;
 
-//底部线条
-@property (nonatomic, strong) UIView *lineView;
-
 @property (nonatomic, strong) NSMutableArray *btnArray;
 
 @property (nonatomic, assign) CGFloat leftLength;
@@ -77,69 +74,5 @@
     _scrollView.contentOffset = CGPointMake(kScreenWidth*0, 0);
     [self addSubview:_scrollView];
 }
-
-#pragma mark - Settings
-
-- (void)setTitlePropertyWithTitleColor:(UIColor *)titleColor titleFont:(CGFloat )titleFont selectColor:(UIColor *)selectColor {
-    
-//    for (UIButton *btn in _btnArray) {
-//        
-//        [btn setTitleColor:titleColor forState:UIControlStateNormal];
-//        
-//        [btn setTitleColor:selectColor forState:UIControlStateSelected];
-//        
-//        btn.titleLabel.font = titleFont;
-//        
-//    }
-    
-}
-
-- (void)setLinePropertyWithLineColor:(UIColor *)lineColor lineSize:(CGSize)lineSize {
-    
-    _lineView.backgroundColor = lineColor;
-    
-    CGFloat length = kScreenWidth/(_itemTitles.count*2.0);
-    
-    CGFloat leftLength = length - lineSize.width/2.0;
-    
-    _leftLength = leftLength;
-    
-    [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.mas_equalTo(leftLength);
-        make.height.mas_equalTo(lineSize.height);
-        make.width.mas_equalTo(lineSize.width);
-        make.bottom.mas_equalTo(0);
-        
-    }];
-    
-}
-
-#pragma mark - Events
-
-//- (void)clickBtn:(UIButton *)sender {
-//    
-//    sender.selected = !sender.selected;
-//    
-//    NSInteger index = sender.tag - 1200;
-//    
-//    CGPoint point = CGPointMake(index*kScreenWidth, _scrollView.contentOffset.y);
-//    //线条偏移量
-//    CGFloat x = kScreenWidth/(_itemTitles.count*1.0)*index + _leftLength;
-//    
-//    for (UIButton *btn in _btnArray) {
-//        
-//        btn.selected = sender.tag == btn.tag ? YES: NO;
-//    }
-//    
-//    //滚动
-//    [UIView animateWithDuration:0.5 animations:^{
-//        
-//        [_lineView setX:x];
-//        
-//        [_scrollView setContentOffset:point];
-//        
-//    }];
-//}
 
 @end

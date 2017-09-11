@@ -39,11 +39,12 @@
 #define kTextColor2             [UIColor colorWithHexString:@"#999999"]   //二级文字
 #define kTextColor3             [UIColor colorWithHexString:@"#ffae00"]   //三级文字
 #define kTextColor4             [UIColor colorWithHexString:@"#dedede"]   //四级文字
+#define kThemeColor             [UIColor colorWithHexString:@"#fe4332"]  //红色文字
 
 #define kAuxiliaryTipColor      [UIColor colorWithHexString:@"#FF254C"]   //辅助提示颜色
 #define kBottomItemGrayColor    [UIColor colorWithHexString:@"#FAFAFA"]   //底栏灰色
 #define kCommentSecondColor     [UIColor colorWithHexString:@"#FAFAFA"]   //评论二级颜色
-
+#define kGreyButtonColor        [UIColor colorWithHexString:@"#CCCCCC"]   //灰色按钮颜色
 /****颜色列表***/
 
 

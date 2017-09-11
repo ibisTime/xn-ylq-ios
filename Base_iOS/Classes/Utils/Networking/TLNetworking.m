@@ -81,7 +81,7 @@
 {
     //如果想要设置其它 请求头信息 直接设置 HTTPSessionManager 的 requestSerializer 就可以了，不用直接设置 NSURLRequest
     
-    if(self.showView){
+    if(self.showView) {
     
         [TLProgressHUD show];
     }
@@ -154,7 +154,8 @@
               //token错误  4
               
               [TLAlert alertWithTitle:nil message:@"为了您的账户安全，请重新登录" confirmAction:^{
-//                  [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
+                  
+                  [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
               }];
               return;
               

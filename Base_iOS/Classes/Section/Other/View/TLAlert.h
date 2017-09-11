@@ -13,8 +13,14 @@
 
 @interface TLAlert : NSObject
 
+@property (nonatomic, assign) CGFloat infoSecond;     //警告停留的时间
+
+@property (nonatomic, assign) CGFloat errorSecond;    //失败停留的时间
+
+@property (nonatomic, assign) CGFloat successSecond;  //成功停留的时间
+
 //SVProgressHUD新版
-+ (void)alertHUDWithMsg:(NSString *)msg;
+//+ (void)alertHUDWithMsg:(NSString *)msg;
 
 //info
 + (void)alertWithInfo:(NSString *)msg;
@@ -24,9 +30,8 @@
 + (void)alertWithSucces:(NSString *)msg;
 
 
-
 //设置延迟时间
-+ (void)alertWithHUDText:(NSString *)text duration:(NSTimeInterval)sec complection:(void(^)())complection;
+//+ (void)alertWithHUDText:(NSString *)text duration:(NSTimeInterval)sec complection:(void(^)())complection;
 
 //--//基于系统的alertController
 + (void)alertWithMsg:(NSString * )message;

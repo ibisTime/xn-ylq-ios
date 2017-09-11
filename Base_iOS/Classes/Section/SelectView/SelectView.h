@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^SelectBlock)(NSInteger index);
+
 @interface SelectView : UIView
 
 @property (nonatomic, strong) UIScrollView *scrollView;
+
+@property (nonatomic, copy) SelectBlock selectBlock;
 
 - (instancetype)initWithFrame:(CGRect)frame itemTitles:(NSArray *)itemTitles;
 

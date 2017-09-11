@@ -9,8 +9,12 @@
 #import "TLTableView.h"
 #import "OrderModel.h"
 
+typedef void(^RenewalBlock)();
+
 @interface OverdueTableView : TLTableView
 
 @property (nonatomic, strong) OrderModel *order;
+
+@property (nonatomic, copy) RenewalBlock renewalBlock;
 
 @end

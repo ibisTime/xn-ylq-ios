@@ -33,20 +33,24 @@
 
 @property (nonatomic, strong) AuthModel *authModel;
 
+@property (nonatomic, copy) NSString *isApply;     //是否有申请单
+
 @end
 
 @implementation AuthVC
 
 - (void)viewWillAppear:(BOOL)animated {
-
+    
     [super viewWillAppear:animated];
     
     if ([TLUser user].isLogin) {
         
         [self requestAuthStatus];
-
+        
+//        [self requestApplyStatus];
+        
     } else {
-    
+        
         AuthModel *authModel = [AuthModel new];
         
         authModel.infoIdentifyFlag = @"0";
@@ -58,9 +62,9 @@
         authModel.infoCarrierFlag = @"0";
         
         self.dataView.authModel = authModel;
-
+        
     }
-
+    
 }
 
 - (void)viewDidLoad {
@@ -69,8 +73,10 @@
     self.title = @"认证引导";
     
     [self initTopView];
-
+    
     [self initDataView];
+    
+    [self requestMXApiKey];
     
 }
 
@@ -130,23 +136,33 @@
 
 - (void)initMXSDK {
     
+    InfoIdentify *identify = self.authModel.infoIdentify;
+    
     [MoxieSDK shared].delegate = self;
     [MoxieSDK shared].mxUserId = kMoXieUserID;
-    [MoxieSDK shared].mxApiKey = kMoXieApiKey;
+    [MoxieSDK shared].mxApiKey = [TLUser user].mxApiKey;
     [MoxieSDK shared].fromController = self;
+    
+    [MoxieSDK shared].taskType = @"carrier";
+    //跳过输入身份证和姓名界面
+    [MoxieSDK shared].carrier_phone = [TLUser user].mobile;
+    [MoxieSDK shared].carrier_name = identify.realName;
+    [MoxieSDK shared].carrier_idcard = identify.idNo;
+    [MoxieSDK shared].carrier_editable = YES;
     
     [MoxieSDK shared].backImageName = @"返回";
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
+    //开始运营商认证
+    [[MoxieSDK shared] startFunction];
     
 }
 
 #pragma mark - Data
 - (void)requestAuthStatus {
-
+    
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"623050";
@@ -165,10 +181,44 @@
     }];
 }
 
+//- (void)requestApplyStatus {
+//    //获取用户当前正在进行的申请记录
+//    TLNetworking *http = [TLNetworking new];
+//    
+//    http.code = @"623032";
+//    
+//    http.parameters[@"userId"] = [TLUser user].userId;
+//    
+//    [http postWithSuccess:^(id responseObject) {
+//        
+//        self.isApply = responseObject[@"data"][@"toApproveFlag"];
+//        
+//    } failure:^(NSError *error) {
+//        
+//    }];
+//}
+
+- (void)requestMXApiKey {
+
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"623917";
+    http.parameters[@"key"] = @"mxApiKey";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [TLUser user].mxApiKey = responseObject[@"data"][@"cvalue"];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+
+}
+
 #pragma mark - Events
 
 - (void)clickCancel {
-
+    
     [UIView animateWithDuration:0.2 animations:^{
         
         self.dataView.y = 0;
@@ -181,14 +231,14 @@
     BaseWeakSelf;
     //认证是否完成,是（点击哪个就进入哪个）否：按认证顺序来
     
-    BOOL isIdent = [self.authModel.infoIdentifyFlag boolValue];
-
-    BOOL isBasic = [self.authModel.infoAntifraudFlag boolValue];
-
-    BOOL isZMScore = [self.authModel.infoZMCreditFlag boolValue];
-
-    BOOL isYYS = [self.authModel.infoCarrierFlag boolValue];
-
+    BOOL isIdent = [self.authModel.infoIdentifyFlag isEqualToString:@"1"];
+    
+    BOOL isBasic = [self.authModel.infoAntifraudFlag isEqualToString:@"1"];
+    
+    BOOL isZMScore = [self.authModel.infoZMCreditFlag isEqualToString:@"1"];
+    
+    BOOL isYYS = [self.authModel.infoCarrierFlag isEqualToString:@"1"];
+    
     switch (section.type) {
             
         case DataTypeSFRZ:
@@ -320,6 +370,7 @@
             
         case DataTypeYYSRZ:
         {
+            
             if (![TLUser user].isLogin) {
                 
                 TLUserLoginVC *loginVC = [TLUserLoginVC new];
@@ -343,12 +394,15 @@
                         return;
                     }
                     
-                    [self initMXSDK];
-
-                    [MoxieSDK shared].taskType = @"carrier";
-                    
-                    [[MoxieSDK shared] startFunction];
-                    
+                    if (!isYYS) {
+                        
+                        [self initMXSDK];
+                        
+                    } else {
+                        
+                        [TLAlert alertWithInfo:@"运营商已认证, 请勿重复认证"];
+                        return ;
+                    }
                 };
                 
                 NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
@@ -370,7 +424,7 @@
             //                operatorAuthVC.title = @"详情报告";
             //
             //                [self.navigationController pushViewController:operatorAuthVC animated:YES];
-            //            }
+            //            }，
             
             if (!isIdent) {
                 
@@ -389,11 +443,15 @@
                 return;
             }
             
-            [self initMXSDK];
-
-            [MoxieSDK shared].taskType = @"carrier";
-            
-            [[MoxieSDK shared] startFunction];
+            if (!isYYS) {
+                
+                [self initMXSDK];
+                
+            } else {
+                
+                [TLAlert alertWithInfo:@"运营商已认证, 请勿重复认证"];
+                return ;
+            }
             
         }break;
             
@@ -405,26 +463,26 @@
                 
                 loginVC.loginSuccess = ^{
                     
-                    if (!isIdent) {
-                        
-                        [TLAlert alertWithInfo:@"请先进行身份认证"];
-                        return;
-                        
-                    } else if (!isBasic) {
-                        
-                        [TLAlert alertWithInfo:@"请先提交个人信息"];
-                        return;
-                        
-                    }else if (!isZMScore) {
-                        
-                        [TLAlert alertWithInfo:@"请先认证芝麻分"];
-                        return;
-                        
-                    } else if (!isYYS) {
-                        
-                        [TLAlert alertWithInfo:@"请先认证运营商"];
-                        return;
-                    }
+                    //                    if (!isIdent) {
+                    //
+                    //                        [TLAlert alertWithInfo:@"请先进行身份认证"];
+                    //                        return;
+                    //
+                    //                    } else if (!isBasic) {
+                    //
+                    //                        [TLAlert alertWithInfo:@"请先提交个人信息"];
+                    //                        return;
+                    //
+                    //                    }else if (!isZMScore) {
+                    //
+                    //                        [TLAlert alertWithInfo:@"请先认证芝麻分"];
+                    //                        return;
+                    //
+                    //                    } else if (!isYYS) {
+                    //
+                    //                        [TLAlert alertWithInfo:@"请先认证运营商"];
+                    //                        return;
+                    //                    }
                     
                     MailListVC *mailListVC = [MailListVC new];
                     
@@ -438,26 +496,26 @@
                 return ;
             }
             
-            if (!isIdent) {
-                
-                [TLAlert alertWithInfo:@"请先进行身份认证"];
-                return;
-                
-            } else if (!isBasic) {
-                
-                [TLAlert alertWithInfo:@"请先提交个人信息"];
-                return;
-                
-            }else if (!isZMScore) {
-                
-                [TLAlert alertWithInfo:@"请先认证芝麻分"];
-                return;
-                
-            } else if (!isYYS) {
-            
-                [TLAlert alertWithInfo:@"请先认证运营商"];
-                return;
-            }
+            //            if (!isIdent) {
+            //
+            //                [TLAlert alertWithInfo:@"请先进行身份认证"];
+            //                return;
+            //
+            //            } else if (!isBasic) {
+            //
+            //                [TLAlert alertWithInfo:@"请先提交个人信息"];
+            //                return;
+            //
+            //            }else if (!isZMScore) {
+            //
+            //                [TLAlert alertWithInfo:@"请先认证芝麻分"];
+            //                return;
+            //
+            //            } else if (!isYYS) {
+            //
+            //                [TLAlert alertWithInfo:@"请先认证运营商"];
+            //                return;
+            //            }
             
             MailListVC *mailListVC = [MailListVC new];
             
@@ -494,8 +552,6 @@
                         return;
                     }
                     
-                    [TLAlert alertWithInfo:@"正在研发中，敬请期待"];
-
                 };
                 
                 NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
@@ -525,8 +581,6 @@
                 [TLAlert alertWithInfo:@"请先认证运营商"];
                 return;
             }
-            
-            [TLAlert alertWithInfo:@"正在研发中，敬请期待"];
             
         }break;
             
@@ -568,14 +622,33 @@
         [TLProgressHUD show];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //魔蝎运营商认证
+            //            魔蝎运营商认证
+            //            TLNetworking *http = [TLNetworking new];
+            //
+            //            http.code = @"623048";
+            //            http.parameters[@"userId"] = [TLUser user].userId;
+            //            http.parameters[@"taskId"] = taskId;
+            //
+            //            [http postWithSuccess:^(id responseObject) {
+            //
+            //
+            //
+            //            } failure:^(NSError *error) {
+            //
+            //
+            //            }];
+            
+            //获取用户当前正在进行的申请记录
             TLNetworking *http = [TLNetworking new];
             
-            http.code = @"623048";
+            http.code = @"623032";
+            
             http.parameters[@"userId"] = [TLUser user].userId;
-            http.parameters[@"taskId"] = taskId;
             
             [http postWithSuccess:^(id responseObject) {
+                
+                //申请状态
+                self.isApply = responseObject[@"data"][@"toApproveFlag"];
                 
                 //认证结果查询
                 TLNetworking *http = [TLNetworking new];
@@ -586,22 +659,28 @@
                 
                 [http postWithSuccess:^(id responseObject) {
                     
-                    [TLProgressHUD dismiss];
-
                     self.authModel = [AuthModel mj_objectWithKeyValues:responseObject[@"data"]];
                     
                     self.dataView.authModel = self.authModel;
                     
-                    [TLAlert alertWithSucces:@"认证成功"];
-
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [TLProgressHUD dismiss];
+                    
+                    [TLAlert alertWithTitle:@"" message:@"运营商认证成功" confirmMsg:@"OK" confirmAction:^{
                         
-                        ManualAuditVC *auditVC = [ManualAuditVC new];
+                        if ([self.isApply isEqualToString:@"1"]) {
+                            
+                            //进入人工审核界面
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                
+                                ManualAuditVC *auditVC = [ManualAuditVC new];
+                                
+                                auditVC.title = @"人工审核";
+                                
+                                [self.navigationController pushViewController:auditVC animated:YES];
+                            });
+                        }
                         
-                        auditVC.title = @"人工审核";
-                        
-                        [self.navigationController pushViewController:auditVC animated:YES];
-                    });
+                    }];
                     
                 } failure:^(NSError *error) {
                     
@@ -610,9 +689,8 @@
                 
             } failure:^(NSError *error) {
                 
-                
             }];
-            
+        
         });
         
     } else if(code == -1) {

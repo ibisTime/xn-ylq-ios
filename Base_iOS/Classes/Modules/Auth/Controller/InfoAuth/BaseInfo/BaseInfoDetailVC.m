@@ -21,23 +21,23 @@
 
 @property (nonatomic, strong) NSMutableArray <KeyValueModel *>*marriageArr;
 
-@property (nonatomic, strong) PickerTextField *edcationTF;  //学历
+@property (nonatomic, strong) PickerTextField *edcationTF;      //学历
 
-@property (nonatomic, strong) PickerTextField *marriageTF;  //婚姻
+@property (nonatomic, strong) PickerTextField *marriageTF;      //婚姻
 
-@property (nonatomic, strong) TLTextField *childernNumTF;   //子女个数
+@property (nonatomic, strong) TLTextField *childernNumTF;       //子女个数
 
-@property (nonatomic, strong) TLTextField *liveProvinceTF;  //居住省市
+@property (nonatomic, strong) TLTextField *liveProvinceTF;      //居住省市
 
 @property (nonatomic,strong) AddressPickerView *addressPicker;  //省市区
 
-@property (nonatomic, strong) TLTextField *addressTF;       //详细地址
+@property (nonatomic, strong) TLTextField *addressTF;           //详细地址
 
 @property (nonatomic, strong) PickerTextField *liveTimeTF;      //居住时长
 
-@property (nonatomic, strong) TLTextField *qqTF;            //QQ
+@property (nonatomic, strong) TLTextField *qqTF;                //QQ
 
-@property (nonatomic, strong) TLTextField *emailTF;         //email
+@property (nonatomic, strong) TLTextField *emailTF;             //email
 
 @property (nonatomic, copy) NSString *selectEdcation;
 
@@ -149,8 +149,8 @@
     [self.liveProvinceTF addSubview:btn];
     [btn addTarget:self action:@selector(chooseAddress) forControlEvents:UIControlEventTouchUpInside];
     
-    //常住地址
-    self.addressTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.liveProvinceTF.yy + 1, kScreenWidth, 45) leftTitle:@"常住地址" titleWidth:titleWidth placeholder:@"请输入常住地址"];
+    //详细地址
+    self.addressTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.liveProvinceTF.yy + 1, kScreenWidth, 45) leftTitle:@"详细地址" titleWidth:titleWidth placeholder:@"请输入详细地址(精确到门牌号)"];
     
     self.addressTF.text = infoBasic.address;
     
@@ -171,7 +171,7 @@
     [self.view addSubview:self.liveTimeTF];
     
     //QQ
-    self.qqTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.liveTimeTF.yy + 1, kScreenWidth, 45) leftTitle:@"QQ" titleWidth:titleWidth placeholder:@"请输入QQ号码"];
+    self.qqTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.liveTimeTF.yy + 1, kScreenWidth, 45) leftTitle:@"QQ" titleWidth:titleWidth placeholder:@"请输入QQ号码(选填)"];
     
     self.qqTF.text = infoBasic.qq;
     
@@ -180,7 +180,7 @@
     [self.view addSubview:self.qqTF];
     
     //电子邮箱
-    self.emailTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.qqTF.yy + 1, kScreenWidth, 45) leftTitle:@"电子邮箱" titleWidth:titleWidth placeholder:@"请输入电子邮箱"];
+    self.emailTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.qqTF.yy + 1, kScreenWidth, 45) leftTitle:@"电子邮箱" titleWidth:titleWidth placeholder:@"请输入电子邮箱(选填)"];
     
     self.emailTF.text = infoBasic.email;
     
@@ -190,10 +190,14 @@
     
     CGFloat leftMargin = 15;
     
-    UIButton *commitBtn = [UIButton buttonWithTitle:@"提交" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:btnH/2.0];
+    UIColor *bgColor = [_authModel.infoAntifraudFlag isEqualToString:@"1"] ? kGreyButtonColor: kAppCustomMainColor;
+
+    UIButton *commitBtn = [UIButton buttonWithTitle:@"提交" titleColor:kWhiteColor backgroundColor:bgColor titleFont:15.0 cornerRadius:btnH/2.0];
     
     commitBtn.frame = CGRectMake(leftMargin, self.emailTF.yy + 50, kScreenWidth - 2*leftMargin, btnH);
     
+    commitBtn.enabled = [_authModel.infoAntifraudFlag isEqualToString:@"1"] ? NO: YES;
+
     [commitBtn addTarget:self action:@selector(clickCommit) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:commitBtn];
@@ -358,7 +362,7 @@
     
     if (![self.addressTF.text valid]) {
         
-        [TLAlert alertWithInfo:@"请输入常住地址"];
+        [TLAlert alertWithInfo:@"请输入详细地址"];
         
         return;
     }
@@ -370,21 +374,33 @@
         return;
     }
     
-    if (![self.qqTF.text valid]) {
+    if ([self.qqTF.text valid]) {
         
-        [TLAlert alertWithInfo:@"请输入QQ号码"];
-        
-        return;
+        if (self.qqTF.text.length < 6) {
+            
+            [TLAlert alertWithInfo:@"请输入正确的QQ号码"];
+            return ;
+        }
     }
+//    if (![self.qqTF.text valid]) {
+//        
+//        [TLAlert alertWithInfo:@"请输入QQ号码"];
+//        
+//        return;
+//    }
     
-    if (![self.emailTF.text isValidateEmail]) {
+    if ([self.emailTF.text valid]) {
         
-        [TLAlert alertWithInfo:@"请输入正确邮箱格式"];
-        
-        return;
+        if (![self.emailTF.text isValidateEmail]) {
+            
+            [TLAlert alertWithInfo:@"请输入正确的邮箱格式"];
+            return;
+        }
     }
     
     TLNetworking *http = [TLNetworking new];
+    
+    http.showView = self.view;
     
     http.code = @"623040";
     http.parameters[@"userId"] = [TLUser user].userId;

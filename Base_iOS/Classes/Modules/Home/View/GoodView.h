@@ -24,4 +24,6 @@ typedef void(^LoanBlock)(LoanType loanType, GoodModel *good);
 
 @property (nonatomic, strong) GoodModel *goodModel;
 
+@property (nonatomic, assign) BOOL isCancel;
+
 @end

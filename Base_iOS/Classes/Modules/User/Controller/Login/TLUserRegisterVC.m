@@ -40,6 +40,7 @@
 @property (nonatomic,copy) NSString *province;
 @property (nonatomic,copy) NSString *city;
 @property (nonatomic,copy) NSString *area;
+@property (nonatomic, copy) NSString *address;  //详细地址
 
 @end
 
@@ -56,31 +57,21 @@
     [super viewDidLoad];
     self.navigationItem.titleView = [UILabel labelWithTitle:@"注册"];
     
-    CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
+    [TLProgressHUD show];
     
-    if (authStatus == kCLAuthorizationStatusDenied) { //定位权限不可用可用
+    if (![TLAuthHelper isEnableLocation]) {
         
         [self setUpUI];
         
-        if (![TLAuthHelper isEnableLocation]) {
+        [TLAlert alertWithTitle:@"" msg:@"为了更好的为您服务,请在设置中打开定位服务" confirmMsg:@"设置" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
             
-            [TLAlert alertWithTitle:@"" msg:@"为了更好的为您服务,请在设置中打开定位服务" confirmMsg:@"设置" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
-                
-            } confirm:^(UIAlertAction *action) {
-                
-                [TLAuthHelper openSetting];
-                
-            }];
+        } confirm:^(UIAlertAction *action) {
             
-            return;
+            [TLAuthHelper openSetting];
             
-        }
+        }];
         
         return;
-        
-    } else if (authStatus == kCLAuthorizationStatusNotDetermined) {
-        
-        [self setUpUI];
         
     }
     
@@ -91,9 +82,11 @@
 
 - (void)setUpUI {
     
+    [TLProgressHUD dismiss];
+    
     self.view.backgroundColor = kBackgroundColor;
 
-    NSInteger count = 4;
+    NSInteger count = 3;
     
     CGFloat margin = ACCOUNT_MARGIN;
     CGFloat w = kScreenWidth - 2*margin;
@@ -140,10 +133,10 @@
     
     AccountTf *addressTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, pwdTf.yy + middleMargin, w, h)];
     addressTf.placeHolder = @"当前位置-自动定位";
-//    referrer.keyboardType = UIKeyboardTypeNumberPad;
     addressTf.leftIconView.image = [UIImage imageNamed:@"定位"];
     addressTf.enabled = NO;
-    
+    addressTf.hidden = YES;
+
     [bgView addSubview:addressTf];
     self.addressTf = addressTf;
     
@@ -195,15 +188,16 @@
         
     }];
 
-
+//    UIButton *btn = [[UIButton alloc] initWithFrame:self.addressTf.frame];
+//    
+//    [bgView addSubview:btn];
+//    [btn addTarget:self action:@selector(chooseAddress) forControlEvents:UIControlEventTouchUpInside];
+    
     //定位成功 隐藏地址选择
     if (self.province && self.city && self.area) {
         
         //        self.addressTf.height = 0.1;
         self.addressTf.text = [NSString stringWithFormat:@"%@ %@ %@",self.province,self.city,self.area];
-        
-    } else {
-        
         
     }
 }
@@ -272,6 +266,7 @@
             self.city = placemark.locality ? : placemark.administrativeArea; //市
             self.area = placemark.subLocality; //区
             
+            self.address = [NSString stringWithFormat:@"%@%@",placemark.thoroughfare ,placemark.name];      //详细地址
         }
         
         [self setUpUI];
@@ -315,34 +310,33 @@
 
 - (void)goReg {
     
-    if (![self.phoneTf.text isPhoneNum]) {
-        
-        [TLAlert alertWithInfo:@"请输入正确的手机号"];
-        
-        return;
-    }
-    
-    if (!(self.captchaView.captchaTf.text && self.captchaView.captchaTf.text.length > 3)) {
-        [TLAlert alertWithInfo:@"请输入正确的验证码"];
-        
-        return;
-    }
-    
-    if (!(self.pwdTf.text &&self.pwdTf.text.length > 5)) {
-        
-        [TLAlert alertWithInfo:@"请输入6位以上密码"];
-        return;
-    }
+//    if (![self.phoneTf.text isPhoneNum]) {
+//        
+//        [TLAlert alertWithInfo:@"请输入正确的手机号"];
+//        
+//        return;
+//    }
+//    
+//    if (!(self.captchaView.captchaTf.text && self.captchaView.captchaTf.text.length > 3)) {
+//        [TLAlert alertWithInfo:@"请输入正确的验证码"];
+//        
+//        return;
+//    }
+//    
+//    if (!(self.pwdTf.text &&self.pwdTf.text.length > 5)) {
+//        
+//        [TLAlert alertWithInfo:@"请输入6位以上密码"];
+//        return;
+//    }
   
-    if ([self.addressTf.text valid]) {
-        
-        if (!(self.province && self.city && self.area)) {
-            
-            [TLAlert alertWithInfo:@"请选择省市区"];
-            return;
-        }
-    }
-    
+//    if ([self.addressTf.text valid]) {
+//        
+//        if (!(self.province && self.city && self.area)) {
+//            
+//            [TLAlert alertWithInfo:@"请选择省市区"];
+//            return;
+//        }
+//    }
     
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
@@ -357,6 +351,7 @@
     http.parameters[@"province"] = self.province;
     http.parameters[@"city"] = self.city;
     http.parameters[@"area"] = self.area;
+    http.parameters[@"address"] = self.address;
     
     [http postWithSuccess:^(id responseObject) {
         

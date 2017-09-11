@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong) UILabel *rightLabel;
 
+@property (nonatomic, assign) BOOL arrowHidden;
+
 @end

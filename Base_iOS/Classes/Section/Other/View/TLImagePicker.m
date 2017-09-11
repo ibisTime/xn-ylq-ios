@@ -29,35 +29,41 @@
 
 - (void)picker {
     
-    
-    
     UIImagePickerController *pickCtrl = [[UIImagePickerController alloc] init];
     pickCtrl.delegate = self;
     pickCtrl.allowsEditing = self.allowsEditing;
     
     UIAlertController *chooseImageCtrl = [UIAlertController alertControllerWithTitle:@"选择照片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *action00 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    if (self.imageType != ImageTypePhoto) {
         
-        pickCtrl.sourceType = UIImagePickerControllerSourceTypeCamera;
-        [self.vc presentViewController:pickCtrl animated:YES completion:nil];
+        UIAlertAction *action00 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            pickCtrl.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self.vc presentViewController:pickCtrl animated:YES completion:nil];
+            
+        }];
         
-    }];
+        [chooseImageCtrl addAction:action00];
+    }
     
-    UIAlertAction *action01 = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    if (self.imageType != ImageTypeCamera) {
         
-        pickCtrl.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        [self.vc presentViewController:pickCtrl animated:YES completion:nil];
-
+        UIAlertAction *action01 = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            pickCtrl.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self.vc presentViewController:pickCtrl animated:YES completion:nil];
+            
+            
+        }];
         
-    }];
+        [chooseImageCtrl addAction:action01];
+    }
     
     UIAlertAction *action02 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];
     
-    [chooseImageCtrl addAction:action00];
-    [chooseImageCtrl addAction:action01];
     [chooseImageCtrl addAction:action02];
     [self.vc presentViewController:chooseImageCtrl animated:YES completion:nil];
 

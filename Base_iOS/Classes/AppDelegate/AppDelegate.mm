@@ -164,7 +164,7 @@
 - (void)configServiceAddress {
     
     //配置环境
-    [AppConfig config].runEnv = RunEnvTest;
+    [AppConfig config].runEnv = RunEnvRelease;
     
 }
 
@@ -200,17 +200,16 @@
         TabbarViewController *tabbarCtrl = [[TabbarViewController alloc] init];
         self.window.rootViewController = tabbarCtrl;
         
-        //取出用户信息
+        //重新登录
         if([TLUser user].isLogin) {
             
+            //初始化用户信息
             [[TLUser user] initUserData];
-            
-            //异步跟新用户信息
-            [[TLUser user] updateUserInfo];
+
+            [[TLUser user] reLogin];
             
         };
-        
-        
+    
     }];
 }
 

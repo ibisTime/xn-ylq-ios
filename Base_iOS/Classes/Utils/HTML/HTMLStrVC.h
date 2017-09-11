@@ -9,13 +9,14 @@
 #import "TLBaseVC.h"
 
 typedef NS_ENUM(NSUInteger, HTMLType) {
-    HTMLTypeAboutUs = 0,    //关于我们
-    HTMLTypeRegProtocol,    //注册协议
-    HTMLTypeHelpCenter,     //帮助中心
-    HTMLTypeCouponExplain,  //优惠券说明
-    HTMLTypeBorrowProtocol, //借款协议
-    HTMLTypeAuthProtocol,   //通讯录授权协议
-    HTMLTypeInfoRule,       //信息收集及使用规则
+    HTMLTypeAboutUs = 0,        //关于我们
+    HTMLTypeRegProtocol,        //注册协议
+    HTMLTypeHelpCenter,         //帮助中心
+    HTMLTypeCouponExplain,      //优惠券说明
+    HTMLTypeBorrowProtocol,     //借款协议
+    HTMLTypeAuthProtocol,       //通讯录授权协议
+    HTMLTypeInfoRule,           //信息收集及使用规则
+    HTMLTypeContactCustomer,    //联系客服
 };
 
 @interface HTMLStrVC : TLBaseVC

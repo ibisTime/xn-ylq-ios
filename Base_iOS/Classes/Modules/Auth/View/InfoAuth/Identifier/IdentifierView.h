@@ -30,6 +30,4 @@ typedef void(^IdentifierBlock)(IdentifierType type);
 
 @property (nonatomic, strong) AuthModel *authModel;
 
-@property (nonatomic, strong) UIImageView *identifierIV;
-
 @end

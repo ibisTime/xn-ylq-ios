@@ -51,7 +51,7 @@
     
     CGFloat x = 15;
     
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(x, 0, kScreenWidth - 2*x, 100)];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(x, 0, kScreenWidth - 2*x, 125)];
     
     bgView.backgroundColor = kWhiteColor;
     
@@ -85,7 +85,7 @@
     
     self.contentLabel.frame = CGRectMake(x, topView.yy + x, self.bgView.width - 2*x, 15.0);
     
-    self.contentLabel.numberOfLines = 0;
+//    self.contentLabel.numberOfLines = 0;
     
     [bgView addSubview:self.contentLabel];
 
@@ -117,19 +117,19 @@
     
     self.contentLabel.text = _notice.smsContent;
     
-    self.contentLabel.height = _notice.contentHeight;
-    
-    _notice.cellHeight = 45 + 15 + _notice.contentHeight + 15 + 35;
-    
-    self.bgView.height = _notice.cellHeight;
-    //时间
+//    self.contentLabel.height = _notice.contentHeight;
+//    
+//    _notice.cellHeight = 45 + 15 + _notice.contentHeight + 15 + 35;
+//    
+//    self.bgView.height = _notice.cellHeight;
+//    时间
     NSString *date = [_notice.pushedDatetime convertToDetailDate];
     
     NSAttributedString *timeAttr = [NSAttributedString getAttributedStringWithImgStr:@"消息时间" index:0 string:[NSString stringWithFormat:@"  %@", date] labelHeight:self.timeLabel.height];
     
     self.timeLabel.attributedText = timeAttr;
     
-    self.bottomView.y = self.contentLabel.yy + 15;
+//    self.bottomView.y = self.contentLabel.yy + 15;
 }
 
 @end

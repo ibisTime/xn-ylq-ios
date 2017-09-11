@@ -10,11 +10,13 @@
 
 typedef NS_ENUM(NSInteger,LoanOrderStatus) {
     
-    LoanOrderStatusWillLoan = 0,        //待放款
-    LoanOrderStatusDidLoan = 1,         //生效中
-    LoanOrderStatusDidOverdue = 2 ,      //已逾期
-    LoanOrderStatusDidRepayment = 3,    //已还款
-    
+    LoanOrderStatusWillAudit = 0,       //待审核
+    LoanOrderStatusAuditFailure = 1,    //审核失败
+    LoanOrderStatusWillLoan = 2,        //待放款
+    LoanOrderStatusMoneyFailure = 3,    //打款失败
+    LoanOrderStatusDidLoan = 4,         //生效中
+    LoanOrderStatusDidRepayment = 5,    //已还款
+    LoanOrderStatusDidOverdue = 6,      //已逾期
 };
 
 @interface LoanOrderListVC : BaseViewController

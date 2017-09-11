@@ -72,7 +72,7 @@
     
     identifierModel.title = @"身份证上传";
     
-    identifierModel.img = @"身份证上传";
+    identifierModel.type = DataTypeSCSFZ;
     
     identifierModel.flag = @"0";
     
@@ -82,7 +82,7 @@
     
     faceModel.title = @"人脸识别";
     
-    faceModel.img = @"人脸识别";
+    faceModel.type = DataTypeRLSB;
     
     faceModel.flag = @"0";
     
@@ -101,7 +101,9 @@
         
         if (type == IdentifierTypeIDCard) {
             
-            [weakSelf commitIDCard];
+            IdentifierAuthVC *authVC = [IdentifierAuthVC new];
+                        
+            [weakSelf.navigationController pushViewController:authVC animated:YES];
             
         } else if (type == IdentifierTypeFaceRecognition) {
             
@@ -148,8 +150,10 @@
     }];
 }
 
-- (void)commitIdentifier {
+#pragma mark - Events
 
+- (void)commitIdentifier {
+    
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"623049";
@@ -160,84 +164,30 @@
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"kCurrentAuthStatus"];
         
         [TLUser user].currentAuth = 0;
-
-        [TLAlert alertWithSucces:@"提交成功"];
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [TLAlert alertWithSucces:@"提交成功"];
+        
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            
+//            [self.navigationController popViewControllerAnimated:YES];
+//            
+//        });
+        
+        [TLAlert alertWithTitle:@"" message:@"身份认证成功" confirmMsg:@"OK" confirmAction:^{
             
-            [self.navigationController popViewControllerAnimated:YES];
-            
-        });
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            });
+        }];
+        
+        
         
     } failure:^(NSError *error) {
         
     }];
     
-}
-
-#pragma mark - Events
-- (void)commitIDCard {
-
-    __weak typeof(self) weakSelf = self;
-    if (!self.imagePicker.pickFinish) {
-        
-        self.imagePicker.pickFinish = ^(NSDictionary *info){
-            
-            TLNetworking *getUploadToken = [TLNetworking new];
-            getUploadToken.showView = weakSelf.view;
-            getUploadToken.code = IMG_UPLOAD_CODE;
-            getUploadToken.parameters[@"token"] = [TLUser user].token;
-            [getUploadToken postWithSuccess:^(id responseObject) {
-                
-                [TLProgressHUD showWithStatus:@""];
-                
-                QNUploadManager *uploadManager = [[QNUploadManager alloc] initWithConfiguration:[QNConfiguration build:^(QNConfigurationBuilder *builder) {
-                    builder.zone = [QNZone zone2];
-                    
-                }]];
-                NSString *token = responseObject[@"data"][@"uploadToken"];
-                
-                UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
-                NSData *imgData = UIImageJPEGRepresentation(image, 0.4);
-                
-                [uploadManager putData:imgData key:[TLUploadManager imageNameByImage:image] token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
-                    //                    [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                    
-                    //设置头像
-                    
-                    TLNetworking *http = [TLNetworking new];
-                    http.showView = weakSelf.view;
-                    http.code = @"623044";
-                    http.parameters[@"userId"] = [TLUser user].userId;
-                    http.parameters[@"identifyPic"] = key;
-                    http.parameters[@"token"] = [TLUser user].token;
-                    [http postWithSuccess:^(id responseObject) {
-                        
-                        [TLAlert alertWithSucces:@"上传成功"];
-                        [TLUser user].photo = key;
-                        
-                        UIImageView *imgView = [weakSelf.identifierView viewWithTag:1300];
-                        
-                        imgView.image = nil;
-                        
-                        weakSelf.identifierView.identifierIV.image = image;
-                        
-                    } failure:^(NSError *error) {
-                        
-                        
-                    }];
-                    
-                    
-                } option:nil];
-                
-            } failure:^(NSError *error) {
-                
-            }];
-            
-        };
-    }
-    
-    [self.imagePicker picker];
 }
 
 - (void)didReceiveMemoryWarning {

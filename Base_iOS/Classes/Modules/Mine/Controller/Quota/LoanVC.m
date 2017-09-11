@@ -69,8 +69,12 @@
     //-----//
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         
-        weakSelf.orderModel = objs[0];
-        weakSelf.loanView.orderModel = weakSelf.orderModel;
+        if (objs.count > 0) {
+            
+            weakSelf.orderModel = objs[0];
+            weakSelf.loanView.orderModel = weakSelf.orderModel;
+        }
+        
 
         
     } failure:^(NSError *error) {

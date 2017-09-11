@@ -97,7 +97,7 @@
 {
     if (_tagNames.count) {
         
-//      self.text = _tagNames[0];
+      self.text = _tagNames[0];
         
     }
     

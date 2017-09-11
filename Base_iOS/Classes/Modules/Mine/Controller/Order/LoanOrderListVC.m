@@ -56,7 +56,7 @@
 
 - (void)initPlaceHolderView {
 
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40)];
 
     UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 80, 80)];
     
@@ -88,23 +88,55 @@
     
     helper.isDeliverCompanyCode = NO;
     
-    if (self.status == LoanOrderStatusDidLoan) {
+    NSArray *statusList;
+    
+    switch (self.status) {
+        case LoanOrderStatusWillAudit:
+        {
+            statusList = @[@"0"];
+        }break;
+          
+        case LoanOrderStatusWillLoan:
+        {
+            statusList = @[@"1"];
+            
+        }break;
         
-        helper.parameters[@"status"] = @"1";
-        
-    } else if(self.status == LoanOrderStatusDidRepayment) {
-        
-        helper.parameters[@"status"] = @"3";
-        
-    } else if(self.status == LoanOrderStatusDidOverdue)  {
-        
-        helper.parameters[@"status"] = @"2";
-        
-    } else {//全部
-        
-        helper.parameters[@"status"] = @"0";
+        case LoanOrderStatusAuditFailure:
+        {
+            statusList = @[@"2"];
+            
+        }break;
+            
+        case LoanOrderStatusDidLoan:
+        {
+            statusList = @[@"3"];
+            
+        }break;
+            
+        case LoanOrderStatusDidRepayment:
+        {
+            statusList = @[@"4"];
+            
+        }break;
+            
+        case LoanOrderStatusDidOverdue:
+        {
+            statusList = @[@"5"];
+            
+        }break;
+            
+        case LoanOrderStatusMoneyFailure:
+        {
+            statusList = @[@"7"];
 
+        }break;
+            
+        default:
+            break;
     }
+    
+    helper.parameters[@"statusList"] = statusList;
     
     helper.tableView = self.tableView;
     [helper modelClass:[OrderModel class]];

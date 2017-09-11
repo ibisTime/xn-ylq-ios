@@ -56,10 +56,14 @@
     
     [self.view addSubview:self.idCard];
     
-    UIButton *confirmBtn = [UIButton buttonWithTitle:@"人脸识别" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:45/2.0];
+    UIColor *bgColor = [_authModel.infoIdentifyFlag isEqualToString:@"1"] ? kGreyButtonColor: kAppCustomMainColor;
+
+    UIButton *confirmBtn = [UIButton buttonWithTitle:@"人脸识别" titleColor:kWhiteColor backgroundColor:bgColor titleFont:15.0 cornerRadius:45/2.0];
     
     confirmBtn.frame = CGRectMake(leftMargin, self.idCard.yy + 40, kScreenWidth - 2*leftMargin, 45);
     
+    confirmBtn.enabled = [_authModel.infoIdentifyFlag isEqualToString:@"1"] ? NO: YES;
+
     [confirmBtn addTarget:self action:@selector(confirmIDCard:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:confirmBtn];
@@ -71,23 +75,26 @@
 
 - (void)realNameAuth:(NSNotification *)notification {
     
-    
-    
     [TLUser user].realName = self.realName.text;
     
     [TLUser user].idNo = self.idCard.text;
     
     [[TLUser user] updateUserInfo];
     
-    NSString *result = [notification.object isEqualToString:@"1"] ? @"认证成功": @"认证失败";
-
-    [TLAlert alertWithSucces:result];
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    if ([notification.object isEqualToString:@"1"]) {
         
-        [self.navigationController popViewControllerAnimated:YES];
+        [TLAlert alertWithSucces:@"认证成功"];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        });
 
-    });
+    } else {
+    
+        [TLAlert alertWithError:@"认证失败, 请重新认证"];
+    }
     
 }
 
@@ -140,11 +147,14 @@
 //            
 //                        [self startAuthWithBizNo:bizNo merchantID:merchantID];
             
+            //            [self doVerify:responseObject[@"data"][@"url"]];
+
             [TLUser user].tempBizNo = bizNo;
+
+            NSString *urlStr = [NSString stringWithFormat:@"http://116.62.193.233:8903/std-certi/zhima?bizNo=%@",bizNo];
             
-            [self doVerify:responseObject[@"data"][@"url"]];
-            
-            
+            [self doVerify:urlStr];
+
         } else {
             
             ZMAuthResultVC *authResultVC = [ZMAuthResultVC new];
@@ -270,8 +280,13 @@
 #pragma mark - 跳转到支付宝认证
 - (void)doVerify:(NSString *)url {
     // 这里使用固定appid 20000067
-    NSString *alipayUrl = [NSString stringWithFormat:@"alipays://platformapi/startapp?appId=20000067&url=%@",
-                           [self URLEncodedStringWithUrl:url]];
+    
+//    NSString *urll = @"https://zmcustprod.zmxy.com.cn/certify/guide.htm?zhima_exterface_invoke_assign_target=0a6eed651503539484955299774875&zhima_exterface_invoke_assig_sign=HaUvFNg30SPE-AGj8cuS_HaKxBNbg8_3Fu6xZ2jTXZ8fhs_b7UbeHOYB1JXAvE75Kfm-3j2Cw0N1k5Q-G0qNO6ky5JcDL3JsfHlJ4CEBkFr_EtVroJ_PKSHTvC7_O-0y7ss1TLwlQ0QZmM3pKMLMX-bkHRzE_eyhttuxzqcty0E";
+    
+    NSString *alipayUrl = [NSString stringWithFormat:@"alipayqr://platformapi/startapp?saId=10000007&qrcode=%@",url];
+    
+//    NSString *alipayUrl = [NSString stringWithFormat:@"alipays://platformapi/startapp?appId=20000067&url=%@",
+//                           [self URLEncodedStringWithUrl:url]];
     
     if ([self canOpenAlipay]) {
         

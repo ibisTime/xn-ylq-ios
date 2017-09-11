@@ -35,7 +35,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"添加银行卡";
     
     //只能添加本人银行卡
 //    if ([TLUser user].realName && [TLUser user].idNo) {
@@ -58,8 +57,6 @@
     [self realNameAuthAfterAction];
 
 }
-
-
 
 - (void)realNameAuthAfterAction {
 
@@ -223,8 +220,10 @@
             [TLAlert alertWithSucces:@"修改成功"];
 
         } else {
+            
+            [TLUser user].bankcardFlag = @"1";
+            
             [TLAlert alertWithSucces:@"绑定成功"];
-
         }
         
         [self.navigationController popViewControllerAnimated:YES];

@@ -16,4 +16,6 @@
 
 @property (nonatomic, assign) NSInteger validDays;
 
+@property (nonatomic, copy) NSString *flag;
+
 @end

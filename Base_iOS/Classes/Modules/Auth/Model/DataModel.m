@@ -23,39 +23,49 @@
     switch (type) {
         case DataTypeSFRZ:
         {
-            _img = flag == 0 ? @"身份认证未认证": @"身份认证";
+            _img = flag == 0 || flag == 2 ? @"身份认证未认证": @"身份认证";
         }
             break;
          
         case DataTypeBaseInfo:
         {
-            _img = flag == 0 ? @"个人信息未认证": @"个人信息认证";
+            _img = flag == 0 || flag == 2 ? @"个人信息未认证": @"个人信息认证";
         }
             break;
         
         case DataTypeZMF:
         {
-            _img = flag == 0 ? @"芝麻分未认证": @"芝麻分认证";
+            _img = flag == 0 || flag == 2 ? @"芝麻分未认证": @"芝麻分认证";
         }
             break;
         
         case DataTypeYYSRZ:
         {
-            _img = flag == 0 ? @"运营商认证未认证": @"运营商认证";
+            _img = flag == 0 || flag == 2 ? @"运营商认证未认证": @"运营商认证";
         }
             break;
             
         case DataTypeTXLRZ:
         {
-            _img = flag == 0 ? @"通讯录未认证": @"通讯录认证";
+            _img = flag == 0 || flag == 2 ? @"通讯录未认证": @"通讯录认证";
         }
             break;
             
         case DataTypeWXRZ:
         {
-            _img = flag == 0 ? @"微信未认证": @"微信认证";
+            _img = flag == 0 || flag == 2 ? @"微信未认证": @"微信认证";
         }
             break;
+            
+        case DataTypeRLSB:
+        {
+            _img = flag == 0 || flag == 2 ? @"人脸识别_灰": @"人脸识别";
+        }break;
+            
+        case DataTypeSCSFZ:
+        {
+            _img = flag == 0 || flag == 2 ? @"身份证_灰": @"身份证上传";
+        }break;
             
         default:
             break;

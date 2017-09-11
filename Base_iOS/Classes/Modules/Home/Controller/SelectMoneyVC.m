@@ -15,6 +15,8 @@
 #import "TabbarViewController.h"
 #import "SignContractVC.h"
 #import "ManualAuditVC.h"
+#import "NavigationController.h"
+#import "TLUserLoginVC.h"
 
 #import "CouponModel.h"
 #import "GoodModel.h"
@@ -26,7 +28,7 @@
 #define kFirstDay       7
 #define kSecondDay      14
 
-@interface SelectMoneyVC ()
+@interface SelectMoneyVC ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UIButton *btnArr;
 
@@ -60,6 +62,14 @@
 @end
 
 @implementation SelectMoneyVC
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    [super viewWillAppear:animated];
+    
+    //获取优惠券列表
+    [self requestCouponList];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -175,6 +185,8 @@
     self.couponBtn.centerX = bgView.width/2.0;
     
     self.couponBtn.textAlignment = NSTextAlignmentCenter;
+    
+    self.couponBtn.delegate = self;
     
     [self.couponBtn addTarget:self action:@selector(selectCoupon:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -307,7 +319,18 @@
 }
 
 - (void)clickNext:(UIButton *)sender {
-
+    
+    if (![TLUser user].isLogin) {
+        
+        TLUserLoginVC *loginVC = [TLUserLoginVC new];
+        
+        NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
+        
+        [self.navigationController presentViewController:navi animated:YES completion:nil];
+        
+        return ;
+    }
+    
     if (_selectType == SelectGoodTypeAuth) {
         
         TLNetworking *http = [TLNetworking new];
@@ -323,16 +346,16 @@
             
             if ([status isEqualToString:@"1"]) {
                 
-                [TLAlert alertWithInfo:@"您的信息未认证，请先完成认证"];
-                
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    
-                    TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
-                    
-                    tabbarVC.currentIndex = 1;
-                    
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                });
+                [TLAlert alertWithTitle:@"" message:@"您的信息未认证，请先完成认证" confirmMsg:@"OK" confirmAction:^{
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        
+                        TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+                        
+                        tabbarVC.currentIndex = 1;
+                        
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                    });
+                }];
                 
             } else if ([status isEqualToString:@"2"]) {
             
@@ -362,7 +385,7 @@
 }
 
 - (void)selectCoupon:(UITapGestureRecognizer *)sender {
-
+    
     if (self.coupons.count == 0) {
         
         [TLAlert alertWithInfo:@"暂无可使用优惠券"];
@@ -373,6 +396,11 @@
 #pragma mark - Data
 - (void)requestCouponList {
 
+    if (![TLUser user].isLogin) {
+        
+        return ;
+    }
+    
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.code = @"623148";
@@ -447,12 +475,29 @@
         //获取优惠券列表
         [self requestCouponList];
 
-
     } failure:^(NSError *error) {
         
         
     }];
 
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+
+    if (![TLUser user].isLogin) {
+        
+        TLUserLoginVC *loginVC = [TLUserLoginVC new];
+        
+        NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
+        
+        [self.navigationController presentViewController:navi animated:YES completion:nil];
+        
+        return NO;
+    }
+    
+    return NO;
 }
 
 - (void)didReceiveMemoryWarning {

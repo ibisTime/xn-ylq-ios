@@ -141,18 +141,43 @@
     
     self.totalLbl.text = [_quotaModel.sxAmount convertToSimpleRealMoney];
     
-    NSString *vaildDays = @"";
+    NSInteger flag = [self.quotaModel.flag integerValue];
     
-    if (_quotaModel.validDays <= 0) {
-        
-        vaildDays = @"当前额度已失效, 请重新申请";
-        
-    } else {
+    NSString *promptStr = @"";
     
-        vaildDays = [NSString stringWithFormat:@"还有%ld天，当前额度失效", _quotaModel.validDays];
+    switch (flag) {
+        case 0:
+        {
+            
+            promptStr = @"您还没有额度";
+            
+        }break;
+            
+        case 1:
+        {
+            if ([[_quotaModel.sxAmount convertToSimpleRealMoney] isEqualToString:@"0"]) {
+                
+                promptStr = @"您的额度已用完";
+                
+            } else {
+            
+                promptStr = [NSString stringWithFormat:@"还有%ld天，当前额度失效", _quotaModel.validDays];
+
+            }
+
+        }break;
+            
+        case 2:
+        {
+            promptStr = @"当前额度已失效, 请重新申请";
+
+        }break;
+            
+        default:
+            break;
     }
     
-    self.contentLbl.text = vaildDays;
+    self.contentLbl.text = promptStr;
     
 }
 

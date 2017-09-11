@@ -22,12 +22,18 @@
 @property (nonatomic, copy) NSString *mobile;
 @property (nonatomic, strong) NSString *status;
 
+@property (nonatomic, strong) NSString *userName;  //用户手机号
+@property (nonatomic, strong) NSString *userPassward;  //用户密码
+
 @property (nonatomic, copy) NSString *amount;
 @property (nonatomic, copy) NSString *kind;
 @property (nonatomic, copy) NSString *level;
 @property (nonatomic, copy) NSString *ljAmount;
 @property (nonatomic, copy) NSString *loginName;
 @property (nonatomic, copy) NSString *nickname;
+@property (nonatomic, copy) NSString *bankcardFlag;     //银行卡标识(0:未绑定, 1:已绑定)
+@property (nonatomic, copy) NSString *blacklistFlag;    //黑名单标识(0:不是黑名单, 1:是黑名单)
+@property (nonatomic, copy) NSString *mxApiKey;         //魔蝎ApiKey
 
 @property (nonatomic,copy) NSString *province;
 @property (nonatomic,copy) NSString *city;
@@ -48,8 +54,8 @@
 @property (nonatomic, assign) NSInteger currentAuth;
 
 @property (nonatomic, strong) NSNumber *tradepwdFlag;
-@property (nonatomic, copy) NSString *realName;
-@property (nonatomic, copy) NSString *idNo;
+@property (nonatomic, copy) NSString *realName;         //真实姓名
+@property (nonatomic, copy) NSString *idNo;             //身份证
 
 @property (nonatomic, copy) NSString *remark;
 
@@ -68,6 +74,9 @@
 //是否为需要登录，如果已登录，取出用户信息
 - (BOOL)isLogin;
 
+//重新登录
+- (void)reLogin;
+
 //用户已登录状态，从数据库中初始化用户信息
 - (void)initUserData;
 
@@ -80,6 +89,9 @@
 
 //设置用户信息
 - (void)setUserInfoWithDict:(NSDictionary *)dict;
+
+//保存登录账号和密码
+- (void)saveUserName:(NSString *)userName pwd:(NSString *)pwd;
 
 //异步更新用户信息
 - (void)updateUserInfo;

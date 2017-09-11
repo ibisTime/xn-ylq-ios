@@ -34,7 +34,12 @@
 
 @property (nonatomic, copy) NSString *code;
 
-@property (nonatomic, copy) NSString *remark;
+@property (nonatomic, copy) NSString *approveNote;      //审核不通过说明
+@property (nonatomic, copy) NSString *remark;           //状态说明
+
+@property (nonatomic, strong) NSString *resc;           //订单状态
+
+@property (nonatomic, strong) NSString *imageStr;          //状态对应的图片
 
 @property (nonatomic, copy) NSString *applyUser;
 
@@ -59,6 +64,14 @@
 @property (nonatomic, copy) NSString *fkDatetime;       //放款日期
 
 @property (nonatomic, copy) NSString *jxDatetime;       //计息日
+
+@property (nonatomic, copy) NSString *renewalStartDate; //起始日期
+
+@property (nonatomic, copy) NSString *renewalEndDate;   //结束日期
+
+@property (nonatomic, strong) NSNumber *renewalAmount;  //续期金额
+
+@property (nonatomic, assign) NSInteger renewalCount;   //续期次数
 
 @end
 

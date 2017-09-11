@@ -12,6 +12,8 @@
 
 + (BOOL)isEnableLocation;
 
++ (BOOL)isEnableContact;
+
 //打开，应用设置
 + (void)openSetting;
 

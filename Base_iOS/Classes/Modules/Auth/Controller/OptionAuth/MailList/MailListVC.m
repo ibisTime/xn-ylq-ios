@@ -149,12 +149,7 @@
                 
             } confirm:^(UIAlertAction *action) {
                 
-                if ([[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]
-) {
-                    
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-
-                }
+                [TLAuthHelper openSetting];
             }];
         }
         
@@ -209,7 +204,7 @@
         //姓名不存在就传公司名
         if (contact.firstName == nil && contact.lastName == nil) {
             
-            name = contact.organization;
+            name = contact.organization == nil ? @"无": contact.organization;
             
         } else {
         
@@ -218,6 +213,11 @@
             NSString *lastName = contact.lastName == nil ? @"": contact.lastName;
             
             name = [NSString stringWithFormat:@"%@%@", lastName, firstName];
+            
+            if (name == nil) {
+                
+                name = @"无";
+            }
         }
         
         NSString *mobile = @"无";
@@ -240,13 +240,15 @@
     
     TLNetworking *http = [[TLNetworking alloc] init];
     
+    http.showView = self.view;
+    
     http.code = @"623053";
     http.parameters[@"addressBookList"] = self.contacts;
     http.parameters[@"userId"] = [TLUser user].userId;
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"认证成功"];
+        [TLAlert alertWithSucces:@"通讯录认证成功"];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -261,22 +263,13 @@
 
 - (void)getContactAfteriOS9 {
 
-    // 1.获取授权状态
-    CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
-    
-    // 2.判断授权状态,如果不是已经授权,则直接返回
-    if (status != CNAuthorizationStatusAuthorized) {
-    
+    if (![TLAuthHelper isEnableContact]) {
+        
         [TLAlert alertWithTitle:@"提示" msg:@"通讯录未授权，请前往“设置->九州宝->通讯录“中开启通讯录" confirmMsg:@"设置" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
             
         } confirm:^(UIAlertAction *action) {
             
-            if ([[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]
-                ) {
-                
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                
-            }
+            [TLAuthHelper openSetting];
         }];
     }
     

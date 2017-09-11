@@ -45,9 +45,7 @@
 
     [super viewDidLoad];
     self.title = @"我的银行卡";
-    
 
-    
     TLTableView *bankCardTV = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)
                                                        delegate:self
                                                      dataSource:self];
@@ -112,13 +110,15 @@
 
     BaseWeakSelf;
     
-    ZHBankCardAddVC *VC= [[ZHBankCardAddVC alloc] init];
-    VC.addSuccess = ^(ZHBankCard *card){
+    ZHBankCardAddVC *bankCardAddVC= [[ZHBankCardAddVC alloc] init];
+    
+    bankCardAddVC.title = @"添加银行卡";
+    bankCardAddVC.addSuccess = ^(ZHBankCard *card){
     
         [weakSelf.bankCardTV beginRefreshing];
         
     };
-    [self.navigationController pushViewController:VC animated:YES];
+    [self.navigationController pushViewController:bankCardAddVC animated:YES];
 
 }
 
@@ -172,7 +172,12 @@
     BaseWeakSelf;
     
     ZHBankCardAddVC *displayAddVC = [[ZHBankCardAddVC alloc] init];
-    displayAddVC.bankCard = self.banks[indexPath.row];
+    
+    displayAddVC.title = @"修改银行卡";
+    if (self.banks.count > 0) {
+        
+        displayAddVC.bankCard = self.banks[indexPath.row];
+    }
     displayAddVC.addSuccess = ^(ZHBankCard *card){
         
         [weakSelf.bankCardTV beginRefreshing];
@@ -182,9 +187,6 @@
     [self.navigationController pushViewController:displayAddVC animated:YES];
 
 }
-
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 

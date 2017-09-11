@@ -108,7 +108,7 @@
     
     _dayLbl.text = [NSString stringWithFormat:@"%ld天", _orderModel.duration];
     
-    [_statusBtn setTitle:_orderModel.remark forState:UIControlStateNormal];
+    [_statusBtn setTitle:_orderModel.resc forState:UIControlStateNormal];
 }
 
 @end

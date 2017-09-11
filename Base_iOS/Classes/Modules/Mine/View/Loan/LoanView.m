@@ -57,7 +57,7 @@
     
     [self.topView addSubview:iconIV];
 
-    UILabel *textLbl = [UILabel labelWithText:@"借款放款中" textColor:kTextColor3 textFont:kWidth(16)];
+    UILabel *textLbl = [UILabel labelWithText:@"等待放款中" textColor:kTextColor3 textFont:kWidth(16)];
     
     textLbl.frame = CGRectMake(0, iconIV.yy + kWidth(14.0), kWidth(150), kWidth(16));
     
@@ -78,9 +78,9 @@
 
 - (void)initProcessView {
 
-    NSArray *titleArr = @[@"额度使用", @"签约成功", @"已放款"];
+    NSArray *titleArr = @[@"签约成功", @"绑定银行卡", @"已放款"];
 
-    NSArray *imgArr = @[@"期望额度", @"签约成功", @"unselect"];
+    NSArray *imgArr = @[@"签约成功", @"签约成功", @"unselect"];
     
     self.processView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth, kWidth(270))];
     
@@ -102,7 +102,7 @@
         
         UILabel *textLbl = [UILabel labelWithText:titleArr[i] textColor:kTextColor textFont:kWidth(15.0)];
         
-        textLbl.frame = CGRectMake(iv.xx + kWidth(20), kHeight(42) + i*(21 + kHeight(65)), 70, kWidth(16));
+        textLbl.frame = CGRectMake(iv.xx + kWidth(20), kHeight(42) + i*(21 + kHeight(65)), 100, kWidth(16));
         
         [self.processView addSubview:textLbl];
         

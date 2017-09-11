@@ -76,9 +76,13 @@
     
     [self.view addSubview:self.idCard];
     
-    UIButton *confirmBtn = [UIButton buttonWithTitle:@"确认提交" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:45/2.0];
+    UIColor *bgColor = [_authModel.infoZMCreditFlag isEqualToString:@"1"] ? kGreyButtonColor: kAppCustomMainColor;
+    
+    UIButton *confirmBtn = [UIButton buttonWithTitle:@"确认提交" titleColor:kWhiteColor backgroundColor:bgColor titleFont:15.0 cornerRadius:45/2.0];
     
     confirmBtn.frame = CGRectMake(leftMargin, self.idCard.yy + 40, kScreenWidth - 2*leftMargin, 45);
+    
+    confirmBtn.enabled = [_authModel.infoZMCreditFlag isEqualToString:@"1"] ? NO: YES;
     
     [confirmBtn addTarget:self action:@selector(confirmIDCard:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -145,12 +149,21 @@
                 [TLUser user].currentAuth = 2;
                 
                 [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"kCurrentAuthStatus"];
-                [TLAlert alertWithSucces:@"认证成功"];
+//                [TLAlert alertWithSucces:@"认证成功"];
                 
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    
+//                    [self.navigationController popViewControllerAnimated:YES];
+//                });
+                
+                [TLAlert alertWithTitle:@"" message:@"芝麻分认证成功" confirmMsg:@"OK" confirmAction:^{
                     
-                    [self.navigationController popViewControllerAnimated:YES];
-                });
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        
+                        [self.navigationController popViewControllerAnimated:YES];
+                        
+                    });
+                }];
                 
                 return ;
                 
@@ -221,21 +234,24 @@
             
             if ([responseObject[@"errorCode"] isEqual:@"0"]) {
                 
-//                ZMScoreModel *scoreModel = [ZMScoreModel mj_objectWithKeyValues:responseObject[@"data"]];
-//                
-//                scoreResultVC.result = YES;
-//                
-//                scoreResultVC.scoreModel = scoreModel;
-                
                 [TLUser user].currentAuth = 2;
                 
                 [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"kCurrentAuthStatus"];
-                [TLAlert alertWithSucces:@"认证成功"];
                 
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [TLAlert alertWithSucces:@"认证成功"];
+//                
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    
+//                    [self.navigationController popViewControllerAnimated:YES];
+//                });
+                [TLAlert alertWithTitle:@"" message:@"芝麻分认证成功" confirmMsg:@"OK" confirmAction:^{
                     
-                    [self.navigationController popViewControllerAnimated:YES];
-                });
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        
+                        [self.navigationController popViewControllerAnimated:YES];
+                        
+                    });
+                }];
                 
                 return ;
                 

@@ -9,8 +9,12 @@
 #import "TLTableView.h"
 #import "OrderModel.h"
 
+typedef void(^CommitAuditBlock)();
+
 @interface WillLoanTableView : TLTableView
 
 @property (nonatomic, strong) OrderModel *order;
+
+@property (nonatomic, copy) CommitAuditBlock commitBlock;  //重新提交
 
 @end

@@ -7,8 +7,10 @@
 //
 
 #import "SignContractVC.h"
+
 #import "LoanVC.h"
 #import "HTMLStrVC.h"
+#import "ZHBankCardAddVC.h"
 
 @interface SignContractVC ()
 
@@ -26,7 +28,7 @@
 
 #pragma mark - Init
 - (void)initSubviews {
-
+    
     UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
     
     [self.bgSV addSubview:topView];
@@ -48,34 +50,46 @@
     NSArray *textArr = @[@"借款人:", @"借款金额:", @"借款时限:", @"综合费用:", @"实到金额:", @"还款方案:", @"逾期政策:"];
     //借款人
     NSString *realName = [TLUser user].realName;
+    STRING_NIL_NULL(realName);
+    
     //借款金额
     NSString *money = [NSString stringWithFormat:@"%@元", [_good.amount convertToSimpleRealMoney]];
+    STRING_NIL_NULL(money);
+    
     //借款时限
     NSString *day = [NSString stringWithFormat:@"%ld天", _good.duration];
+    STRING_NIL_NULL(day);
+    
     //综合费用
     CGFloat totalMoney =[_good.xsAmount doubleValue] + [_good.lxAmount doubleValue] + [_good.fwAmount doubleValue] + [_good.glAmount doubleValue];
-
+    
     NSString *total = [NSString stringWithFormat:@"%@元", [@(totalMoney) convertToSimpleRealMoney]];
+    STRING_NIL_NULL(total);
     
     CGFloat couponFee = _coupon ? [_coupon.amount doubleValue]: 0;
     //实到金额=总额-综合费用+优惠券金额
     CGFloat effectAmount = [_good.amount doubleValue] - totalMoney + couponFee;
     
     NSString *effectAmountStr = [NSString stringWithFormat:@"%@元", [@(effectAmount) convertToSimpleRealMoney]];
+    STRING_NIL_NULL(effectAmountStr);
+    
     //还款方案
     NSString *plan = [NSString stringWithFormat:@"一次性还款%@元", [_good.amount convertToSimpleRealMoney]];
-//    //还款日期
-//    NSDate *currentDate = [NSDate date];
-//    
-//    NSDate *repaymentDate = [currentDate dateByAddingTimeInterval:7*24*60*60];
-//    
-//    NSString *repaymentDateStr = [NSString stringFromDate:repaymentDate formatter:@"yyyy年M月d日"];
+    STRING_NIL_NULL(plan);
+    //    //还款日期
+    //    NSDate *currentDate = [NSDate date];
+    //
+    //    NSDate *repaymentDate = [currentDate dateByAddingTimeInterval:7*24*60*60];
+    //
+    //    NSString *repaymentDateStr = [NSString stringFromDate:repaymentDate formatter:@"yyyy年M月d日"];
     //逾期政策
     CGFloat yqAmount1 = [_good.yqRate1 doubleValue]*[_good.amount doubleValue];
     
     CGFloat yqAmount2 = [_good.yqRate2 doubleValue]*[_good.amount doubleValue];
     
     NSString *yqStr = [NSString stringWithFormat:@"7天内逾期, %@元每天\n7天后逾期, %@元每天", [@(yqAmount1) convertToSimpleRealMoney], [@(yqAmount2) convertToSimpleRealMoney]];
+    
+    STRING_NIL_NULL(yqStr);
     
     NSArray *contentArr = @[realName, money, day, total, effectAmountStr, plan, yqStr];
     
@@ -123,8 +137,8 @@
     [self.bgSV addSubview:agreeLbl];
     
     UIButton *agreeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"《%@-借款协议》", [TLUser user].realName] titleColor:[UIColor colorWithHexString:@"#4385b3"] backgroundColor:kClearColor titleFont:12];
-
-//    agreeBtn.frame = CGRectMake(agreeLbl.xx, agreeLbl.y, 200, 12);
+    
+    //    agreeBtn.frame = CGRectMake(agreeLbl.xx, agreeLbl.y, 200, 12);
     
     [agreeBtn setEnlargeEdge:10];
     
@@ -154,13 +168,13 @@
 
 #pragma mark - Events
 - (void)clickSelect:(UIButton *)sender {
-
+    
     sender.selected = !sender.selected;
     
 }
 
 - (void)agreement {
-
+    
     HTMLStrVC *htmlVC = [HTMLStrVC new];
     
     htmlVC.type = HTMLTypeBorrowProtocol;
@@ -169,7 +183,22 @@
 }
 //签约
 - (void)confirm {
+    
+    //判断是否绑定银行卡，是就进入放款中，否就绑定银行卡
+    if ([[TLUser user].bankcardFlag isEqualToString:@"0"]) {
+        
+        [TLAlert alertWithTitle:@"" message:@"您还未绑定银行卡, 请先绑定银行卡" confirmMsg:@"OK" confirmAction:^{
+            
+            ZHBankCardAddVC *bankCardAddVC= [[ZHBankCardAddVC alloc] init];
+            bankCardAddVC.title = @"添加银行卡";
 
+            [self.navigationController pushViewController:bankCardAddVC animated:YES];
+            
+        }];
+        
+        return ;
+    }
+    
     UIButton *btn = [self.view viewWithTag:1250];
     
     if (btn.selected) {
@@ -177,7 +206,7 @@
         [TLAlert alertWithInfo:@"同意借款协议才能签约"];
         return ;
     }
-    
+
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"623070";
@@ -193,6 +222,7 @@
             LoanVC *loanVC = [LoanVC new];
             
             [self.navigationController pushViewController:loanVC animated:YES];
+            
         });
         
     } failure:^(NSError *error) {

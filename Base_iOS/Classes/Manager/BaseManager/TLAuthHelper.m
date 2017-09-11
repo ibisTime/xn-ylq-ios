@@ -8,24 +8,46 @@
 
 #import "TLAuthHelper.h"
 #import <CoreLocation/CoreLocation.h>
+#import <Contacts/Contacts.h>
 
 @implementation TLAuthHelper
 
 + (BOOL)isEnableLocation {
 
     CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
-    if (authStatus == kCLAuthorizationStatusDenied) {
+    if (authStatus == kCLAuthorizationStatusDenied || authStatus == kCLAuthorizationStatusNotDetermined) {
+        
         return NO;
+        
     } else {
+        
         return YES;
     }
 
 }
 
++ (BOOL)isEnableContact {
+
+    // 1.获取授权状态
+    CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+
+    if (status != CNAuthorizationStatusAuthorized) {
+        
+        return NO;
+        
+    } else {
+    
+        return YES;
+    }
+    
+}
+
 + (void)openSetting {
 
     NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        
         [[UIApplication sharedApplication] openURL:url];
     }
 }

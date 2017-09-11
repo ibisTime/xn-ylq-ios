@@ -10,6 +10,7 @@
 
 @interface LoanOrderDetailCell ()
 
+@property (nonatomic, strong) UIImageView *rightArrow;
 
 @end
 
@@ -32,6 +33,19 @@
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        //右箭头
+        UIImageView *rightArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mine_more"]];
+        
+        rightArrow.frame = CGRectMake(kScreenWidth - 6 - 15, 0, 6, 11);
+        
+        rightArrow.centerY = self.centerY;
+        
+        rightArrow.hidden = YES;
+        
+        [self addSubview:rightArrow];
+        
+        self.rightArrow = rightArrow;
+        
         self.rightLabel = [UILabel labelWithText:@"" textColor:kTextColor textFont:14.0];
         
         self.rightLabel.textAlignment = NSTextAlignmentRight;
@@ -53,8 +67,6 @@
             make.centerY.equalTo(self.contentView.mas_centerY);
         }];
         
-        
-        
         UIView *line = [[UIView alloc] init];
         
         line.backgroundColor = kLineColor;
@@ -68,6 +80,23 @@
         
     }
     return self;
+    
+}
+
+- (void)setArrowHidden:(BOOL)arrowHidden {
+
+    _arrowHidden = arrowHidden;
+    
+    _rightArrow.hidden = _arrowHidden;
+    
+    if (!_arrowHidden) {
+        
+        [_rightLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            
+            make.right.mas_equalTo(self.rightArrow.mas_left).mas_equalTo(-15);
+            
+        }];
+    }
     
 }
 

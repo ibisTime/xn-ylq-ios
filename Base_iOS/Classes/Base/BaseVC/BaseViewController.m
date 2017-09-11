@@ -20,7 +20,6 @@
 
 @interface BaseViewController () <MBProgressHUDDelegate, UIGestureRecognizerDelegate>
 
-
 @property (nonatomic, strong) UILabel *placeholderTitleLbl;
 
 @property (nonatomic, strong) UIButton *opBtn;

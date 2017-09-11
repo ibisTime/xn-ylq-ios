@@ -17,21 +17,16 @@
 
 @property (nonatomic , strong) CustomShareView *shareView;
 
-@property (nonatomic, strong) UIViewController *vc;
-
 @end
 
 @implementation ShareView
 
-- (instancetype)initWithFrame:(CGRect)frame shareBlock:(ShareViewTypeBlock)shareBlock vc:(UIViewController *)vc
-{
+- (instancetype)initWithFrame:(CGRect)frame shareBlock:(ShareViewTypeBlock)shareBlock {
     self = [super initWithFrame:frame];
     
     if (self) {
         
         _shareBlock = [shareBlock copy];
-        
-        _vc = vc;
         
         [self addShareView];
     }
@@ -87,6 +82,8 @@
 
 - (void)shareWithTitle:(NSString*)title
 {
+ 
+    BaseWeakSelf;
     
     NSString *shareTitle = PASS_NULL_TO_NIL(_shareTitle).length > 0 ? _shareTitle : @"九州宝";
     NSString *shareDesc = PASS_NULL_TO_NIL(_shareDesc).length > 0 ? _shareDesc : @"欢迎使用九州宝";
@@ -117,25 +114,7 @@
     
     [WXApi sendReq:req];
     
-    [TLWXManager manager].wxShare = ^(BOOL isSuccess, int errorCode) {
-        
-        if (isSuccess) {
-            
-            if (_shareBlock) {
-                
-                _shareBlock(@"0");
-                
-            }
-            
-        } else {
-            
-            if (_shareBlock) {
-                
-                _shareBlock(@"1");
-                
-            }
-        }
-    };
+    [TLWXManager manager].wxShare = self.shareBlock;
     
 }
 

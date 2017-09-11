@@ -9,6 +9,7 @@
 #import "TLUser.h"
 #import "TLUserExt.h"
 #import "UICKeyChainStore.h"
+#import "UserDefaultsUtil.h"
 
 //#define USER_ID_KEY @"user_id_key_csw"
 #define TOKEN_ID_KEY @"token_id_key_csw"
@@ -67,36 +68,68 @@ NSString *const kUserInfoChange = @"kUserInfoChange_csw";
 
 }
 
-
 - (BOOL)isLogin {
 
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 //    NSString *userId = [userDefault objectForKey:USER_ID_KEY];
     NSString *token = [userDefault objectForKey:TOKEN_ID_KEY];
+    
     if (token) {
         
         return YES;
+        
     } else {
-    
     
         return NO;
     }
 
 }
 
+- (void)reLogin {
 
+    self.userName = [UserDefaultsUtil getUserDefaultName];
+    
+    self.userPassward = [UserDefaultsUtil getUserDefaultPassword];
+    
+    TLNetworking *http = [TLNetworking new];
+    http.code = USER_LOGIN_CODE;
+    
+    http.parameters[@"loginName"] = self.userName;
+    http.parameters[@"loginPwd"] = self.userPassward;
+    http.parameters[@"kind"] = @"C";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSString *token = responseObject[@"data"][@"token"];
+
+        self.token = token;
+        
+        [[TLUser user] saveToken:token];
+
+        //异步跟新用户信息
+        [[TLUser user] updateUserInfo];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
 
 - (void)loginOut {
 
     self.userId = nil;
     self.token = nil;
+    self.userName = nil;
+    self.userPassward = nil;
 //    self.rmbNum = nil;
 //    self.jfNum = nil;
     self.mobile = nil;
     self.nickname = nil;
     self.tradepwdFlag = nil;
+    self.bankcardFlag = nil;
+    self.blacklistFlag = nil;
     self.level = nil;
-    
+
 //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID_KEY];
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:TOKEN_ID_KEY];
@@ -119,6 +152,11 @@ NSString *const kUserInfoChange = @"kUserInfoChange_csw";
     [[NSUserDefaults standardUserDefaults] setObject:userInfo forKey:USER_INFO_DICT_KEY];
     //
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+- (void)updateToken {
+
     
 }
 
@@ -155,6 +193,9 @@ NSString *const kUserInfoChange = @"kUserInfoChange_csw";
     self.realName = dict[@"realName"];
     self.idNo = dict[@"idNo"];
     self.tradepwdFlag = dict[@"tradepwdFlag"];
+    self.bankcardFlag = dict[@"bankcardFlag"];
+    self.blacklistFlag = dict[@"blacklistFlag"];
+    
     self.level = dict[@"level"];
     
     self.photo = dict[@"photo"];
@@ -170,6 +211,17 @@ NSString *const kUserInfoChange = @"kUserInfoChange_csw";
     self.currentAuth = [[NSUserDefaults standardUserDefaults] integerForKey:@"kCurrentAuthStatus"];
 }
 
+- (void)saveUserName:(NSString *)userName pwd:(NSString *)pwd {
+
+    self.userName = userName;
+    
+    self.userPassward = pwd;
+    
+    [UserDefaultsUtil setUserDefaultName:userName];
+    
+    [UserDefaultsUtil setUserDefaultPassword:pwd];
+    
+}
 
 - (NSString *)detailAddress {
 
@@ -178,45 +230,6 @@ NSString *const kUserInfoChange = @"kUserInfoChange_csw";
     }
     return [NSString stringWithFormat:@"%@ %@ %@",self.province,self.city,self.area];
 
-}
-
-- (NSString *)userLevel:(NSString *)levelStr {
-
-    NSInteger level = [levelStr integerValue];
-    
-    NSString *levelName;
-    
-    switch (level) {
-            
-        case 1:
-            levelName = @"新手上路";
-            break;
-          
-        case 2:
-            levelName = @"初级会员";
-            break;
-            
-        case 3:
-            levelName = @"中级会员";
-            break;
-            
-        case 4:
-            levelName = @"高级会员";
-            break;
-            
-        case 5:
-            levelName = @"金牌会员";
-            break;
-            
-        case 6:
-            levelName = @"论坛元老";
-            break;
-            
-        default:
-            break;
-    }
-    
-    return levelName;
 }
 
 @end

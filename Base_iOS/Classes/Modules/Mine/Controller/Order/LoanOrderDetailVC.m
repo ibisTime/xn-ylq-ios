@@ -14,6 +14,9 @@
 #import "OverdueTableView.h"
 
 #import "RepaymentVC.h"
+#import "RenewalVC.h"
+
+#import "RenewalListVC.h"
 
 @interface LoanOrderDetailVC ()
 
@@ -23,6 +26,14 @@
 
 @implementation LoanOrderDetailVC
 
+- (void)viewDidAppear:(BOOL)animated {
+
+    if (!self.order) {
+        
+        [self requestOrder];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -30,10 +41,6 @@
     if (self.order) {
         
         [self initSubviews];
-
-    } else {
-    
-        [self requestOrder];
     }
     
 }
@@ -41,12 +48,14 @@
 #pragma mark - Init
 - (void)initSubviews {
 
+    BaseWeakSelf;
+    
     NSInteger status = [self.order.status integerValue];
     
     switch (status) {
         case 0:
         {
-            self.title = @"待放款详情";
+            self.title = @"待审核详情";
             
             WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
             
@@ -59,31 +68,77 @@
             
         case 1:
         {
-            self.title = @"生效中详情";
+            self.title = @"待放款详情";
+            
+            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+            
+            tableView.order = self.order;
+            
+            [self.view addSubview:tableView];
 
-            DidLoanTableView *tableView = [[DidLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+            
+        }break;
+          
+        
+        case 2:
+        {
+            self.title = @"审核不通过";
+            
+            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
             
             tableView.order = self.order;
             
             [self.view addSubview:tableView];
             
-            [UIBarButtonItem addRightItemWithTitle:@"还款" frame:CGRectMake(0, 0, 40, 30) vc:self action:@selector(repayment)];
+            
+        }break;
+            
+        case 3:
+        {
+            self.title = @"生效中详情";
+
+            DidLoanTableView *tableView = [[DidLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 65)];
+            
+            tableView.order = self.order;
+            
+            tableView.renewalBlock = ^{
+                
+                RenewalListVC *renewalListVC = [RenewalListVC new];
+                
+                renewalListVC.code = weakSelf.order.code;
+
+                [weakSelf.navigationController pushViewController:renewalListVC animated:YES];
+            };
+            
+            [self.view addSubview:tableView];
+            
+            //底部视图
+            [self initBottomButton];
             
         }break;
            
-        case 3:
+        case 4:
         {
             self.title = @"已还款详情";
 
             DidRepaymentTableView *tableView = [[DidRepaymentTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
             
             tableView.order = self.order;
+
+            tableView.renewalBlock = ^{
+                
+                RenewalListVC *renewalListVC = [RenewalListVC new];
+                
+                renewalListVC.code = weakSelf.order.code;
+                
+                [weakSelf.navigationController pushViewController:renewalListVC animated:YES];
+            };
             
             [self.view addSubview:tableView];
             
         }break;
             
-        case 2:
+        case 5:
         {
             self.title = @"已逾期详情";
 
@@ -91,10 +146,38 @@
             
             tableView.order = self.order;
             
+            tableView.renewalBlock = ^{
+                
+                RenewalListVC *renewalListVC = [RenewalListVC new];
+                
+                renewalListVC.code = weakSelf.order.code;
+                
+                [weakSelf.navigationController pushViewController:renewalListVC animated:YES];
+            };
+
             [self.view addSubview:tableView];
             
-            [UIBarButtonItem addRightItemWithTitle:@"还款" frame:CGRectMake(0, 0, 40, 30) vc:self action:@selector(repayment)];
-
+            //底部视图
+            [self initBottomButton];
+            
+        }break;
+            
+        case 7:
+        {
+            BaseWeakSelf;
+            
+            self.title = @"打款失败";
+            
+            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+            
+            tableView.order = self.order;
+            
+            tableView.commitBlock = ^{
+                //重新提交
+                [weakSelf clickResubmit];
+            };
+            
+            [self.view addSubview:tableView];
             
         }break;
             
@@ -103,22 +186,79 @@
     }
 }
 
+- (void)initBottomButton {
+
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 64 - 65, kScreenWidth, 65)];
+    
+    bottomView.backgroundColor = kWhiteColor;
+    
+    [self.view addSubview:bottomView];
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 1)];
+    
+    lineView.backgroundColor = kLineColor;
+    
+    [bottomView addSubview:lineView];
+    
+    CGFloat btnW = (kScreenWidth - 3*15)/2.0;
+    
+    UIButton *repayBtn = [UIButton buttonWithTitle:@"还款" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:18 cornerRadius:10];
+    
+    repayBtn.frame = CGRectMake(15, 10, btnW, 45);
+    
+    [repayBtn addTarget:self action:@selector(clickRepay) forControlEvents:UIControlEventTouchUpInside];
+    
+    [bottomView addSubview:repayBtn];
+    
+    UIButton *renewalBtn = [UIButton buttonWithTitle:@"续期" titleColor:kWhiteColor backgroundColor:kTextColor3 titleFont:18 cornerRadius:10];
+    
+    renewalBtn.frame = CGRectMake(kScreenWidth/2.0 + 5, 10, btnW, 45);
+    
+    [renewalBtn addTarget:self action:@selector(clickRenewal) forControlEvents:UIControlEventTouchUpInside];
+    
+    [bottomView addSubview:renewalBtn];
+}
+
 #pragma mark - Events
-- (void)repayment {
+
+- (void)clickRepay {
 
     RepaymentVC *repaymentVC = [RepaymentVC new];
     
     repaymentVC.order = self.order;
     
-    repaymentVC.paySucces = ^{
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        });
-    };
-    
     [self.navigationController pushViewController:repaymentVC animated:YES];
+}
+
+- (void)clickRenewal {
+
+    RenewalVC *renewalVC = [RenewalVC new];
+    
+    renewalVC.order = self.order;
+    
+    [self.navigationController pushViewController:renewalVC animated:YES];
+}
+
+- (void)clickResubmit {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"623079";
+    http.parameters[@"code"] = self.order.code;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [TLAlert alertWithSucces:@"重新提交成功"];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        });
+        
+    } failure:^(NSError *error) {
+        
+    }];
+
 }
 
 #pragma mark - Data
@@ -126,6 +266,7 @@
 
     TLNetworking *http = [[TLNetworking alloc] init];
     
+    http.showView = self.view;
     http.code = @"623086";
     http.parameters[@"code"] = self.code;
     

@@ -17,7 +17,6 @@ typedef void (^SortSelectBlock) (NSInteger index);
  */
 - (void)changeSortBarWithNames:(NSArray*)sortNames;
 
-
 /**
  * 重新移除原来的按钮,创建新的按钮
  * @sortNames 选项的标题
@@ -29,8 +28,6 @@ typedef void (^SortSelectBlock) (NSInteger index);
 - (void)selectSortBarWithIndex:(NSInteger)index;
 
 - (instancetype)initWithFrame:(CGRect)frame sortNames:(NSArray*)sortNames sortBlock:(SortSelectBlock)sortBlock;
-
-
 
 
 

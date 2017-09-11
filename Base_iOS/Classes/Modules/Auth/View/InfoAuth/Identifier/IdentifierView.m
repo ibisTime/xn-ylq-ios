@@ -20,6 +20,8 @@
 
 @property (nonatomic, strong) NSMutableArray *textLabelArr;
 
+@property (nonatomic, strong) UIButton *commitBtn;  //提交
+
 @end
 
 @implementation IdentifierView
@@ -75,11 +77,6 @@
         //画虚线
         [bgIV drawAroundLine:3 lineSpacing:3 lineColor:kLineColor];
         
-        if (i == 0) {
-            
-            self.identifierIV = bgIV;
-        }
-        
         CGFloat ivH = i == 0 ? 56: 70;
         
         UIImageView *iv = [[UIImageView alloc] init];
@@ -127,13 +124,15 @@
     
     CGFloat leftMargin = 15;
     
-    UIButton *commitBtn = [UIButton buttonWithTitle:@"提交" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:btnH/2.0];
+    UIButton *commitBtn = [UIButton buttonWithTitle:@"提交" titleColor:kWhiteColor backgroundColor:kWhiteColor titleFont:15.0];
     
     commitBtn.frame = CGRectMake(leftMargin, bgView.yy + kWidth(40), kScreenWidth - 2*leftMargin, btnH);
     
     [commitBtn addTarget:self action:@selector(clickCommit) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:commitBtn];
+    
+    self.commitBtn = commitBtn;
 }
 
 - (void)setDatas:(NSMutableArray<SectionModel *> *)datas {
@@ -171,20 +170,17 @@
     
     InfoIdentifyPic *picFlag = self.authModel.infoIdentifyPic;
     
-    if (picFlag.identifyPic) {
-        
-        UIImageView *imgView = [self viewWithTag:1300];
-        
-        imgView.image = nil;
-    }
-
-    [self.identifierIV sd_setImageWithURL:[NSURL URLWithString:[picFlag.identifyPic convertImageUrl]] placeholderImage:[UIImage imageNamed:@""]];
-    
     for (int i = 0; i < _datas.count; i++) {
         
         SectionModel *section = _datas[i];
         
         section.flag = i == 0 ? authModel.infoIdentifyPicFlag: authModel.infoIdentifyFaceFlag;
+        
+        section.type = DataTypeSCSFZ + i;
+
+        UIImageView *imgView = [self viewWithTag:1300 + i];
+        
+        imgView.image = kImage(section.img);
         
         UILabel *textLabel = self.textLabelArr[i];
         
@@ -195,6 +191,17 @@
         textLabel.textColor = section.color;
     }
     
+    self.commitBtn.enabled = [_authModel.infoIdentifyFlag isEqualToString:@"1"] ? NO: YES;
+    
+    UIColor *bgColor = [_authModel.infoIdentifyFlag isEqualToString:@"1"] ? kGreyButtonColor: kAppCustomMainColor;
+    
+    [self.commitBtn setBackgroundColor:bgColor];
+
+    self.commitBtn.layer.cornerRadius = 22.5;
+    self.commitBtn.clipsToBounds = YES;
+    
+    
+//    self.commitBtn.alpha = [_authModel.infoIdentifyFlag isEqualToString:@"1"] ? 0.5: 1;
 }
 
 #pragma mark - Events

@@ -11,11 +11,17 @@
 #import "MoxieSDK.h"
 #import <WebKit/WebKit.h>
 
+#import "AuthModel.h"
+
 @interface MXOperatorAuthVC ()<MoxieSDKDelegate, WKNavigationDelegate>
 
 @property (nonatomic, strong) WKWebView *webView;
 
 @property (nonatomic, copy) NSString *htmlStr;
+
+@property (nonatomic, strong) AuthModel *authModel;
+
+@property (nonatomic, copy) NSString *isApply;     //是否有申请单
 
 @end
 
@@ -36,17 +42,27 @@
 #pragma mark - Init
 - (void)initMXSDK {
     
+    InfoIdentify *identify = self.authModel.infoIdentify;
+    
     [MoxieSDK shared].delegate = self;
     [MoxieSDK shared].mxUserId = kMoXieUserID;
-    [MoxieSDK shared].mxApiKey = kMoXieApiKey;
+    [MoxieSDK shared].mxApiKey = [TLUser user].mxApiKey;
     [MoxieSDK shared].fromController = self;
-    //    [MoxieSDK shared].cacheDisable = YES;
+    
+    [MoxieSDK shared].taskType = @"carrier";
+    //跳过输入身份证和姓名界面
+    [MoxieSDK shared].carrier_phone = [TLUser user].mobile;
+    [MoxieSDK shared].carrier_name = identify.realName;
+    [MoxieSDK shared].carrier_idcard = identify.idNo;
+    [MoxieSDK shared].carrier_editable = YES;
     
     [MoxieSDK shared].backImageName = @"返回";
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    //开始运营商认证
+    [[MoxieSDK shared] startFunction];
     
     
 }
@@ -119,32 +135,15 @@
     } else if(code == 1) {
         
         //code是1则成功
-
+        
         [TLProgressHUD show];
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            TLNetworking *http = [TLNetworking new];
-            
-            http.code = @"623048";
-            http.parameters[@"userId"] = [TLUser user].userId;
-            
-            [http postWithSuccess:^(id responseObject) {
-                
-                [TLProgressHUD dismiss];
-                
-                [TLAlert alertWithSucces:@"认证成功"];
-                
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                    
-                });
-                
-            } failure:^(NSError *error) {
-                
+            [TLAlert alertWithTitle:@"" message:@"运营商认证成功" confirmMsg:@"OK" confirmAction:^{
                 
             }];
+
             
         });
         

@@ -73,8 +73,6 @@
         [self requestServiceMobile];
     }
     
-    
-    //--//
 }
 
 - (void)viewDidLoad {
@@ -155,7 +153,6 @@
     //1.刷新用户信息
     [[TLUser user] updateUserInfo];
     
-    //--//
     //刷新额度
     TLNetworking *http = [TLNetworking new];
     http.code = @"623051";
@@ -198,7 +195,7 @@
 - (void)requestServiceTime {
     
     TLNetworking *http = [TLNetworking new];
-    http.showView = self.view;
+
     http.code = @"805917";
     
     http.parameters[@"ckey"] = @"time";
@@ -215,7 +212,7 @@
 - (void)requestServiceMobile {
     
     TLNetworking *http = [TLNetworking new];
-    http.showView = self.view;
+
     http.code = @"805917";
     
     http.parameters[@"ckey"] = @"telephone";
@@ -243,7 +240,6 @@
     //
     self.headerView.nameLbl.text = @"--";
     
-    //论坛-绞肉机
     self.headerView.genderImg.image = nil;
     
     self.headerView.vipImg.hidden = YES;
@@ -261,12 +257,7 @@
     [self.headerView.userPhoto sd_setImageWithURL:[NSURL URLWithString:userPhotoStr] placeholderImage:[UIImage imageNamed:@"头像"]];
     
     self.headerView.nameLbl.text = [TLUser user].mobile;
-    
-//    NSString *img = [[TLUser user].userExt.gender isEqualToString:@"1"] ? @"男": @"女生";
 
-//    self.headerView.genderImg.image = [UIImage imageNamed:img];
-    
-//    self.headerView.vipImg.hidden = [[TLUser user].level isEqualToString:@"1"] ? NO: YES;
 }
 
 #pragma mark- 修改头像
@@ -295,7 +286,6 @@
                 NSData *imgData = UIImageJPEGRepresentation(image, 0.4);
                 
                 [uploadManager putData:imgData key:[TLUploadManager imageNameByImage:image] token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
-//                    [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                     
                     //设置头像
                     
@@ -374,7 +364,7 @@
         
         _group = [[SettingGroup alloc] init];
         
-        NSArray *names = @[@[@"借款记录", @"邀请好友", @"帮助中心"], @[@"个人设置"]];
+        NSArray *names = @[@[@"借款记录", @"邀请好友", @"帮助中心", @"联系客服"], @[@"个人设置"]];
 
         //借款记录
         SettingModel *loanRecordItem = [SettingModel new];
@@ -413,6 +403,20 @@
             
         }];
         
+        //联系客服
+        SettingModel *contactItem = [SettingModel new];
+        contactItem.imgName = names[0][3];
+        contactItem.text  = names[0][3];
+        [contactItem setAction:^{
+            
+            HTMLStrVC *htmlVC = [HTMLStrVC new];
+            
+            htmlVC.type = HTMLTypeContactCustomer;
+            
+            [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+            
+        }];
+        
         //个人设置
         SettingModel *settingItem = [SettingModel new];
         settingItem.imgName = names[1][0];
@@ -425,7 +429,7 @@
             
         }];
         
-        _group.groups = @[@[loanRecordItem, inviteFriendItem, helpItem], @[settingItem]];
+        _group.groups = @[@[loanRecordItem, inviteFriendItem, helpItem, contactItem], @[settingItem]];
         
     }
     return _group;

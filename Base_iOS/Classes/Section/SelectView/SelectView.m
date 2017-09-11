@@ -175,6 +175,11 @@
         [_scrollView setContentOffset:point];
 
     }];
+    
+    if (_selectBlock) {
+        
+        _selectBlock(index);
+    }
 }
 
 @end

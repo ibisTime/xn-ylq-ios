@@ -73,12 +73,38 @@
         
         self.quota = [QuotaModel mj_objectWithKeyValues:responseObject[@"data"]];
         
-        self.quotaView.quotaModel = self.quota;
+        NSInteger flag = [self.quota.flag integerValue];
         
-        NSString *title = self.quota.validDays > 0 ? @"使用额度": @"重新申请额度";
+        NSString *title = @"";
+        
+        switch (flag) {
+            case 0:
+            {
+                
+                title = @"申请额度";
+                
+            }break;
+                
+            case 1:
+            {
+                title = @"使用额度";
+                
+            }break;
+                
+            case 2:
+            {
+                title = @"重新申请额度";
+                
+            }break;
+                
+            default:
+                break;
+        }
         
         [self.quotaBtn setTitle:title forState:UIControlStateNormal];
         
+        self.quotaView.quotaModel = self.quota;
+
     } failure:^(NSError *error) {
         
         
@@ -87,18 +113,38 @@
 
 #pragma mark - Events
 - (void)clickUseQuota:(UIButton *)sender {
+    //根据额度状态进行不同的跳转
+    NSInteger flag = [self.quota.flag integerValue];
     
-    if (self.quota.validDays > 0) {
-        
-        [self requestGood];
+    switch (flag) {
+        case 0:
+        {
+            TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+            
+            tabbarVC.currentIndex = 0;
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        }break;
+            
+        case 1:
+        {
+            [self requestGood];
 
-    } else {
-    
-        TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
-        
-        tabbarVC.currentIndex = 0;
-        
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        }break;
+            
+        case 2:
+        {
+            TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+            
+            tabbarVC.currentIndex = 0;
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        }break;
+            
+        default:
+            break;
     }
     
 }

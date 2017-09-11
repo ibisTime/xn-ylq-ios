@@ -7,8 +7,12 @@
 //
 
 #import "NoticeVC.h"
+
 #import "NoticeCell.h"
+
 #import "NoticeModel.h"
+
+#import "NoticeDetailVC.h"
 
 @interface NoticeVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -119,7 +123,6 @@
     if (!cell) {
         
         cell = [[NoticeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:noticeCellID];
-        
     }
     
     NoticeModel *notice = self.notices[indexPath.section];
@@ -133,9 +136,22 @@
 
 #pragma mark- tableView  --- delegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    NoticeDetailVC *detailVC = [NoticeDetailVC new];
+    
+    detailVC.notice = self.notices[indexPath.section];
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return self.notices[indexPath.section].cellHeight;
+//    return self.notices[indexPath.section].cellHeight;
+    
+    return 125;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

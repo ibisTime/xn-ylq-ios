@@ -13,6 +13,4 @@
 
 @property (nonatomic, strong) OrderModel *order;
 
-@property (nonatomic,copy) void(^paySucces)();
-
 @end

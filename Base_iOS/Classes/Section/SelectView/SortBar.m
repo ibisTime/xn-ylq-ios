@@ -9,6 +9,7 @@
 #import "SortBar.h"
 
 #define widthItem (kScreenWidth/5.0)
+#define btnFont MIN(kWidth(15.0), 15)
 
 static const float kAnimationdDuration = 0.3;
 
@@ -45,21 +46,21 @@ static const float kAnimationdDuration = 0.3;
 
 - (void)initSubViews {
     
+    [self createItems];
+    
+    [self changeItemTitleColorWithIndex:0];
+    
     _selectLine = [[UIView alloc] init];
-    _selectLine.backgroundColor = [UIColor blackColor];
+    _selectLine.backgroundColor = kAppCustomMainColor;
     [self addSubview:_selectLine];
     
     [_selectLine mas_makeConstraints:^(MASConstraintMaker *make) {
        
         make.left.mas_equalTo((widthItem-40)/2.0);
         make.bottom.mas_equalTo(self.frame.size.height -1);
-        make.width.mas_equalTo(40);
-        make.height.mas_equalTo(1);
+        make.width.mas_equalTo(MIN(kWidth(15.0), 15)*3);
+        make.height.mas_equalTo(2);
     }];
-    
-    [self createItems];
-    
-    [self changeItemTitleColorWithIndex:0];
 }
 
 - (void)createItems {
@@ -70,9 +71,9 @@ static const float kAnimationdDuration = 0.3;
         
         NSString *title = _sortNames[i];
         
-        CGFloat btnW = title.length*15 + 30;
+        CGFloat btnW = title.length*btnFont + 30;
         
-        UIButton *button = [UIButton buttonWithTitle:_sortNames[i] titleColor:[UIColor textColor] backgroundColor:kWhiteColor titleFont:MIN(kWidth(15.0), 15)];
+        UIButton *button = [UIButton buttonWithTitle:_sortNames[i] titleColor:[UIColor textColor] backgroundColor:kWhiteColor titleFont:btnFont];
         
         [button setTitleColor:[UIColor textColor] forState:UIControlStateNormal];
         [self addSubview:button];
@@ -126,13 +127,21 @@ static const float kAnimationdDuration = 0.3;
     UIButton *button = [self viewWithTag:100+index];
     
     CGFloat length = button.centerX - kScreenWidth/2;
+    
     [self scrollRectToVisible:CGRectMake(length, 0, self.width, self.height) animated:YES];
+    
+    NSString *title = _sortNames[index];
+    
+    CGFloat widthMargin = title.length*MIN(kWidth(16.0), 16);
+    
+    CGFloat leftMargin = button.left + (button.width - widthMargin)/2.0;
     
     [UIView animateWithDuration:kAnimationdDuration animations:^{
         
         [_selectLine mas_updateConstraints:^(MASConstraintMaker *make) {
             
-            make.left.mas_equalTo(button.left +(widthItem-40)/2.0);
+            make.left.mas_equalTo(leftMargin);
+            make.width.mas_equalTo(widthMargin);
         }];
         
         [self changeItemTitleColorWithIndex:button.tag - 100];

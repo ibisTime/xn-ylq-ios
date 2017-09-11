@@ -18,13 +18,16 @@
 
 @property (nonatomic, strong) NSMutableArray <KeyValueModel *>*societyArr;
 
-@property (nonatomic, strong) PickerTextField *familyRelationTF;         //亲属关系
+@property (nonatomic, strong) PickerTextField *familyRelationTF;        //亲属关系
 
-@property (nonatomic, strong) TLTextField *familyMobileTF;   //亲属联系方式
+@property (nonatomic, strong) TLTextField *familyNameTF;                //亲属姓名
 
-@property (nonatomic, strong) PickerTextField *societyRelationTF;         //社会关系
+@property (nonatomic, strong) TLTextField *familyMobileTF;              //亲属联系方式
 
-@property (nonatomic, strong) TLTextField *societyMobileTF;   //社会联系方式
+@property (nonatomic, strong) PickerTextField *societyRelationTF;       //社会关系
+
+@property (nonatomic, strong) TLTextField *societyNameTF;               //社会联系人姓名
+@property (nonatomic, strong) TLTextField *societyMobileTF;             //社会联系方式
 
 @property (nonatomic, copy) NSString *selectFamily;
 
@@ -67,14 +70,23 @@
     
     [self.view addSubview:self.familyRelationTF];
     
+    //亲属姓名
+    self.familyNameTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.familyRelationTF.yy + 1, kScreenWidth, 45) leftTitle:@"姓名" titleWidth:titleWidth placeholder:@"请输入亲属姓名"];
+    
+    self.familyNameTF.text = infoContact.familyName;
+    
+    [self.view addSubview:self.familyNameTF];
+    
     //亲属联系方式
-    self.familyMobileTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.familyRelationTF.yy + 1, kScreenWidth, 45) leftTitle:@"联系方式" titleWidth:titleWidth placeholder:@"请输入亲属联系人手机号"];
+    self.familyMobileTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.familyNameTF.yy + 1, kScreenWidth, 45) leftTitle:@"联系方式" titleWidth:titleWidth placeholder:@"请输入亲属手机号"];
     
     self.familyMobileTF.text = infoContact.familyMobile;
     
     self.familyMobileTF.keyboardType = UIKeyboardTypeNumberPad;
     
     [self.view addSubview:self.familyMobileTF];
+    
+    
     
     //社会关系
     
@@ -89,8 +101,15 @@
     
     [self.view addSubview:self.societyRelationTF];
     
+    //社会联系人姓名
+    self.societyNameTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.societyRelationTF.yy + 1, kScreenWidth, 45) leftTitle:@"姓名" titleWidth:titleWidth placeholder:@"请输入社会联系人姓名"];
+    
+    self.societyNameTF.text = infoContact.societyName;
+    
+    [self.view addSubview:self.societyNameTF];
+    
     //社会联系方式
-    self.societyMobileTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.societyRelationTF.yy + 1, kScreenWidth, 45) leftTitle:@"联系方式" titleWidth:titleWidth placeholder:@"请输入社会联系人手机号"];
+    self.societyMobileTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.societyNameTF.yy + 1, kScreenWidth, 45) leftTitle:@"联系方式" titleWidth:titleWidth placeholder:@"请输入社会联系人手机号"];
     
     self.societyMobileTF.text = infoContact.societyMobile;
     
@@ -102,10 +121,14 @@
     
     CGFloat leftMargin = 15;
     
-    UIButton *commitBtn = [UIButton buttonWithTitle:@"提交" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:btnH/2.0];
+    UIColor *bgColor = [_authModel.infoAntifraudFlag isEqualToString:@"1"] ? kGreyButtonColor: kAppCustomMainColor;
+
+    UIButton *commitBtn = [UIButton buttonWithTitle:@"提交" titleColor:kWhiteColor backgroundColor:bgColor titleFont:15.0 cornerRadius:btnH/2.0];
     
     commitBtn.frame = CGRectMake(leftMargin, self.societyMobileTF.yy + 50, kScreenWidth - 2*leftMargin, btnH);
     
+    commitBtn.enabled = [_authModel.infoAntifraudFlag isEqualToString:@"1"] ? NO: YES;
+
     [commitBtn addTarget:self action:@selector(clickCommit) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:commitBtn];
@@ -208,6 +231,12 @@
         return;
     };
     
+    if (![self.familyNameTF.text valid]) {
+        
+        [TLAlert alertWithInfo:@"请输入亲属姓名"];
+        return;
+    }
+    
     if (![self.familyMobileTF.text valid]) {
         
         [TLAlert alertWithInfo:@"请输入亲属联系人手机号"];
@@ -227,6 +256,12 @@
         return;
     }
     
+    if (![self.societyNameTF.text valid]) {
+        
+        [TLAlert alertWithInfo:@"请输入社会联系人姓名"];
+        return;
+    }
+    
     if (![self.societyMobileTF.text valid]) {
         
         [TLAlert alertWithInfo:@"请输入社会联系人手机号"];
@@ -242,11 +277,16 @@
     
     TLNetworking *http = [TLNetworking new];
     
+    http.showView = self.view;
+    
     http.code = @"623042";
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"familyRelation"] = self.selectFamily;
+    http.parameters[@"familyName"] = self.familyNameTF.text;
     http.parameters[@"familyMobile"] = self.familyMobileTF.text;
+    
     http.parameters[@"societyRelation"] = self.selectSociety;
+    http.parameters[@"societyName"] = self.societyNameTF.text;
     http.parameters[@"societyMobile"] = self.societyMobileTF.text;
     
     [http postWithSuccess:^(id responseObject) {

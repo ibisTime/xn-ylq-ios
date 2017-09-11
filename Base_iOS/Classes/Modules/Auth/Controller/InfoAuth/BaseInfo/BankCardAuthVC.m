@@ -7,7 +7,9 @@
 //
 
 #import "BankCardAuthVC.h"
+
 #import "BankCardAuthResultVC.h"
+#import "LoanVC.h"
 
 #import "AddressPickerView.h"
 #import "PickerTextField.h"
@@ -56,7 +58,6 @@
         
         __weak typeof(self) weakSelf = self;
         _addressPicker.confirm = ^(NSString *province,NSString *city,NSString *area){
-            
             
             weakSelf.province = province;
             weakSelf.city = city;
@@ -118,9 +119,21 @@
     
     [self.view addSubview:self.bankCard];
     
-    UIButton *confirmBtn = [UIButton buttonWithTitle:@"提交" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:45/2.0];
+    UILabel *promptLbl = [UILabel labelWithText:@"" textColor:kTextColor3 textFont:11.0];
     
-    confirmBtn.frame = CGRectMake(leftMargin, self.bankCard.yy + 40, kScreenWidth - 2*leftMargin, 45);
+    promptLbl.frame = CGRectMake(0, self.bankCard.yy + 15, kScreenWidth, 16);
+    
+    promptLbl.textAlignment = NSTextAlignmentCenter;
+    
+    NSAttributedString *promptAttrStr = [NSAttributedString getAttributedStringWithImgStr:@"禁止学生贷款" index:0 string:[NSString stringWithFormat:@" %@", @"必须使用本人名下借记卡, 暂不支持信用卡"] labelHeight:promptLbl.height];
+    
+    promptLbl.attributedText = promptAttrStr;
+    
+    [self.view addSubview:promptLbl];
+    
+    UIButton *confirmBtn = [UIButton buttonWithTitle:@"绑定" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:45/2.0];
+    
+    confirmBtn.frame = CGRectMake(leftMargin, promptLbl.yy + 32, kScreenWidth - 2*leftMargin, 45);
     
     [confirmBtn addTarget:self action:@selector(confirmIDCard:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -203,10 +216,17 @@
         return;
     }
     
+    if (!(self.province && self.city && self.area)) {
+        
+        [TLAlert alertWithInfo:@"请选择省市区"];
+        return;
+    }
+    
     [self.view endEditing:YES];
 
     TLNetworking *http = [TLNetworking new];
     
+    http.showView = self.view;
     http.isShowMsg = NO;
 
     http.code = @"623043";
@@ -218,7 +238,7 @@
 
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"提交成功"];
+        [TLAlert alertWithSucces:@"绑定成功"];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             

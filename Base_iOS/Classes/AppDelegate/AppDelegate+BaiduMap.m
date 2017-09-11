@@ -23,22 +23,14 @@
     //启动LocationService
     if (![CLLocationManager locationServicesEnabled]) {
         
-        UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:@"提示" message:@"定位失败，请前往“设置->九州宝->位置“中开启定位服务" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *actionSure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [TLAlert alertWithTitle:@"提示" msg:@"定位失败，请前往“设置->九州宝->位置“中开启定位服务" confirmMsg:@"设置" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
             
-            if ([[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]
-                ) {
-                
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                
-            }
-
+        } confirm:^(UIAlertAction *action) {
+            
+            [TLAuthHelper openSetting];
         }];
-        [alertCtrl addAction:actionSure];
         
-        [self.window.rootViewController presentViewController:alertCtrl animated:YES completion:nil];
-    }
-    else {
+    }else {
         
         [self.locationManage startUpdatingLocation];
     }

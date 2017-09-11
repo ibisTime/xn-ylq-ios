@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CustomShareView.h"
 
-typedef void (^ShareViewTypeBlock) (NSString *title);
+typedef void (^ShareViewTypeBlock) (BOOL isSuccess, int errorCode);
 
 @interface ShareView : UIView
 
@@ -25,6 +25,6 @@ typedef void (^ShareViewTypeBlock) (NSString *title);
 
 - (void)customShareViewButtonAction:(CustomShareView *)shareView title:(NSString *)title;
 
-- (instancetype)initWithFrame:(CGRect)frame shareBlock:(ShareViewTypeBlock)shareBlock vc:(UIViewController *)vc;
+- (instancetype)initWithFrame:(CGRect)frame shareBlock:(ShareViewTypeBlock)shareBlock;
 
 @end

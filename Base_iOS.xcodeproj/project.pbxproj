@@ -42,9 +42,9 @@
 		21176EEA1F32FC9800C5217A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21176EE91F32FC9800C5217A /* CoreMotion.framework */; };
 		21176EED1F32FFB400C5217A /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21176EEC1F32FFB400C5217A /* HomeVC.m */; };
 		21176EFA1F33005C00C5217A /* AuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21176EF91F33005C00C5217A /* AuthVC.m */; };
-		21198F501F45B4FA00FDDCC4 /* RepaymentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21198F4F1F45B4FA00FDDCC4 /* RepaymentVC.m */; };
 		21198F531F45B51400FDDCC4 /* PayInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21198F521F45B51400FDDCC4 /* PayInfoCell.m */; };
 		21198F561F45B5AE00FDDCC4 /* PayFuncModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21198F551F45B5AE00FDDCC4 /* PayFuncModel.m */; };
+		211D3F731F4EEE0D00451BA0 /* PickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 211D3F721F4EEE0D00451BA0 /* PickerButton.m */; };
 		211F66411F3AB90C00B10E9E /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 211F663B1F3AB90C00B10E9E /* libMoxieSDK.a */; };
 		211F66421F3AB90C00B10E9E /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 211F663D1F3AB90C00B10E9E /* mx_back@2x.png */; };
 		211F66431F3AB90C00B10E9E /* mx_finish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 211F663E1F3AB90C00B10E9E /* mx_finish@2x.png */; };
@@ -122,6 +122,10 @@
 		212A454F1F4681AE0059AB4E /* NoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A454E1F4681AE0059AB4E /* NoticeVC.m */; };
 		212A45551F46838D0059AB4E /* NoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A45541F46838D0059AB4E /* NoticeCell.m */; };
 		212A45581F4683CE0059AB4E /* NoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A45571F4683CE0059AB4E /* NoticeModel.m */; };
+		21364E931F5D2A3200E94CEB /* IdentifierAuthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21364E921F5D2A3200E94CEB /* IdentifierAuthView.m */; };
+		21364E961F5D4FC900E94CEB /* NoticeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21364E951F5D4FC900E94CEB /* NoticeDetailVC.m */; };
+		21364E9A1F5D51E600E94CEB /* DetailWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21364E991F5D51E600E94CEB /* DetailWebView.m */; };
+		21364E9D1F5EAF3500E94CEB /* UserDefaultsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 21364E9C1F5EAF3500E94CEB /* UserDefaultsUtil.m */; };
 		214EED9F1F3EE888008A02F9 /* ManualAuditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 214EED9E1F3EE888008A02F9 /* ManualAuditVC.m */; };
 		214EEDA21F3F02F1008A02F9 /* AuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 214EEDA11F3F02F1008A02F9 /* AuthModel.m */; };
 		214EEDA51F3F0C5B008A02F9 /* KeyValueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 214EEDA41F3F0C5B008A02F9 /* KeyValueModel.m */; };
@@ -134,6 +138,17 @@
 		2151A1291F4467D8002483CD /* SignContractVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1281F4467D8002483CD /* SignContractVC.m */; };
 		2151A1311F4549FE002483CD /* InviteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1301F4549FE002483CD /* InviteModel.m */; };
 		2151A1341F454A36002483CD /* HistoryFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1331F454A36002483CD /* HistoryFriendCell.m */; };
+		21570C141F5F8E6B00E1C164 /* OfflineRenewalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21570C0C1F5F8E6B00E1C164 /* OfflineRenewalVC.m */; };
+		21570C151F5F8E6B00E1C164 /* OnlineRenewalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21570C0E1F5F8E6B00E1C164 /* OnlineRenewalVC.m */; };
+		21570C161F5F8E6B00E1C164 /* RenewalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21570C101F5F8E6B00E1C164 /* RenewalVC.m */; };
+		21570C171F5F8E6B00E1C164 /* RepaymentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21570C131F5F8E6B00E1C164 /* RepaymentVC.m */; };
+		21570C1A1F5F937A00E1C164 /* OnlineRepaymentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21570C191F5F937A00E1C164 /* OnlineRepaymentVC.m */; };
+		21570C1D1F5F939100E1C164 /* OfflineRepaymentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21570C1C1F5F939100E1C164 /* OfflineRepaymentVC.m */; };
+		21570C201F5FCF2A00E1C164 /* RenewalListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21570C1F1F5FCF2A00E1C164 /* RenewalListVC.m */; };
+		21570C231F5FCF4700E1C164 /* RenewalDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21570C221F5FCF4700E1C164 /* RenewalDetailVC.m */; };
+		21570C2B1F5FD11800E1C164 /* RenewalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21570C2A1F5FD11800E1C164 /* RenewalModel.m */; };
+		21570C2E1F5FD2B000E1C164 /* RenewalListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21570C2D1F5FD2B000E1C164 /* RenewalListCell.m */; };
+		21570C341F5FD54C00E1C164 /* RenewalDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21570C331F5FD54C00E1C164 /* RenewalDetailTableView.m */; };
 		216AB7EC1F189F04006C26A1 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7EB1F189F03006C26A1 /* libstdc++.6.0.9.tbd */; };
 		216AB7EE1F189F11006C26A1 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7ED1F189F11006C26A1 /* libresolv.tbd */; };
 		216AB7F01F189F22006C26A1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */; };
@@ -366,12 +381,12 @@
 		21176EEC1F32FFB400C5217A /* HomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
 		21176EF81F33005C00C5217A /* AuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthVC.h; sourceTree = "<group>"; };
 		21176EF91F33005C00C5217A /* AuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthVC.m; sourceTree = "<group>"; };
-		21198F4E1F45B4FA00FDDCC4 /* RepaymentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepaymentVC.h; sourceTree = "<group>"; };
-		21198F4F1F45B4FA00FDDCC4 /* RepaymentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepaymentVC.m; sourceTree = "<group>"; };
 		21198F511F45B51400FDDCC4 /* PayInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayInfoCell.h; sourceTree = "<group>"; };
 		21198F521F45B51400FDDCC4 /* PayInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayInfoCell.m; sourceTree = "<group>"; };
 		21198F541F45B5AE00FDDCC4 /* PayFuncModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayFuncModel.h; sourceTree = "<group>"; };
 		21198F551F45B5AE00FDDCC4 /* PayFuncModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayFuncModel.m; sourceTree = "<group>"; };
+		211D3F711F4EEE0D00451BA0 /* PickerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerButton.h; sourceTree = "<group>"; };
+		211D3F721F4EEE0D00451BA0 /* PickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerButton.m; sourceTree = "<group>"; };
 		211F663A1F3AB90C00B10E9E /* MoxieSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoxieSDK.h; sourceTree = "<group>"; };
 		211F663B1F3AB90C00B10E9E /* libMoxieSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMoxieSDK.a; sourceTree = "<group>"; };
 		211F663D1F3AB90C00B10E9E /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
@@ -507,6 +522,14 @@
 		212A45541F46838D0059AB4E /* NoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeCell.m; sourceTree = "<group>"; };
 		212A45561F4683CE0059AB4E /* NoticeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeModel.h; sourceTree = "<group>"; };
 		212A45571F4683CE0059AB4E /* NoticeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeModel.m; sourceTree = "<group>"; };
+		21364E911F5D2A3200E94CEB /* IdentifierAuthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentifierAuthView.h; sourceTree = "<group>"; };
+		21364E921F5D2A3200E94CEB /* IdentifierAuthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentifierAuthView.m; sourceTree = "<group>"; };
+		21364E941F5D4FC900E94CEB /* NoticeDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeDetailVC.h; sourceTree = "<group>"; };
+		21364E951F5D4FC900E94CEB /* NoticeDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeDetailVC.m; sourceTree = "<group>"; };
+		21364E981F5D51E600E94CEB /* DetailWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailWebView.h; sourceTree = "<group>"; };
+		21364E991F5D51E600E94CEB /* DetailWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailWebView.m; sourceTree = "<group>"; };
+		21364E9B1F5EAF3500E94CEB /* UserDefaultsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsUtil.h; sourceTree = "<group>"; };
+		21364E9C1F5EAF3500E94CEB /* UserDefaultsUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsUtil.m; sourceTree = "<group>"; };
 		214EED9D1F3EE888008A02F9 /* ManualAuditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManualAuditVC.h; sourceTree = "<group>"; };
 		214EED9E1F3EE888008A02F9 /* ManualAuditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManualAuditVC.m; sourceTree = "<group>"; };
 		214EEDA01F3F02F1008A02F9 /* AuthModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthModel.h; sourceTree = "<group>"; };
@@ -531,6 +554,28 @@
 		2151A1301F4549FE002483CD /* InviteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteModel.m; sourceTree = "<group>"; };
 		2151A1321F454A36002483CD /* HistoryFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryFriendCell.h; sourceTree = "<group>"; };
 		2151A1331F454A36002483CD /* HistoryFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryFriendCell.m; sourceTree = "<group>"; };
+		21570C0B1F5F8E6B00E1C164 /* OfflineRenewalVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineRenewalVC.h; sourceTree = "<group>"; };
+		21570C0C1F5F8E6B00E1C164 /* OfflineRenewalVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineRenewalVC.m; sourceTree = "<group>"; };
+		21570C0D1F5F8E6B00E1C164 /* OnlineRenewalVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlineRenewalVC.h; sourceTree = "<group>"; };
+		21570C0E1F5F8E6B00E1C164 /* OnlineRenewalVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlineRenewalVC.m; sourceTree = "<group>"; };
+		21570C0F1F5F8E6B00E1C164 /* RenewalVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenewalVC.h; sourceTree = "<group>"; };
+		21570C101F5F8E6B00E1C164 /* RenewalVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenewalVC.m; sourceTree = "<group>"; };
+		21570C121F5F8E6B00E1C164 /* RepaymentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepaymentVC.h; sourceTree = "<group>"; };
+		21570C131F5F8E6B00E1C164 /* RepaymentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepaymentVC.m; sourceTree = "<group>"; };
+		21570C181F5F937A00E1C164 /* OnlineRepaymentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlineRepaymentVC.h; sourceTree = "<group>"; };
+		21570C191F5F937A00E1C164 /* OnlineRepaymentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlineRepaymentVC.m; sourceTree = "<group>"; };
+		21570C1B1F5F939100E1C164 /* OfflineRepaymentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineRepaymentVC.h; sourceTree = "<group>"; };
+		21570C1C1F5F939100E1C164 /* OfflineRepaymentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineRepaymentVC.m; sourceTree = "<group>"; };
+		21570C1E1F5FCF2A00E1C164 /* RenewalListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenewalListVC.h; sourceTree = "<group>"; };
+		21570C1F1F5FCF2A00E1C164 /* RenewalListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenewalListVC.m; sourceTree = "<group>"; };
+		21570C211F5FCF4700E1C164 /* RenewalDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenewalDetailVC.h; sourceTree = "<group>"; };
+		21570C221F5FCF4700E1C164 /* RenewalDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenewalDetailVC.m; sourceTree = "<group>"; };
+		21570C291F5FD11800E1C164 /* RenewalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenewalModel.h; sourceTree = "<group>"; };
+		21570C2A1F5FD11800E1C164 /* RenewalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenewalModel.m; sourceTree = "<group>"; };
+		21570C2C1F5FD2B000E1C164 /* RenewalListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenewalListCell.h; sourceTree = "<group>"; };
+		21570C2D1F5FD2B000E1C164 /* RenewalListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenewalListCell.m; sourceTree = "<group>"; };
+		21570C321F5FD54C00E1C164 /* RenewalDetailTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenewalDetailTableView.h; sourceTree = "<group>"; };
+		21570C331F5FD54C00E1C164 /* RenewalDetailTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenewalDetailTableView.m; sourceTree = "<group>"; };
 		216AB7EB1F189F03006C26A1 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		216AB7ED1F189F11006C26A1 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -985,6 +1030,10 @@
 				211709221F42E9F8002EBF79 /* LoanOrderListVC.m */,
 				211709241F42EA38002EBF79 /* LoanOrderDetailVC.h */,
 				211709251F42EA38002EBF79 /* LoanOrderDetailVC.m */,
+				21570C1E1F5FCF2A00E1C164 /* RenewalListVC.h */,
+				21570C1F1F5FCF2A00E1C164 /* RenewalListVC.m */,
+				21570C211F5FCF4700E1C164 /* RenewalDetailVC.h */,
+				21570C221F5FCF4700E1C164 /* RenewalDetailVC.m */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -1093,6 +1142,7 @@
 		21176EF61F33003600C5217A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				21570C241F5FD06400E1C164 /* Renewal */,
 				2151A12E1F4549FE002483CD /* Invite */,
 				2117092B1F42F120002EBF79 /* Order */,
 				21026F411F413553005F121A /* Quota */,
@@ -1106,6 +1156,7 @@
 			children = (
 				2117090B1F42C970002EBF79 /* MineHeaderView.h */,
 				2117090C1F42C970002EBF79 /* MineHeaderView.m */,
+				21570C251F5FD07A00E1C164 /* Renewal */,
 				2151A12A1F454958002483CD /* Invite */,
 				211709271F42ED4B002EBF79 /* Order */,
 				211709051F42C970002EBF79 /* BankCard */,
@@ -1128,8 +1179,8 @@
 		21198F4B1F45B4CF00FDDCC4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				21198F4E1F45B4FA00FDDCC4 /* RepaymentVC.h */,
-				21198F4F1F45B4FA00FDDCC4 /* RepaymentVC.m */,
+				21570C0A1F5F8E6B00E1C164 /* Renewal */,
+				21570C111F5F8E6B00E1C164 /* Repayment */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1290,6 +1341,8 @@
 				2151A1221F445DF1002483CD /* LoanFailureVC.m */,
 				212A454D1F4681AE0059AB4E /* NoticeVC.h */,
 				212A454E1F4681AE0059AB4E /* NoticeVC.m */,
+				21364E941F5D4FC900E94CEB /* NoticeDetailVC.h */,
+				21364E951F5D4FC900E94CEB /* NoticeDetailVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1352,6 +1405,8 @@
 				21216FDD1F380ED2007C9855 /* UserAddress.m */,
 				21216FB51F380E30007C9855 /* UserReferrer.h */,
 				21216FB61F380E30007C9855 /* UserReferrer.m */,
+				21364E9B1F5EAF3500E94CEB /* UserDefaultsUtil.h */,
+				21364E9C1F5EAF3500E94CEB /* UserDefaultsUtil.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1562,6 +1617,8 @@
 			children = (
 				2126897D1F3C46B200225267 /* IdentifierView.h */,
 				2126897E1F3C46B200225267 /* IdentifierView.m */,
+				21364E911F5D2A3200E94CEB /* IdentifierAuthView.h */,
+				21364E921F5D2A3200E94CEB /* IdentifierAuthView.m */,
 			);
 			path = Identifier;
 			sourceTree = "<group>";
@@ -1587,6 +1644,15 @@
 				212689781F3C463600225267 /* OptionAuthView.m */,
 			);
 			path = OptionAuth;
+			sourceTree = "<group>";
+		};
+		21364E971F5D51B300E94CEB /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				21364E981F5D51E600E94CEB /* DetailWebView.h */,
+				21364E991F5D51E600E94CEB /* DetailWebView.m */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 		2151A1171F443342002483CD /* Invite */ = {
@@ -1616,6 +1682,52 @@
 				2151A1301F4549FE002483CD /* InviteModel.m */,
 			);
 			path = Invite;
+			sourceTree = "<group>";
+		};
+		21570C0A1F5F8E6B00E1C164 /* Renewal */ = {
+			isa = PBXGroup;
+			children = (
+				21570C0F1F5F8E6B00E1C164 /* RenewalVC.h */,
+				21570C101F5F8E6B00E1C164 /* RenewalVC.m */,
+				21570C0D1F5F8E6B00E1C164 /* OnlineRenewalVC.h */,
+				21570C0E1F5F8E6B00E1C164 /* OnlineRenewalVC.m */,
+				21570C0B1F5F8E6B00E1C164 /* OfflineRenewalVC.h */,
+				21570C0C1F5F8E6B00E1C164 /* OfflineRenewalVC.m */,
+			);
+			path = Renewal;
+			sourceTree = "<group>";
+		};
+		21570C111F5F8E6B00E1C164 /* Repayment */ = {
+			isa = PBXGroup;
+			children = (
+				21570C121F5F8E6B00E1C164 /* RepaymentVC.h */,
+				21570C131F5F8E6B00E1C164 /* RepaymentVC.m */,
+				21570C181F5F937A00E1C164 /* OnlineRepaymentVC.h */,
+				21570C191F5F937A00E1C164 /* OnlineRepaymentVC.m */,
+				21570C1B1F5F939100E1C164 /* OfflineRepaymentVC.h */,
+				21570C1C1F5F939100E1C164 /* OfflineRepaymentVC.m */,
+			);
+			path = Repayment;
+			sourceTree = "<group>";
+		};
+		21570C241F5FD06400E1C164 /* Renewal */ = {
+			isa = PBXGroup;
+			children = (
+				21570C291F5FD11800E1C164 /* RenewalModel.h */,
+				21570C2A1F5FD11800E1C164 /* RenewalModel.m */,
+			);
+			path = Renewal;
+			sourceTree = "<group>";
+		};
+		21570C251F5FD07A00E1C164 /* Renewal */ = {
+			isa = PBXGroup;
+			children = (
+				21570C2C1F5FD2B000E1C164 /* RenewalListCell.h */,
+				21570C2D1F5FD2B000E1C164 /* RenewalListCell.m */,
+				21570C321F5FD54C00E1C164 /* RenewalDetailTableView.h */,
+				21570C331F5FD54C00E1C164 /* RenewalDetailTableView.m */,
+			);
+			path = Renewal;
 			sourceTree = "<group>";
 		};
 		21F827C61F1742E80019B176 = {
@@ -2007,6 +2119,7 @@
 		21FB2F7D1F26E9EE0028ADEE /* Section */ = {
 			isa = PBXGroup;
 			children = (
+				21364E971F5D51B300E94CEB /* WebView */,
 				21FB2F7E1F26E9EE0028ADEE /* AddressPicker */,
 				21FB2F861F26E9EE0028ADEE /* CircleGuideView */,
 				21FB2F891F26E9EE0028ADEE /* DatePicker */,
@@ -2055,6 +2168,8 @@
 				21FB2F8B1F26E9EE0028ADEE /* CustomDatePicker.m */,
 				21FB2F8C1F26E9EE0028ADEE /* PickerTextField.h */,
 				21FB2F8D1F26E9EE0028ADEE /* PickerTextField.m */,
+				211D3F711F4EEE0D00451BA0 /* PickerButton.h */,
+				211D3F721F4EEE0D00451BA0 /* PickerButton.m */,
 			);
 			path = DatePicker;
 			sourceTree = "<group>";
@@ -2763,6 +2878,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21570C1D1F5F939100E1C164 /* OfflineRepaymentVC.m in Sources */,
 				21FB30731F26E9EF0028ADEE /* TLAlert.m in Sources */,
 				21FB30BD1F26E9EF0028ADEE /* UIControl+Block.m in Sources */,
 				212689691F3C45F100225267 /* BaseInfoModel.m in Sources */,
@@ -2795,23 +2911,29 @@
 				211709021F42C849002EBF79 /* LoanVC.m in Sources */,
 				21FB30761F26E9EF0028ADEE /* TLDatePicker.m in Sources */,
 				210F44091F3DCE3E0002052E /* GoodModel.m in Sources */,
+				21570C161F5F8E6B00E1C164 /* RenewalVC.m in Sources */,
 				2126897B1F3C463600225267 /* BaseInfoCell.m in Sources */,
 				212170431F386C51007C9855 /* SelectMoneyVC.m in Sources */,
 				21FB307D1F26E9EF0028ADEE /* TLTextStorage.m in Sources */,
 				21F82C9B1F17719D0019B176 /* BaseModel.m in Sources */,
 				21F82CA01F17719D0019B176 /* BaseCollectionView.m in Sources */,
 				2126894B1F3C44A100225267 /* BaseInfoVC.m in Sources */,
+				21570C2B1F5FD11800E1C164 /* RenewalModel.m in Sources */,
 				21076C391F395E6700725C76 /* SettingGroup.m in Sources */,
 				21198F531F45B51400FDDCC4 /* PayInfoCell.m in Sources */,
 				21FB30A91F26E9EF0028ADEE /* HttpSign.m in Sources */,
-				21198F501F45B4FA00FDDCC4 /* RepaymentVC.m in Sources */,
 				21FB30891F26E9EF0028ADEE /* TLPhotoCell.m in Sources */,
 				212A454F1F4681AE0059AB4E /* NoticeVC.m in Sources */,
 				21FB308F1F26E9EF0028ADEE /* SortBar.m in Sources */,
+				211D3F731F4EEE0D00451BA0 /* PickerButton.m in Sources */,
 				2151A1131F4411C4002483CD /* CouponModel.m in Sources */,
 				21FB30C81F26E9EF0028ADEE /* UIView+ZYDraggable.m in Sources */,
+				21570C171F5F8E6B00E1C164 /* RepaymentVC.m in Sources */,
 				21F82CA41F17719D0019B176 /* TLCurrencyHelper.m in Sources */,
+				21570C151F5F8E6B00E1C164 /* OnlineRenewalVC.m in Sources */,
 				2151A1341F454A36002483CD /* HistoryFriendCell.m in Sources */,
+				21570C2E1F5FD2B000E1C164 /* RenewalListCell.m in Sources */,
+				21570C141F5F8E6B00E1C164 /* OfflineRenewalVC.m in Sources */,
 				21FB30BC1F26E9EF0028ADEE /* UIColor+Custom.m in Sources */,
 				21076C531F39634400725C76 /* ZHBankCardAddVC.m in Sources */,
 				2151A1161F4413C4002483CD /* CouponCell.m in Sources */,
@@ -2826,6 +2948,7 @@
 				211F66971F3B090C00B10E9E /* BankCardAuthResultVC.m in Sources */,
 				211F6EE81F4B0756007BB638 /* KeyValueApi.m in Sources */,
 				21FB307E1F26E9EF0028ADEE /* TLTextView.m in Sources */,
+				21570C201F5FCF2A00E1C164 /* RenewalListVC.m in Sources */,
 				21216FCE1F380E30007C9855 /* TLUserExt.m in Sources */,
 				2126897C1F3C463600225267 /* OptionAuthView.m in Sources */,
 				2126896A1F3C45F100225267 /* ZMScoreModel.m in Sources */,
@@ -2860,6 +2983,8 @@
 				21FB307F1F26E9EF0028ADEE /* TLTimeButton.m in Sources */,
 				21076C551F39634400725C76 /* SettingVC.m in Sources */,
 				211F66881F3AF49800B10E9E /* ZMOPScoreResultVC.m in Sources */,
+				21570C1A1F5F937A00E1C164 /* OnlineRepaymentVC.m in Sources */,
+				21364E961F5D4FC900E94CEB /* NoticeDetailVC.m in Sources */,
 				212689671F3C45F100225267 /* DataModel.m in Sources */,
 				21FB30791F26E9EF0028ADEE /* TLPlaceholderView.m in Sources */,
 				212170051F380FB9007C9855 /* TLPwdRelatedVC.m in Sources */,
@@ -2867,6 +2992,7 @@
 				212A45581F4683CE0059AB4E /* NoticeModel.m in Sources */,
 				21216FFB1F380FB9007C9855 /* ZHAddAddressVC.m in Sources */,
 				21FB30771F26E9EF0028ADEE /* TLImagePicker.m in Sources */,
+				21364E9A1F5D51E600E94CEB /* DetailWebView.m in Sources */,
 				21FB30B01F26E9EF0028ADEE /* NSAttributedString+add.m in Sources */,
 				211709161F42C993002EBF79 /* LoanView.m in Sources */,
 				21FB30C01F26E9EF0028ADEE /* UIImage+ImageEffects.m in Sources */,
@@ -2936,9 +3062,11 @@
 				212689791F3C463600225267 /* BaseAuthView.m in Sources */,
 				21F82C9A1F17719D0019B176 /* AppDelegate.mm in Sources */,
 				211709101F42C970002EBF79 /* ZHBankCardCell.m in Sources */,
+				21364E9D1F5EAF3500E94CEB /* UserDefaultsUtil.m in Sources */,
 				21FB30AD1F26E9EF0028ADEE /* NSDictionary+Custom.m in Sources */,
 				2151A1231F445DF1002483CD /* LoanFailureVC.m in Sources */,
 				21158E491F1C502400A07266 /* BarButton.m in Sources */,
+				21570C231F5FCF4700E1C164 /* RenewalDetailVC.m in Sources */,
 				211F70821F4D314D007BB638 /* MailListVC.m in Sources */,
 				212170041F380FB9007C9855 /* TLChangeMobileVC.m in Sources */,
 				21FB30831F26E9EF0028ADEE /* WTReTextField.m in Sources */,
@@ -2955,6 +3083,7 @@
 				21FB306F1F26E9EF0028ADEE /* Province.m in Sources */,
 				21FB309D1F26E9EF0028ADEE /* ShareFunction.m in Sources */,
 				21FB30B51F26E9EF0028ADEE /* LKViewAttribute.m in Sources */,
+				21570C341F5FD54C00E1C164 /* RenewalDetailTableView.m in Sources */,
 				21FB309B1F26E9EF0028ADEE /* SGScanningQRCodeView.m in Sources */,
 				21FB30B61F26E9EF0028ADEE /* LabelModel.m in Sources */,
 				21FB30861F26E9EF0028ADEE /* TLChooseResultManager.m in Sources */,
@@ -2969,6 +3098,7 @@
 				21FB30BF1F26E9EF0028ADEE /* UIImage+Custom.m in Sources */,
 				2126894A1F3C44A100225267 /* BankCardAuthVC.m in Sources */,
 				212170031F380FB9007C9855 /* TLAccountSetBaseVC.m in Sources */,
+				21364E931F5D2A3200E94CEB /* IdentifierAuthView.m in Sources */,
 				21FB30AA1F26E9EF0028ADEE /* AppConfig.m in Sources */,
 				212689681F3C45F100225267 /* BaseInfoGroup.m in Sources */,
 				21FB30C11F26E9EF0028ADEE /* UILabel+Custom.m in Sources */,

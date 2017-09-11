@@ -39,7 +39,7 @@
 
 - (void)initSelectView {
     
-    _titles = @[@"可使用", @"不可使用"];
+    _titles = @[@"可使用", @"已失效"];
     
     _selectView = [[SelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64) itemTitles:_titles];
     

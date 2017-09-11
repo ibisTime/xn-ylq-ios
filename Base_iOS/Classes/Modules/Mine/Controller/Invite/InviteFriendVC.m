@@ -132,19 +132,18 @@
 
 - (void)inviteFriend {
 
-    ShareView *shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) shareBlock:^(NSString *title) {
+    ShareView *shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) shareBlock:^(BOOL isSuccess, int errorCode) {
         
-        if ([title isEqualToString:@"0"]) {
+        if (isSuccess) {
             
             [TLAlert alertWithSucces:@"分享成功"];
             
         } else {
             
             [TLAlert alertWithError:@"分享失败"];
-            
         }
         
-    } vc:self];
+    }];
     
     shareView.shareTitle = @"邀请好友";
     shareView.shareDesc = @"邀好友送优惠券 多邀多得";

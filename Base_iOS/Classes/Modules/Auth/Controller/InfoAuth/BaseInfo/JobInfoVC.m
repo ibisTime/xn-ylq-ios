@@ -141,7 +141,7 @@
     
     //单位电话
     
-    self.mobileTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.addressTF.yy + 1, kScreenWidth, 45) leftTitle:@"单位电话" titleWidth:titleWidth placeholder:@"区号+号码"];
+    self.mobileTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.addressTF.yy + 1, kScreenWidth, 45) leftTitle:@"单位电话" titleWidth:titleWidth placeholder:@"区号+号码(选填)"];
     
     self.mobileTF.text = infoOccupation.phone;
     
@@ -151,10 +151,14 @@
     
     CGFloat leftMargin = 15;
     
-    UIButton *commitBtn = [UIButton buttonWithTitle:@"提交" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:btnH/2.0];
+    UIColor *bgColor = [_authModel.infoAntifraudFlag isEqualToString:@"1"] ? kGreyButtonColor: kAppCustomMainColor;
+
+    UIButton *commitBtn = [UIButton buttonWithTitle:@"提交" titleColor:kWhiteColor backgroundColor:bgColor titleFont:15.0 cornerRadius:btnH/2.0];
     
     commitBtn.frame = CGRectMake(leftMargin, self.mobileTF.yy + 50, kScreenWidth - 2*leftMargin, btnH);
     
+    commitBtn.enabled = [_authModel.infoAntifraudFlag isEqualToString:@"1"] ? NO: YES;
+
     [commitBtn addTarget:self action:@selector(clickCommit) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:commitBtn];
@@ -283,15 +287,17 @@
         
         return;
     }
-    
-    if (![self.mobileTF.text valid]) {
-        
-        [TLAlert alertWithInfo:@"请输入单位电话号码"];
-        
-        return;
-    }
+
+//    if (![self.mobileTF.text valid]) {
+//        
+//        [TLAlert alertWithInfo:@"请输入单位电话号码"];
+//        
+//        return;
+//    }
     
     TLNetworking *http = [TLNetworking new];
+    
+    http.showView = self.view;
     
     http.code = @"623041";
     http.parameters[@"userId"] = [TLUser user].userId;

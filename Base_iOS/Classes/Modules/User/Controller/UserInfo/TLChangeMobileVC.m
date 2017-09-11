@@ -144,7 +144,7 @@
 
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"申请成功, 请耐心等待平台审核"];
+        [TLAlert alertWithSucces:@"修改成功"];
         [TLUser user].mobile = self.phoneTf.text;
         if (self.changeMobileSuccess) {
             self.changeMobileSuccess(self.phoneTf.text);

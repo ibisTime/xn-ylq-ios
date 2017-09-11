@@ -91,6 +91,14 @@
             name = @"信息收集及使用规则";
             
         } break;
+            
+        case HTMLTypeContactCustomer: {
+            
+            ckey = @"customerService";
+            
+            name = @"联系客服";
+            
+        } break;
     }
 
     self.navigationItem.titleView = [UILabel labelWithTitle:name];

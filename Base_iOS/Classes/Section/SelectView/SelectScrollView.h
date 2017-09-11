@@ -14,8 +14,4 @@
 
 - (instancetype)initWithFrame:(CGRect)frame itemTitles:(NSArray *)itemTitles;
 
-- (void)setTitlePropertyWithTitleColor:(UIColor *)titleColor titleFont:(CGFloat )titleFont selectColor:(UIColor *)selectColor;
-
-- (void)setLinePropertyWithLineColor:(UIColor *)lineColor lineSize:(CGSize)lineSize;
-
 @end

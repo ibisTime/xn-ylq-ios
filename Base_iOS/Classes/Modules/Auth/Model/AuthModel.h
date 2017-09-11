@@ -93,9 +93,13 @@
 
 @property (nonatomic, copy) NSString *familyMobile;
 
+@property (nonatomic, copy) NSString *familyName;
+
 @property (nonatomic, copy) NSString *societyRelation;
 
 @property (nonatomic, copy) NSString *societyMobile;
+
+@property (nonatomic, copy) NSString *societyName;
 
 @end
 
@@ -114,6 +118,10 @@
 @interface InfoIdentifyPic : NSObject
 
 @property (nonatomic, copy) NSString *identifyPic;
+
+@property (nonatomic, copy) NSString *identifyPicReverse;
+
+@property (nonatomic, copy) NSString *identifyPicHand;
 
 @end
 

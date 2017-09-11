@@ -52,15 +52,17 @@
 
     goodView.goodModel = self.good;
     
+    goodView.isCancel = YES;
+    
     [topView addSubview:goodView];
     
     UILabel *textLbl = [UILabel labelWithText:@"" textColor:kTextColor textFont:15];
     
-    textLbl.frame = CGRectMake(0, goodView.yy + 25, kScreenWidth, 15);
+    textLbl.frame = CGRectMake(0, goodView.yy + 25, kScreenWidth, 22);
     
     textLbl.textAlignment = NSTextAlignmentCenter;
     
-    NSAttributedString *textAttr = [NSAttributedString getAttributedStringWithImgStr:@"禁止学生贷款" index:0 string:[NSString stringWithFormat:@"  %@", @"申请失败, 原因："] labelHeight:textLbl.height];
+    NSAttributedString *textAttr = [NSAttributedString getAttributedStringWithImgStr:@"失败" index:0 string:[NSString stringWithFormat:@"  %@", @"申请失败, 原因："] labelHeight:textLbl.height];
     
     textLbl.attributedText = textAttr;
     
@@ -68,14 +70,22 @@
     
     self.resultLbl = [UILabel labelWithText:@"" textColor:kTextColor3 textFont:18];
     
+    self.resultLbl.numberOfLines = 0;
+    
+    CGSize contentSize = [_good.approveNote calculateStringSize:CGSizeMake(kScreenWidth - 30, MAXFLOAT) font:Font(18.0)];
+    
+//    [self.resultLbl labelWithTextString:_good.approveNote lineSpace:10];
+    
     self.resultLbl.text = _good.approveNote;
     
-    self.resultLbl.frame = CGRectMake(0, textLbl.yy + 25, kScreenWidth, 18);
+    self.resultLbl.frame = CGRectMake(15, textLbl.yy + 25, kScreenWidth - 30, contentSize.height);
     
     self.resultLbl.textAlignment = NSTextAlignmentCenter;
     
     [topView addSubview:self.resultLbl];
     
+    topView.height = 250 - 18 + contentSize.height;
+
     UIButton *reApplication = [UIButton buttonWithTitle:@"重新申请" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:18 cornerRadius:22.5];
     
     reApplication.frame = CGRectMake(15, topView.yy + 54, kScreenWidth - 30, 45);

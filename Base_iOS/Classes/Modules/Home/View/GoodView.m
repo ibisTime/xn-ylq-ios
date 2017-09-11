@@ -219,6 +219,13 @@
     
 }
 
+- (void)setIsCancel:(BOOL)isCancel {
+
+    _isCancel = isCancel;
+    
+    self.cancelBtn.hidden = _isCancel;
+}
+
 #pragma mark - Events
 - (void)clickContinue:(UIButton *)sender {
     

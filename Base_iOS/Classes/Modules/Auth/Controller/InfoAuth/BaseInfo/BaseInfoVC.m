@@ -41,7 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+
     [self initTableView];
     
 }
@@ -56,10 +56,14 @@
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150)];
     
-    UIButton *commitBtn = [UIButton buttonWithTitle:@"提交" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:btnH/2.0];
+    UIColor *bgColor = [_authModel.infoAntifraudFlag isEqualToString:@"1"] ? kGreyButtonColor: kAppCustomMainColor;
+
+    UIButton *commitBtn = [UIButton buttonWithTitle:@"提交" titleColor:kWhiteColor backgroundColor:bgColor titleFont:15.0 cornerRadius:btnH/2.0];
     
     commitBtn.frame = CGRectMake(leftMargin, 50, kScreenWidth - 2*leftMargin, btnH);
     
+    commitBtn.enabled = [_authModel.infoAntifraudFlag isEqualToString:@"1"] ? NO: YES;
+
     [commitBtn addTarget:self action:@selector(clickCommit) forControlEvents:UIControlEventTouchUpInside];
     
     [footerView addSubview:commitBtn];
@@ -88,37 +92,6 @@
     _tableView = tableView;
 }
 
-#pragma mark - Data
-- (void)requestAuthStatus {
-    
-    TLNetworking *http = [TLNetworking new];
-    
-    http.showView = self.view;
-    
-    http.code = @"623050";
-    
-    http.parameters[@"userId"] = [TLUser user].userId;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        if (!self.authModel) {
-            
-            [self initFooterView];
-            
-        }
-        
-        self.authModel = [AuthModel mj_objectWithKeyValues:responseObject[@"data"]];
-        
-        [self setGroup];
-
-        [self.tableView reloadData];
-
-    } failure:^(NSError *error) {
-        
-        
-    }];
-}
-
 - (void)setGroup {
     
     BaseWeakSelf;
@@ -134,7 +107,7 @@
         
         detailVC.title = @"基本信息";
         
-        detailVC.authModel = self.authModel;
+        detailVC.authModel = weakSelf.authModel;
         
         [weakSelf.navigationController pushViewController:detailVC animated:YES];
         
@@ -152,8 +125,8 @@
         
         jobInfoVC.title = @"职业信息";
         
-        jobInfoVC.authModel = self.authModel;
-
+        jobInfoVC.authModel = weakSelf.authModel;
+        
         [weakSelf.navigationController pushViewController:jobInfoVC animated:YES];
         
     }];
@@ -170,31 +143,61 @@
         
         contactVC.title = @"紧急联系人";
         
-        contactVC.authModel = self.authModel;
-
+        contactVC.authModel = weakSelf.authModel;
+        
         [weakSelf.navigationController pushViewController:contactVC animated:YES];
     }];
     
-    BaseInfoModel *bankCardAuth = [BaseInfoModel new];
-    bankCardAuth.text = @"银行卡认证";
-    bankCardAuth.imgName = @"银行卡认证";
-    bankCardAuth.isAuth = [self.authModel.infoBankcardFlag boolValue];
-    
-    [bankCardAuth setAction:^{
-        
-        BankCardAuthVC *bankCardAuthVC = [BankCardAuthVC new];
-        
-        bankCardAuthVC.title = @"银行卡认证";
-        
-        bankCardAuthVC.authModel = self.authModel;
-
-        [weakSelf.navigationController pushViewController:bankCardAuthVC animated:YES];
-    }];
+    //    BaseInfoModel *bankCardAuth = [BaseInfoModel new];
+    //    bankCardAuth.text = @"银行卡认证";
+    //    bankCardAuth.imgName = @"银行卡认证";
+    //    bankCardAuth.isAuth = [self.authModel.infoBankcardFlag boolValue];
+    //
+    //    [bankCardAuth setAction:^{
+    //
+    //        BankCardAuthVC *bankCardAuthVC = [BankCardAuthVC new];
+    //
+    //        bankCardAuthVC.title = @"银行卡认证";
+    //
+    //        bankCardAuthVC.authModel = weakSelf.authModel;
+    //
+    //        [weakSelf.navigationController pushViewController:bankCardAuthVC animated:YES];
+    //    }];
     
     self.group = [BaseInfoGroup new];
     
-    self.group.items = @[baseInfo, jobInfo, contact, bankCardAuth];
+    //    self.group.items = @[baseInfo, jobInfo, contact, bankCardAuth];
     
+    self.group.items = @[baseInfo, jobInfo, contact];
+    
+    
+}
+
+#pragma mark - Data
+- (void)requestAuthStatus {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.showView = self.view;
+    
+    http.code = @"623050";
+    
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.authModel = [AuthModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        [self setGroup];
+        
+        [self initFooterView];
+        
+        [self.tableView reloadData];
+
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 #pragma mark - Events
@@ -202,6 +205,7 @@
 
     TLNetworking *http = [TLNetworking new];
     
+    http.showView = self.view;
     http.code = @"623052";
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"wifimac"] = [NSString getWifiMacAddress];
@@ -213,13 +217,22 @@
         
         [TLUser user].currentAuth = 1;
         
-        [TLAlert alertWithSucces:@"提交成功"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [self.navigationController popViewControllerAnimated:YES];
-            
-        });
+//        [TLAlert alertWithSucces:@"提交成功"];
+
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            
+//            [self.navigationController popViewControllerAnimated:YES];
+//            
+//        });
+
+        [TLAlert alertWithTitle:@"" message:@"个人信息提交成功" confirmMsg:@"OK" confirmAction:^{
+           
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            });
+        }];
         
     } failure:^(NSError *error) {
         

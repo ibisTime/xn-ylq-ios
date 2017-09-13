@@ -88,9 +88,11 @@
             
             section.img = dataModel.imgArr[i];
             
+            section.flag = @"0";
+
             section.type = [dataModel.typeArr[i] integerValue];
             
-            section.flag = @"0";
+            section.authStatusType = @"0";
             
             [sections addObject:section];
             
@@ -241,8 +243,10 @@
                 SectionModel *section = view.section;
 
                 section.flag = authModel.infoIdentifyFlag;
-                
+
                 section.type = DataTypeSFRZ;
+
+                section.authStatusType = authModel.infoIdentifyFlag;
                 
                 view.section = section;
                 
@@ -255,10 +259,12 @@
                 
                 SectionModel *section = view.section;
                 
-                section.flag = [authModel.infoAntifraudFlag isEqualToString:@"1"] ? @"3": authModel.infoAntifraudFlag;
-                
+                section.flag = authModel.infoAntifraudFlag;
+
                 section.type = DataTypeBaseInfo;
-                
+
+                section.authStatusType = [authModel.infoAntifraudFlag isEqualToString:@"1"] ? @"4": authModel.infoAntifraudFlag;
+
                 view.section = section;
             }
                 break;
@@ -270,8 +276,10 @@
                 SectionModel *section = view.section;
                 
                 section.flag = authModel.infoZMCreditFlag;
-                
+
                 section.type = DataTypeZMF;
+
+                section.authStatusType = authModel.infoZMCreditFlag;
                 
                 view.section = section;
 
@@ -285,9 +293,12 @@
                 SectionModel *section = view.section;
                 
                 section.flag = authModel.infoCarrierFlag;
-
-                section.type = DataTypeYYSRZ;
                 
+                section.type = DataTypeYYSRZ;
+
+                section.authStatusType = authModel.infoCarrierFlag;
+                ;
+
                 view.section = section;
 
             }
@@ -300,9 +311,11 @@
                 SectionModel *section = view.section;
                 
                 section.flag = authModel.infoAddressBookFlag;
-                
+
                 section.type = DataTypeTXLRZ;
                 
+                section.authStatusType = authModel.infoAddressBookFlag;
+
                 view.section = section;
             }
                 break;

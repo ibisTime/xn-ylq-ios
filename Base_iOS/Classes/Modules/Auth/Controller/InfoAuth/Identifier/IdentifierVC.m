@@ -72,19 +72,23 @@
     
     identifierModel.title = @"身份证上传";
     
+    identifierModel.flag = @"0";
+
     identifierModel.type = DataTypeSCSFZ;
     
-    identifierModel.flag = @"0";
-    
+    identifierModel.authStatusType = @"0";
+
     [self.datas addObject:identifierModel];
     
     SectionModel *faceModel = [SectionModel new];
     
     faceModel.title = @"人脸识别";
     
+    faceModel.flag = @"0";
+
     faceModel.type = DataTypeRLSB;
     
-    faceModel.flag = @"0";
+    faceModel.authStatusType = @"0";
     
     [self.datas addObject:faceModel];
     

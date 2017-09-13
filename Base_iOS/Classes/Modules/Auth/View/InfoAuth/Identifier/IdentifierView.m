@@ -168,8 +168,6 @@
 
     _authModel = authModel;
     
-    InfoIdentifyPic *picFlag = self.authModel.infoIdentifyPic;
-    
     for (int i = 0; i < _datas.count; i++) {
         
         SectionModel *section = _datas[i];
@@ -178,6 +176,8 @@
         
         section.type = DataTypeSCSFZ + i;
 
+        section.authStatusType = i == 0 ? authModel.infoIdentifyPicFlag: authModel.infoIdentifyFaceFlag;
+        
         UIImageView *imgView = [self viewWithTag:1300 + i];
         
         imgView.image = kImage(section.img);

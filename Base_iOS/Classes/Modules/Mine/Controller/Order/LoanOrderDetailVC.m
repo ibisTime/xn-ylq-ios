@@ -15,8 +15,8 @@
 
 #import "RepaymentVC.h"
 #import "RenewalVC.h"
-
 #import "RenewalListVC.h"
+#import "ZHBankCardListVC.h"
 
 @interface LoanOrderDetailVC ()
 
@@ -179,6 +179,9 @@
             
             [self.view addSubview:tableView];
             
+            //弹窗
+            [self alertFailureInfo];
+            
         }break;
             
         default:
@@ -280,6 +283,21 @@
         
     }];
     
+}
+
+#pragma mark - Events
+- (void)alertFailureInfo {
+    
+    [TLAlert alertWithTitle:@"提示" msg:@"打款失败, 请核对银行卡信息" confirmMsg:@"确定" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+        
+        
+    } confirm:^(UIAlertAction *action) {
+       
+        ZHBankCardListVC *vc = [[ZHBankCardListVC alloc] init];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning {

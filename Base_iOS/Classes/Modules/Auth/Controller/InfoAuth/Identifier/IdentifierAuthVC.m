@@ -56,7 +56,8 @@
     if (!_imagePicker) {
         _imagePicker = [[TLImagePicker alloc] initWithVC:self];
         _imagePicker.imageType = ImageTypeCamera;
-        _imagePicker.allowsEditing = YES;
+ 
+        _imagePicker.allowsEditing = NO;
         
     }
     return _imagePicker;

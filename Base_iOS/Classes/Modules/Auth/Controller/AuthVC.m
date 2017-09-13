@@ -136,6 +136,21 @@
 
 - (void)initMXSDK {
     
+    //            if (![TLUser user].message) {
+    //
+    //                [MoxieSDK shared].taskType = @"carrier";
+    //
+    //                [[MoxieSDK shared] startFunction];
+    //
+    //            } else {
+    //
+    //                MXOperatorAuthVC *operatorAuthVC = [MXOperatorAuthVC new];
+    //
+    //                operatorAuthVC.title = @"详情报告";
+    //
+    //                [self.navigationController pushViewController:operatorAuthVC animated:YES];
+    //            }，
+    
     InfoIdentify *identify = self.authModel.infoIdentify;
     
     [MoxieSDK shared].delegate = self;
@@ -148,7 +163,7 @@
     [MoxieSDK shared].carrier_phone = [TLUser user].mobile;
     [MoxieSDK shared].carrier_name = identify.realName;
     [MoxieSDK shared].carrier_idcard = identify.idNo;
-    [MoxieSDK shared].carrier_editable = YES;
+//    [MoxieSDK shared].carrier_editable = YES;
     
     [MoxieSDK shared].backImageName = @"返回";
     
@@ -394,6 +409,7 @@
                         return;
                     }
                     
+                    //判断是否已认证
                     if (!isYYS) {
                         
                         [self initMXSDK];
@@ -411,20 +427,6 @@
                 
                 return ;
             }
-            //            if (![TLUser user].message) {
-            //
-            //                [MoxieSDK shared].taskType = @"carrier";
-            //
-            //                [[MoxieSDK shared] startFunction];
-            //
-            //            } else {
-            //
-            //                MXOperatorAuthVC *operatorAuthVC = [MXOperatorAuthVC new];
-            //
-            //                operatorAuthVC.title = @"详情报告";
-            //
-            //                [self.navigationController pushViewController:operatorAuthVC animated:YES];
-            //            }，
             
             if (!isIdent) {
                 
@@ -445,7 +447,15 @@
             
             if (!isYYS) {
                 
-                [self initMXSDK];
+                //判断是否在认证中,3为认证中状态
+                if (![self.authModel.infoCarrierFlag isEqualToString:@"3"]) {
+                    
+                    [self initMXSDK];
+                    
+                } else {
+                    
+                    [TLAlert alertWithInfo:@"运营商数据正在认证，请稍后"];
+                }
                 
             } else {
                 
@@ -614,7 +624,7 @@
     if(code == 2) {
         //继续查询该任务进展
         
-        [TLAlert alertWithInfo:@"继续查询该任务进展"];
+//        [TLAlert alertWithInfo:@"继续查询该任务进展"];
         
     } else if(code == 1) {
         //code是1则成功

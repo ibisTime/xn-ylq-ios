@@ -79,5 +79,24 @@
 
 #define boldFont(F)    [UIFont boldSystemFontOfSize:(F)]
 
+//View圆角和加边框
+
+#define kViewBorderRadius(View,Radius,Width,Color)\
+\
+[View.layer setCornerRadius:(Radius)];\
+\
+[View.layer setMasksToBounds:YES];\
+\
+[View.layer setBorderWidth:(Width)];\
+\
+[View.layer setBorderColor:[Color CGColor]]
+
+// View圆角
+
+#define kViewRadius(View,Radius)\
+\
+[View.layer setCornerRadius:(Radius)];\
+\
+[View.layer setMasksToBounds:YES]
 
 #endif /* AppColorMacro_h */

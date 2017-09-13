@@ -20,6 +20,16 @@ typedef NS_ENUM(NSInteger, DataType) {//认证类型
     DataTypeRLSB,           //人脸识别
 };
 
+typedef NS_ENUM(NSInteger, AuthStatusType) {//认证状态
+
+    AuthStatusTypeCommit = 0,             //前往提交
+    AuthStatusTypeAuthenticated,          //已认证
+    AuthStatusTypeOverdue,                //已过期
+    AuthStatusTypeAuthenticating,         //认证中
+    AuthStatusTypeCommited,               //已提交
+
+};
+
 @class SectionModel;
 
 @interface DataModel : BaseModel
@@ -63,7 +73,9 @@ typedef NS_ENUM(NSInteger, DataType) {//认证类型
 
 @property (nonatomic, assign) DataType type;        //认证类型
 
-@property (nonatomic, copy) NSString *flag;         //认证状态
+@property (nonatomic, copy) NSString *authStatusType;    //认证状态
+    
+@property (nonatomic, copy) NSString *flag;         //传过来的认证状态
 
 @property (nonatomic, copy) NSString *authStatusStr;
 

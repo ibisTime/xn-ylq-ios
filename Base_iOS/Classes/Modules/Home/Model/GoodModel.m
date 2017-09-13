@@ -21,7 +21,7 @@
                                 @"5": @"等待放款中",
                                 @"6": @"生效中",
                                 @"7": @"已逾期",
-                                
+                                @"11": @"打款失败",
                                 };
     
     return statusDic[self.userProductStatus];

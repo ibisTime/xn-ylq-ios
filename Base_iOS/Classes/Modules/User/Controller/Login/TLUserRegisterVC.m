@@ -266,7 +266,14 @@
             self.city = placemark.locality ? : placemark.administrativeArea; //市
             self.area = placemark.subLocality; //区
             
-            self.address = [NSString stringWithFormat:@"%@%@",placemark.thoroughfare ,placemark.name];      //详细地址
+            //道路
+            NSString *road = placemark.thoroughfare;
+            STRING_NIL_NULL(road);
+            //具体地方
+            NSString *building = placemark.name;
+            STRING_NIL_NULL(building);
+            //详细地址
+            self.address = [NSString stringWithFormat:@"%@%@", road,building];
         }
         
         [self setUpUI];
@@ -283,26 +290,48 @@
     if (![self.phoneTf.text isPhoneNum]) {
         
         [TLAlert alertWithInfo:@"请输入正确的手机号"];
-        
         return;
     }
     
+    //检查手机号是否存在
     TLNetworking *http = [TLNetworking new];
+    
     http.showView = self.view;
-    http.code = CAPTCHA_CODE;
-    http.parameters[@"bizType"] = USER_REG_CODE;
+    
+    http.code = @"805040";
     http.parameters[@"mobile"] = self.phoneTf.text;
     http.parameters[@"kind"] = @"C";
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"验证码已发送,请注意查收"];
+        //返回true代表可以注册，否则直接抛异常
+        BOOL isSuccess = responseObject[@"data"][@"isSuccess"];
         
-        [self.captchaView.captchaBtn begin];
+        if (isSuccess) {
+            
+            //发送验证码
+            TLNetworking *http = [TLNetworking new];
+            http.showView = self.view;
+            http.code = CAPTCHA_CODE;
+            http.parameters[@"bizType"] = USER_REG_CODE;
+            http.parameters[@"mobile"] = self.phoneTf.text;
+            http.parameters[@"kind"] = @"C";
+            
+            [http postWithSuccess:^(id responseObject) {
+                
+                [TLAlert alertWithSucces:@"验证码已发送,请注意查收"];
+                
+                [self.captchaView.captchaBtn begin];
+                
+            } failure:^(NSError *error) {
+                
+                [TLAlert alertWithError:@"发送失败,请检查手机号"];
+                
+            }];
+
+        }
         
     } failure:^(NSError *error) {
-        
-        [TLAlert alertWithError:@"发送失败,请检查手机号"];
         
     }];
     
@@ -310,24 +339,24 @@
 
 - (void)goReg {
     
-//    if (![self.phoneTf.text isPhoneNum]) {
-//        
-//        [TLAlert alertWithInfo:@"请输入正确的手机号"];
-//        
-//        return;
-//    }
-//    
-//    if (!(self.captchaView.captchaTf.text && self.captchaView.captchaTf.text.length > 3)) {
-//        [TLAlert alertWithInfo:@"请输入正确的验证码"];
-//        
-//        return;
-//    }
-//    
-//    if (!(self.pwdTf.text &&self.pwdTf.text.length > 5)) {
-//        
-//        [TLAlert alertWithInfo:@"请输入6位以上密码"];
-//        return;
-//    }
+    if (![self.phoneTf.text isPhoneNum]) {
+        
+        [TLAlert alertWithInfo:@"请输入正确的手机号"];
+        
+        return;
+    }
+    
+    if (!(self.captchaView.captchaTf.text && self.captchaView.captchaTf.text.length > 3)) {
+        [TLAlert alertWithInfo:@"请输入正确的验证码"];
+        
+        return;
+    }
+    
+    if (!(self.pwdTf.text &&self.pwdTf.text.length > 5)) {
+        
+        [TLAlert alertWithInfo:@"请输入6位以上密码"];
+        return;
+    }
   
 //    if ([self.addressTf.text valid]) {
 //        

@@ -198,6 +198,7 @@
     switch (status) {
         case 0:
         {
+            //选择产品
             SelectMoneyVC *moneyVC = [SelectMoneyVC new];
             
             moneyVC.title = @"产品详情";
@@ -214,6 +215,7 @@
         case 1:
         {
         
+            //认证中
             TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
             
             tabbarVC.currentIndex = 1;
@@ -222,7 +224,7 @@
           
         case 2:
         {
-            
+            //人工审核
             ManualAuditVC *auditVC = [ManualAuditVC new];
             
             auditVC.title = @"人工审核";
@@ -234,7 +236,7 @@
             
         case 3:
         {
-            
+            //额度申请失败
             LoanFailureVC *failureVC = [LoanFailureVC new];
             
             failureVC.good = good;
@@ -245,7 +247,7 @@
             
         case 4:
         {
-            
+            //已有额度
             MyQuotaVC *quotaVC = [[MyQuotaVC alloc] init];
             
             quotaVC.title = @"我的额度";
@@ -255,22 +257,21 @@
             
         case 5:
         {
+            //放款中
             LoanVC *loanVC = [LoanVC new];
             
             [self.navigationController pushViewController:loanVC animated:YES];
 
         }break;
         
-        case 6:
-        {
-            [self requestOrderWithCode:good.borrowCode];
-            
-        }break;
-            
-        case 7:
-        {
-            [self requestOrderWithCode:good.borrowCode];
+        case 6://生效中
+        case 7://已逾期
+        case 11://打款失败
 
+        {
+            
+            [self requestOrderWithCode:good.borrowCode];
+            
         }break;
             
         default:

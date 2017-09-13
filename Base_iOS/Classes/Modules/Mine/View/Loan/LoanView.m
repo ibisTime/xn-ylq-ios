@@ -78,7 +78,7 @@
 
 - (void)initProcessView {
 
-    NSArray *titleArr = @[@"签约成功", @"绑定银行卡", @"已放款"];
+    NSArray *titleArr = @[@"绑定银行卡", @"签约成功", @"已放款"];
 
     NSArray *imgArr = @[@"签约成功", @"签约成功", @"unselect"];
     

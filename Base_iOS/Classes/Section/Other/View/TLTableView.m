@@ -41,6 +41,10 @@
     tableView.dataSource = dataSource;
     tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.estimatedRowHeight = 0;
+    tableView.estimatedSectionHeaderHeight = 0;
+    tableView.estimatedSectionFooterHeight = 0;
+    
     return tableView;
 
 }
@@ -56,6 +60,10 @@
     tableView.dataSource = dataSource;
     tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.estimatedRowHeight = 0;
+    tableView.estimatedSectionHeaderHeight = 0;
+    tableView.estimatedSectionFooterHeight = 0;
+    
     return tableView;
 
 }

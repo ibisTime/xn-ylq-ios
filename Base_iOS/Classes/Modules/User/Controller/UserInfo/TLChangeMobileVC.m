@@ -61,7 +61,7 @@
 //    [self.bgSV addSubview:newCaptchaView];
     
     //确认按钮
-    UIButton *confirmBtn = [UIButton buttonWithTitle:@"确认申请" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:45/2.0];
+    UIButton *confirmBtn = [UIButton buttonWithTitle:@"确定" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:45/2.0];
     
     confirmBtn.frame = CGRectMake(15, captchaView.yy + 30, kScreenWidth - 30, 45);
     [self.bgSV addSubview:confirmBtn];

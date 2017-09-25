@@ -95,12 +95,18 @@
 - (void)beginLoad {
     
     //--//
-    NSArray *imgs = @[@"weixin",@"alipay"];
+//    NSArray *imgs = @[@"weixin",@"alipay"];
+    NSArray *imgs = @[@"alipay"];
+
     NSArray *payNames;
-    payNames  = @[@"微信支付",@"支付宝"]; //余额(可用100)
+//    payNames  = @[@"微信支付",@"支付宝"]; //余额(可用100)
+//
+//    NSArray *payType = @[@(PayTypeWeChat),@(PayTypeAlipay)];
+//    NSArray <NSNumber *>*status = @[@(YES),@(NO)];
+    payNames  = @[@"支付宝"]; //余额(可用100)
     
-    NSArray *payType = @[@(PayTypeWeChat),@(PayTypeAlipay)];
-    NSArray <NSNumber *>*status = @[@(YES),@(NO)];
+    NSArray *payType = @[@(PayTypeAlipay)];
+    NSArray <NSNumber *>*status = @[@(YES)];
     
     self.pays = [NSMutableArray array];
     

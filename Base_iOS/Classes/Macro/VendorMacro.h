@@ -16,11 +16,6 @@
 // 对应bundleID 为 com.beyondin.b2cUser
 #define kPgyerAppKey @""
 
-// 健康e购
-#define kWXAppID @"wxbea7a28408973ab3"
-#define kWXAppSecret @"eef7d6200fa42821fea494060b68200b"
-#define kWXURL @"http://www.baidu.com"
-
 // 友盟
 #define kUMAppKey @""
 
@@ -30,16 +25,6 @@
 
 //
 #define kBaiduMapAppKey @""
-
-
-#define kWBAppKey @""
-#define kWBAppSecret @""
-#define kWBURL @""
-
-
-#define kQQAppID @""
-#define kQQAppKey @""
-#define kQQURL @""
 
 //支付宝
 #define kAlipaySchemes @""

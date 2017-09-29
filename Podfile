@@ -1,5 +1,6 @@
 platform :ios, '9.0'
-
+source 'https://github.com/tianleios/CDSpecs.git'
+source 'https://github.com/CocoaPods/Specs.git'
 
 target ‘Base_iOS’ do
 
@@ -19,5 +20,5 @@ target ‘Base_iOS’ do
     pod 'Qiniu',                    '7.1.5'
     pod 'Realm',                    '2.8.0'
     pod 'FDFullscreenPopGesture',   '1.1'
-
+    pod 'CDCommon', '1.0.3'
 end

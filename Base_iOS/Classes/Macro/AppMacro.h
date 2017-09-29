@@ -26,9 +26,9 @@ if(x == nil || [x isKindOfClass:[NSNull class] ]) \
 
 // 统一处理打印日志
 #ifdef DEBUG
-#define DLog(format, ...)  NSLog(format, __VA_ARGS__)
+#define NSLog(...) printf("%s\n\n", [[NSString stringWithFormat:__VA_ARGS__] UTF8String]);
 #else
-#define DLog(...)
+#define NSLog(...)
 #endif
 
 #define ArtDEPRECATED(instead) NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, instead)

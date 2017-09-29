@@ -16,11 +16,117 @@
 		21076C551F39634400725C76 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21076C521F39634400725C76 /* SettingVC.m */; };
 		21076C641F39657500725C76 /* ZHBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 21076C611F39657500725C76 /* ZHBank.m */; };
 		21076C651F39657500725C76 /* ZHBankCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 21076C631F39657500725C76 /* ZHBankCard.m */; };
+		210B34C61F7DF02B00CCC00B /* TableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34C31F7DF02100CCC00B /* TableViewManager.m */; };
+		210B34C71F7DF02E00CCC00B /* TableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34C51F7DF02100CCC00B /* TableViewModel.m */; };
+		210B34CA1F7DF12A00CCC00B /* TLWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34C91F7DF12A00CCC00B /* TLWebVC.m */; };
+		210B35C51F7DF4C200CCC00B /* ZHDefaultGoodsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34CF1F7DF49900CCC00B /* ZHDefaultGoodsVC.m */; };
+		210B35C61F7DF4CA00CCC00B /* ZHEvaluateListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34D11F7DF49900CCC00B /* ZHEvaluateListVC.m */; };
+		210B35C71F7DF4CA00CCC00B /* ZHGoodsCategoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34D31F7DF49900CCC00B /* ZHGoodsCategoryVC.m */; };
+		210B35C81F7DF4CA00CCC00B /* ZHGoodsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34D51F7DF49900CCC00B /* ZHGoodsDetailVC.m */; };
+		210B35C91F7DF4CA00CCC00B /* ZHGoodsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34D71F7DF49900CCC00B /* ZHGoodsVC.m */; };
+		210B35CA1F7DF4CA00CCC00B /* ZHImmediateBuyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34D91F7DF49900CCC00B /* ZHImmediateBuyVC.m */; };
+		210B35CB1F7DF4CA00CCC00B /* ZHSingleDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34DB1F7DF49900CCC00B /* ZHSingleDetailVC.m */; };
+		210B35CC1F7DF4D300CCC00B /* CDGoodsParameterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34DE1F7DF49900CCC00B /* CDGoodsParameterModel.m */; };
+		210B35CD1F7DF4D300CCC00B /* ZHCategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34E01F7DF49900CCC00B /* ZHCategoryModel.m */; };
+		210B35CE1F7DF4D300CCC00B /* ZHEvaluateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34E21F7DF49900CCC00B /* ZHEvaluateModel.m */; };
+		210B35CF1F7DF4D300CCC00B /* ZHGoodsKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34E41F7DF49900CCC00B /* ZHGoodsKeyValue.m */; };
+		210B35D01F7DF4D300CCC00B /* ZHTreasureRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34E61F7DF49900CCC00B /* ZHTreasureRecord.m */; };
+		210B35D11F7DF4DB00CCC00B /* BaseAddressChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34EA1F7DF49900CCC00B /* BaseAddressChooseView.m */; };
+		210B35D21F7DF4DB00CCC00B /* ZHBuyerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34EC1F7DF49900CCC00B /* ZHBuyerCell.m */; };
+		210B35D31F7DF4DB00CCC00B /* ZHEvaluateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34EE1F7DF49900CCC00B /* ZHEvaluateCell.m */; };
+		210B35D41F7DF4DB00CCC00B /* ZHGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34F01F7DF49900CCC00B /* ZHGoodsCell.m */; };
+		210B35D51F7DF4DB00CCC00B /* ZHOrderGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34F21F7DF49900CCC00B /* ZHOrderGoodsCell.m */; };
+		210B35D61F7DF4DB00CCC00B /* ZHParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34F41F7DF49900CCC00B /* ZHParameterCell.m */; };
+		210B35D71F7DF4E200CCC00B /* CDGoodsParameterChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34F71F7DF49900CCC00B /* CDGoodsParameterChooseView.m */; };
+		210B35D81F7DF4E200CCC00B /* CDSingleParamView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34F91F7DF49900CCC00B /* CDSingleParamView.m */; };
+		210B35D91F7DF4F000CCC00B /* ZHShoppingCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34FC1F7DF49900CCC00B /* ZHShoppingCartCell.m */; };
+		210B35DA1F7DF4F000CCC00B /* ZHDoubleTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B34FE1F7DF49900CCC00B /* ZHDoubleTitleView.m */; };
+		210B35DB1F7DF4F000CCC00B /* ZHEvaluateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35001F7DF49900CCC00B /* ZHEvaluateView.m */; };
+		210B35DC1F7DF4F000CCC00B /* ZHProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35021F7DF49900CCC00B /* ZHProgressView.m */; };
+		210B35DD1F7DF4F000CCC00B /* ZHStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35041F7DF49900CCC00B /* ZHStepView.m */; };
+		210B35DE1F7DF4F000CCC00B /* ZHTreasureInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35061F7DF49900CCC00B /* ZHTreasureInfoView.m */; };
+		210B35DF1F7DF50A00CCC00B /* GoodCategoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B350B1F7DF49900CCC00B /* GoodCategoryVC.m */; };
+		210B35E01F7DF50A00CCC00B /* GoodListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B350D1F7DF49900CCC00B /* GoodListVC.m */; };
+		210B35E11F7DF50A00CCC00B /* HealthMallVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B350F1F7DF49900CCC00B /* HealthMallVC.m */; };
+		210B35E21F7DF50A00CCC00B /* ConfirmOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35121F7DF49900CCC00B /* ConfirmOrderVC.m */; };
+		210B35E31F7DF50A00CCC00B /* IntegralGoodDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35141F7DF49900CCC00B /* IntegralGoodDetailVC.m */; };
+		210B35E41F7DF50A00CCC00B /* IntegralMallVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35161F7DF49900CCC00B /* IntegralMallVC.m */; };
+		210B35E51F7DF50A00CCC00B /* IntegralPayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35181F7DF49900CCC00B /* IntegralPayVC.m */; };
+		210B35E61F7DF50A00CCC00B /* IntegralTaskListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B351A1F7DF49900CCC00B /* IntegralTaskListVC.m */; };
+		210B35E71F7DF50A00CCC00B /* IntregalFlowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B351C1F7DF49900CCC00B /* IntregalFlowVC.m */; };
+		210B35E81F7DF50A00CCC00B /* IntegralOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B351F1F7DF49900CCC00B /* IntegralOrderDetailVC.m */; };
+		210B35E91F7DF50A00CCC00B /* IntegralOrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35211F7DF49900CCC00B /* IntegralOrderListVC.m */; };
+		210B35EA1F7DF50A00CCC00B /* IntegralOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35231F7DF49900CCC00B /* IntegralOrderVC.m */; };
+		210B35EB1F7DF50A00CCC00B /* MallOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35251F7DF49900CCC00B /* MallOrderVC.m */; };
+		210B35EC1F7DF50A00CCC00B /* SearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35281F7DF49900CCC00B /* SearchVC.m */; };
+		210B35ED1F7DF50A00CCC00B /* ShopDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B352A1F7DF49900CCC00B /* ShopDetailVC.m */; };
+		210B35EE1F7DF50A00CCC00B /* SpecialMallVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B352D1F7DF49900CCC00B /* SpecialMallVC.m */; };
+		210B35EF1F7DF50A00CCC00B /* Coupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35311F7DF49900CCC00B /* Coupon.m */; };
+		210B35F01F7DF50A00CCC00B /* GoodListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35341F7DF49900CCC00B /* GoodListModel.m */; };
+		210B35F11F7DF50A00CCC00B /* GoodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35361F7DF49900CCC00B /* GoodModel.m */; };
+		210B35F21F7DF50A00CCC00B /* GoodsParameterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35381F7DF49900CCC00B /* GoodsParameterModel.m */; };
+		210B35F31F7DF50A00CCC00B /* ZHCurrencyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B353A1F7DF49900CCC00B /* ZHCurrencyModel.m */; };
+		210B35F41F7DF50A00CCC00B /* ZHHZBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B353D1F7DF49900CCC00B /* ZHHZBModel.m */; };
+		210B35F51F7DF50A00CCC00B /* ZHOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B353F1F7DF49900CCC00B /* ZHOrderModel.m */; };
+		210B35F61F7DF50A00CCC00B /* IntegralMallListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35421F7DF49900CCC00B /* IntegralMallListModel.m */; };
+		210B35F71F7DF50A00CCC00B /* IntregalRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35441F7DF49900CCC00B /* IntregalRecordModel.m */; };
+		210B35F81F7DF50A00CCC00B /* IntregalTaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35461F7DF49900CCC00B /* IntregalTaskModel.m */; };
+		210B35F91F7DF52100CCC00B /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35491F7DF49900CCC00B /* BannerModel.m */; };
+		210B35FA1F7DF52100CCC00B /* ShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B354B1F7DF49900CCC00B /* ShopModel.m */; };
+		210B35FB1F7DF52100CCC00B /* ShopTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B354D1F7DF49900CCC00B /* ShopTypeModel.m */; };
+		210B35FC1F7DF52100CCC00B /* BaseDetailWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35511F7DF49900CCC00B /* BaseDetailWebView.m */; };
+		210B35FD1F7DF52100CCC00B /* GoodListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35531F7DF49900CCC00B /* GoodListCell.m */; };
+		210B35FE1F7DF52100CCC00B /* GoodSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35561F7DF49900CCC00B /* GoodSelectView.m */; };
+		210B35FF1F7DF52100CCC00B /* IntegralHotGoodCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35591F7DF49900CCC00B /* IntegralHotGoodCell.m */; };
+		210B36001F7DF52100CCC00B /* IntegralMallHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B355C1F7DF49900CCC00B /* IntegralMallHeaderView.m */; };
+		210B36011F7DF52100CCC00B /* IntregalRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B355F1F7DF49900CCC00B /* IntregalRecordCell.m */; };
+		210B36021F7DF52100CCC00B /* IntregalTaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35611F7DF49900CCC00B /* IntregalTaskCell.m */; };
+		210B36031F7DF52100CCC00B /* IntregalTaskHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35631F7DF49900CCC00B /* IntregalTaskHeaderView.m */; };
+		210B36041F7DF52100CCC00B /* ShopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35661F7DF49900CCC00B /* ShopCell.m */; };
+		210B36051F7DF52100CCC00B /* BPPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35691F7DF49900CCC00B /* BPPhotoBrowser.m */; };
+		210B36061F7DF52100CCC00B /* ZHDiscountInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B356B1F7DF49900CCC00B /* ZHDiscountInfoCell.m */; };
+		210B36071F7DF52100CCC00B /* ZHImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B356D1F7DF49900CCC00B /* ZHImageCell.m */; };
+		210B36081F7DF52100CCC00B /* ZHShopInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B356F1F7DF49900CCC00B /* ZHShopInfoCell.m */; };
+		210B36091F7DF52100CCC00B /* ZHTextDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35711F7DF49900CCC00B /* ZHTextDetailCell.m */; };
+		210B360A1F7DF52100CCC00B /* ShopDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35741F7DF49900CCC00B /* ShopDisplayCell.m */; };
+		210B360B1F7DF52100CCC00B /* ShopDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35761F7DF49900CCC00B /* ShopDisplayView.m */; };
+		210B360C1F7DF52100CCC00B /* ShopTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35781F7DF49900CCC00B /* ShopTypeView.m */; };
+		210B360D1F7DF53F00CCC00B /* BaseMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B357C1F7DF49900CCC00B /* BaseMineVC.m */; };
+		210B360E1F7DF53F00CCC00B /* EditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B357F1F7DF49900CCC00B /* EditVC.m */; };
+		210B360F1F7DF53F00CCC00B /* UserDetailEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35811F7DF49900CCC00B /* UserDetailEditVC.m */; };
+		210B36101F7DF53F00CCC00B /* BaseInviteFriendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35841F7DF49900CCC00B /* BaseInviteFriendVC.m */; };
+		210B36111F7DF53F00CCC00B /* BaseSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35871F7DF49900CCC00B /* BaseSettingVC.m */; };
+		210B36121F7DF53F00CCC00B /* ZHOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B358A1F7DF49900CCC00B /* ZHOrderDetailVC.m */; };
+		210B36131F7DF53F00CCC00B /* ZHShoppingListCategoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B358C1F7DF49900CCC00B /* ZHShoppingListCategoryVC.m */; };
+		210B36141F7DF53F00CCC00B /* ZHShoppingListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B358E1F7DF49900CCC00B /* ZHShoppingListVC.m */; };
+		210B36151F7DF53F00CCC00B /* UserEditModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35921F7DF49900CCC00B /* UserEditModel.m */; };
+		210B36161F7DF53F00CCC00B /* ZHOrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35951F7DF49900CCC00B /* ZHOrderDetailModel.m */; };
+		210B36171F7DF53F00CCC00B /* ZHShopOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35971F7DF49900CCC00B /* ZHShopOrderModel.m */; };
+		210B36181F7DF53F00CCC00B /* BaseMineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B359A1F7DF49900CCC00B /* BaseMineHeaderView.m */; };
+		210B36191F7DF53F00CCC00B /* UserEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B359D1F7DF49900CCC00B /* UserEditCell.m */; };
+		210B361A1F7DF53F00CCC00B /* ZHOrderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35A01F7DF49900CCC00B /* ZHOrderFooterView.m */; };
+		210B361B1F7DF56500CCC00B /* ZHNewPayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35A41F7DF49900CCC00B /* ZHNewPayVC.m */; };
+		210B361C1F7DF56500CCC00B /* ZHPayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35A61F7DF49900CCC00B /* ZHPayVC.m */; };
+		210B361D1F7DF56500CCC00B /* TLCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35A91F7DF49900CCC00B /* TLCellModel.m */; };
+		210B361E1F7DF56500CCC00B /* TLGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35AB1F7DF49900CCC00B /* TLGroupModel.m */; };
+		210B361F1F7DF56500CCC00B /* ZHPayFuncModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35AD1F7DF49900CCC00B /* ZHPayFuncModel.m */; };
+		210B36201F7DF56500CCC00B /* ZHPaySceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35AF1F7DF49900CCC00B /* ZHPaySceneManager.m */; };
+		210B36211F7DF56500CCC00B /* ZHPaySceneUIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35B11F7DF49900CCC00B /* ZHPaySceneUIItem.m */; };
+		210B36221F7DF56500CCC00B /* ZHPayFuncCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35B41F7DF49900CCC00B /* ZHPayFuncCell.m */; };
+		210B36231F7DF56500CCC00B /* ZHPayInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35B61F7DF49900CCC00B /* ZHPayInfoCell.m */; };
+		210B36241F7DF56500CCC00B /* ZHShoppingCartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35BA1F7DF49900CCC00B /* ZHShoppingCartVC.m */; };
+		210B36251F7DF56500CCC00B /* ZHCartGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35BD1F7DF49900CCC00B /* ZHCartGoodsModel.m */; };
+		210B36261F7DF56500CCC00B /* ZHCartManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35C01F7DF49900CCC00B /* ZHCartManager.m */; };
+		210B36271F7DF56500CCC00B /* ZHGoodsCategoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35C21F7DF49900CCC00B /* ZHGoodsCategoryManager.m */; };
+		210B36281F7DF56500CCC00B /* ZHShoppingCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B35C41F7DF49900CCC00B /* ZHShoppingCart.m */; };
+		210B362B1F7DF5D300CCC00B /* ApiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B362A1F7DF5D200CCC00B /* ApiConfig.m */; };
+		210B36301F7DF62800CCC00B /* TLBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B362C1F7DF62700CCC00B /* TLBannerView.m */; };
+		210B36311F7DF62800CCC00B /* BannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B362D1F7DF62700CCC00B /* BannerCell.m */; };
+		210B36341F7DF94500CCC00B /* ProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B36321F7DF94500CCC00B /* ProductModel.m */; };
 		210F43FC1F3D3FD20002052E /* BaseInfoDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F43FB1F3D3FD20002052E /* BaseInfoDetailVC.m */; };
 		210F43FF1F3D3FEE0002052E /* JobInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F43FE1F3D3FEE0002052E /* JobInfoVC.m */; };
 		210F44021F3D40200002052E /* EmergencyContactVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F44011F3D40200002052E /* EmergencyContactVC.m */; };
 		210F44051F3D51930002052E /* BaseInfoDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F44041F3D51930002052E /* BaseInfoDetailCell.m */; };
-		210F44091F3DCE3E0002052E /* GoodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F44081F3DCE3E0002052E /* GoodModel.m */; };
 		210FCC9C1F3C8968005B8194 /* ZMAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210FCC9B1F3C8968005B8194 /* ZMAuthVC.m */; };
 		210FCCA21F3C8F1A005B8194 /* IdentifierVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210FCCA11F3C8F1A005B8194 /* IdentifierVC.m */; };
 		21158E431F1C4F4D00A07266 /* CustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 21158E421F1C4F4D00A07266 /* CustomTabBar.m */; };
@@ -330,6 +436,223 @@
 		21076C611F39657500725C76 /* ZHBank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBank.m; sourceTree = "<group>"; };
 		21076C621F39657500725C76 /* ZHBankCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBankCard.h; sourceTree = "<group>"; };
 		21076C631F39657500725C76 /* ZHBankCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBankCard.m; sourceTree = "<group>"; };
+		210B34C21F7DF02100CCC00B /* TableViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewManager.h; sourceTree = "<group>"; };
+		210B34C31F7DF02100CCC00B /* TableViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewManager.m; sourceTree = "<group>"; };
+		210B34C41F7DF02100CCC00B /* TableViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewModel.h; sourceTree = "<group>"; };
+		210B34C51F7DF02100CCC00B /* TableViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewModel.m; sourceTree = "<group>"; };
+		210B34C81F7DF12A00CCC00B /* TLWebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLWebVC.h; sourceTree = "<group>"; };
+		210B34C91F7DF12A00CCC00B /* TLWebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLWebVC.m; sourceTree = "<group>"; };
+		210B34CE1F7DF49900CCC00B /* ZHDefaultGoodsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHDefaultGoodsVC.h; sourceTree = "<group>"; };
+		210B34CF1F7DF49900CCC00B /* ZHDefaultGoodsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHDefaultGoodsVC.m; sourceTree = "<group>"; };
+		210B34D01F7DF49900CCC00B /* ZHEvaluateListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHEvaluateListVC.h; sourceTree = "<group>"; };
+		210B34D11F7DF49900CCC00B /* ZHEvaluateListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHEvaluateListVC.m; sourceTree = "<group>"; };
+		210B34D21F7DF49900CCC00B /* ZHGoodsCategoryVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHGoodsCategoryVC.h; sourceTree = "<group>"; };
+		210B34D31F7DF49900CCC00B /* ZHGoodsCategoryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHGoodsCategoryVC.m; sourceTree = "<group>"; };
+		210B34D41F7DF49900CCC00B /* ZHGoodsDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHGoodsDetailVC.h; sourceTree = "<group>"; };
+		210B34D51F7DF49900CCC00B /* ZHGoodsDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHGoodsDetailVC.m; sourceTree = "<group>"; };
+		210B34D61F7DF49900CCC00B /* ZHGoodsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHGoodsVC.h; sourceTree = "<group>"; };
+		210B34D71F7DF49900CCC00B /* ZHGoodsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHGoodsVC.m; sourceTree = "<group>"; };
+		210B34D81F7DF49900CCC00B /* ZHImmediateBuyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHImmediateBuyVC.h; sourceTree = "<group>"; };
+		210B34D91F7DF49900CCC00B /* ZHImmediateBuyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHImmediateBuyVC.m; sourceTree = "<group>"; };
+		210B34DA1F7DF49900CCC00B /* ZHSingleDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHSingleDetailVC.h; sourceTree = "<group>"; };
+		210B34DB1F7DF49900CCC00B /* ZHSingleDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHSingleDetailVC.m; sourceTree = "<group>"; };
+		210B34DD1F7DF49900CCC00B /* CDGoodsParameterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDGoodsParameterModel.h; sourceTree = "<group>"; };
+		210B34DE1F7DF49900CCC00B /* CDGoodsParameterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDGoodsParameterModel.m; sourceTree = "<group>"; };
+		210B34DF1F7DF49900CCC00B /* ZHCategoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHCategoryModel.h; sourceTree = "<group>"; };
+		210B34E01F7DF49900CCC00B /* ZHCategoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHCategoryModel.m; sourceTree = "<group>"; };
+		210B34E11F7DF49900CCC00B /* ZHEvaluateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHEvaluateModel.h; sourceTree = "<group>"; };
+		210B34E21F7DF49900CCC00B /* ZHEvaluateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHEvaluateModel.m; sourceTree = "<group>"; };
+		210B34E31F7DF49900CCC00B /* ZHGoodsKeyValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHGoodsKeyValue.h; sourceTree = "<group>"; };
+		210B34E41F7DF49900CCC00B /* ZHGoodsKeyValue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHGoodsKeyValue.m; sourceTree = "<group>"; };
+		210B34E51F7DF49900CCC00B /* ZHTreasureRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHTreasureRecord.h; sourceTree = "<group>"; };
+		210B34E61F7DF49900CCC00B /* ZHTreasureRecord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHTreasureRecord.m; sourceTree = "<group>"; };
+		210B34E91F7DF49900CCC00B /* BaseAddressChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAddressChooseView.h; sourceTree = "<group>"; };
+		210B34EA1F7DF49900CCC00B /* BaseAddressChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseAddressChooseView.m; sourceTree = "<group>"; };
+		210B34EB1F7DF49900CCC00B /* ZHBuyerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBuyerCell.h; sourceTree = "<group>"; };
+		210B34EC1F7DF49900CCC00B /* ZHBuyerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHBuyerCell.m; sourceTree = "<group>"; };
+		210B34ED1F7DF49900CCC00B /* ZHEvaluateCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHEvaluateCell.h; sourceTree = "<group>"; };
+		210B34EE1F7DF49900CCC00B /* ZHEvaluateCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHEvaluateCell.m; sourceTree = "<group>"; };
+		210B34EF1F7DF49900CCC00B /* ZHGoodsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHGoodsCell.h; sourceTree = "<group>"; };
+		210B34F01F7DF49900CCC00B /* ZHGoodsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHGoodsCell.m; sourceTree = "<group>"; };
+		210B34F11F7DF49900CCC00B /* ZHOrderGoodsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHOrderGoodsCell.h; sourceTree = "<group>"; };
+		210B34F21F7DF49900CCC00B /* ZHOrderGoodsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHOrderGoodsCell.m; sourceTree = "<group>"; };
+		210B34F31F7DF49900CCC00B /* ZHParameterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHParameterCell.h; sourceTree = "<group>"; };
+		210B34F41F7DF49900CCC00B /* ZHParameterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHParameterCell.m; sourceTree = "<group>"; };
+		210B34F61F7DF49900CCC00B /* CDGoodsParameterChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDGoodsParameterChooseView.h; sourceTree = "<group>"; };
+		210B34F71F7DF49900CCC00B /* CDGoodsParameterChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDGoodsParameterChooseView.m; sourceTree = "<group>"; };
+		210B34F81F7DF49900CCC00B /* CDSingleParamView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDSingleParamView.h; sourceTree = "<group>"; };
+		210B34F91F7DF49900CCC00B /* CDSingleParamView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDSingleParamView.m; sourceTree = "<group>"; };
+		210B34FB1F7DF49900CCC00B /* ZHShoppingCartCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHShoppingCartCell.h; sourceTree = "<group>"; };
+		210B34FC1F7DF49900CCC00B /* ZHShoppingCartCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHShoppingCartCell.m; sourceTree = "<group>"; };
+		210B34FD1F7DF49900CCC00B /* ZHDoubleTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHDoubleTitleView.h; sourceTree = "<group>"; };
+		210B34FE1F7DF49900CCC00B /* ZHDoubleTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHDoubleTitleView.m; sourceTree = "<group>"; };
+		210B34FF1F7DF49900CCC00B /* ZHEvaluateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHEvaluateView.h; sourceTree = "<group>"; };
+		210B35001F7DF49900CCC00B /* ZHEvaluateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHEvaluateView.m; sourceTree = "<group>"; };
+		210B35011F7DF49900CCC00B /* ZHProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHProgressView.h; sourceTree = "<group>"; };
+		210B35021F7DF49900CCC00B /* ZHProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHProgressView.m; sourceTree = "<group>"; };
+		210B35031F7DF49900CCC00B /* ZHStepView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHStepView.h; sourceTree = "<group>"; };
+		210B35041F7DF49900CCC00B /* ZHStepView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHStepView.m; sourceTree = "<group>"; };
+		210B35051F7DF49900CCC00B /* ZHTreasureInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHTreasureInfoView.h; sourceTree = "<group>"; };
+		210B35061F7DF49900CCC00B /* ZHTreasureInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHTreasureInfoView.m; sourceTree = "<group>"; };
+		210B350A1F7DF49900CCC00B /* GoodCategoryVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoodCategoryVC.h; sourceTree = "<group>"; };
+		210B350B1F7DF49900CCC00B /* GoodCategoryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodCategoryVC.m; sourceTree = "<group>"; };
+		210B350C1F7DF49900CCC00B /* GoodListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoodListVC.h; sourceTree = "<group>"; };
+		210B350D1F7DF49900CCC00B /* GoodListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodListVC.m; sourceTree = "<group>"; };
+		210B350E1F7DF49900CCC00B /* HealthMallVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthMallVC.h; sourceTree = "<group>"; };
+		210B350F1F7DF49900CCC00B /* HealthMallVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthMallVC.m; sourceTree = "<group>"; };
+		210B35111F7DF49900CCC00B /* ConfirmOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfirmOrderVC.h; sourceTree = "<group>"; };
+		210B35121F7DF49900CCC00B /* ConfirmOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfirmOrderVC.m; sourceTree = "<group>"; };
+		210B35131F7DF49900CCC00B /* IntegralGoodDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralGoodDetailVC.h; sourceTree = "<group>"; };
+		210B35141F7DF49900CCC00B /* IntegralGoodDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralGoodDetailVC.m; sourceTree = "<group>"; };
+		210B35151F7DF49900CCC00B /* IntegralMallVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralMallVC.h; sourceTree = "<group>"; };
+		210B35161F7DF49900CCC00B /* IntegralMallVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralMallVC.m; sourceTree = "<group>"; };
+		210B35171F7DF49900CCC00B /* IntegralPayVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralPayVC.h; sourceTree = "<group>"; };
+		210B35181F7DF49900CCC00B /* IntegralPayVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralPayVC.m; sourceTree = "<group>"; };
+		210B35191F7DF49900CCC00B /* IntegralTaskListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralTaskListVC.h; sourceTree = "<group>"; };
+		210B351A1F7DF49900CCC00B /* IntegralTaskListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralTaskListVC.m; sourceTree = "<group>"; };
+		210B351B1F7DF49900CCC00B /* IntregalFlowVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntregalFlowVC.h; sourceTree = "<group>"; };
+		210B351C1F7DF49900CCC00B /* IntregalFlowVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntregalFlowVC.m; sourceTree = "<group>"; };
+		210B351E1F7DF49900CCC00B /* IntegralOrderDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralOrderDetailVC.h; sourceTree = "<group>"; };
+		210B351F1F7DF49900CCC00B /* IntegralOrderDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralOrderDetailVC.m; sourceTree = "<group>"; };
+		210B35201F7DF49900CCC00B /* IntegralOrderListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralOrderListVC.h; sourceTree = "<group>"; };
+		210B35211F7DF49900CCC00B /* IntegralOrderListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralOrderListVC.m; sourceTree = "<group>"; };
+		210B35221F7DF49900CCC00B /* IntegralOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralOrderVC.h; sourceTree = "<group>"; };
+		210B35231F7DF49900CCC00B /* IntegralOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralOrderVC.m; sourceTree = "<group>"; };
+		210B35241F7DF49900CCC00B /* MallOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MallOrderVC.h; sourceTree = "<group>"; };
+		210B35251F7DF49900CCC00B /* MallOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MallOrderVC.m; sourceTree = "<group>"; };
+		210B35271F7DF49900CCC00B /* SearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchVC.h; sourceTree = "<group>"; };
+		210B35281F7DF49900CCC00B /* SearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchVC.m; sourceTree = "<group>"; };
+		210B35291F7DF49900CCC00B /* ShopDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopDetailVC.h; sourceTree = "<group>"; };
+		210B352A1F7DF49900CCC00B /* ShopDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopDetailVC.m; sourceTree = "<group>"; };
+		210B352C1F7DF49900CCC00B /* SpecialMallVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpecialMallVC.h; sourceTree = "<group>"; };
+		210B352D1F7DF49900CCC00B /* SpecialMallVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpecialMallVC.m; sourceTree = "<group>"; };
+		210B35301F7DF49900CCC00B /* Coupon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Coupon.h; sourceTree = "<group>"; };
+		210B35311F7DF49900CCC00B /* Coupon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Coupon.m; sourceTree = "<group>"; };
+		210B35331F7DF49900CCC00B /* GoodListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoodListModel.h; sourceTree = "<group>"; };
+		210B35341F7DF49900CCC00B /* GoodListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodListModel.m; sourceTree = "<group>"; };
+		210B35351F7DF49900CCC00B /* GoodModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoodModel.h; sourceTree = "<group>"; };
+		210B35361F7DF49900CCC00B /* GoodModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodModel.m; sourceTree = "<group>"; };
+		210B35371F7DF49900CCC00B /* GoodsParameterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoodsParameterModel.h; sourceTree = "<group>"; };
+		210B35381F7DF49900CCC00B /* GoodsParameterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodsParameterModel.m; sourceTree = "<group>"; };
+		210B35391F7DF49900CCC00B /* ZHCurrencyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHCurrencyModel.h; sourceTree = "<group>"; };
+		210B353A1F7DF49900CCC00B /* ZHCurrencyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHCurrencyModel.m; sourceTree = "<group>"; };
+		210B353B1F7DF49900CCC00B /* ZHCurrencyProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHCurrencyProtocol.h; sourceTree = "<group>"; };
+		210B353C1F7DF49900CCC00B /* ZHHZBModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHZBModel.h; sourceTree = "<group>"; };
+		210B353D1F7DF49900CCC00B /* ZHHZBModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHZBModel.m; sourceTree = "<group>"; };
+		210B353E1F7DF49900CCC00B /* ZHOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHOrderModel.h; sourceTree = "<group>"; };
+		210B353F1F7DF49900CCC00B /* ZHOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHOrderModel.m; sourceTree = "<group>"; };
+		210B35411F7DF49900CCC00B /* IntegralMallListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralMallListModel.h; sourceTree = "<group>"; };
+		210B35421F7DF49900CCC00B /* IntegralMallListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralMallListModel.m; sourceTree = "<group>"; };
+		210B35431F7DF49900CCC00B /* IntregalRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntregalRecordModel.h; sourceTree = "<group>"; };
+		210B35441F7DF49900CCC00B /* IntregalRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntregalRecordModel.m; sourceTree = "<group>"; };
+		210B35451F7DF49900CCC00B /* IntregalTaskModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntregalTaskModel.h; sourceTree = "<group>"; };
+		210B35461F7DF49900CCC00B /* IntregalTaskModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntregalTaskModel.m; sourceTree = "<group>"; };
+		210B35481F7DF49900CCC00B /* BannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
+		210B35491F7DF49900CCC00B /* BannerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BannerModel.m; sourceTree = "<group>"; };
+		210B354A1F7DF49900CCC00B /* ShopModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopModel.h; sourceTree = "<group>"; };
+		210B354B1F7DF49900CCC00B /* ShopModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopModel.m; sourceTree = "<group>"; };
+		210B354C1F7DF49900CCC00B /* ShopTypeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopTypeModel.h; sourceTree = "<group>"; };
+		210B354D1F7DF49900CCC00B /* ShopTypeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopTypeModel.m; sourceTree = "<group>"; };
+		210B35501F7DF49900CCC00B /* BaseDetailWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseDetailWebView.h; sourceTree = "<group>"; };
+		210B35511F7DF49900CCC00B /* BaseDetailWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseDetailWebView.m; sourceTree = "<group>"; };
+		210B35521F7DF49900CCC00B /* GoodListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoodListCell.h; sourceTree = "<group>"; };
+		210B35531F7DF49900CCC00B /* GoodListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodListCell.m; sourceTree = "<group>"; };
+		210B35541F7DF49900CCC00B /* GoodListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoodListCell.xib; sourceTree = "<group>"; };
+		210B35551F7DF49900CCC00B /* GoodSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoodSelectView.h; sourceTree = "<group>"; };
+		210B35561F7DF49900CCC00B /* GoodSelectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodSelectView.m; sourceTree = "<group>"; };
+		210B35581F7DF49900CCC00B /* IntegralHotGoodCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralHotGoodCell.h; sourceTree = "<group>"; };
+		210B35591F7DF49900CCC00B /* IntegralHotGoodCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralHotGoodCell.m; sourceTree = "<group>"; };
+		210B355A1F7DF49900CCC00B /* IntegralHotGoodCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntegralHotGoodCell.xib; sourceTree = "<group>"; };
+		210B355B1F7DF49900CCC00B /* IntegralMallHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralMallHeaderView.h; sourceTree = "<group>"; };
+		210B355C1F7DF49900CCC00B /* IntegralMallHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralMallHeaderView.m; sourceTree = "<group>"; };
+		210B355E1F7DF49900CCC00B /* IntregalRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntregalRecordCell.h; sourceTree = "<group>"; };
+		210B355F1F7DF49900CCC00B /* IntregalRecordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntregalRecordCell.m; sourceTree = "<group>"; };
+		210B35601F7DF49900CCC00B /* IntregalTaskCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntregalTaskCell.h; sourceTree = "<group>"; };
+		210B35611F7DF49900CCC00B /* IntregalTaskCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntregalTaskCell.m; sourceTree = "<group>"; };
+		210B35621F7DF49900CCC00B /* IntregalTaskHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntregalTaskHeaderView.h; sourceTree = "<group>"; };
+		210B35631F7DF49900CCC00B /* IntregalTaskHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntregalTaskHeaderView.m; sourceTree = "<group>"; };
+		210B35651F7DF49900CCC00B /* ShopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopCell.h; sourceTree = "<group>"; };
+		210B35661F7DF49900CCC00B /* ShopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopCell.m; sourceTree = "<group>"; };
+		210B35681F7DF49900CCC00B /* BPPhotoBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPPhotoBrowser.h; sourceTree = "<group>"; };
+		210B35691F7DF49900CCC00B /* BPPhotoBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPhotoBrowser.m; sourceTree = "<group>"; };
+		210B356A1F7DF49900CCC00B /* ZHDiscountInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHDiscountInfoCell.h; sourceTree = "<group>"; };
+		210B356B1F7DF49900CCC00B /* ZHDiscountInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHDiscountInfoCell.m; sourceTree = "<group>"; };
+		210B356C1F7DF49900CCC00B /* ZHImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHImageCell.h; sourceTree = "<group>"; };
+		210B356D1F7DF49900CCC00B /* ZHImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHImageCell.m; sourceTree = "<group>"; };
+		210B356E1F7DF49900CCC00B /* ZHShopInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHShopInfoCell.h; sourceTree = "<group>"; };
+		210B356F1F7DF49900CCC00B /* ZHShopInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHShopInfoCell.m; sourceTree = "<group>"; };
+		210B35701F7DF49900CCC00B /* ZHTextDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHTextDetailCell.h; sourceTree = "<group>"; };
+		210B35711F7DF49900CCC00B /* ZHTextDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHTextDetailCell.m; sourceTree = "<group>"; };
+		210B35731F7DF49900CCC00B /* ShopDisplayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopDisplayCell.h; sourceTree = "<group>"; };
+		210B35741F7DF49900CCC00B /* ShopDisplayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopDisplayCell.m; sourceTree = "<group>"; };
+		210B35751F7DF49900CCC00B /* ShopDisplayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopDisplayView.h; sourceTree = "<group>"; };
+		210B35761F7DF49900CCC00B /* ShopDisplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopDisplayView.m; sourceTree = "<group>"; };
+		210B35771F7DF49900CCC00B /* ShopTypeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopTypeView.h; sourceTree = "<group>"; };
+		210B35781F7DF49900CCC00B /* ShopTypeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopTypeView.m; sourceTree = "<group>"; };
+		210B357B1F7DF49900CCC00B /* BaseMineVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseMineVC.h; sourceTree = "<group>"; };
+		210B357C1F7DF49900CCC00B /* BaseMineVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseMineVC.m; sourceTree = "<group>"; };
+		210B357E1F7DF49900CCC00B /* EditVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditVC.h; sourceTree = "<group>"; };
+		210B357F1F7DF49900CCC00B /* EditVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditVC.m; sourceTree = "<group>"; };
+		210B35801F7DF49900CCC00B /* UserDetailEditVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDetailEditVC.h; sourceTree = "<group>"; };
+		210B35811F7DF49900CCC00B /* UserDetailEditVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserDetailEditVC.m; sourceTree = "<group>"; };
+		210B35831F7DF49900CCC00B /* BaseInviteFriendVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseInviteFriendVC.h; sourceTree = "<group>"; };
+		210B35841F7DF49900CCC00B /* BaseInviteFriendVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseInviteFriendVC.m; sourceTree = "<group>"; };
+		210B35861F7DF49900CCC00B /* BaseSettingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseSettingVC.h; sourceTree = "<group>"; };
+		210B35871F7DF49900CCC00B /* BaseSettingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseSettingVC.m; sourceTree = "<group>"; };
+		210B35891F7DF49900CCC00B /* ZHOrderDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHOrderDetailVC.h; sourceTree = "<group>"; };
+		210B358A1F7DF49900CCC00B /* ZHOrderDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHOrderDetailVC.m; sourceTree = "<group>"; };
+		210B358B1F7DF49900CCC00B /* ZHShoppingListCategoryVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHShoppingListCategoryVC.h; sourceTree = "<group>"; };
+		210B358C1F7DF49900CCC00B /* ZHShoppingListCategoryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHShoppingListCategoryVC.m; sourceTree = "<group>"; };
+		210B358D1F7DF49900CCC00B /* ZHShoppingListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHShoppingListVC.h; sourceTree = "<group>"; };
+		210B358E1F7DF49900CCC00B /* ZHShoppingListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHShoppingListVC.m; sourceTree = "<group>"; };
+		210B35911F7DF49900CCC00B /* UserEditModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserEditModel.h; sourceTree = "<group>"; };
+		210B35921F7DF49900CCC00B /* UserEditModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserEditModel.m; sourceTree = "<group>"; };
+		210B35941F7DF49900CCC00B /* ZHOrderDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHOrderDetailModel.h; sourceTree = "<group>"; };
+		210B35951F7DF49900CCC00B /* ZHOrderDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHOrderDetailModel.m; sourceTree = "<group>"; };
+		210B35961F7DF49900CCC00B /* ZHShopOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHShopOrderModel.h; sourceTree = "<group>"; };
+		210B35971F7DF49900CCC00B /* ZHShopOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHShopOrderModel.m; sourceTree = "<group>"; };
+		210B35991F7DF49900CCC00B /* BaseMineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseMineHeaderView.h; sourceTree = "<group>"; };
+		210B359A1F7DF49900CCC00B /* BaseMineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseMineHeaderView.m; sourceTree = "<group>"; };
+		210B359C1F7DF49900CCC00B /* UserEditCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserEditCell.h; sourceTree = "<group>"; };
+		210B359D1F7DF49900CCC00B /* UserEditCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserEditCell.m; sourceTree = "<group>"; };
+		210B359F1F7DF49900CCC00B /* ZHOrderFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHOrderFooterView.h; sourceTree = "<group>"; };
+		210B35A01F7DF49900CCC00B /* ZHOrderFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHOrderFooterView.m; sourceTree = "<group>"; };
+		210B35A31F7DF49900CCC00B /* ZHNewPayVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNewPayVC.h; sourceTree = "<group>"; };
+		210B35A41F7DF49900CCC00B /* ZHNewPayVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNewPayVC.m; sourceTree = "<group>"; };
+		210B35A51F7DF49900CCC00B /* ZHPayVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHPayVC.h; sourceTree = "<group>"; };
+		210B35A61F7DF49900CCC00B /* ZHPayVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHPayVC.m; sourceTree = "<group>"; };
+		210B35A81F7DF49900CCC00B /* TLCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLCellModel.h; sourceTree = "<group>"; };
+		210B35A91F7DF49900CCC00B /* TLCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLCellModel.m; sourceTree = "<group>"; };
+		210B35AA1F7DF49900CCC00B /* TLGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLGroupModel.h; sourceTree = "<group>"; };
+		210B35AB1F7DF49900CCC00B /* TLGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLGroupModel.m; sourceTree = "<group>"; };
+		210B35AC1F7DF49900CCC00B /* ZHPayFuncModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHPayFuncModel.h; sourceTree = "<group>"; };
+		210B35AD1F7DF49900CCC00B /* ZHPayFuncModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHPayFuncModel.m; sourceTree = "<group>"; };
+		210B35AE1F7DF49900CCC00B /* ZHPaySceneManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHPaySceneManager.h; sourceTree = "<group>"; };
+		210B35AF1F7DF49900CCC00B /* ZHPaySceneManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHPaySceneManager.m; sourceTree = "<group>"; };
+		210B35B01F7DF49900CCC00B /* ZHPaySceneUIItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHPaySceneUIItem.h; sourceTree = "<group>"; };
+		210B35B11F7DF49900CCC00B /* ZHPaySceneUIItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHPaySceneUIItem.m; sourceTree = "<group>"; };
+		210B35B31F7DF49900CCC00B /* ZHPayFuncCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHPayFuncCell.h; sourceTree = "<group>"; };
+		210B35B41F7DF49900CCC00B /* ZHPayFuncCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHPayFuncCell.m; sourceTree = "<group>"; };
+		210B35B51F7DF49900CCC00B /* ZHPayInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHPayInfoCell.h; sourceTree = "<group>"; };
+		210B35B61F7DF49900CCC00B /* ZHPayInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHPayInfoCell.m; sourceTree = "<group>"; };
+		210B35B91F7DF49900CCC00B /* ZHShoppingCartVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHShoppingCartVC.h; sourceTree = "<group>"; };
+		210B35BA1F7DF49900CCC00B /* ZHShoppingCartVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHShoppingCartVC.m; sourceTree = "<group>"; };
+		210B35BC1F7DF49900CCC00B /* ZHCartGoodsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHCartGoodsModel.h; sourceTree = "<group>"; };
+		210B35BD1F7DF49900CCC00B /* ZHCartGoodsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHCartGoodsModel.m; sourceTree = "<group>"; };
+		210B35BF1F7DF49900CCC00B /* ZHCartManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHCartManager.h; sourceTree = "<group>"; };
+		210B35C01F7DF49900CCC00B /* ZHCartManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHCartManager.m; sourceTree = "<group>"; };
+		210B35C11F7DF49900CCC00B /* ZHGoodsCategoryManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHGoodsCategoryManager.h; sourceTree = "<group>"; };
+		210B35C21F7DF49900CCC00B /* ZHGoodsCategoryManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHGoodsCategoryManager.m; sourceTree = "<group>"; };
+		210B35C31F7DF49900CCC00B /* ZHShoppingCart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHShoppingCart.h; sourceTree = "<group>"; };
+		210B35C41F7DF49900CCC00B /* ZHShoppingCart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHShoppingCart.m; sourceTree = "<group>"; };
+		210B36291F7DF5D200CCC00B /* ApiConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApiConfig.h; sourceTree = "<group>"; };
+		210B362A1F7DF5D200CCC00B /* ApiConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApiConfig.m; sourceTree = "<group>"; };
+		210B362C1F7DF62700CCC00B /* TLBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLBannerView.m; sourceTree = "<group>"; };
+		210B362D1F7DF62700CCC00B /* BannerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BannerCell.m; sourceTree = "<group>"; };
+		210B362E1F7DF62700CCC00B /* TLBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLBannerView.h; sourceTree = "<group>"; };
+		210B362F1F7DF62800CCC00B /* BannerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerCell.h; sourceTree = "<group>"; };
+		210B36321F7DF94500CCC00B /* ProductModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductModel.m; sourceTree = "<group>"; };
+		210B36331F7DF94500CCC00B /* ProductModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductModel.h; sourceTree = "<group>"; };
 		210F43FA1F3D3FD20002052E /* BaseInfoDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseInfoDetailVC.h; sourceTree = "<group>"; };
 		210F43FB1F3D3FD20002052E /* BaseInfoDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseInfoDetailVC.m; sourceTree = "<group>"; };
 		210F43FD1F3D3FEE0002052E /* JobInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobInfoVC.h; sourceTree = "<group>"; };
@@ -338,8 +661,6 @@
 		210F44011F3D40200002052E /* EmergencyContactVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmergencyContactVC.m; sourceTree = "<group>"; };
 		210F44031F3D51930002052E /* BaseInfoDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseInfoDetailCell.h; sourceTree = "<group>"; };
 		210F44041F3D51930002052E /* BaseInfoDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseInfoDetailCell.m; sourceTree = "<group>"; };
-		210F44071F3DCE3E0002052E /* GoodModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodModel.h; sourceTree = "<group>"; };
-		210F44081F3DCE3E0002052E /* GoodModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodModel.m; sourceTree = "<group>"; };
 		210FCC9A1F3C8968005B8194 /* ZMAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMAuthVC.h; sourceTree = "<group>"; };
 		210FCC9B1F3C8968005B8194 /* ZMAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMAuthVC.m; sourceTree = "<group>"; };
 		210FCCA01F3C8F1A005B8194 /* IdentifierVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentifierVC.h; sourceTree = "<group>"; };
@@ -990,6 +1311,595 @@
 			path = BankCard;
 			sourceTree = "<group>";
 		};
+		210B34C11F7DF02100CCC00B /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				210B34C21F7DF02100CCC00B /* TableViewManager.h */,
+				210B34C31F7DF02100CCC00B /* TableViewManager.m */,
+				210B34C41F7DF02100CCC00B /* TableViewModel.h */,
+				210B34C51F7DF02100CCC00B /* TableViewModel.m */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		210B34CB1F7DF49900CCC00B /* 健康e购 */ = {
+			isa = PBXGroup;
+			children = (
+				210B34CC1F7DF49900CCC00B /* 商品 */,
+				210B35071F7DF49900CCC00B /* 商城 */,
+				210B35791F7DF49900CCC00B /* 我的 */,
+				210B35A11F7DF49900CCC00B /* 支付 */,
+				210B35B71F7DF49900CCC00B /* 购物车 */,
+			);
+			path = "健康e购";
+			sourceTree = "<group>";
+		};
+		210B34CC1F7DF49900CCC00B /* 商品 */ = {
+			isa = PBXGroup;
+			children = (
+				210B34CD1F7DF49900CCC00B /* Controller */,
+				210B34DC1F7DF49900CCC00B /* Model */,
+				210B34E71F7DF49900CCC00B /* View */,
+			);
+			path = "商品";
+			sourceTree = "<group>";
+		};
+		210B34CD1F7DF49900CCC00B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				210B34CE1F7DF49900CCC00B /* ZHDefaultGoodsVC.h */,
+				210B34CF1F7DF49900CCC00B /* ZHDefaultGoodsVC.m */,
+				210B34D01F7DF49900CCC00B /* ZHEvaluateListVC.h */,
+				210B34D11F7DF49900CCC00B /* ZHEvaluateListVC.m */,
+				210B34D21F7DF49900CCC00B /* ZHGoodsCategoryVC.h */,
+				210B34D31F7DF49900CCC00B /* ZHGoodsCategoryVC.m */,
+				210B34D41F7DF49900CCC00B /* ZHGoodsDetailVC.h */,
+				210B34D51F7DF49900CCC00B /* ZHGoodsDetailVC.m */,
+				210B34D61F7DF49900CCC00B /* ZHGoodsVC.h */,
+				210B34D71F7DF49900CCC00B /* ZHGoodsVC.m */,
+				210B34D81F7DF49900CCC00B /* ZHImmediateBuyVC.h */,
+				210B34D91F7DF49900CCC00B /* ZHImmediateBuyVC.m */,
+				210B34DA1F7DF49900CCC00B /* ZHSingleDetailVC.h */,
+				210B34DB1F7DF49900CCC00B /* ZHSingleDetailVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		210B34DC1F7DF49900CCC00B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				210B34DD1F7DF49900CCC00B /* CDGoodsParameterModel.h */,
+				210B34DE1F7DF49900CCC00B /* CDGoodsParameterModel.m */,
+				210B34DF1F7DF49900CCC00B /* ZHCategoryModel.h */,
+				210B34E01F7DF49900CCC00B /* ZHCategoryModel.m */,
+				210B34E11F7DF49900CCC00B /* ZHEvaluateModel.h */,
+				210B34E21F7DF49900CCC00B /* ZHEvaluateModel.m */,
+				210B34E31F7DF49900CCC00B /* ZHGoodsKeyValue.h */,
+				210B34E41F7DF49900CCC00B /* ZHGoodsKeyValue.m */,
+				210B34E51F7DF49900CCC00B /* ZHTreasureRecord.h */,
+				210B34E61F7DF49900CCC00B /* ZHTreasureRecord.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		210B34E71F7DF49900CCC00B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				210B34E81F7DF49900CCC00B /* Cell */,
+				210B34F51F7DF49900CCC00B /* ParameterChoose */,
+				210B34FA1F7DF49900CCC00B /* ShoppingCart */,
+				210B34FD1F7DF49900CCC00B /* ZHDoubleTitleView.h */,
+				210B34FE1F7DF49900CCC00B /* ZHDoubleTitleView.m */,
+				210B34FF1F7DF49900CCC00B /* ZHEvaluateView.h */,
+				210B35001F7DF49900CCC00B /* ZHEvaluateView.m */,
+				210B35011F7DF49900CCC00B /* ZHProgressView.h */,
+				210B35021F7DF49900CCC00B /* ZHProgressView.m */,
+				210B35031F7DF49900CCC00B /* ZHStepView.h */,
+				210B35041F7DF49900CCC00B /* ZHStepView.m */,
+				210B35051F7DF49900CCC00B /* ZHTreasureInfoView.h */,
+				210B35061F7DF49900CCC00B /* ZHTreasureInfoView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		210B34E81F7DF49900CCC00B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				210B34E91F7DF49900CCC00B /* BaseAddressChooseView.h */,
+				210B34EA1F7DF49900CCC00B /* BaseAddressChooseView.m */,
+				210B34EB1F7DF49900CCC00B /* ZHBuyerCell.h */,
+				210B34EC1F7DF49900CCC00B /* ZHBuyerCell.m */,
+				210B34ED1F7DF49900CCC00B /* ZHEvaluateCell.h */,
+				210B34EE1F7DF49900CCC00B /* ZHEvaluateCell.m */,
+				210B34EF1F7DF49900CCC00B /* ZHGoodsCell.h */,
+				210B34F01F7DF49900CCC00B /* ZHGoodsCell.m */,
+				210B34F11F7DF49900CCC00B /* ZHOrderGoodsCell.h */,
+				210B34F21F7DF49900CCC00B /* ZHOrderGoodsCell.m */,
+				210B34F31F7DF49900CCC00B /* ZHParameterCell.h */,
+				210B34F41F7DF49900CCC00B /* ZHParameterCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		210B34F51F7DF49900CCC00B /* ParameterChoose */ = {
+			isa = PBXGroup;
+			children = (
+				210B34F61F7DF49900CCC00B /* CDGoodsParameterChooseView.h */,
+				210B34F71F7DF49900CCC00B /* CDGoodsParameterChooseView.m */,
+				210B34F81F7DF49900CCC00B /* CDSingleParamView.h */,
+				210B34F91F7DF49900CCC00B /* CDSingleParamView.m */,
+			);
+			path = ParameterChoose;
+			sourceTree = "<group>";
+		};
+		210B34FA1F7DF49900CCC00B /* ShoppingCart */ = {
+			isa = PBXGroup;
+			children = (
+				210B34FB1F7DF49900CCC00B /* ZHShoppingCartCell.h */,
+				210B34FC1F7DF49900CCC00B /* ZHShoppingCartCell.m */,
+			);
+			path = ShoppingCart;
+			sourceTree = "<group>";
+		};
+		210B35071F7DF49900CCC00B /* 商城 */ = {
+			isa = PBXGroup;
+			children = (
+				210B35081F7DF49900CCC00B /* Controller */,
+				210B352E1F7DF49900CCC00B /* Model */,
+				210B354E1F7DF49900CCC00B /* View */,
+			);
+			path = "商城";
+			sourceTree = "<group>";
+		};
+		210B35081F7DF49900CCC00B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				210B350E1F7DF49900CCC00B /* HealthMallVC.h */,
+				210B350F1F7DF49900CCC00B /* HealthMallVC.m */,
+				210B35091F7DF49900CCC00B /* Category */,
+				210B35101F7DF49900CCC00B /* IntegralMall */,
+				210B351D1F7DF49900CCC00B /* Order */,
+				210B35261F7DF49900CCC00B /* Search */,
+				210B352B1F7DF49900CCC00B /* SpecialMall */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		210B35091F7DF49900CCC00B /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				210B350A1F7DF49900CCC00B /* GoodCategoryVC.h */,
+				210B350B1F7DF49900CCC00B /* GoodCategoryVC.m */,
+				210B350C1F7DF49900CCC00B /* GoodListVC.h */,
+				210B350D1F7DF49900CCC00B /* GoodListVC.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		210B35101F7DF49900CCC00B /* IntegralMall */ = {
+			isa = PBXGroup;
+			children = (
+				210B35111F7DF49900CCC00B /* ConfirmOrderVC.h */,
+				210B35121F7DF49900CCC00B /* ConfirmOrderVC.m */,
+				210B35131F7DF49900CCC00B /* IntegralGoodDetailVC.h */,
+				210B35141F7DF49900CCC00B /* IntegralGoodDetailVC.m */,
+				210B35151F7DF49900CCC00B /* IntegralMallVC.h */,
+				210B35161F7DF49900CCC00B /* IntegralMallVC.m */,
+				210B35171F7DF49900CCC00B /* IntegralPayVC.h */,
+				210B35181F7DF49900CCC00B /* IntegralPayVC.m */,
+				210B35191F7DF49900CCC00B /* IntegralTaskListVC.h */,
+				210B351A1F7DF49900CCC00B /* IntegralTaskListVC.m */,
+				210B351B1F7DF49900CCC00B /* IntregalFlowVC.h */,
+				210B351C1F7DF49900CCC00B /* IntregalFlowVC.m */,
+			);
+			path = IntegralMall;
+			sourceTree = "<group>";
+		};
+		210B351D1F7DF49900CCC00B /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				210B351E1F7DF49900CCC00B /* IntegralOrderDetailVC.h */,
+				210B351F1F7DF49900CCC00B /* IntegralOrderDetailVC.m */,
+				210B35201F7DF49900CCC00B /* IntegralOrderListVC.h */,
+				210B35211F7DF49900CCC00B /* IntegralOrderListVC.m */,
+				210B35221F7DF49900CCC00B /* IntegralOrderVC.h */,
+				210B35231F7DF49900CCC00B /* IntegralOrderVC.m */,
+				210B35241F7DF49900CCC00B /* MallOrderVC.h */,
+				210B35251F7DF49900CCC00B /* MallOrderVC.m */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
+		210B35261F7DF49900CCC00B /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				210B35271F7DF49900CCC00B /* SearchVC.h */,
+				210B35281F7DF49900CCC00B /* SearchVC.m */,
+				210B35291F7DF49900CCC00B /* ShopDetailVC.h */,
+				210B352A1F7DF49900CCC00B /* ShopDetailVC.m */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		210B352B1F7DF49900CCC00B /* SpecialMall */ = {
+			isa = PBXGroup;
+			children = (
+				210B352C1F7DF49900CCC00B /* SpecialMallVC.h */,
+				210B352D1F7DF49900CCC00B /* SpecialMallVC.m */,
+			);
+			path = SpecialMall;
+			sourceTree = "<group>";
+		};
+		210B352E1F7DF49900CCC00B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				210B352F1F7DF49900CCC00B /* Coupon */,
+				210B35321F7DF49900CCC00B /* Goods */,
+				210B35401F7DF49900CCC00B /* IntegralMall */,
+				210B35471F7DF49900CCC00B /* Shop */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		210B352F1F7DF49900CCC00B /* Coupon */ = {
+			isa = PBXGroup;
+			children = (
+				210B35301F7DF49900CCC00B /* Coupon.h */,
+				210B35311F7DF49900CCC00B /* Coupon.m */,
+			);
+			path = Coupon;
+			sourceTree = "<group>";
+		};
+		210B35321F7DF49900CCC00B /* Goods */ = {
+			isa = PBXGroup;
+			children = (
+				210B35331F7DF49900CCC00B /* GoodListModel.h */,
+				210B35341F7DF49900CCC00B /* GoodListModel.m */,
+				210B35351F7DF49900CCC00B /* GoodModel.h */,
+				210B35361F7DF49900CCC00B /* GoodModel.m */,
+				210B35371F7DF49900CCC00B /* GoodsParameterModel.h */,
+				210B35381F7DF49900CCC00B /* GoodsParameterModel.m */,
+				210B35391F7DF49900CCC00B /* ZHCurrencyModel.h */,
+				210B353A1F7DF49900CCC00B /* ZHCurrencyModel.m */,
+				210B353B1F7DF49900CCC00B /* ZHCurrencyProtocol.h */,
+				210B353C1F7DF49900CCC00B /* ZHHZBModel.h */,
+				210B353D1F7DF49900CCC00B /* ZHHZBModel.m */,
+				210B353E1F7DF49900CCC00B /* ZHOrderModel.h */,
+				210B353F1F7DF49900CCC00B /* ZHOrderModel.m */,
+			);
+			path = Goods;
+			sourceTree = "<group>";
+		};
+		210B35401F7DF49900CCC00B /* IntegralMall */ = {
+			isa = PBXGroup;
+			children = (
+				210B35411F7DF49900CCC00B /* IntegralMallListModel.h */,
+				210B35421F7DF49900CCC00B /* IntegralMallListModel.m */,
+				210B35431F7DF49900CCC00B /* IntregalRecordModel.h */,
+				210B35441F7DF49900CCC00B /* IntregalRecordModel.m */,
+				210B35451F7DF49900CCC00B /* IntregalTaskModel.h */,
+				210B35461F7DF49900CCC00B /* IntregalTaskModel.m */,
+			);
+			path = IntegralMall;
+			sourceTree = "<group>";
+		};
+		210B35471F7DF49900CCC00B /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				210B35481F7DF49900CCC00B /* BannerModel.h */,
+				210B35491F7DF49900CCC00B /* BannerModel.m */,
+				210B354A1F7DF49900CCC00B /* ShopModel.h */,
+				210B354B1F7DF49900CCC00B /* ShopModel.m */,
+				210B354C1F7DF49900CCC00B /* ShopTypeModel.h */,
+				210B354D1F7DF49900CCC00B /* ShopTypeModel.m */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		210B354E1F7DF49900CCC00B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				210B354F1F7DF49900CCC00B /* Goods */,
+				210B35571F7DF49900CCC00B /* IntegralMall */,
+				210B355D1F7DF49900CCC00B /* IntregalTask */,
+				210B35641F7DF49900CCC00B /* Shop */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		210B354F1F7DF49900CCC00B /* Goods */ = {
+			isa = PBXGroup;
+			children = (
+				210B35501F7DF49900CCC00B /* BaseDetailWebView.h */,
+				210B35511F7DF49900CCC00B /* BaseDetailWebView.m */,
+				210B35521F7DF49900CCC00B /* GoodListCell.h */,
+				210B35531F7DF49900CCC00B /* GoodListCell.m */,
+				210B35541F7DF49900CCC00B /* GoodListCell.xib */,
+				210B35551F7DF49900CCC00B /* GoodSelectView.h */,
+				210B35561F7DF49900CCC00B /* GoodSelectView.m */,
+			);
+			path = Goods;
+			sourceTree = "<group>";
+		};
+		210B35571F7DF49900CCC00B /* IntegralMall */ = {
+			isa = PBXGroup;
+			children = (
+				210B35581F7DF49900CCC00B /* IntegralHotGoodCell.h */,
+				210B35591F7DF49900CCC00B /* IntegralHotGoodCell.m */,
+				210B355A1F7DF49900CCC00B /* IntegralHotGoodCell.xib */,
+				210B355B1F7DF49900CCC00B /* IntegralMallHeaderView.h */,
+				210B355C1F7DF49900CCC00B /* IntegralMallHeaderView.m */,
+			);
+			path = IntegralMall;
+			sourceTree = "<group>";
+		};
+		210B355D1F7DF49900CCC00B /* IntregalTask */ = {
+			isa = PBXGroup;
+			children = (
+				210B355E1F7DF49900CCC00B /* IntregalRecordCell.h */,
+				210B355F1F7DF49900CCC00B /* IntregalRecordCell.m */,
+				210B35601F7DF49900CCC00B /* IntregalTaskCell.h */,
+				210B35611F7DF49900CCC00B /* IntregalTaskCell.m */,
+				210B35621F7DF49900CCC00B /* IntregalTaskHeaderView.h */,
+				210B35631F7DF49900CCC00B /* IntregalTaskHeaderView.m */,
+			);
+			path = IntregalTask;
+			sourceTree = "<group>";
+		};
+		210B35641F7DF49900CCC00B /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				210B35651F7DF49900CCC00B /* ShopCell.h */,
+				210B35661F7DF49900CCC00B /* ShopCell.m */,
+				210B35671F7DF49900CCC00B /* ShopDetail */,
+				210B35721F7DF49900CCC00B /* ShopType */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		210B35671F7DF49900CCC00B /* ShopDetail */ = {
+			isa = PBXGroup;
+			children = (
+				210B35681F7DF49900CCC00B /* BPPhotoBrowser.h */,
+				210B35691F7DF49900CCC00B /* BPPhotoBrowser.m */,
+				210B356A1F7DF49900CCC00B /* ZHDiscountInfoCell.h */,
+				210B356B1F7DF49900CCC00B /* ZHDiscountInfoCell.m */,
+				210B356C1F7DF49900CCC00B /* ZHImageCell.h */,
+				210B356D1F7DF49900CCC00B /* ZHImageCell.m */,
+				210B356E1F7DF49900CCC00B /* ZHShopInfoCell.h */,
+				210B356F1F7DF49900CCC00B /* ZHShopInfoCell.m */,
+				210B35701F7DF49900CCC00B /* ZHTextDetailCell.h */,
+				210B35711F7DF49900CCC00B /* ZHTextDetailCell.m */,
+			);
+			path = ShopDetail;
+			sourceTree = "<group>";
+		};
+		210B35721F7DF49900CCC00B /* ShopType */ = {
+			isa = PBXGroup;
+			children = (
+				210B35731F7DF49900CCC00B /* ShopDisplayCell.h */,
+				210B35741F7DF49900CCC00B /* ShopDisplayCell.m */,
+				210B35751F7DF49900CCC00B /* ShopDisplayView.h */,
+				210B35761F7DF49900CCC00B /* ShopDisplayView.m */,
+				210B35771F7DF49900CCC00B /* ShopTypeView.h */,
+				210B35781F7DF49900CCC00B /* ShopTypeView.m */,
+			);
+			path = ShopType;
+			sourceTree = "<group>";
+		};
+		210B35791F7DF49900CCC00B /* 我的 */ = {
+			isa = PBXGroup;
+			children = (
+				210B357A1F7DF49900CCC00B /* Controller */,
+				210B358F1F7DF49900CCC00B /* Model */,
+				210B35981F7DF49900CCC00B /* View */,
+			);
+			path = "我的";
+			sourceTree = "<group>";
+		};
+		210B357A1F7DF49900CCC00B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				210B357B1F7DF49900CCC00B /* BaseMineVC.h */,
+				210B357C1F7DF49900CCC00B /* BaseMineVC.m */,
+				210B357D1F7DF49900CCC00B /* Edit */,
+				210B35821F7DF49900CCC00B /* InviteFriend */,
+				210B35851F7DF49900CCC00B /* Setting */,
+				210B35881F7DF49900CCC00B /* shoppingList */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		210B357D1F7DF49900CCC00B /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				210B357E1F7DF49900CCC00B /* EditVC.h */,
+				210B357F1F7DF49900CCC00B /* EditVC.m */,
+				210B35801F7DF49900CCC00B /* UserDetailEditVC.h */,
+				210B35811F7DF49900CCC00B /* UserDetailEditVC.m */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
+		210B35821F7DF49900CCC00B /* InviteFriend */ = {
+			isa = PBXGroup;
+			children = (
+				210B35831F7DF49900CCC00B /* BaseInviteFriendVC.h */,
+				210B35841F7DF49900CCC00B /* BaseInviteFriendVC.m */,
+			);
+			path = InviteFriend;
+			sourceTree = "<group>";
+		};
+		210B35851F7DF49900CCC00B /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				210B35861F7DF49900CCC00B /* BaseSettingVC.h */,
+				210B35871F7DF49900CCC00B /* BaseSettingVC.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		210B35881F7DF49900CCC00B /* shoppingList */ = {
+			isa = PBXGroup;
+			children = (
+				210B35891F7DF49900CCC00B /* ZHOrderDetailVC.h */,
+				210B358A1F7DF49900CCC00B /* ZHOrderDetailVC.m */,
+				210B358B1F7DF49900CCC00B /* ZHShoppingListCategoryVC.h */,
+				210B358C1F7DF49900CCC00B /* ZHShoppingListCategoryVC.m */,
+				210B358D1F7DF49900CCC00B /* ZHShoppingListVC.h */,
+				210B358E1F7DF49900CCC00B /* ZHShoppingListVC.m */,
+			);
+			path = shoppingList;
+			sourceTree = "<group>";
+		};
+		210B358F1F7DF49900CCC00B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				210B35901F7DF49900CCC00B /* Edit */,
+				210B35931F7DF49900CCC00B /* ShopOrder */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		210B35901F7DF49900CCC00B /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				210B35911F7DF49900CCC00B /* UserEditModel.h */,
+				210B35921F7DF49900CCC00B /* UserEditModel.m */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
+		210B35931F7DF49900CCC00B /* ShopOrder */ = {
+			isa = PBXGroup;
+			children = (
+				210B35941F7DF49900CCC00B /* ZHOrderDetailModel.h */,
+				210B35951F7DF49900CCC00B /* ZHOrderDetailModel.m */,
+				210B35961F7DF49900CCC00B /* ZHShopOrderModel.h */,
+				210B35971F7DF49900CCC00B /* ZHShopOrderModel.m */,
+			);
+			path = ShopOrder;
+			sourceTree = "<group>";
+		};
+		210B35981F7DF49900CCC00B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				210B35991F7DF49900CCC00B /* BaseMineHeaderView.h */,
+				210B359A1F7DF49900CCC00B /* BaseMineHeaderView.m */,
+				210B359B1F7DF49900CCC00B /* Edit */,
+				210B359E1F7DF49900CCC00B /* ShoppingList */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		210B359B1F7DF49900CCC00B /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				210B359C1F7DF49900CCC00B /* UserEditCell.h */,
+				210B359D1F7DF49900CCC00B /* UserEditCell.m */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
+		210B359E1F7DF49900CCC00B /* ShoppingList */ = {
+			isa = PBXGroup;
+			children = (
+				210B359F1F7DF49900CCC00B /* ZHOrderFooterView.h */,
+				210B35A01F7DF49900CCC00B /* ZHOrderFooterView.m */,
+			);
+			path = ShoppingList;
+			sourceTree = "<group>";
+		};
+		210B35A11F7DF49900CCC00B /* 支付 */ = {
+			isa = PBXGroup;
+			children = (
+				210B35A21F7DF49900CCC00B /* Controller */,
+				210B35A71F7DF49900CCC00B /* Model */,
+				210B35B21F7DF49900CCC00B /* View */,
+			);
+			path = "支付";
+			sourceTree = "<group>";
+		};
+		210B35A21F7DF49900CCC00B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				210B35A31F7DF49900CCC00B /* ZHNewPayVC.h */,
+				210B35A41F7DF49900CCC00B /* ZHNewPayVC.m */,
+				210B35A51F7DF49900CCC00B /* ZHPayVC.h */,
+				210B35A61F7DF49900CCC00B /* ZHPayVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		210B35A71F7DF49900CCC00B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				210B35A81F7DF49900CCC00B /* TLCellModel.h */,
+				210B35A91F7DF49900CCC00B /* TLCellModel.m */,
+				210B35AA1F7DF49900CCC00B /* TLGroupModel.h */,
+				210B35AB1F7DF49900CCC00B /* TLGroupModel.m */,
+				210B35AC1F7DF49900CCC00B /* ZHPayFuncModel.h */,
+				210B35AD1F7DF49900CCC00B /* ZHPayFuncModel.m */,
+				210B35AE1F7DF49900CCC00B /* ZHPaySceneManager.h */,
+				210B35AF1F7DF49900CCC00B /* ZHPaySceneManager.m */,
+				210B35B01F7DF49900CCC00B /* ZHPaySceneUIItem.h */,
+				210B35B11F7DF49900CCC00B /* ZHPaySceneUIItem.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		210B35B21F7DF49900CCC00B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				210B35B31F7DF49900CCC00B /* ZHPayFuncCell.h */,
+				210B35B41F7DF49900CCC00B /* ZHPayFuncCell.m */,
+				210B35B51F7DF49900CCC00B /* ZHPayInfoCell.h */,
+				210B35B61F7DF49900CCC00B /* ZHPayInfoCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		210B35B71F7DF49900CCC00B /* 购物车 */ = {
+			isa = PBXGroup;
+			children = (
+				210B35B81F7DF49900CCC00B /* Controller */,
+				210B35BB1F7DF49900CCC00B /* Model */,
+				210B35BE1F7DF49900CCC00B /* ViewModel */,
+			);
+			path = "购物车";
+			sourceTree = "<group>";
+		};
+		210B35B81F7DF49900CCC00B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				210B35B91F7DF49900CCC00B /* ZHShoppingCartVC.h */,
+				210B35BA1F7DF49900CCC00B /* ZHShoppingCartVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		210B35BB1F7DF49900CCC00B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				210B35BC1F7DF49900CCC00B /* ZHCartGoodsModel.h */,
+				210B35BD1F7DF49900CCC00B /* ZHCartGoodsModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		210B35BE1F7DF49900CCC00B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				210B35BF1F7DF49900CCC00B /* ZHCartManager.h */,
+				210B35C01F7DF49900CCC00B /* ZHCartManager.m */,
+				210B35C11F7DF49900CCC00B /* ZHGoodsCategoryManager.h */,
+				210B35C21F7DF49900CCC00B /* ZHGoodsCategoryManager.m */,
+				210B35C31F7DF49900CCC00B /* ZHShoppingCart.h */,
+				210B35C41F7DF49900CCC00B /* ZHShoppingCart.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		211709051F42C970002EBF79 /* BankCard */ = {
 			isa = PBXGroup;
 			children = (
@@ -1161,7 +2071,6 @@
 				211709271F42ED4B002EBF79 /* Order */,
 				211709051F42C970002EBF79 /* BankCard */,
 				211709081F42C970002EBF79 /* Loan */,
-				2117090D1F42C970002EBF79 /* Setting */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1350,10 +2259,10 @@
 		21212A7A1F18CF010091A493 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				210F44071F3DCE3E0002052E /* GoodModel.h */,
-				210F44081F3DCE3E0002052E /* GoodModel.m */,
 				212A45561F4683CE0059AB4E /* NoticeModel.h */,
 				212A45571F4683CE0059AB4E /* NoticeModel.m */,
+				210B36331F7DF94500CCC00B /* ProductModel.h */,
+				210B36321F7DF94500CCC00B /* ProductModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1811,6 +2720,7 @@
 				21076C381F395E6700725C76 /* SettingModel.m */,
 				211F6EE21F4ACBA8007BB638 /* UpdateModel.h */,
 				211F6EE31F4ACBA8007BB638 /* UpdateModel.m */,
+				210B34C11F7DF02100CCC00B /* TableView */,
 			);
 			path = BaseModel;
 			sourceTree = "<group>";
@@ -1820,6 +2730,8 @@
 			children = (
 				21F82D211F1771DE0019B176 /* TLBaseVC.h */,
 				21F82D221F1771DE0019B176 /* TLBaseVC.m */,
+				210B34C81F7DF12A00CCC00B /* TLWebVC.h */,
+				210B34C91F7DF12A00CCC00B /* TLWebVC.m */,
 				21F82B601F17719D0019B176 /* BaseViewController.h */,
 				21F82B611F17719D0019B176 /* BaseViewController.m */,
 				21F82B621F17719D0019B176 /* BaseWKWebViewController.h */,
@@ -1843,6 +2755,7 @@
 				21158E421F1C4F4D00A07266 /* CustomTabBar.m */,
 				21158E471F1C502400A07266 /* BarButton.h */,
 				21158E481F1C502400A07266 /* BarButton.m */,
+				2117090D1F42C970002EBF79 /* Setting */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -1885,6 +2798,7 @@
 		21F82B7D1F17719D0019B176 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				210B34CB1F7DF49900CCC00B /* 健康e购 */,
 				21198F4A1F45B4CF00FDDCC4 /* Pay */,
 				21216F8D1F380E2F007C9855 /* User */,
 				21212A6F1F18CA880091A493 /* Home */,
@@ -2213,6 +3127,10 @@
 				21FB2FA91F26E9EF0028ADEE /* TLTimeButton.m */,
 				21FB2FAA1F26E9EF0028ADEE /* ZHSegmentView.h */,
 				21FB2FAB1F26E9EF0028ADEE /* ZHSegmentView.m */,
+				210B362F1F7DF62800CCC00B /* BannerCell.h */,
+				210B362D1F7DF62700CCC00B /* BannerCell.m */,
+				210B362E1F7DF62700CCC00B /* TLBannerView.h */,
+				210B362C1F7DF62700CCC00B /* TLBannerView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2425,6 +3343,8 @@
 			children = (
 				21FB30071F26E9EF0028ADEE /* AppConfig.h */,
 				21FB30081F26E9EF0028ADEE /* AppConfig.m */,
+				210B36291F7DF5D200CCC00B /* ApiConfig.h */,
+				210B362A1F7DF5D200CCC00B /* ApiConfig.m */,
 			);
 			path = AppConfig;
 			sourceTree = "<group>";
@@ -2888,6 +3808,109 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				210B361B1F7DF56500CCC00B /* ZHNewPayVC.m in Sources */,
+				210B361C1F7DF56500CCC00B /* ZHPayVC.m in Sources */,
+				210B361D1F7DF56500CCC00B /* TLCellModel.m in Sources */,
+				210B361E1F7DF56500CCC00B /* TLGroupModel.m in Sources */,
+				210B361F1F7DF56500CCC00B /* ZHPayFuncModel.m in Sources */,
+				210B36201F7DF56500CCC00B /* ZHPaySceneManager.m in Sources */,
+				210B36211F7DF56500CCC00B /* ZHPaySceneUIItem.m in Sources */,
+				210B36221F7DF56500CCC00B /* ZHPayFuncCell.m in Sources */,
+				210B36231F7DF56500CCC00B /* ZHPayInfoCell.m in Sources */,
+				210B36241F7DF56500CCC00B /* ZHShoppingCartVC.m in Sources */,
+				210B36251F7DF56500CCC00B /* ZHCartGoodsModel.m in Sources */,
+				210B36261F7DF56500CCC00B /* ZHCartManager.m in Sources */,
+				210B36271F7DF56500CCC00B /* ZHGoodsCategoryManager.m in Sources */,
+				210B36281F7DF56500CCC00B /* ZHShoppingCart.m in Sources */,
+				210B360D1F7DF53F00CCC00B /* BaseMineVC.m in Sources */,
+				210B360E1F7DF53F00CCC00B /* EditVC.m in Sources */,
+				210B36301F7DF62800CCC00B /* TLBannerView.m in Sources */,
+				210B360F1F7DF53F00CCC00B /* UserDetailEditVC.m in Sources */,
+				210B36101F7DF53F00CCC00B /* BaseInviteFriendVC.m in Sources */,
+				210B36111F7DF53F00CCC00B /* BaseSettingVC.m in Sources */,
+				210B36121F7DF53F00CCC00B /* ZHOrderDetailVC.m in Sources */,
+				210B36131F7DF53F00CCC00B /* ZHShoppingListCategoryVC.m in Sources */,
+				210B36141F7DF53F00CCC00B /* ZHShoppingListVC.m in Sources */,
+				210B36151F7DF53F00CCC00B /* UserEditModel.m in Sources */,
+				210B36161F7DF53F00CCC00B /* ZHOrderDetailModel.m in Sources */,
+				210B36171F7DF53F00CCC00B /* ZHShopOrderModel.m in Sources */,
+				210B36181F7DF53F00CCC00B /* BaseMineHeaderView.m in Sources */,
+				210B36191F7DF53F00CCC00B /* UserEditCell.m in Sources */,
+				210B361A1F7DF53F00CCC00B /* ZHOrderFooterView.m in Sources */,
+				210B35F91F7DF52100CCC00B /* BannerModel.m in Sources */,
+				210B35FA1F7DF52100CCC00B /* ShopModel.m in Sources */,
+				210B35FB1F7DF52100CCC00B /* ShopTypeModel.m in Sources */,
+				210B35FC1F7DF52100CCC00B /* BaseDetailWebView.m in Sources */,
+				210B35FD1F7DF52100CCC00B /* GoodListCell.m in Sources */,
+				210B35FE1F7DF52100CCC00B /* GoodSelectView.m in Sources */,
+				210B35FF1F7DF52100CCC00B /* IntegralHotGoodCell.m in Sources */,
+				210B36001F7DF52100CCC00B /* IntegralMallHeaderView.m in Sources */,
+				210B36011F7DF52100CCC00B /* IntregalRecordCell.m in Sources */,
+				210B36021F7DF52100CCC00B /* IntregalTaskCell.m in Sources */,
+				210B36031F7DF52100CCC00B /* IntregalTaskHeaderView.m in Sources */,
+				210B36041F7DF52100CCC00B /* ShopCell.m in Sources */,
+				210B36051F7DF52100CCC00B /* BPPhotoBrowser.m in Sources */,
+				210B36061F7DF52100CCC00B /* ZHDiscountInfoCell.m in Sources */,
+				210B36071F7DF52100CCC00B /* ZHImageCell.m in Sources */,
+				210B36081F7DF52100CCC00B /* ZHShopInfoCell.m in Sources */,
+				210B36091F7DF52100CCC00B /* ZHTextDetailCell.m in Sources */,
+				210B360A1F7DF52100CCC00B /* ShopDisplayCell.m in Sources */,
+				210B360B1F7DF52100CCC00B /* ShopDisplayView.m in Sources */,
+				210B360C1F7DF52100CCC00B /* ShopTypeView.m in Sources */,
+				210B35DF1F7DF50A00CCC00B /* GoodCategoryVC.m in Sources */,
+				210B35E01F7DF50A00CCC00B /* GoodListVC.m in Sources */,
+				210B35E11F7DF50A00CCC00B /* HealthMallVC.m in Sources */,
+				210B35E21F7DF50A00CCC00B /* ConfirmOrderVC.m in Sources */,
+				210B35E31F7DF50A00CCC00B /* IntegralGoodDetailVC.m in Sources */,
+				210B35E41F7DF50A00CCC00B /* IntegralMallVC.m in Sources */,
+				210B35E51F7DF50A00CCC00B /* IntegralPayVC.m in Sources */,
+				210B35E61F7DF50A00CCC00B /* IntegralTaskListVC.m in Sources */,
+				210B35E71F7DF50A00CCC00B /* IntregalFlowVC.m in Sources */,
+				210B35E81F7DF50A00CCC00B /* IntegralOrderDetailVC.m in Sources */,
+				210B35E91F7DF50A00CCC00B /* IntegralOrderListVC.m in Sources */,
+				210B35EA1F7DF50A00CCC00B /* IntegralOrderVC.m in Sources */,
+				210B362B1F7DF5D300CCC00B /* ApiConfig.m in Sources */,
+				210B35EB1F7DF50A00CCC00B /* MallOrderVC.m in Sources */,
+				210B35EC1F7DF50A00CCC00B /* SearchVC.m in Sources */,
+				210B35ED1F7DF50A00CCC00B /* ShopDetailVC.m in Sources */,
+				210B35EE1F7DF50A00CCC00B /* SpecialMallVC.m in Sources */,
+				210B35EF1F7DF50A00CCC00B /* Coupon.m in Sources */,
+				210B35F01F7DF50A00CCC00B /* GoodListModel.m in Sources */,
+				210B35F11F7DF50A00CCC00B /* GoodModel.m in Sources */,
+				210B35F21F7DF50A00CCC00B /* GoodsParameterModel.m in Sources */,
+				210B35F31F7DF50A00CCC00B /* ZHCurrencyModel.m in Sources */,
+				210B35F41F7DF50A00CCC00B /* ZHHZBModel.m in Sources */,
+				210B35F51F7DF50A00CCC00B /* ZHOrderModel.m in Sources */,
+				210B35F61F7DF50A00CCC00B /* IntegralMallListModel.m in Sources */,
+				210B35F71F7DF50A00CCC00B /* IntregalRecordModel.m in Sources */,
+				210B35F81F7DF50A00CCC00B /* IntregalTaskModel.m in Sources */,
+				210B35D91F7DF4F000CCC00B /* ZHShoppingCartCell.m in Sources */,
+				210B35DA1F7DF4F000CCC00B /* ZHDoubleTitleView.m in Sources */,
+				210B35DB1F7DF4F000CCC00B /* ZHEvaluateView.m in Sources */,
+				210B35DC1F7DF4F000CCC00B /* ZHProgressView.m in Sources */,
+				210B35DD1F7DF4F000CCC00B /* ZHStepView.m in Sources */,
+				210B35DE1F7DF4F000CCC00B /* ZHTreasureInfoView.m in Sources */,
+				210B35D71F7DF4E200CCC00B /* CDGoodsParameterChooseView.m in Sources */,
+				210B35D81F7DF4E200CCC00B /* CDSingleParamView.m in Sources */,
+				210B36341F7DF94500CCC00B /* ProductModel.m in Sources */,
+				210B35D11F7DF4DB00CCC00B /* BaseAddressChooseView.m in Sources */,
+				210B35D21F7DF4DB00CCC00B /* ZHBuyerCell.m in Sources */,
+				210B35D31F7DF4DB00CCC00B /* ZHEvaluateCell.m in Sources */,
+				210B35D41F7DF4DB00CCC00B /* ZHGoodsCell.m in Sources */,
+				210B35D51F7DF4DB00CCC00B /* ZHOrderGoodsCell.m in Sources */,
+				210B35D61F7DF4DB00CCC00B /* ZHParameterCell.m in Sources */,
+				210B35CC1F7DF4D300CCC00B /* CDGoodsParameterModel.m in Sources */,
+				210B35CD1F7DF4D300CCC00B /* ZHCategoryModel.m in Sources */,
+				210B35CE1F7DF4D300CCC00B /* ZHEvaluateModel.m in Sources */,
+				210B35CF1F7DF4D300CCC00B /* ZHGoodsKeyValue.m in Sources */,
+				210B35D01F7DF4D300CCC00B /* ZHTreasureRecord.m in Sources */,
+				210B35C61F7DF4CA00CCC00B /* ZHEvaluateListVC.m in Sources */,
+				210B35C71F7DF4CA00CCC00B /* ZHGoodsCategoryVC.m in Sources */,
+				210B35C81F7DF4CA00CCC00B /* ZHGoodsDetailVC.m in Sources */,
+				210B35C91F7DF4CA00CCC00B /* ZHGoodsVC.m in Sources */,
+				210B35CA1F7DF4CA00CCC00B /* ZHImmediateBuyVC.m in Sources */,
+				210B35CB1F7DF4CA00CCC00B /* ZHSingleDetailVC.m in Sources */,
+				210B35C51F7DF4C200CCC00B /* ZHDefaultGoodsVC.m in Sources */,
 				21570C1D1F5F939100E1C164 /* OfflineRepaymentVC.m in Sources */,
 				21FB30731F26E9EF0028ADEE /* TLAlert.m in Sources */,
 				21FB30BD1F26E9EF0028ADEE /* UIControl+Block.m in Sources */,
@@ -2920,7 +3943,6 @@
 				211F66871F3AF49800B10E9E /* ZMAuthResultVC.m in Sources */,
 				211709021F42C849002EBF79 /* LoanVC.m in Sources */,
 				21FB30761F26E9EF0028ADEE /* TLDatePicker.m in Sources */,
-				210F44091F3DCE3E0002052E /* GoodModel.m in Sources */,
 				21570C161F5F8E6B00E1C164 /* RenewalVC.m in Sources */,
 				2126897B1F3C463600225267 /* BaseInfoCell.m in Sources */,
 				212170431F386C51007C9855 /* SelectMoneyVC.m in Sources */,
@@ -3029,6 +4051,7 @@
 				2122F7A91F43E5D200A379C7 /* OverdueTableView.m in Sources */,
 				21FB30CC1F26E9EF0028ADEE /* UIViewController+MethodSwizzling.m in Sources */,
 				2151A1201F4441B2002483CD /* CouponListVC.m in Sources */,
+				210B34C61F7DF02B00CCC00B /* TableViewManager.m in Sources */,
 				21FB30CE1F26E9EF0028ADEE /* TLPageDataHelper.m in Sources */,
 				2121700C1F3810B7007C9855 /* TLUserLoginVC.m in Sources */,
 				21FB30A51F26E9EF0028ADEE /* HttpLogger.m in Sources */,
@@ -3076,6 +4099,7 @@
 				21FB30AD1F26E9EF0028ADEE /* NSDictionary+Custom.m in Sources */,
 				2151A1231F445DF1002483CD /* LoanFailureVC.m in Sources */,
 				21158E491F1C502400A07266 /* BarButton.m in Sources */,
+				210B34C71F7DF02E00CCC00B /* TableViewModel.m in Sources */,
 				21570C231F5FCF4700E1C164 /* RenewalDetailVC.m in Sources */,
 				211F70821F4D314D007BB638 /* MailListVC.m in Sources */,
 				212170041F380FB9007C9855 /* TLChangeMobileVC.m in Sources */,
@@ -3085,6 +4109,7 @@
 				21FB30931F26E9EF0028ADEE /* SGAlertView.m in Sources */,
 				21FB307B1F26E9EF0028ADEE /* TLTableView.m in Sources */,
 				21FB30741F26E9EF0028ADEE /* TLCaptchaView.m in Sources */,
+				210B34CA1F7DF12A00CCC00B /* TLWebVC.m in Sources */,
 				21FB30A11F26E9EF0028ADEE /* CustomTextView.m in Sources */,
 				210F44051F3D51930002052E /* BaseInfoDetailCell.m in Sources */,
 				21076C651F39657500725C76 /* ZHBankCard.m in Sources */,
@@ -3098,6 +4123,7 @@
 				21FB30B61F26E9EF0028ADEE /* LabelModel.m in Sources */,
 				21FB30861F26E9EF0028ADEE /* TLChooseResultManager.m in Sources */,
 				21FB30CA1F26E9EF0028ADEE /* HTMLStrVC.m in Sources */,
+				210B36311F7DF62800CCC00B /* BannerCell.m in Sources */,
 				211709261F42EA38002EBF79 /* LoanOrderDetailVC.m in Sources */,
 				2126894E1F3C44A100225267 /* ZMOPScoreVC.m in Sources */,
 				21F82C991F17719D0019B176 /* AppDelegate+Launch.m in Sources */,

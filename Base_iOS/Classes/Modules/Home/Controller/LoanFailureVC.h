@@ -7,10 +7,10 @@
 //
 
 #import "BaseViewController.h"
-#import "GoodModel.h"
+#import "ProductModel.h"
 
 @interface LoanFailureVC : BaseViewController
 
-@property (nonatomic, strong) GoodModel *good;
+@property (nonatomic, strong) ProductModel *good;
 
 @end

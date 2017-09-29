@@ -24,14 +24,14 @@
 
 #import "TLPageDataHelper.h"
 
-#import "GoodModel.h"
+#import "ProductModel.h"
 #import "UpdateModel.h"
 
 @interface HomeVC ()
 
 @property (nonatomic, strong) TLPageDataHelper *helper;
 
-@property (nonatomic, strong) NSArray <GoodModel *>*goods;
+@property (nonatomic, strong) NSArray <ProductModel *>*goods;
 
 @property (nonatomic, strong) GoodView *goodView;
 
@@ -92,7 +92,7 @@
     
     CGFloat y = 0;
     
-    self.bgSV.height = kScreenHeight - 64 - 49;
+    self.bgSV.height = kScreenHeight - kNavigationBarHeight - kTabBarHeight;
 
     self.bgSV.backgroundColor = kBackgroundColor;
     
@@ -104,7 +104,7 @@
         
         goodView.goodModel = self.goods[i];
 
-        goodView.loanBlock = ^(LoanType loanType, GoodModel *good) {
+        goodView.loanBlock = ^(LoanType loanType, ProductModel *good) {
             
             [weakSelf loanEventWithType:loanType good:good];
         };
@@ -134,7 +134,7 @@
 }
 
 #pragma mark - Events
-- (void)loanEventWithType:(LoanType)loanType good:(GoodModel *)good {
+- (void)loanEventWithType:(LoanType)loanType good:(ProductModel *)good {
 
     BaseWeakSelf;
     
@@ -191,7 +191,7 @@
     }
 }
 
-- (void)loanStatusWithGood:(GoodModel *)good {
+- (void)loanStatusWithGood:(ProductModel *)good {
     
     NSInteger status = [good.userProductStatus integerValue];
     
@@ -224,10 +224,10 @@
           
         case 2:
         {
-            //人工审核
+            //系统审核
             ManualAuditVC *auditVC = [ManualAuditVC new];
             
-            auditVC.title = @"人工审核";
+            auditVC.title = @"系统审核";
             
             [self.navigationController pushViewController:auditVC animated:YES];
             
@@ -260,11 +260,13 @@
             //放款中
             LoanVC *loanVC = [LoanVC new];
             
+            loanVC.borrowCode = good.borrowCode;
+            
             [self.navigationController pushViewController:loanVC animated:YES];
 
         }break;
         
-        case 6://生效中
+        case 6://待还款
         case 7://已逾期
         case 11://打款失败
 
@@ -295,13 +297,12 @@
     if (_isFirst) {
         
         helper.showView = self.view;
-
     }
     
     helper.code = @"623012";
     helper.parameters[@"userId"] = [TLUser user].userId;
     
-    [helper modelClass:[GoodModel class]];
+    [helper modelClass:[ProductModel class]];
     
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         

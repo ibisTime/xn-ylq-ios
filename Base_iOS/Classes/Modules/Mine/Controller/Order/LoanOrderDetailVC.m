@@ -57,7 +57,7 @@
         {
             self.title = @"待审核详情";
             
-            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
             
             tableView.order = self.order;
             
@@ -70,7 +70,7 @@
         {
             self.title = @"待放款详情";
             
-            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
             
             tableView.order = self.order;
             
@@ -84,7 +84,7 @@
         {
             self.title = @"审核不通过";
             
-            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
             
             tableView.order = self.order;
             
@@ -95,9 +95,9 @@
             
         case 3:
         {
-            self.title = @"生效中详情";
+            self.title = @"待还款详情";
 
-            DidLoanTableView *tableView = [[DidLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 65)];
+            DidLoanTableView *tableView = [[DidLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - 65)];
             
             tableView.order = self.order;
             
@@ -121,7 +121,7 @@
         {
             self.title = @"已还款详情";
 
-            DidRepaymentTableView *tableView = [[DidRepaymentTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+            DidRepaymentTableView *tableView = [[DidRepaymentTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
             
             tableView.order = self.order;
 
@@ -142,7 +142,7 @@
         {
             self.title = @"已逾期详情";
 
-            OverdueTableView *tableView = [[OverdueTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+            OverdueTableView *tableView = [[OverdueTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
             
             tableView.order = self.order;
             
@@ -168,7 +168,7 @@
             
             self.title = @"打款失败";
             
-            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
             
             tableView.order = self.order;
             
@@ -191,7 +191,7 @@
 
 - (void)initBottomButton {
 
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 64 - 65, kScreenWidth, 65)];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kNavigationBarHeight - 65, kScreenWidth, 65)];
     
     bottomView.backgroundColor = kWhiteColor;
     

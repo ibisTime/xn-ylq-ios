@@ -29,6 +29,7 @@
 @property (nonatomic, weak) id<TabBarDelegate> delegate;
 
 @property (nonatomic, copy) NSArray <TabBarModel *>*tabBarItems;
+@property (nonatomic, assign) NSInteger itemNum;
 @property (nonatomic, assign) NSInteger selectedIdx;
 
 @end

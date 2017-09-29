@@ -11,7 +11,7 @@
 #import "LoanView.h"
 #import "OrderModel.h"
 
-#import "LoanOrderVC.h"
+#import "LoanOrderDetailVC.h"
 
 @interface LoanVC ()
 
@@ -40,13 +40,15 @@
 
     BaseWeakSelf;
     
-    self.loanView = [[LoanView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+    self.loanView = [[LoanView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
     
     self.loanView.loanBlock = ^{
         
-        LoanOrderVC *orderVC = [LoanOrderVC new];
+        LoanOrderDetailVC *detailVC = [[LoanOrderDetailVC alloc] init];
         
-        [weakSelf.navigationController pushViewController:orderVC animated:YES];
+        detailVC.code = weakSelf.borrowCode;
+        
+        [weakSelf.navigationController pushViewController:detailVC animated:YES];
     };
     
     [self.view addSubview:self.loanView];
@@ -74,8 +76,6 @@
             weakSelf.orderModel = objs[0];
             weakSelf.loanView.orderModel = weakSelf.orderModel;
         }
-        
-
         
     } failure:^(NSError *error) {
         

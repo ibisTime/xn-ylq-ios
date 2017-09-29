@@ -8,6 +8,7 @@
 
 #import "TLTableView.h"
 #import "MJRefresh.h"
+#import <UIScrollView+TLAdd.h>
 
 @interface TLTableView ()
 
@@ -45,6 +46,12 @@
     tableView.estimatedSectionHeaderHeight = 0;
     tableView.estimatedSectionFooterHeight = 0;
     
+    if (@available(iOS 11.0, *)) {
+        
+        [tableView adjustsContentInsets];
+    }
+    
+    
     return tableView;
 
 }
@@ -63,6 +70,11 @@
     tableView.estimatedRowHeight = 0;
     tableView.estimatedSectionHeaderHeight = 0;
     tableView.estimatedSectionFooterHeight = 0;
+    
+    if (@available(iOS 11.0, *)) {
+        
+        [tableView adjustsContentInsets];
+    }
     
     return tableView;
 

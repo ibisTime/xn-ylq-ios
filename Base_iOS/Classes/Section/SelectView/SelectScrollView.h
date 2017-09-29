@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 
+@property (nonatomic, assign) NSInteger index;
+
 - (instancetype)initWithFrame:(CGRect)frame itemTitles:(NSArray *)itemTitles;
 
 @end

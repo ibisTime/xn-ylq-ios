@@ -8,6 +8,7 @@
 
 #import "DidRepaymentTableView.h"
 #import "LoanOrderDetailCell.h"
+#import <UIScrollView+TLAdd.h>
 
 @interface DidRepaymentTableView ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -34,6 +35,8 @@
         self.dataSource = self;
         
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        [self adjustsContentInsets];
         
         [self initHeaderView];
         
@@ -201,6 +204,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    return [UIView new];
 }
 
 @end

@@ -57,7 +57,7 @@
     
     [self.topView addSubview:iconIV];
 
-    UILabel *textLbl = [UILabel labelWithText:@"等待放款中" textColor:kTextColor3 textFont:kWidth(16)];
+    UILabel *textLbl = [UILabel labelWithText:@"款项正在路上" textColor:kTextColor3 textFont:kWidth(16)];
     
     textLbl.frame = CGRectMake(0, iconIV.yy + kWidth(14.0), kWidth(150), kWidth(16));
     
@@ -123,7 +123,7 @@
     
     CGFloat leftMargin = 15;
     
-    UIButton *commitBtn = [UIButton buttonWithTitle:@"款项已在路上" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:btnH/2.0];
+    UIButton *commitBtn = [UIButton buttonWithTitle:@"款项正在路上" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:btnH/2.0];
     
     commitBtn.frame = CGRectMake(leftMargin, self.processView.yy, kScreenWidth - 2*leftMargin, btnH);
     

@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"获客";
+    self.title = @"邀请好友";
     
     [UIBarButtonItem addRightItemWithTitle:@"推荐历史" frame:CGRectMake(0, 0, 70, 30) vc:self action:@selector(historyFriends)];
     
@@ -48,7 +48,7 @@
     
     [self.view addSubview:inviteIV];
     
-    self.centerView = [[UIView alloc] initWithFrame:CGRectMake(0, inviteIV.yy + 10, kScreenWidth, kScreenHeight - 64 - 65 - 20 - kWidth(275))];
+    self.centerView = [[UIView alloc] initWithFrame:CGRectMake(0, inviteIV.yy + 10, kScreenWidth, kScreenHeight - kNavigationBarHeight - 65 - 20 - kWidth(275))];
     
     self.centerView.backgroundColor = kWhiteColor;
     
@@ -88,7 +88,7 @@
     self.activityRuleLbl = promptLbl;
     
     //底部按钮
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 64 - 65, kScreenWidth, 65)];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kNavigationBarHeight - 65, kScreenWidth, 65)];
     
     bottomView.backgroundColor = kWhiteColor;
     

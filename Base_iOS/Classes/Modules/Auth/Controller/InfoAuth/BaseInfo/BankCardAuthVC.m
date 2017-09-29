@@ -9,7 +9,6 @@
 #import "BankCardAuthVC.h"
 
 #import "BankCardAuthResultVC.h"
-#import "LoanVC.h"
 
 #import "AddressPickerView.h"
 #import "PickerTextField.h"

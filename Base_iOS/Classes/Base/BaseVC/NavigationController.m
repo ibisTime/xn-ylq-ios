@@ -29,11 +29,16 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setImage:[UIImage imageNamed:@"返回"] forState:UIControlStateNormal];
         btn.contentMode = UIViewContentModeScaleToFill;
-        btn.frame = CGRectMake(0, 0, 20, 20);
+        btn.frame = CGRectMake(-10, 0, 40, 44);
         [btn addTarget:self action:@selector(clickButton) forControlEvents:UIControlEventTouchUpInside];
         self.navButton = btn;
+        
+        UIView *customView = [[UIView alloc] initWithFrame:btn.bounds];
+        [customView addSubview:btn];
+        
+        
         viewController.hidesBottomBarWhenPushed = YES;
-        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];        
+        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:customView];
     }
     
     [super pushViewController:viewController animated:animated];

@@ -18,12 +18,13 @@
 #import "JobInfoVC.h"
 #import "EmergencyContactVC.h"
 #import "BankCardAuthVC.h"
+#import "MailListVC.h"
 
 @interface BaseInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) BaseInfoGroup *group;
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) TLTableView *tableView;
 
 @property (nonatomic, strong) AuthModel *authModel;
 
@@ -73,9 +74,8 @@
 
 - (void)initTableView {
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    tableView.delegate = self;
-    tableView.dataSource = self;
+    TLTableView *tableView = [TLTableView tableViewWithFrame:CGRectZero delegate:self dataSource:self];
+
     tableView.backgroundColor = [UIColor colorWithHexString:@"#ececec"];
     
     [self.view addSubview:tableView];
@@ -148,28 +148,21 @@
         [weakSelf.navigationController pushViewController:contactVC animated:YES];
     }];
     
-    //    BaseInfoModel *bankCardAuth = [BaseInfoModel new];
-    //    bankCardAuth.text = @"银行卡认证";
-    //    bankCardAuth.imgName = @"银行卡认证";
-    //    bankCardAuth.isAuth = [self.authModel.infoBankcardFlag boolValue];
-    //
-    //    [bankCardAuth setAction:^{
-    //
-    //        BankCardAuthVC *bankCardAuthVC = [BankCardAuthVC new];
-    //
-    //        bankCardAuthVC.title = @"银行卡认证";
-    //
-    //        bankCardAuthVC.authModel = weakSelf.authModel;
-    //
-    //        [weakSelf.navigationController pushViewController:bankCardAuthVC animated:YES];
-    //    }];
+        BaseInfoModel *contactAuth = [BaseInfoModel new];
+        contactAuth.text = @"通讯录认证";
+        contactAuth.imgName = @"Contact";
+        contactAuth.isAuth = [self.authModel.infoAddressBookFlag boolValue];
+    
+        [contactAuth setAction:^{
+    
+            MailListVC *mailListVC = [MailListVC new];
+            
+            [self.navigationController pushViewController:mailListVC animated:YES];
+        }];
     
     self.group = [BaseInfoGroup new];
     
-    //    self.group.items = @[baseInfo, jobInfo, contact, bankCardAuth];
-    
-    self.group.items = @[baseInfo, jobInfo, contact];
-    
+    self.group.items = @[baseInfo, jobInfo, contact, contactAuth];
     
 }
 
@@ -212,10 +205,6 @@
     http.parameters[@"ip"] = [NSString getIPAddress:YES];
     
     [http postWithSuccess:^(id responseObject) {
-        
-        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"kCurrentAuthStatus"];
-        
-        [TLUser user].currentAuth = 1;
         
 //        [TLAlert alertWithSucces:@"提交成功"];
 

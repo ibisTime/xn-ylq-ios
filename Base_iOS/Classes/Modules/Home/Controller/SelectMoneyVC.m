@@ -19,7 +19,7 @@
 #import "TLUserLoginVC.h"
 
 #import "CouponModel.h"
-#import "GoodModel.h"
+#import "ProductModel.h"
 
 #import "PickerTextField.h"
 
@@ -55,7 +55,7 @@
 
 @property (nonatomic, strong) NSArray <CouponModel *>*coupons;
 
-@property (nonatomic, strong) GoodModel *good;
+@property (nonatomic, strong) ProductModel *good;
 
 @property (nonatomic, strong) CouponModel *selectCoupon;
 
@@ -361,7 +361,7 @@
             
                 ManualAuditVC *auditVC = [ManualAuditVC new];
                 
-                auditVC.title = @"人工审核";
+                auditVC.title = @"系统审核";
                 
                 [self.navigationController pushViewController:auditVC animated:YES];
             }
@@ -468,7 +468,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        self.good = [GoodModel mj_objectWithKeyValues:responseObject[@"data"]];
+        self.good = [ProductModel mj_objectWithKeyValues:responseObject[@"data"]];
         
         [self initSubviews];
         

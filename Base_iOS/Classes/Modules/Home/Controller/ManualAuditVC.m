@@ -28,9 +28,9 @@
 #pragma mark - Init
 - (void)initSubviews {
 
-    NSArray *imgArr = @[@"期望额度", @"select", @"人工审核灰"];
+    NSArray *imgArr = @[@"期望额度", @"select", @"系统审核灰"];
     
-    NSArray *titleArr = @[@"期望额度", @"资料认证", @"人工审核"];
+    NSArray *titleArr = @[@"期望额度", @"资料认证", @"系统审核"];
     
     for (int i = 0; i < 3; i++) {
 

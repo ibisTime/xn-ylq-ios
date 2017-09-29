@@ -46,7 +46,7 @@
     [super viewDidLoad];
     self.title = @"我的银行卡";
 
-    TLTableView *bankCardTV = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)
+    TLTableView *bankCardTV = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)
                                                        delegate:self
                                                      dataSource:self];
     self.bankCardTV = bankCardTV;

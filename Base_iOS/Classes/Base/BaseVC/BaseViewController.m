@@ -64,13 +64,17 @@
     
     if (!_bgSV) {
         
-        _bgSV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+        _bgSV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
         
         _bgSV.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         
         _bgSV.backgroundColor = kBackgroundColor;
         
-        _bgSV.contentSize = CGSizeMake(kScreenWidth, kScreenHeight - 64 + 1);
+        _bgSV.contentSize = CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight + 1);
+        
+        if (@available(iOS 11.0, *)) {
+            _bgSV.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
         
         [self.view addSubview:_bgSV];
     }
@@ -92,7 +96,9 @@
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.extendedLayoutIncludesOpaqueBars = NO;
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
 }
 
 - (BOOL)isRootViewController {

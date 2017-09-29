@@ -19,9 +19,9 @@
 
 @implementation CustomTabBar
 {
-    
     BarButton *_lastTabBarBtn;
 }
+
 - (void)setTabBarItems:(NSArray<TabBarModel *> *)tabBarItems {
     
     _tabBarItems = [tabBarItems copy];
@@ -41,14 +41,9 @@
             } else {
                 
                 barBtn.iconImageView.image = [UIImage imageNamed:obj.unSelectedImgUrl];
-                
             }
-            
-            
         }];
-        
     }
-    
 }
 
 - (UIView *)falseTabBar {
@@ -61,10 +56,10 @@
         _falseTabBar.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         //添加3个按钮
-        
-        CGFloat w  = self.width/3.0;
-        self.btns = [NSMutableArray arrayWithCapacity:3];
-        for (NSInteger i = 0; i < 3; i ++) {
+            
+        CGFloat w = self.width/(self.itemNum*1.0);
+        self.btns = [NSMutableArray arrayWithCapacity:self.itemNum];
+        for (NSInteger i = 0; i < self.itemNum; i ++) {
             
             BarButton *btn = [[BarButton alloc] initWithFrame:CGRectMake(i*w, 0, w, _falseTabBar.height)];
             [_falseTabBar addSubview:btn];

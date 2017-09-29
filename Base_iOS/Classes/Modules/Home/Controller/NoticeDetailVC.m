@@ -69,7 +69,7 @@
     
     BaseWeakSelf;
     
-    self.webview = [[DetailWebView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth, kScreenHeight - 40 - 64)];
+    self.webview = [[DetailWebView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth, kScreenHeight - 40 - kNavigationBarHeight)];
     
     self.webview.webViewBlock = ^(CGFloat height) {
         
@@ -86,7 +86,7 @@
 - (void)initScrollView {
     
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
     
     self.scrollView.backgroundColor = kWhiteColor;
     self.scrollView.delegate = self;

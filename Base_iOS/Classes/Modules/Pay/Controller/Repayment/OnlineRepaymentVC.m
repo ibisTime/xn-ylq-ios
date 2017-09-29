@@ -67,7 +67,7 @@
 
 - (void)initSubviews {
     
-    self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64) delegate:self dataSource:self];
+    self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) delegate:self dataSource:self];
     
     [self.view addSubview:self.tableView];
     
@@ -95,18 +95,19 @@
 - (void)beginLoad {
     
     //--//
-//    NSArray *imgs = @[@"weixin",@"alipay"];
-    NSArray *imgs = @[@"alipay"];
-
-    NSArray *payNames;
-//    payNames  = @[@"微信支付",@"支付宝"]; //余额(可用100)
-//
-//    NSArray *payType = @[@(PayTypeWeChat),@(PayTypeAlipay)];
-//    NSArray <NSNumber *>*status = @[@(YES),@(NO)];
-    payNames  = @[@"支付宝"]; //余额(可用100)
+    //    NSArray *imgs = @[@"weixin",@"alipay"];
+    NSArray *imgs = @[@"alipay", @"baofu"];
     
-    NSArray *payType = @[@(PayTypeAlipay)];
-    NSArray <NSNumber *>*status = @[@(YES)];
+    NSArray *payNames;
+    
+    //    payNames  = @[@"微信支付",@"支付宝"]; //余额(可用100)
+    //
+    //    NSArray *payType = @[@(PayTypeWeChat),@(PayTypeAlipay)];
+    //    NSArray <NSNumber *>*status = @[@(YES),@(NO)];
+    payNames  = @[@"支付宝", @"宝付"]; //余额(可用100)
+    
+    NSArray *payType = @[@(PayTypeAlipay), @(PayTypeBaoFu)];
+    NSArray <NSNumber *>*status = @[@(YES), @(NO)];
     
     self.pays = [NSMutableArray array];
     
@@ -150,6 +151,12 @@
     NSString *payType;
     
     switch (type) {
+            
+        case PayTypeBaoFu:
+        {
+            payType = @"5";
+            
+        }break;
             
         case PayTypeAlipay: {
             
@@ -195,7 +202,6 @@
             
             [self aliPayWithInfo:responseObject[@"data"]];
             
-            
         } else {
             
             [TLAlert alertWithSucces:@"还款成功"];
@@ -203,7 +209,6 @@
             if (self.paySucces) {
                 self.paySucces();
             }
-            
         }
         
     } failure:^(NSError *error) {

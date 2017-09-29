@@ -10,4 +10,6 @@
 
 @interface LoanVC : BaseViewController
 
+@property (nonatomic, copy) NSString *borrowCode;
+
 @end

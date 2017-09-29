@@ -48,7 +48,7 @@
             
             ckey = @"regProtocol";
             
-            name = @"九州宝用户协议";
+            name = @"借款服务与隐私协议";
             
         } break;
             
@@ -136,7 +136,7 @@
     
     wkConfig.userContentController = wkUCC;
     
-    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64) configuration:wkConfig];
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) configuration:wkConfig];
     
     _webView.backgroundColor = kWhiteColor;
     

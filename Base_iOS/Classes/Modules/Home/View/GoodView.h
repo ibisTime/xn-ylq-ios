@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GoodModel.h"
+#import "ProductModel.h"
 
 typedef NS_ENUM(NSInteger, LoanType) {
 
@@ -16,13 +16,13 @@ typedef NS_ENUM(NSInteger, LoanType) {
     LoanTypeCancel,         //取消
 };
 
-typedef void(^LoanBlock)(LoanType loanType, GoodModel *good);
+typedef void(^LoanBlock)(LoanType loanType, ProductModel *good);
 
 @interface GoodView : UIView
 
 @property (nonatomic, copy) LoanBlock loanBlock;
 
-@property (nonatomic, strong) GoodModel *goodModel;
+@property (nonatomic, strong) ProductModel *goodModel;
 
 @property (nonatomic, assign) BOOL isCancel;
 

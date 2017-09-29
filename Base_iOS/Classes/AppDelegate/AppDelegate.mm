@@ -10,8 +10,6 @@
 
 #import "IQKeyboardManager.h"
 #import "WXApi.h"
-#import "TLWXManager.h"
-#import "TLAlipayManager.h"
 
 #import <ZMCreditSDK/ALCreditService.h>
 
@@ -20,7 +18,6 @@
 
 #import "NavigationController.h"
 #import "TabbarViewController.h"
-//#import "HomeVC.h"
 #import "TLUserLoginVC.h"
 
 @interface AppDelegate ()
@@ -34,6 +31,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    //项目环境
+    [ApiConfig config].runMode = RunModeDis;
+    
     //服务器环境
     [self configServiceAddress];
     
@@ -44,10 +44,7 @@
     [self configZMOP];
     
     //配置地图
-    [self configMapKit];
-    
-    //配置魔蝎
-//    [self configMoXie];
+    //    [self configMapKit];
     
     //配置微信
     [self configWeChat];
@@ -162,18 +159,16 @@
 
 #pragma mark - Config
 - (void)configServiceAddress {
-    
     //配置环境
-    [AppConfig config].runEnv = RunEnvRelease;
-    
+    [AppConfig config].runEnv = RunEnvDev;
 }
 
 - (void)configIQKeyboard {
     
     //
-//    [IQKeyboardManager sharedManager].enable = YES;
-//    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[ComposeVC class]];
-//    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[SendCommentVC class]];
+    //    [IQKeyboardManager sharedManager].enable = YES;
+    //    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[ComposeVC class]];
+    //    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[SendCommentVC class]];
     
 }
 
@@ -195,22 +190,10 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    [self launchEventWithCompletionHandle:^(LaunchOption launchOption) {
-        
-        TabbarViewController *tabbarCtrl = [[TabbarViewController alloc] init];
-        self.window.rootViewController = tabbarCtrl;
-        
-        //重新登录
-        if([TLUser user].isLogin) {
-            
-            //初始化用户信息
-            [[TLUser user] initUserData];
-
-            [[TLUser user] reLogin];
-            
-        };
+    //根控制器
+    TabbarViewController *tabbarCtrl = [[TabbarViewController alloc] init];
+    self.window.rootViewController = tabbarCtrl;
     
-    }];
 }
 
 @end

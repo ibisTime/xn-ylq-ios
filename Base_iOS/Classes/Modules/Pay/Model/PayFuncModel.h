@@ -12,6 +12,7 @@ typedef NS_ENUM(NSInteger,PayType){
     
     PayTypeAlipay = 0,
     PayTypeWeChat,
+    PayTypeBaoFu,       //宝付
     PayTypeOther,
 };
 

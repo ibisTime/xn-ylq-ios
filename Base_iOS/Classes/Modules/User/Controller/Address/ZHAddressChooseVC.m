@@ -37,7 +37,7 @@
     [super viewDidLoad];
     
     self.title = @"收货地址";
-    TLTableView *addressTableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 49) delegate:self dataSource:self];
+    TLTableView *addressTableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - 49) delegate:self dataSource:self];
     [self.view addSubview:addressTableView];
     self.addressTableView = addressTableView;
     addressTableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无收货地址"];
@@ -260,6 +260,11 @@
     }
     return 10;
     
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    return [UIView new];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

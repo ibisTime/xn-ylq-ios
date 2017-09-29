@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIScrollView *bgScrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+    UIScrollView *bgScrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
     [self.view addSubview:bgScrollview];
     bgScrollview.delegate = self;
     
@@ -69,10 +69,10 @@
     [bgScrollview addSubview:confirmBtn];
     [confirmBtn addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
     
-    if (confirmBtn.yy > kScreenHeight - 64) {
+    if (confirmBtn.yy > kScreenHeight - kNavigationBarHeight) {
         bgScrollview.contentSize = CGSizeMake(kScreenWidth, confirmBtn.yy + 10);
     } else {
-        bgScrollview.contentSize = CGSizeMake(kScreenWidth, kScreenHeight - 64 + 5);
+        bgScrollview.contentSize = CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight + 5);
 
     }
     

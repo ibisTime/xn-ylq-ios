@@ -14,11 +14,14 @@
 
 //Manager
 #import "AppConfig.h"
-
+#import "ApiConfig.h"
+#import "TLWXManager.h"
+#import "TLAlipayManager.h"
 
 //TL
 #import "TLTableView.h"
 #import "TLAlert.h"
+#import "TLBaseVC.h"
 #import "AccountTf.h"
 
 #import "TLUser.h"

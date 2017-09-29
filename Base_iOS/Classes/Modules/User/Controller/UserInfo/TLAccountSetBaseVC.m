@@ -7,6 +7,7 @@
 //
 
 #import "TLAccountSetBaseVC.h"
+#import <UIScrollView+TLAdd.h>
 
 @interface TLAccountSetBaseVC ()
 
@@ -19,8 +20,10 @@
     
     self.bgSV = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     _bgSV.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-    self.bgSV.contentSize = CGSizeMake(kScreenWidth, kScreenHeight - 64 + 1);
+    self.bgSV.contentSize = CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight + 1);
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    [self.bgSV adjustsContentInsets];
+    
     [self.bgSV addGestureRecognizer:tap];
     [self.view addSubview:_bgSV];
     

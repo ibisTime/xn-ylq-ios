@@ -8,6 +8,7 @@
 
 #import "WillLoanTableView.h"
 #import "LoanOrderDetailCell.h"
+#import <UIScrollView+TLAdd.h>
 
 @interface WillLoanTableView ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -34,6 +35,8 @@
         self.dataSource = self;
         
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        [self adjustsContentInsets];
         
         [self initHeaderView];
 
@@ -196,18 +199,9 @@
     return 10;
 }
 
-
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    UITableViewHeaderFooterView *hfV = (UITableViewHeaderFooterView *)view;
-    hfV.contentView.backgroundColor = [UIColor zh_backgroundColor];
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
-    
-    UITableViewHeaderFooterView *hfV = (UITableViewHeaderFooterView *)view;
-    hfV.contentView.backgroundColor = [UIColor zh_backgroundColor];
-    
+    return [UIView new];
 }
 
 @end

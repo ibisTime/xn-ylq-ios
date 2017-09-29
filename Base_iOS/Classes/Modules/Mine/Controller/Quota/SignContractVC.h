@@ -7,12 +7,12 @@
 //
 
 #import "BaseViewController.h"
-#import "GoodModel.h"
+#import "ProductModel.h"
 #import "CouponModel.h"
 
 @interface SignContractVC : BaseViewController
 
-@property (nonatomic, strong) GoodModel *good;
+@property (nonatomic, strong) ProductModel *good;
 
 @property (nonatomic, strong) CouponModel *coupon;
 

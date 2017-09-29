@@ -13,8 +13,8 @@
 // 用于上架的APPID
 #define kAPPID @""
 
-// 对应bundleID 为 com.beyondin.b2cUser
-#define kPgyerAppKey @""
+//蒲公英AppKey
+#define kPgyerAppKey @"c69656f2983bb6cdb0e52412efc070e9"
 
 // 友盟
 #define kUMAppKey @""
@@ -23,7 +23,7 @@
 #define kJPushAppKey @""
 
 
-//
+//百度
 #define kBaiduMapAppKey @""
 
 //支付宝

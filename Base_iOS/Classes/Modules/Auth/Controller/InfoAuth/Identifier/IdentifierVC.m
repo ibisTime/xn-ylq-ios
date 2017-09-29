@@ -99,7 +99,7 @@
     
     BaseWeakSelf;
     
-    self.identifierView = [[IdentifierView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+    self.identifierView = [[IdentifierView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
     
     self.identifierView.identifierBlock = ^(IdentifierType type) {
         
@@ -164,10 +164,6 @@
     http.parameters[@"userId"] = [TLUser user].userId;
     
     [http postWithSuccess:^(id responseObject) {
-        
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"kCurrentAuthStatus"];
-        
-        [TLUser user].currentAuth = 0;
         
 //        [TLAlert alertWithSucces:@"提交成功"];
         

@@ -30,7 +30,7 @@
 
 @property (nonatomic, copy) NSString *cacheStr;
 
-@property (nonatomic, strong) UITableView *mineTableView;
+@property (nonatomic, strong) TLTableView *mineTableView;
 
 @property (nonatomic, strong) UIView *headerView;
 
@@ -126,9 +126,8 @@
 
 - (void)initTableView {
 
-    UITableView *mineTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    mineTableView.delegate = self;
-    mineTableView.dataSource = self;
+    TLTableView *mineTableView = [TLTableView tableViewWithFrame:CGRectZero delegate:self dataSource:self];
+
     mineTableView.backgroundColor = kBackgroundColor;
     
     mineTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 1)];
@@ -199,8 +198,15 @@
     bankCard.text = @"我的银行卡";
     [bankCard setAction:^{
         
-        ZHBankCardListVC *vc = [[ZHBankCardListVC alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([TLUser user].realName) {
+            
+            ZHBankCardListVC *vc = [[ZHBankCardListVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            
+            [TLAlert alertWithInfo:@"您还未进行身份认证,不能添加银行卡"];
+        }
+        
     }];
     
     SettingModel *aboutUs = [SettingModel new];
@@ -402,6 +408,11 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+
+    return [UIView new];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

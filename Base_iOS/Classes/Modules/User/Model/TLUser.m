@@ -207,8 +207,6 @@ NSString *const kUserInfoChange = @"kUserInfoChange_csw";
     self.province = dict[@"province"];
     self.city = dict[@"city"];
     self.area = dict[@"area"];
-    
-    self.currentAuth = [[NSUserDefaults standardUserDefaults] integerForKey:@"kCurrentAuthStatus"];
 }
 
 - (void)saveUserName:(NSString *)userName pwd:(NSString *)pwd {

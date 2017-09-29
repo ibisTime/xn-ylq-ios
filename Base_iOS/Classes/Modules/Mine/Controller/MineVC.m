@@ -103,7 +103,7 @@
                                                            dataSource:self];
     [self.view addSubview:mineTableView];
 
-    mineTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 49);
+    mineTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight);
     mineTableView.rowHeight = 45;
     mineTableView.separatorColor = UITableViewCellSeparatorStyleNone;
     mineTableView.backgroundColor = [UIColor colorWithHexString:@"#f1f4f7"];
@@ -124,7 +124,7 @@
 
     CGFloat serviceH = 60;
     
-    UIView *serviceView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 64 - 49 - serviceH, kScreenWidth, serviceH)];
+    UIView *serviceView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kNavigationBarHeight - kTabBarHeight - serviceH, kScreenWidth, serviceH)];
     
     [self.view addSubview:serviceView];
     
@@ -373,8 +373,7 @@
         [loanRecordItem setAction:^{
             
             LoanOrderVC *loanOrderVC = [LoanOrderVC new];
-            
-            
+        
             [weakSelf.navigationController pushViewController:loanOrderVC animated:YES];
         }];
         
@@ -453,11 +452,7 @@
 }
 
 
-#pragma mark- datasource
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    return 5;
-}
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
@@ -490,6 +485,17 @@
     
     return cell;
     
+}
+
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    return 5;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    return [UIView new];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

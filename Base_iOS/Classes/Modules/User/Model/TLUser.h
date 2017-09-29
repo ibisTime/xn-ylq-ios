@@ -51,8 +51,6 @@
 @property (nonatomic, copy) NSString *companyCode;
 
 //0 未设置交易密码 1已设置
-@property (nonatomic, assign) NSInteger currentAuth;
-
 @property (nonatomic, strong) NSNumber *tradepwdFlag;
 @property (nonatomic, copy) NSString *realName;         //真实姓名
 @property (nonatomic, copy) NSString *idNo;             //身份证
@@ -64,6 +62,16 @@
 
 @property (nonatomic, copy) NSString *updateDatetime;
 @property (nonatomic, copy) NSString *updater;
+
+@property (nonatomic, strong) TLUserExt *userExt;
+
+//健康e购
+
+@property (nonatomic, strong) UserReferrer *referrer;
+
+@property (nonatomic, copy) NSString *inviteCode;       //邀请码
+
+@property (nonatomic, copy) NSString *referrerNum;    //邀请人个数
 
 //实名认证的 --- 临时参数
 @property (nonatomic, copy) NSString *tempBizNo;

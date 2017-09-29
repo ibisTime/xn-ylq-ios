@@ -9,7 +9,6 @@
 #import "LoanFailureVC.h"
 
 #import "GoodView.h"
-#import "GoodModel.h"
 
 #import "SelectMoneyVC.h"
 

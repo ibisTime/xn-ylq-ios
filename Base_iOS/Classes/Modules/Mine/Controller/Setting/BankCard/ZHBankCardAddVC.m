@@ -62,7 +62,7 @@
 
     //检测是否进行实名认证
     
-    UIScrollView *bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+    UIScrollView *bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
     [self.view addSubview:bgScrollView];
     self.bgSV = bgScrollView;
     
@@ -149,7 +149,7 @@
     
     if (![self.bankCardTf.text isBankCardNo]) {
         
-        [TLAlert alertWithInfo:@"请填写正确的银行卡号"];
+        [TLAlert alertWithInfo:@"银行卡号最低为16位数字"];
         return ;
     }
     
@@ -254,6 +254,8 @@
     
     //户名
     TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45) leftTitle:@"户名" titleWidth:leftW placeholder:@"请输入银行卡所属人姓名"];
+    nameTf.text = [TLUser user].realName;
+    nameTf.enabled = NO;
     [self.bgSV addSubview:nameTf];
     self.realNameTf = nameTf;
     
@@ -269,7 +271,7 @@
 //    self.subbranchTf = subbranchTf;
     
     //卡号
-    TLTextField *bankCardTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, bankPick.yy + margin, kScreenWidth, 45) leftTitle:@"银行卡号  " titleWidth:leftW placeholder:@"请输入银行卡号"];
+    TLTextField *bankCardTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, bankPick.yy + margin, kScreenWidth, 45) leftTitle:@"银行卡号  " titleWidth:leftW placeholder:@"银行卡号(最低输入16位)"];
     [self.bgSV addSubview:bankCardTf];
     bankCardTf.keyboardType = UIKeyboardTypeNumberPad;
     self.bankCardTf = bankCardTf;
@@ -285,6 +287,15 @@
     [self.bgSV addSubview:addBtn];
     [addBtn addTarget:self action:@selector(bindCard) forControlEvents:UIControlEventTouchUpInside];
     self.operationBtn = addBtn;
+    
+    //提示
+    UILabel *promptLbl = [UILabel labelWithFrame:CGRectMake(15, addBtn.yy + 30, kScreenWidth - 2*15, 40) textAligment:NSTextAlignmentLeft backgroundColor:kClearColor font:Font(14) textColor:kThemeColor];
+    
+    promptLbl.numberOfLines = 0;
+    
+    [promptLbl labelWithTextString:@"请仔细核对银行信息，确保银行账户有效，以免耽误资金使用" lineSpace:5];
+    
+    [self.bgSV addSubview:promptLbl];
 
 }
 

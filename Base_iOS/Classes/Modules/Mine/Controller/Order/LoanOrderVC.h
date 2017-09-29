@@ -10,4 +10,6 @@
 
 @interface LoanOrderVC : BaseViewController
 
+@property (nonatomic, assign) NSInteger index;
+
 @end

@@ -18,7 +18,7 @@
 //<LoanSegmentViewDelegate>
 
 //@property (nonatomic, strong) LoanOrderListVC *willLoanVC;        //待放款
-//@property (nonatomic, strong) LoanOrderListVC *didLoanVC;         //生效中
+//@property (nonatomic, strong) LoanOrderListVC *didLoanVC;         //待还款
 //@property (nonatomic, strong) LoanOrderListVC *didRepaymentVC;    //已还款
 //@property (nonatomic, strong) LoanOrderListVC *overdueVC;         //已逾期
 //
@@ -56,10 +56,12 @@
 #pragma mark - Init
 - (void)initSelectScrollView {
     
-    self.titles = @[@"待审核", @"审核不通过", @"待放款", @"打款失败", @"生效中", @"已还款", @"已逾期"];
+    self.titles = @[@"待审核", @"审核不通过", @"待放款", @"打款失败", @"待还款", @"已还款", @"已逾期"];
     
-    self.selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64) itemTitles:self.titles];
-        
+    self.selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) itemTitles:self.titles];
+    
+    self.selectScrollView.index = self.index;
+    
     [self.view addSubview:self.selectScrollView];
 }
 
@@ -69,7 +71,7 @@
         
         LoanOrderListVC *childVC = [[LoanOrderListVC alloc] init];
         
-        childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kScreenHeight - 64 -40);
+        childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kScreenHeight - kNavigationBarHeight -40);
         
 //        childVC.code = _models[i].dkey;
 //        childVC.kind = _models[i].parentKey;
@@ -89,7 +91,7 @@
 //    LoanSegmentView *segmentView =  [[LoanSegmentView alloc] initWithFrame:CGRectMake(0, 0.5, kScreenWidth, 45)];
 //    [self.view addSubview:segmentView];
 //    segmentView.delegate = self;
-//    segmentView.tagNames = @[@"待放款",@"生效中",@"已还款",@"已逾期"];
+//    segmentView.tagNames = @[@"待放款",@"待还款",@"已还款",@"已逾期"];
 //    
 //    self.isAdd = [@[@1, @0, @0, @0] mutableCopy];
 //    
@@ -98,7 +100,7 @@
 //
 //- (void)initScrollView {
 //
-//    UIScrollView *switchSV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.segmentView.yy + 0.5, kScreenWidth, kScreenHeight - 64 - self.segmentView.yy)];
+//    UIScrollView *switchSV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.segmentView.yy + 0.5, kScreenWidth, kScreenHeight - kNavigationBarHeight - self.segmentView.yy)];
 //    switchSV.pagingEnabled = YES;
 //    switchSV.contentSize = CGSizeMake(4*kScreenWidth, switchSV.height);
 //    switchSV.scrollEnabled = NO;

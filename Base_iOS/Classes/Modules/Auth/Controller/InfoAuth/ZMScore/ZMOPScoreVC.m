@@ -150,9 +150,6 @@
 //                
 //                scoreResultVC.scoreModel = scoreModel;
                 
-                [TLUser user].currentAuth = 2;
-                
-                [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"kCurrentAuthStatus"];
 //                [TLAlert alertWithSucces:@"认证成功"];
                 
 //                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -237,10 +234,6 @@
             scoreResultVC.idCard = self.idCard.text;
             
             if ([responseObject[@"errorCode"] isEqual:@"0"]) {
-                
-                [TLUser user].currentAuth = 2;
-                
-                [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"kCurrentAuthStatus"];
                 
 //                [TLAlert alertWithSucces:@"认证成功"];
 //                

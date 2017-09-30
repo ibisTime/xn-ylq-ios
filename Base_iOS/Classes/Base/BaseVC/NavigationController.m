@@ -29,7 +29,7 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setImage:[UIImage imageNamed:@"返回"] forState:UIControlStateNormal];
         btn.contentMode = UIViewContentModeScaleToFill;
-        btn.frame = CGRectMake(-10, 0, 40, 40);
+        btn.frame = CGRectMake(-10, 0, 40, 44);
         [btn addTarget:self action:@selector(clickButton) forControlEvents:UIControlEventTouchUpInside];
         
         UIView *customView = [[UIView alloc] initWithFrame:btn.bounds];

@@ -66,6 +66,8 @@
     
     self.realName.text = identify.realName ? identify.realName: nil;
     
+    self.realName.enabled = NO;
+    
     [self.realName addTarget:self action:@selector(next:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     [self.view addSubview:self.realName];
@@ -73,6 +75,8 @@
     self.idCard = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.realName.yy + 1, kScreenWidth, 50) leftTitle:@"身份证号码" titleWidth:105 placeholder:@"请输入身份证号码"];
     
     self.idCard.text = identify.idNo ? identify.idNo: nil;
+    
+    self.idCard.enabled = NO;
     
     [self.view addSubview:self.idCard];
     

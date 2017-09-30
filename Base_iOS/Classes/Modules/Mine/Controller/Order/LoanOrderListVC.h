@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger,LoanOrderStatus) {
     LoanOrderStatusAuditFailure = 1,    //审核失败
     LoanOrderStatusWillLoan = 2,        //待放款
     LoanOrderStatusMoneyFailure = 3,    //打款失败
-    LoanOrderStatusDidLoan = 4,         //生效中
+    LoanOrderStatusDidLoan = 4,         //待还款
     LoanOrderStatusDidRepayment = 5,    //已还款
     LoanOrderStatusDidOverdue = 6,      //已逾期
 };

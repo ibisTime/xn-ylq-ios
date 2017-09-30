@@ -465,134 +465,134 @@
             
         }break;
             
-        case DataTypeTXLRZ:
-        {
-            if (![TLUser user].isLogin) {
-                
-                TLUserLoginVC *loginVC = [TLUserLoginVC new];
-                
-                loginVC.loginSuccess = ^{
-                    
-                    //                    if (!isIdent) {
-                    //
-                    //                        [TLAlert alertWithInfo:@"请先进行身份认证"];
-                    //                        return;
-                    //
-                    //                    } else if (!isBasic) {
-                    //
-                    //                        [TLAlert alertWithInfo:@"请先提交个人信息"];
-                    //                        return;
-                    //
-                    //                    }else if (!isZMScore) {
-                    //
-                    //                        [TLAlert alertWithInfo:@"请先认证芝麻分"];
-                    //                        return;
-                    //
-                    //                    } else if (!isYYS) {
-                    //
-                    //                        [TLAlert alertWithInfo:@"请先认证运营商"];
-                    //                        return;
-                    //                    }
-                    
-                    MailListVC *mailListVC = [MailListVC new];
-                    
-                    [self.navigationController pushViewController:mailListVC animated:YES];
-                };
-                
-                NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
-                
-                [weakSelf.navigationController presentViewController:navi animated:YES completion:nil];
-                
-                return ;
-            }
-            
-            //            if (!isIdent) {
-            //
-            //                [TLAlert alertWithInfo:@"请先进行身份认证"];
-            //                return;
-            //
-            //            } else if (!isBasic) {
-            //
-            //                [TLAlert alertWithInfo:@"请先提交个人信息"];
-            //                return;
-            //
-            //            }else if (!isZMScore) {
-            //
-            //                [TLAlert alertWithInfo:@"请先认证芝麻分"];
-            //                return;
-            //
-            //            } else if (!isYYS) {
-            //
-            //                [TLAlert alertWithInfo:@"请先认证运营商"];
-            //                return;
-            //            }
-            
-            MailListVC *mailListVC = [MailListVC new];
-            
-            [self.navigationController pushViewController:mailListVC animated:YES];
-            
-        }break;
-            
-        case DataTypeWXRZ:
-        {
-            if (![TLUser user].isLogin) {
-                
-                TLUserLoginVC *loginVC = [TLUserLoginVC new];
-                
-                loginVC.loginSuccess = ^{
-                    
-                    if (!isIdent) {
-                        
-                        [TLAlert alertWithInfo:@"请先进行身份认证"];
-                        return;
-                        
-                    } else if (!isBasic) {
-                        
-                        [TLAlert alertWithInfo:@"请先提交个人信息"];
-                        return;
-                        
-                    }else if (!isZMScore) {
-                        
-                        [TLAlert alertWithInfo:@"请先认证芝麻分"];
-                        return;
-                        
-                    } else if (!isYYS) {
-                        
-                        [TLAlert alertWithInfo:@"请先认证运营商"];
-                        return;
-                    }
-                    
-                };
-                
-                NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
-                
-                [weakSelf.navigationController presentViewController:navi animated:YES completion:nil];
-                
-                return ;
-            }
-            
-            if (!isIdent) {
-                
-                [TLAlert alertWithInfo:@"请先进行身份认证"];
-                return;
-                
-            } else if (!isBasic) {
-                
-                [TLAlert alertWithInfo:@"请先提交个人信息"];
-                return;
-                
-            }else if (!isZMScore) {
-                
-                [TLAlert alertWithInfo:@"请先认证芝麻分"];
-                return;
-                
-            } else if (!isYYS) {
-                
-                [TLAlert alertWithInfo:@"请先认证运营商"];
-                return;
-            }
-            
-        }break;
+//        case DataTypeTXLRZ:
+//        {
+//            if (![TLUser user].isLogin) {
+//
+//                TLUserLoginVC *loginVC = [TLUserLoginVC new];
+//
+//                loginVC.loginSuccess = ^{
+//
+//                    //                    if (!isIdent) {
+//                    //
+//                    //                        [TLAlert alertWithInfo:@"请先进行身份认证"];
+//                    //                        return;
+//                    //
+//                    //                    } else if (!isBasic) {
+//                    //
+//                    //                        [TLAlert alertWithInfo:@"请先提交个人信息"];
+//                    //                        return;
+//                    //
+//                    //                    }else if (!isZMScore) {
+//                    //
+//                    //                        [TLAlert alertWithInfo:@"请先认证芝麻分"];
+//                    //                        return;
+//                    //
+//                    //                    } else if (!isYYS) {
+//                    //
+//                    //                        [TLAlert alertWithInfo:@"请先认证运营商"];
+//                    //                        return;
+//                    //                    }
+//
+//                    MailListVC *mailListVC = [MailListVC new];
+//
+//                    [self.navigationController pushViewController:mailListVC animated:YES];
+//                };
+//
+//                NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
+//
+//                [weakSelf.navigationController presentViewController:navi animated:YES completion:nil];
+//
+//                return ;
+//            }
+//
+//            //            if (!isIdent) {
+//            //
+//            //                [TLAlert alertWithInfo:@"请先进行身份认证"];
+//            //                return;
+//            //
+//            //            } else if (!isBasic) {
+//            //
+//            //                [TLAlert alertWithInfo:@"请先提交个人信息"];
+//            //                return;
+//            //
+//            //            }else if (!isZMScore) {
+//            //
+//            //                [TLAlert alertWithInfo:@"请先认证芝麻分"];
+//            //                return;
+//            //
+//            //            } else if (!isYYS) {
+//            //
+//            //                [TLAlert alertWithInfo:@"请先认证运营商"];
+//            //                return;
+//            //            }
+//
+//            MailListVC *mailListVC = [MailListVC new];
+//
+//            [self.navigationController pushViewController:mailListVC animated:YES];
+//
+//        }break;
+//
+//        case DataTypeWXRZ:
+//        {
+//            if (![TLUser user].isLogin) {
+//
+//                TLUserLoginVC *loginVC = [TLUserLoginVC new];
+//
+//                loginVC.loginSuccess = ^{
+//
+//                    if (!isIdent) {
+//
+//                        [TLAlert alertWithInfo:@"请先进行身份认证"];
+//                        return;
+//
+//                    } else if (!isBasic) {
+//
+//                        [TLAlert alertWithInfo:@"请先提交个人信息"];
+//                        return;
+//
+//                    }else if (!isZMScore) {
+//
+//                        [TLAlert alertWithInfo:@"请先认证芝麻分"];
+//                        return;
+//
+//                    } else if (!isYYS) {
+//
+//                        [TLAlert alertWithInfo:@"请先认证运营商"];
+//                        return;
+//                    }
+//
+//                };
+//
+//                NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
+//
+//                [weakSelf.navigationController presentViewController:navi animated:YES completion:nil];
+//
+//                return ;
+//            }
+//
+//            if (!isIdent) {
+//
+//                [TLAlert alertWithInfo:@"请先进行身份认证"];
+//                return;
+//
+//            } else if (!isBasic) {
+//
+//                [TLAlert alertWithInfo:@"请先提交个人信息"];
+//                return;
+//
+//            }else if (!isZMScore) {
+//
+//                [TLAlert alertWithInfo:@"请先认证芝麻分"];
+//                return;
+//
+//            } else if (!isYYS) {
+//
+//                [TLAlert alertWithInfo:@"请先认证运营商"];
+//                return;
+//            }
+//
+//        }break;
             
         default:
             break;
@@ -679,12 +679,12 @@
                         
                         if ([self.isApply isEqualToString:@"1"]) {
                             
-                            //进入人工审核界面
+                            //进入系统审核界面
                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                 
                                 ManualAuditVC *auditVC = [ManualAuditVC new];
                                 
-                                auditVC.title = @"人工审核";
+                                auditVC.title = @"系统审核";
                                 
                                 [self.navigationController pushViewController:auditVC animated:YES];
                             });

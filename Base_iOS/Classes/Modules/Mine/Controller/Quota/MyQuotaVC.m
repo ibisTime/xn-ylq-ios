@@ -50,7 +50,7 @@
     
     CGFloat quotaBtnH = 45;
     
-    self.quotaBtn = [UIButton buttonWithTitle:@"使用额度" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
+    self.quotaBtn = [UIButton buttonWithTitle:@"签约" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
     
     self.quotaBtn.frame = CGRectMake(15, self.quotaView.yy + 44, kScreenWidth - 30, quotaBtnH);
     
@@ -66,6 +66,8 @@
     //--//
     //刷新额度
     TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    
     http.code = @"623051";
     http.parameters[@"userId"] = [TLUser user].userId;
     
@@ -87,7 +89,7 @@
                 
             case 1:
             {
-                title = @"使用额度";
+                title = @"签约";
                 
             }break;
                 

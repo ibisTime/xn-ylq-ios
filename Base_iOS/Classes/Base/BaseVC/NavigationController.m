@@ -29,7 +29,7 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setImage:[UIImage imageNamed:@"返回"] forState:UIControlStateNormal];
         btn.contentMode = UIViewContentModeScaleToFill;
-        btn.frame = CGRectMake(0, 0, 20, 20);
+        btn.frame = CGRectMake(-10, 0, 40, 40);
         [btn addTarget:self action:@selector(clickButton) forControlEvents:UIControlEventTouchUpInside];
         self.navButton = btn;
         viewController.hidesBottomBarWhenPushed = YES;
@@ -48,7 +48,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    TabbarViewController *tabbarCrl = (TabbarViewController*)self.tabBarController;
+//    TabbarViewController *tabbarCrl = (TabbarViewController*)self.tabBarController;
     //[tabbarCrl removeOriginTabbarButton];
 }
 

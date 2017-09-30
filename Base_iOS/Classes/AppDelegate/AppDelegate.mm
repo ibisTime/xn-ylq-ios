@@ -164,7 +164,7 @@
 - (void)configServiceAddress {
     
     //配置环境
-    [AppConfig config].runEnv = RunEnvRelease;
+    [AppConfig config].runEnv = RunEnvDev;
     
 }
 

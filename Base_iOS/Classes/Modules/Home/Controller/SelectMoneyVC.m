@@ -361,7 +361,7 @@
             
                 ManualAuditVC *auditVC = [ManualAuditVC new];
                 
-                auditVC.title = @"人工审核";
+                auditVC.title = @"系统审核";
                 
                 [self.navigationController pushViewController:auditVC animated:YES];
             }

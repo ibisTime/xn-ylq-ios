@@ -76,7 +76,7 @@
     [self.headerView addSubview:topView];
     
     //起始时间
-    TLTextField *originDateTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, topView.yy, kScreenWidth, 44) leftTitle:@"起点日期" titleWidth:100 placeholder:@""];
+    TLTextField *originDateTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, topView.yy, kScreenWidth, 44) leftTitle:@"起点日期" titleWidth:145 placeholder:@""];
     
     originDateTF.textColor = [UIColor textColor];
     
@@ -87,7 +87,7 @@
     self.originDateTF = originDateTF;
     
     //结束时间
-    TLTextField *endDateTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, originDateTF.yy + 1, kScreenWidth, 44) leftTitle:@"终点日期" titleWidth:100 placeholder:@""];
+    TLTextField *endDateTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, originDateTF.yy + 1, kScreenWidth, 44) leftTitle:@"续期后还款日期" titleWidth:145 placeholder:@""];
     
     endDateTF.textColor = [UIColor textColor];
     
@@ -97,7 +97,7 @@
     self.endDateTF = endDateTF;
     
     //续期金额
-    self.amountTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, endDateTF.yy + 1, kScreenWidth, 44) leftTitle:@"续期金额" titleWidth:100 placeholder:@""];
+    self.amountTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, endDateTF.yy + 1, kScreenWidth, 44) leftTitle:@"续期金额" titleWidth:145 placeholder:@""];
     
     self.amountTF.textColor = [UIColor textColor];
     

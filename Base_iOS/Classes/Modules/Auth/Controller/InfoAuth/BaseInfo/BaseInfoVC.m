@@ -18,6 +18,7 @@
 #import "JobInfoVC.h"
 #import "EmergencyContactVC.h"
 #import "BankCardAuthVC.h"
+#import "MailListVC.h"
 
 @interface BaseInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -148,27 +149,23 @@
         [weakSelf.navigationController pushViewController:contactVC animated:YES];
     }];
     
-    //    BaseInfoModel *bankCardAuth = [BaseInfoModel new];
-    //    bankCardAuth.text = @"银行卡认证";
-    //    bankCardAuth.imgName = @"银行卡认证";
-    //    bankCardAuth.isAuth = [self.authModel.infoBankcardFlag boolValue];
-    //
-    //    [bankCardAuth setAction:^{
-    //
-    //        BankCardAuthVC *bankCardAuthVC = [BankCardAuthVC new];
-    //
-    //        bankCardAuthVC.title = @"银行卡认证";
-    //
-    //        bankCardAuthVC.authModel = weakSelf.authModel;
-    //
-    //        [weakSelf.navigationController pushViewController:bankCardAuthVC animated:YES];
-    //    }];
+        BaseInfoModel *contactAuth = [BaseInfoModel new];
+        contactAuth.text = @"通讯录认证";
+        contactAuth.imgName = @"Contact";
+        contactAuth.isAuth = [self.authModel.infoAddressBookFlag boolValue];
+    
+        [contactAuth setAction:^{
+    
+            MailListVC *mailListVC = [MailListVC new];
+    
+            [weakSelf.navigationController pushViewController:mailListVC animated:YES];
+        }];
     
     self.group = [BaseInfoGroup new];
     
     //    self.group.items = @[baseInfo, jobInfo, contact, bankCardAuth];
     
-    self.group.items = @[baseInfo, jobInfo, contact];
+    self.group.items = @[baseInfo, jobInfo, contact, contactAuth];
     
     
 }

@@ -96,17 +96,19 @@
     
     //--//
 //    NSArray *imgs = @[@"weixin",@"alipay"];
-    NSArray *imgs = @[@"alipay"];
 
-    NSArray *payNames;
 //    payNames  = @[@"微信支付",@"支付宝"]; //余额(可用100)
 //
 //    NSArray *payType = @[@(PayTypeWeChat),@(PayTypeAlipay)];
 //    NSArray <NSNumber *>*status = @[@(YES),@(NO)];
-    payNames  = @[@"支付宝"]; //余额(可用100)
     
-    NSArray *payType = @[@(PayTypeAlipay)];
-    NSArray <NSNumber *>*status = @[@(YES)];
+    NSArray *imgs = @[@"alipay", @"baofu"];
+    
+    NSArray *payNames;
+    payNames  = @[@"支付宝", @"宝付"]; //余额(可用100)
+    
+    NSArray *payType = @[@(PayTypeAlipay), @(PayTypeBaoFu)];
+    NSArray <NSNumber *>*status = @[@(YES), @(NO)];
     
     self.pays = [NSMutableArray array];
     
@@ -150,6 +152,12 @@
     NSString *payType;
     
     switch (type) {
+            
+        case PayTypeBaoFu: {
+            
+            payType = @"5";
+            
+        }break;
             
         case PayTypeAlipay: {
             

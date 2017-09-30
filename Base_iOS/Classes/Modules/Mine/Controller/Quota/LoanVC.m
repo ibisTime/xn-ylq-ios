@@ -11,7 +11,7 @@
 #import "LoanView.h"
 #import "OrderModel.h"
 
-#import "LoanOrderVC.h"
+#import "LoanOrderDetailVC.h"
 
 @interface LoanVC ()
 
@@ -44,7 +44,9 @@
     
     self.loanView.loanBlock = ^{
         
-        LoanOrderVC *orderVC = [LoanOrderVC new];
+        LoanOrderDetailVC *orderVC = [LoanOrderDetailVC new];
+        
+        orderVC.code = self.borrowCode;
         
         [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };

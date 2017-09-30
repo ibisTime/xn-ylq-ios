@@ -374,7 +374,6 @@
             
             LoanOrderVC *loanOrderVC = [LoanOrderVC new];
             
-            
             [weakSelf.navigationController pushViewController:loanOrderVC animated:YES];
         }];
         

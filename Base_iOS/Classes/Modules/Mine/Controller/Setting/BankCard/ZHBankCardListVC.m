@@ -151,6 +151,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
+        [TLUser user].bankcardFlag = @"0";
         //
         [self.bankCardTV beginRefreshing];
         

@@ -149,7 +149,7 @@
     
     if (![self.bankCardTf.text isBankCardNo]) {
         
-        [TLAlert alertWithInfo:@"请填写正确的银行卡号"];
+        [TLAlert alertWithInfo:@"银行卡号最低输入16位"];
         return ;
     }
     
@@ -254,12 +254,13 @@
     
     //户名
     TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45) leftTitle:@"户名" titleWidth:leftW placeholder:@"请输入银行卡所属人姓名"];
+    nameTf.enabled = NO;
+    
     [self.bgSV addSubview:nameTf];
     self.realNameTf = nameTf;
     
     //开户行
     TLPickerTextField *bankPick = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, nameTf.yy + margin, kScreenWidth, nameTf.height) leftTitle:@"开户行" titleWidth:leftW placeholder:@"请选择开户行"];
-//    bankPick.tagNames = @[@"农业",@"深证",@"哪里"];
     [self.bgSV addSubview:bankPick];
     self.bankNameTf = bankPick;
     
@@ -269,22 +270,26 @@
 //    self.subbranchTf = subbranchTf;
     
     //卡号
-    TLTextField *bankCardTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, bankPick.yy + margin, kScreenWidth, 45) leftTitle:@"银行卡号  " titleWidth:leftW placeholder:@"请输入银行卡号"];
+    TLTextField *bankCardTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, bankPick.yy + margin, kScreenWidth, 45) leftTitle:@"银行卡号  " titleWidth:leftW placeholder:@"银行卡号(最低输入16位)"];
     [self.bgSV addSubview:bankCardTf];
     bankCardTf.keyboardType = UIKeyboardTypeNumberPad;
     self.bankCardTf = bankCardTf;
-    
-    //手机号
-//    TLTextField *mobileTf = [[TLTextField alloc] initWithframe:CGRectMake(0, bankCardTf.yy + margin, kScreenWidth, 45) leftTitle:@"手机号" titleWidth:leftW placeholder:@"请输入银行卡预留手机号"];
-//    [self.bgSV addSubview:mobileTf];
-//    mobileTf.keyboardType = UIKeyboardTypeNumberPad;
-//    self.mobileTf = mobileTf;
     
     //
     UIButton *addBtn = [UIButton zhBtnWithFrame:CGRectMake(15, bankCardTf.yy + 30, kScreenWidth - 30, 45) title:@"添加"];
     [self.bgSV addSubview:addBtn];
     [addBtn addTarget:self action:@selector(bindCard) forControlEvents:UIControlEventTouchUpInside];
     self.operationBtn = addBtn;
+    
+    UILabel *promptLbl = [UILabel labelWithText:@"" textColor:kThemeColor textFont:14.0];
+    
+    promptLbl.frame = CGRectMake(15, addBtn.yy + 30, kScreenWidth - 2*15, 50);
+    
+    promptLbl.numberOfLines = 0;
+    
+    [promptLbl labelWithTextString:@"请仔细核对银行信息，确保银行账户有效，以免耽误资金使用" lineSpace:5];
+    
+    [self.bgSV addSubview:promptLbl];
 
 }
 
@@ -293,14 +298,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

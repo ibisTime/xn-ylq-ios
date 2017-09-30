@@ -44,13 +44,21 @@
 
 - (void)initData {
 
-    NSArray *topTitleArr = @[@"信息认证", @"可选认证"];
+//    NSArray *topTitleArr = @[@"信息认证", @"可选认证"];
+//
+//    NSArray *contentArr = @[@[@"身份认证", @"个人信息", @"芝麻分", @"运营商认证"], @[@"通讯录认证", @"微信认证", @""]];
+//
+//    NSArray *unAuthImgArr = @[@[@"身份认证未认证", @"个人信息未认证", @"芝麻分未认证", @"运营商认证未认证"], @[@"通讯录未认证", @"微信未认证", @""]];
+//
+//    NSArray *typeArr = @[@[@(DataTypeSFRZ), @(DataTypeBaseInfo), @(DataTypeZMF), @(DataTypeYYSRZ)], @[@(DataTypeTXLRZ), @(DataTypeWXRZ), @(DataTypeWXRZ)]];
     
-    NSArray *contentArr = @[@[@"身份认证", @"个人信息", @"芝麻分", @"运营商认证"], @[@"通讯录认证", @"微信认证", @""]];
+    NSArray *topTitleArr = @[@"信息认证"];
     
-    NSArray *unAuthImgArr = @[@[@"身份认证未认证", @"个人信息未认证", @"芝麻分未认证", @"运营商认证未认证"], @[@"通讯录未认证", @"微信未认证", @""]];
+    NSArray *contentArr = @[@[@"身份认证", @"个人信息", @"芝麻分", @"运营商认证"]];
     
-    NSArray *typeArr = @[@[@(DataTypeSFRZ), @(DataTypeBaseInfo), @(DataTypeZMF), @(DataTypeYYSRZ)], @[@(DataTypeTXLRZ), @(DataTypeWXRZ), @(DataTypeWXRZ)]];
+    NSArray *unAuthImgArr = @[@[@"身份认证未认证", @"个人信息未认证", @"芝麻分未认证", @"运营商认证未认证"]];
+    
+    NSArray *typeArr = @[@[@(DataTypeSFRZ), @(DataTypeBaseInfo), @(DataTypeZMF), @(DataTypeYYSRZ)]];
     
     for (int i = 0; i < topTitleArr.count; i++) {
         
@@ -304,24 +312,24 @@
             }
                 break;
                 
-            case 4:
-            {
-                OptionAuthView *view = self.viewArr[i];
+//            case 4:
+//            {
+//                OptionAuthView *view = self.viewArr[i];
+//
+//                SectionModel *section = view.section;
+//
+//                section.flag = authModel.infoAddressBookFlag;
+//
+//                section.type = DataTypeTXLRZ;
+//
+//                section.authStatusType = authModel.infoAddressBookFlag;
+//
+//                view.section = section;
+//            }
+//                break;
                 
-                SectionModel *section = view.section;
-                
-                section.flag = authModel.infoAddressBookFlag;
-
-                section.type = DataTypeTXLRZ;
-                
-                section.authStatusType = authModel.infoAddressBookFlag;
-
-                view.section = section;
-            }
-                break;
-                
-            case 5:
-            {
+//            case 5:
+//            {
 //                OptionAuthView *view = self.viewArr[i];
 //                
 //                SectionModel *section = view.section;
@@ -332,17 +340,17 @@
 //                
 //                view.section = section;
                 
-            }
-                break;
-                
-            case 6:
-            {
-                OptionAuthView *view = self.viewArr[i];
-                
-                view.textLabel.text = @"";
-                
-            }
-                break;
+//            }
+//                break;
+//
+//            case 6:
+//            {
+//                OptionAuthView *view = self.viewArr[i];
+//
+//                view.textLabel.text = @"";
+//
+//            }
+//                break;
                 
             default:
                 break;
@@ -355,48 +363,6 @@
 #pragma mark - Events
 
 - (void)selectTestType:(UITapGestureRecognizer *)sender {
-    
-//    BOOL isIdent = [self.authModel.infoIdentifyFlag boolValue];
-//    
-//    BOOL isBasic = [self.authModel.infoAntifraudFlag boolValue];
-//    
-//    BOOL isZMScore = [self.authModel.infoZMCreditFlag boolValue];
-//    
-//    BOOL isYYS = [self.authModel.infoCarrierFlag boolValue];
-
-//
-//    NSInteger i;
-//    
-//    NSInteger j;
-//    
-//    if (isBasic == YES && isIdent == YES && isZMScore == YES && isYYS == YES) {
-//        
-//        i = sender.view.tag%100;
-//        
-//        j = (sender.view.tag-2000)/100;
-//        
-//    } else if (isIdent == NO) {
-//    
-//        j = 0;
-//        
-//        i = 0;
-//        
-//    }else {
-//    
-//        j = 0;
-//    
-//        i = [[TLUser user] currentAuth] + 1;
-//    }
-//    
-//    DataModel *dataModel = self.datas[j];
-//    
-//    SectionModel *section = dataModel.sections[i];
-//    
-//    if (_dataBlock) {
-//        
-//        _dataBlock(section);
-//    }
-    
     
     NSInteger i = sender.view.tag%100;
     

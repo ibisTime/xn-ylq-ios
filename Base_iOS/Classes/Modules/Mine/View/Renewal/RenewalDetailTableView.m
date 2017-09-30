@@ -47,7 +47,7 @@
     
     CGFloat centerX = kScreenWidth /2.0;
     
-    UIImageView *statusIV = [[UIImageView alloc] initWithImage:kImage(@"生效中")];
+    UIImageView *statusIV = [[UIImageView alloc] initWithImage:kImage(@"待还款")];
     
     statusIV.frame = CGRectMake(kScreenWidth - 80, 0, 80, 100);
     

@@ -172,7 +172,7 @@
     }];
     
     //协议按钮
-    UIButton *protocalBtn = [[UIButton alloc] initWithFrame:CGRectMake(margin,regBtn.yy + 10, w, 25) title:@"注册即代表同意《九州宝用户协议》" backgroundColor:[UIColor clearColor]];
+    UIButton *protocalBtn = [[UIButton alloc] initWithFrame:CGRectMake(margin,regBtn.yy + 10, w, 25) title:@"注册即代表同意《借款服务与隐私协议》" backgroundColor:[UIColor clearColor]];
     protocalBtn.titleLabel.font = FONT(12);
     [protocalBtn addTarget:self action:@selector(readProtocal) forControlEvents:UIControlEventTouchUpInside];
     [self.bgSV addSubview:protocalBtn];

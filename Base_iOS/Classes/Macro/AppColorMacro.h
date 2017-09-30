@@ -69,6 +69,10 @@
 #define kWidth(x) (x)*(kScreenWidth)/375.0
 #define kHeight(y) (y)*(kScreenHeight)/667.0
 
+#define kDevice_Is_iPhoneX (kScreenHeight == 812 ? YES : NO)
+#define kNavigationBarHeight  (kDevice_Is_iPhoneX == YES ? 88: 64)
+#define kTabBarHeight  (kDevice_Is_iPhoneX == YES ? 49: 49)
+
 #define kImage(I)     [UIImage imageNamed:I]
 
 #define kLeftMargin 15

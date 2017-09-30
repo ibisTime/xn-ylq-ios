@@ -57,7 +57,7 @@
     
     [self.topView addSubview:iconIV];
 
-    UILabel *textLbl = [UILabel labelWithText:@"等待放款中" textColor:kTextColor3 textFont:kWidth(16)];
+    UILabel *textLbl = [UILabel labelWithText:@"款项正在路上" textColor:kTextColor3 textFont:kWidth(16)];
     
     textLbl.frame = CGRectMake(0, iconIV.yy + kWidth(14.0), kWidth(150), kWidth(16));
     

@@ -1,15 +1,15 @@
 //
-//  HTMLStrVC.m
-//  YS_iOS
+//  LoanProtocolVC.m
+//  Base_iOS
 //
-//  Created by 蔡卓越 on 2017/6/29.
+//  Created by 蔡卓越 on 2017/9/29.
 //  Copyright © 2017年 caizhuoyue. All rights reserved.
 //
 
-#import "HTMLStrVC.h"
+#import "LoanProtocolVC.h"
 #import <WebKit/WebKit.h>
 
-@interface HTMLStrVC ()<WKNavigationDelegate>
+@interface LoanProtocolVC ()<WKNavigationDelegate>
 
 @property (nonatomic, copy) NSString *htmlStr;
 
@@ -17,101 +17,31 @@
 
 @end
 
-@implementation HTMLStrVC
+@implementation LoanProtocolVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
     [self requestContent];
+
 }
 
 #pragma mark - Data
 
 - (void)requestContent {
     
-    NSString *name = @"";
-    
-    NSString *ckey = @"";
-    
-    switch (self.type) {
-            
-        case HTMLTypeAboutUs: {
-            
-            ckey = @"aboutUs";
-            
-            name = @"关于我们";
-            
-        } break;
-            
-        case HTMLTypeRegProtocol: {
-            
-            ckey = @"regProtocol";
-            
-            name = @"借款服务与隐私协议";
-            
-        } break;
-            
-        case HTMLTypeHelpCenter: {
-            
-            ckey = @"helpCenter";
-            
-            name = @"帮助中心";
-            
-        } break;
-            
-        case HTMLTypeCouponExplain: {
-            
-            ckey = @"couponExplain";
-            
-            name = @"优惠券说明";
-            
-        } break;
-            
-        case HTMLTypeBorrowProtocol: {
-            
-            ckey = @"borrowProtocol";
-            
-            name = @"借款协议";
-            
-        } break;
-            
-        case HTMLTypeAuthProtocol: {
-            
-            ckey = @"addressBookProtocol";
-            
-            name = @"通讯录授权协议";
-            
-        } break;
-        
-        case HTMLTypeInfoRule: {
-            
-            ckey = @"infoCollectRule";
-            
-            name = @"信息收集及使用规则";
-            
-        } break;
-            
-        case HTMLTypeContactCustomer: {
-            
-            ckey = @"customerService";
-            
-            name = @"联系客服";
-            
-        } break;
-    }
-
-    self.navigationItem.titleView = [UILabel labelWithTitle:name];
+    self.navigationItem.titleView = [UILabel labelWithTitle:@"借款协议"];
     
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
-    http.code = USER_CKEY_CVALUE;
+    http.code = @"623092";
     
-    http.parameters[@"ckey"] = ckey;
+    http.parameters[@"couponId"] = self.coupon.couponId;
+    http.parameters[@"userId"] = [TLUser user].userId;
     
     [http postWithSuccess:^(id responseObject) {
         
-        self.htmlStr = responseObject[@"data"][@"cvalue"];
+        self.htmlStr = responseObject[@"data"];
         
         [self initWebView];
         
@@ -123,7 +53,7 @@
 #pragma mark - Init
 
 - (void)initWebView {
-
+    
     NSString *jS = [NSString stringWithFormat:@"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'); meta.setAttribute('width', %lf); document.getElementsByTagName('head')[0].appendChild(meta);",kScreenWidth];
     
     WKUserScript *wkUserScript = [[WKUserScript alloc] initWithSource:jS injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];

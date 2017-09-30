@@ -46,7 +46,7 @@
     [self swizzling_viewDidAppear:animated];
     
 
-    DLog(@"\n** %@ ** viewDidAppear", [self class]);
+    NSLog(@"\n** %@ ** viewDidAppear", [self class]);
     
     // 设置系统滑动手势可以响应
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;

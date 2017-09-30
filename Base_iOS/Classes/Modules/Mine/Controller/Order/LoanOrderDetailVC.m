@@ -95,7 +95,7 @@
             
         case 3:
         {
-            self.title = @"生效中详情";
+            self.title = @"待还款详情";
 
             DidLoanTableView *tableView = [[DidLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 65)];
             

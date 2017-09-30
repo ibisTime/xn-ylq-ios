@@ -224,10 +224,10 @@
           
         case 2:
         {
-            //人工审核
+            //系统审核
             ManualAuditVC *auditVC = [ManualAuditVC new];
             
-            auditVC.title = @"人工审核";
+            auditVC.title = @"系统审核";
             
             [self.navigationController pushViewController:auditVC animated:YES];
             
@@ -260,11 +260,13 @@
             //放款中
             LoanVC *loanVC = [LoanVC new];
             
+            loanVC.borrowCode = good.borrowCode;
+            
             [self.navigationController pushViewController:loanVC animated:YES];
 
         }break;
         
-        case 6://生效中
+        case 6://待还款
         case 7://已逾期
         case 11://打款失败
 

@@ -45,7 +45,7 @@
         case 3:
         {
             resc = @"已放款";
-            imageStr = @"生效中";
+            imageStr = @"待还款";
 
         }break;
             

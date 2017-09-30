@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"获客";
+    self.title = @"邀请好友";
     
     [UIBarButtonItem addRightItemWithTitle:@"推荐历史" frame:CGRectMake(0, 0, 70, 30) vc:self action:@selector(historyFriends)];
     

@@ -176,7 +176,7 @@
 {
     if ([self isDigital]) {
         
-        if (self.length >= 6 && self.length <= 30) {
+        if (self.length >= 16 && self.length <= 30) {
             
             return YES;
             

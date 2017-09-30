@@ -103,7 +103,7 @@
     //申请状态
     self.statusBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kClearColor titleFont:kWidth(16) cornerRadius:45/2.0];
     
-    self.statusBtn.frame = CGRectMake(0, kWidth(31), 100, 45);
+    self.statusBtn.frame = CGRectMake(0, kWidth(31), 115, 45);
     
     self.statusBtn.centerX = self.width/2.0;
     

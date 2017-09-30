@@ -9,14 +9,44 @@
 #import "SignContractVC.h"
 
 #import "LoanVC.h"
-#import "HTMLStrVC.h"
+#import "ZHBankCardAddVC.h"
+
+#import "LoanProtocolVC.h"
 #import "ZHBankCardAddVC.h"
 
 @interface SignContractVC ()
 
+@property (nonatomic,strong) NSMutableArray <ZHBankCard *>*banks;
+
 @end
 
 @implementation SignContractVC
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    if ([[TLUser user].bankcardFlag isEqualToString:@"0"]) {
+        
+        [TLAlert alertWithTitle:@"" message:@"您还未绑定银行卡, 请先绑定银行卡" confirmMsg:@"OK" confirmAction:^{
+            
+            ZHBankCardAddVC *bankCardAddVC= [[ZHBankCardAddVC alloc] init];
+            bankCardAddVC.title = @"添加银行卡";
+            
+            [self.navigationController pushViewController:bankCardAddVC animated:YES];
+            
+        }];
+        
+        return ;
+        
+    } else if ([[TLUser user].bankcardFlag isEqualToString:@"1"]) {
+        
+        [self requestBankCard];
+        
+    }
+        
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -175,55 +205,83 @@
 
 - (void)agreement {
     
-    HTMLStrVC *htmlVC = [HTMLStrVC new];
+    LoanProtocolVC *loanProtocolVC = [LoanProtocolVC new];
     
-    htmlVC.type = HTMLTypeBorrowProtocol;
+    loanProtocolVC.coupon = self.coupon;
     
-    [self.navigationController pushViewController:htmlVC animated:YES];
+    [self.navigationController pushViewController:loanProtocolVC animated:YES];
 }
 //签约
 - (void)confirm {
     
     //判断是否绑定银行卡，是就进入放款中，否就绑定银行卡
-    if ([[TLUser user].bankcardFlag isEqualToString:@"0"]) {
+    if ([[TLUser user].bankcardFlag isEqualToString:@"1"]) {
         
-        [TLAlert alertWithTitle:@"" message:@"您还未绑定银行卡, 请先绑定银行卡" confirmMsg:@"OK" confirmAction:^{
+        ZHBankCard *bankCard = self.banks[0];
+        
+        [TLAlert alertWithTitle:@"请确认银行卡信息是否正确" msg:[NSString stringWithFormat:@"户名: %@\n开户行: %@\n银行卡号: %@", bankCard.realName, bankCard.bankName, bankCard.bankcardNumber] confirmMsg:@"确定" cancleMsg:@"修改" cancle:^(UIAlertAction *action) {
             
-            ZHBankCardAddVC *bankCardAddVC= [[ZHBankCardAddVC alloc] init];
-            bankCardAddVC.title = @"添加银行卡";
-
-            [self.navigationController pushViewController:bankCardAddVC animated:YES];
+            ZHBankCardAddVC *bankCardVC = [ZHBankCardAddVC new];
             
+            bankCardVC.bankCard = bankCard;
+            
+            [self.navigationController pushViewController:bankCardVC animated:YES];
+            
+        } confirm:^(UIAlertAction *action) {
+            
+            UIButton *btn = [self.view viewWithTag:1250];
+            
+            if (btn.selected) {
+                
+                [TLAlert alertWithInfo:@"同意借款协议才能签约"];
+                return ;
+            }
+            
+            TLNetworking *http = [TLNetworking new];
+            
+            http.code = @"623070";
+            http.parameters[@"userId"] = [TLUser user].userId;
+            http.parameters[@"couponId"] = self.coupon.couponId;
+            
+            [http postWithSuccess:^(id responseObject) {
+                
+                [TLAlert alertWithSucces:@"签约成功"];
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
+                    LoanVC *loanVC = [LoanVC new];
+                    
+                    loanVC.borrowCode = responseObject[@"data"][@"code"];
+                    
+                    [self.navigationController pushViewController:loanVC animated:YES];
+                    
+                });
+                
+            } failure:^(NSError *error) {
+                
+                
+            }];
         }];
         
         return ;
     }
     
-    UIButton *btn = [self.view viewWithTag:1250];
     
-    if (btn.selected) {
-        
-        [TLAlert alertWithInfo:@"同意借款协议才能签约"];
-        return ;
-    }
+}
 
-    TLNetworking *http = [TLNetworking new];
+#pragma mark - Data
+- (void)requestBankCard {
     
-    http.code = @"623070";
-    http.parameters[@"userId"] = [TLUser user].userId;
-    http.parameters[@"couponId"] = self.coupon.couponId;
+    BaseWeakSelf;
     
-    [http postWithSuccess:^(id responseObject) {
+    TLPageDataHelper *pageDataHelper = [[TLPageDataHelper alloc] init];
+    pageDataHelper.code = @"802015";
+    pageDataHelper.parameters[@"token"] = [TLUser user].token;
+    pageDataHelper.parameters[@"userId"] = [TLUser user].userId;
+    [pageDataHelper modelClass:[ZHBankCard class]];
+    [pageDataHelper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         
-        [TLAlert alertWithSucces:@"签约成功"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            LoanVC *loanVC = [LoanVC new];
-            
-            [self.navigationController pushViewController:loanVC animated:YES];
-            
-        });
+        weakSelf.banks = objs;
         
     } failure:^(NSError *error) {
         

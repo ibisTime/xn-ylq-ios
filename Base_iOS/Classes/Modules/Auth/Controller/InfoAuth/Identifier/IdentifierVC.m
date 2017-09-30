@@ -99,7 +99,7 @@
     
     BaseWeakSelf;
     
-    self.identifierView = [[IdentifierView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+    self.identifierView = [[IdentifierView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
     
     self.identifierView.identifierBlock = ^(IdentifierType type) {
         

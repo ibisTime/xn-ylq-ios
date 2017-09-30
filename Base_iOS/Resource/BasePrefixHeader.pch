@@ -37,6 +37,7 @@
 
 #import "NSString+Custom.h"
 #import "NSNumber+TLAdd.h"
+#import <UIScrollView+TLAdd.h>
 #import "NSAttributedString+add.h"
 
 //UI

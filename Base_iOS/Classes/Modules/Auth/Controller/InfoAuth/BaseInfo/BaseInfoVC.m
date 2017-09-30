@@ -24,7 +24,7 @@
 
 @property (nonatomic, strong) BaseInfoGroup *group;
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) TLTableView *tableView;
 
 @property (nonatomic, strong) AuthModel *authModel;
 
@@ -74,9 +74,8 @@
 
 - (void)initTableView {
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    tableView.delegate = self;
-    tableView.dataSource = self;
+    TLTableView *tableView = [TLTableView tableViewWithFrame:CGRectZero delegate:self dataSource:self];
+    
     tableView.backgroundColor = [UIColor colorWithHexString:@"#ececec"];
     
     [self.view addSubview:tableView];

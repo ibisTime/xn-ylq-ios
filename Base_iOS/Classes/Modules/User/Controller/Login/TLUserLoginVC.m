@@ -60,9 +60,7 @@
 - (void)setUpUI {
     
     self.view.backgroundColor = kBackgroundColor;
-    
-    //    UIScrollView *bgSV = self.bgSV;
-    
+        
     CGFloat margin = ACCOUNT_MARGIN;
     CGFloat w = kScreenWidth - 2*margin;
     CGFloat h = ACCOUNT_HEIGHT;

@@ -51,7 +51,7 @@
 
 - (void)initScrollView {
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64 - 40)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - 40)];
     
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.showsHorizontalScrollIndicator = NO;

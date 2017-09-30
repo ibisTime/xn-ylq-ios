@@ -92,7 +92,7 @@
     
     CGFloat y = 0;
     
-    self.bgSV.height = kScreenHeight - 64 - 49;
+    self.bgSV.height = kScreenHeight - kNavigationBarHeight - 49;
 
     self.bgSV.backgroundColor = kBackgroundColor;
     

@@ -62,7 +62,10 @@
 
     //检测是否进行实名认证
     
-    UIScrollView *bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64)];
+    UIScrollView *bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
+    
+    [bgScrollView adjustsContentInsets];
+    
     [self.view addSubview:bgScrollView];
     self.bgSV = bgScrollView;
     

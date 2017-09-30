@@ -42,7 +42,7 @@
     
     _titles = @[@"实时还款", @"线下还款"];
     
-    _selectView = [[SelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64) itemTitles:_titles];
+    _selectView = [[SelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) itemTitles:_titles];
     
     _selectView.selectBlock = ^(NSInteger index) {
         
@@ -64,7 +64,7 @@
             
             childVC.order = self.order;
 
-            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kScreenHeight - 64 -40);
+            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kScreenHeight - kNavigationBarHeight -40);
             
             childVC.paySucces = ^{
                 
@@ -84,7 +84,7 @@
             
             childVC.order = self.order;
 
-            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kScreenHeight - 64 -40);
+            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kScreenHeight - kNavigationBarHeight -40);
             
             childVC.paySucces = ^{
                 

@@ -81,7 +81,7 @@
 
 - (void)initTableView {
     
-    self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64) delegate:self dataSource:self];
+    self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) delegate:self dataSource:self];
     
     [self.view addSubview:self.tableView];
     

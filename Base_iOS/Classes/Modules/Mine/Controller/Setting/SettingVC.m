@@ -30,7 +30,7 @@
 
 @property (nonatomic, copy) NSString *cacheStr;
 
-@property (nonatomic, strong) UITableView *mineTableView;
+@property (nonatomic, strong) TLTableView *mineTableView;
 
 @property (nonatomic, strong) UIView *headerView;
 
@@ -126,9 +126,8 @@
 
 - (void)initTableView {
 
-    UITableView *mineTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    mineTableView.delegate = self;
-    mineTableView.dataSource = self;
+    TLTableView *mineTableView = [TLTableView tableViewWithFrame:CGRectZero delegate:self dataSource:self];
+    
     mineTableView.backgroundColor = kBackgroundColor;
     
     mineTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 1)];

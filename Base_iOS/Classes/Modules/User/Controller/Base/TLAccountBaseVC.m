@@ -30,6 +30,8 @@
     self.bgSV = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     _bgSV.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     self.bgSV.contentSize = CGSizeMake(kScreenWidth, kScreenHeight + 1);
+    [self.bgSV adjustsContentInsets];
+
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self.bgSV addGestureRecognizer:tap];
     [self.view addSubview:_bgSV];

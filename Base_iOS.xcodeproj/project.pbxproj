@@ -16,7 +16,6 @@
 		21076C551F39634400725C76 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21076C521F39634400725C76 /* SettingVC.m */; };
 		21076C641F39657500725C76 /* ZHBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 21076C611F39657500725C76 /* ZHBank.m */; };
 		21076C651F39657500725C76 /* ZHBankCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 21076C631F39657500725C76 /* ZHBankCard.m */; };
-		210B363A1F7E388500CCC00B /* LoanProtocolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210B36391F7E388400CCC00B /* LoanProtocolVC.m */; };
 		210F43FC1F3D3FD20002052E /* BaseInfoDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F43FB1F3D3FD20002052E /* BaseInfoDetailVC.m */; };
 		210F43FF1F3D3FEE0002052E /* JobInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F43FE1F3D3FEE0002052E /* JobInfoVC.m */; };
 		210F44021F3D40200002052E /* EmergencyContactVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F44011F3D40200002052E /* EmergencyContactVC.m */; };
@@ -332,8 +331,6 @@
 		21076C611F39657500725C76 /* ZHBank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBank.m; sourceTree = "<group>"; };
 		21076C621F39657500725C76 /* ZHBankCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBankCard.h; sourceTree = "<group>"; };
 		21076C631F39657500725C76 /* ZHBankCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBankCard.m; sourceTree = "<group>"; };
-		210B36381F7E388400CCC00B /* LoanProtocolVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoanProtocolVC.h; sourceTree = "<group>"; };
-		210B36391F7E388400CCC00B /* LoanProtocolVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoanProtocolVC.m; sourceTree = "<group>"; };
 		210F43FA1F3D3FD20002052E /* BaseInfoDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseInfoDetailVC.h; sourceTree = "<group>"; };
 		210F43FB1F3D3FD20002052E /* BaseInfoDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseInfoDetailVC.m; sourceTree = "<group>"; };
 		210F43FD1F3D3FEE0002052E /* JobInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobInfoVC.h; sourceTree = "<group>"; };
@@ -1302,8 +1299,6 @@
 				2122F7B01F43F52600A379C7 /* CouponVC.m */,
 				2151A11E1F4441B1002483CD /* CouponListVC.h */,
 				2151A11F1F4441B2002483CD /* CouponListVC.m */,
-				210B36381F7E388400CCC00B /* LoanProtocolVC.h */,
-				210B36391F7E388400CCC00B /* LoanProtocolVC.m */,
 				21A6B1761F7F57DC004FE27E /* LoanContractVC.h */,
 				21A6B1771F7F57DC004FE27E /* LoanContractVC.m */,
 			);
@@ -2952,7 +2947,6 @@
 				21F82CA41F17719D0019B176 /* TLCurrencyHelper.m in Sources */,
 				21570C151F5F8E6B00E1C164 /* OnlineRenewalVC.m in Sources */,
 				2151A1341F454A36002483CD /* HistoryFriendCell.m in Sources */,
-				210B363A1F7E388500CCC00B /* LoanProtocolVC.m in Sources */,
 				21570C2E1F5FD2B000E1C164 /* RenewalListCell.m in Sources */,
 				21570C141F5F8E6B00E1C164 /* OfflineRenewalVC.m in Sources */,
 				21FB30BC1F26E9EF0028ADEE /* UIColor+Custom.m in Sources */,

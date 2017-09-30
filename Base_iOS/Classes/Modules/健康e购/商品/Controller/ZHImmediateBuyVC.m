@@ -376,7 +376,7 @@
     if (!_tableV) {
         
         //无收货地址
-        TLTableView *tableView = [TLTableView groupTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight) delegate:self dataSource:self];
+        TLTableView *tableView = [TLTableView groupTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight) delegate:self dataSource:self];
         tableView.tableHeaderView = self.headerView;
         tableView.tableFooterView = [self footerView];
         _tableV = tableView;

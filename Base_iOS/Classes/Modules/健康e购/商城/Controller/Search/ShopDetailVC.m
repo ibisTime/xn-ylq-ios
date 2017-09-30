@@ -117,7 +117,7 @@ static char imgUrlArrayKey;
 
     CGFloat h = self.detaileType == DetailTypeHotel? 60: 0;
     
-    UITableView *shopDetailTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - h) style:UITableViewStyleGrouped];
+    UITableView *shopDetailTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - h) style:UITableViewStyleGrouped];
     shopDetailTV.delegate = self;
     shopDetailTV.dataSource = self;
     shopDetailTV.separatorStyle = UITableViewCellSeparatorStyleNone;

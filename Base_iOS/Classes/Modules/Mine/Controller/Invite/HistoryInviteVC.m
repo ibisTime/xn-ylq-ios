@@ -37,7 +37,7 @@ static NSString *identifierCell = @"HistoryFriendCellID";
 #pragma mark - Init
 - (void)initTableView {
 
-    self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) delegate:self dataSource:self];
+    self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) delegate:self dataSource:self];
     
     self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无推荐历史"];
     

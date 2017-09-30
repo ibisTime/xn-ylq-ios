@@ -75,7 +75,7 @@
 
 - (void)initTableView {
 
-    self.tabeleView = [TLTableView tableViewWithFrame:CGRectMake(0, self.headerView.yy + 10, kScreenWidth, kScreenHeight - kNavigationBarHeight - self.headerView.yy - 10) delegate:self dataSource:self];
+    self.tabeleView = [TLTableView tableViewWithFrame:CGRectMake(0, self.headerView.yy + 10, kScreenWidth, kSuperViewHeight - self.headerView.yy - 10) delegate:self dataSource:self];
     
     self.tabeleView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无任务"];
     

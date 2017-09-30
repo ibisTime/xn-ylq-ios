@@ -29,7 +29,7 @@
 #pragma mark - Init
 - (void)initTableView {
 
-    self.tableView = [[RenewalDetailTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) style:UITableViewStylePlain];
+    self.tableView = [[RenewalDetailTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
     
     self.tableView.renewal = self.renewal;
     

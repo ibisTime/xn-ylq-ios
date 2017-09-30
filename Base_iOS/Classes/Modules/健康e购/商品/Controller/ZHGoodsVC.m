@@ -183,7 +183,7 @@
         dshjVC.smallCategories = [ZHGoodsCategoryManager manager].dshjCategories;
         
         [self.view addSubview:dshjVC.view];
-        self.view.frame = CGRectMake(0, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight);
+        self.view.frame = CGRectMake(0, kNavigationBarHeight, kScreenWidth, kSuperViewHeight - kTabBarHeight);
         
     }
     
@@ -196,7 +196,7 @@
 //    self.segmentView = segmentView;
     
     
-//    self.switchScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.typeChangeView.yy, kScreenWidth, kScreenHeight - kNavigationBarHeight - 49 - self.typeChangeView.yy)];
+//    self.switchScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.typeChangeView.yy, kScreenWidth, kSuperViewHeight - 49 - self.typeChangeView.yy)];
 //    [self.view addSubview:self.switchScrollView];
 //    self.switchScrollView.pagingEnabled = YES;
 //    self.switchScrollView.contentSize = CGSizeMake(kScreenWidth * 3, self.switchScrollView.height);

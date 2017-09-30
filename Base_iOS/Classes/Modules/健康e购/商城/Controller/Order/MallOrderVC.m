@@ -37,7 +37,7 @@
 
 - (void)initTableView {
     
-    UITableView *mineTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) style:UITableViewStyleGrouped];
+    UITableView *mineTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStyleGrouped];
     mineTableView.delegate = self;
     mineTableView.dataSource = self;
     mineTableView.backgroundColor = kPaleGreyColor;

@@ -86,7 +86,7 @@
 - (void)initScrollView {
     
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
     
     self.scrollView.backgroundColor = kWhiteColor;
     self.scrollView.delegate = self;

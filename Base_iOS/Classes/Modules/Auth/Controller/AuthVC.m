@@ -122,7 +122,7 @@
     
     self.bgSV.height -= 49;
     
-    self.dataView = [[DataView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight)];
+    self.dataView = [[DataView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth, kSuperViewHeight - kTabBarHeight)];
     
     self.dataView.dataBlock = ^(SectionModel *section) {
         

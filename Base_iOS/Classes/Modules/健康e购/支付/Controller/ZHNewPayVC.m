@@ -734,7 +734,7 @@
 //
 - (void)setUpUI {
     
-    UITableView *payTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight) style:UITableViewStyleGrouped];
+    UITableView *payTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, kSuperViewHeight - kTabBarHeight) style:UITableViewStyleGrouped];
     [self.view addSubview:payTableView];
     self.payTableView = payTableView;
     payTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 1)];

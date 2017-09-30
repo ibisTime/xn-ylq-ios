@@ -122,7 +122,7 @@
                                                            dataSource:self];
     [self.view addSubview:mineTableView];
 
-    mineTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight);
+    mineTableView.frame = CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight);
     mineTableView.rowHeight = 45;
     mineTableView.separatorColor = UITableViewCellSeparatorStyleNone;
     mineTableView.backgroundColor = [UIColor colorWithHexString:@"#f1f4f7"];
@@ -154,7 +154,7 @@
         
         CGFloat serviceH = 60;
         
-        UIView *serviceView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kNavigationBarHeight - kTabBarHeight - serviceH, kScreenWidth, serviceH)];
+        UIView *serviceView = [[UIView alloc] initWithFrame:CGRectMake(0, kSuperViewHeight - kTabBarHeight - serviceH, kScreenWidth, serviceH)];
         
         [self.view addSubview:serviceView];
         

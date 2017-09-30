@@ -105,8 +105,8 @@
 
 - (void)initScrollView {
     
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kHeadBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight - kHeadBarHeight)];
-    _scrollView.contentSize = CGSizeMake(kScreenWidth * _itemTitles.count, kScreenHeight - kNavigationBarHeight - kHeadBarHeight);
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kHeadBarHeight, kScreenWidth, kSuperViewHeight - kHeadBarHeight)];
+    _scrollView.contentSize = CGSizeMake(kScreenWidth * _itemTitles.count, kSuperViewHeight - kHeadBarHeight);
     _scrollView.delegate = self;
     _scrollView.pagingEnabled = YES;
     _scrollView.bounces = NO;

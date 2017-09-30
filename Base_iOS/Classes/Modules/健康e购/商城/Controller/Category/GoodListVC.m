@@ -54,7 +54,7 @@
 
 - (void)initTableView {
     
-    TLTableView *tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) delegate:self dataSource:self];
+    TLTableView *tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) delegate:self dataSource:self];
     
     [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GoodListCell class]) bundle:nil] forCellReuseIdentifier:@"GoodCellId"];
     [self.view addSubview:tableView];

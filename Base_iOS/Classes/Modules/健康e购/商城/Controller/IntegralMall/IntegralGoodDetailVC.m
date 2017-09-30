@@ -376,7 +376,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     //底部负责左右切换的背景
-    self.goodsDetailTypeScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight)];
+    self.goodsDetailTypeScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight)];
     [self.view addSubview:self.goodsDetailTypeScrollView];
     self.goodsDetailTypeScrollView.pagingEnabled = YES;
     self.goodsDetailTypeScrollView.showsHorizontalScrollIndicator = NO;
@@ -385,7 +385,7 @@
     self.goodsDetailTypeScrollView.contentSize = CGSizeMake(self.goodsDetailTypeScrollView.width*2, self.goodsDetailTypeScrollView.height);
     
     //商品信息背景
-    self.bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight)];
+    self.bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight)];
     self.bgScrollView.backgroundColor = [UIColor whiteColor];
     
     [self.goodsDetailTypeScrollView addSubview: self.bgScrollView];

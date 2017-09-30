@@ -35,7 +35,7 @@
     [super viewDidLoad];
     self.isFirst = YES;
     
-    TLTableView *tableView = [TLTableView groupTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - 40) delegate:self dataSource:self];
+    TLTableView *tableView = [TLTableView groupTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40) delegate:self dataSource:self];
     [self.view addSubview:tableView];
     tableView.rowHeight = 100;
     

@@ -70,7 +70,7 @@
     [searchBar becomeFirstResponder];
     
     //
-    TLTableView *tableView = [TLTableView tableViewWithFrame:CGRectMake(0, searchH, kScreenWidth, kScreenHeight - kNavigationBarHeight - searchH) delegate:self dataSource:self];
+    TLTableView *tableView = [TLTableView tableViewWithFrame:CGRectMake(0, searchH, kScreenWidth, kSuperViewHeight - searchH) delegate:self dataSource:self];
     
     if (_type == SearchVCTypeDefaultGoods) {
         

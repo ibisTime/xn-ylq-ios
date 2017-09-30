@@ -41,7 +41,7 @@
     
     _titles = @[@"可使用", @"已失效"];
     
-    _selectView = [[SelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) itemTitles:_titles];
+    _selectView = [[SelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:_titles];
     
     [_selectView setLinePropertyWithLineColor:kAppCustomMainColor lineSize:CGSizeMake(kScreenWidth/2.0, 2)];
     
@@ -54,7 +54,7 @@
         
         CouponListVC *childVC = [[CouponListVC alloc] init];
         
-        childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kScreenHeight - kNavigationBarHeight - 40);
+        childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40);
         
         childVC.statusType = i;
         

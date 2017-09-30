@@ -73,6 +73,9 @@
 #define kNavigationBarHeight  (kDevice_Is_iPhoneX == YES ? 88: 64)
 #define kTabBarHeight  (kDevice_Is_iPhoneX == YES ? 49: 49)
 
+
+#define kSuperViewHeight kScreenHeight - kNavigationBarHeight
+
 #define kImage(I)     [UIImage imageNamed:I]
 
 #define kLeftMargin 15

@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UITableView *goodsDetailTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight) style:UITableViewStylePlain];
+    UITableView *goodsDetailTV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight) style:UITableViewStylePlain];
     goodsDetailTV.delegate = self;
     goodsDetailTV.dataSource = self;
     goodsDetailTV.separatorStyle = UITableViewCellSeparatorStyleNone;

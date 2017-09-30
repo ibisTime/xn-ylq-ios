@@ -20,7 +20,7 @@
    
     WKWebViewConfiguration *webConfig = [[WKWebViewConfiguration alloc] init];
     
-    WKWebView *webV = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) configuration:webConfig];
+    WKWebView *webV = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) configuration:webConfig];
     [self.view addSubview:webV];
     webV.navigationDelegate = self;
     

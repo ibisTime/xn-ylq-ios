@@ -40,7 +40,7 @@
 
     BaseWeakSelf;
     
-    self.loanView = [[LoanView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
+    self.loanView = [[LoanView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
     
     self.loanView.loanBlock = ^{
         

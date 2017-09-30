@@ -64,7 +64,7 @@
 
 - (void)initTableView {
     
-    self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, self.headerView.yy + 10, kScreenWidth, kScreenHeight - kNavigationBarHeight - self.headerView.yy - 10) delegate:self dataSource:self];
+    self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, self.headerView.yy + 10, kScreenWidth, kSuperViewHeight - self.headerView.yy - 10) delegate:self dataSource:self];
     
     self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无记录" topMargin:40];
     

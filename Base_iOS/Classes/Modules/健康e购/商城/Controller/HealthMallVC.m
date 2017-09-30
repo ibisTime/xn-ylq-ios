@@ -339,7 +339,7 @@
 - (void)setUpTableView {
     
     //
-    TLTableView *tableView = [TLTableView tableViewWithFrame:CGRectMake(0,0, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight) delegate:self dataSource:self];
+    TLTableView *tableView = [TLTableView tableViewWithFrame:CGRectMake(0,0, kScreenWidth, kSuperViewHeight - kTabBarHeight) delegate:self dataSource:self];
     
     tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无商品" topMargin:42];
     

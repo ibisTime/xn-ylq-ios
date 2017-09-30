@@ -133,13 +133,13 @@
 
     if (self.navigationController.childViewControllers.count == 1) {
         
-        self.shoopingCartTableV.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight - 49);
+        self.shoopingCartTableV.frame = CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight - 49);
         
         self.clearingView.frame = CGRectMake(0, kScreenHeight - 49 - kNavigationBarHeight - kTabBarHeight, kScreenWidth, 49);
         
     } else {
     
-        self.shoopingCartTableV.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight);
+        self.shoopingCartTableV.frame = CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight);
         
         self.clearingView.frame = CGRectMake(0, kScreenHeight - kTabBarHeight - kNavigationBarHeight, kScreenWidth, 49);
 
@@ -158,7 +158,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(countChange) name:kSelectedCartGoodsCountChangeNotification object:nil];
     //
-    TLTableView *tableView = [TLTableView groupTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight) delegate:self dataSource:self];
+    TLTableView *tableView = [TLTableView groupTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight) delegate:self dataSource:self];
     [self.view addSubview:tableView];
     self.shoopingCartTableV = tableView;
     tableView.rowHeight = [ZHShoppingCartCell rowHeight];

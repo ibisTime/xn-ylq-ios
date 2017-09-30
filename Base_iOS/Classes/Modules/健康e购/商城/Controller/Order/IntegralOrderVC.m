@@ -38,7 +38,7 @@
     self.isAdd = [@[@1, @0, @0, @0] mutableCopy];
     
     //
-    UIScrollView *switchScrollV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, segmentView.yy + 0.5, kScreenWidth, kScreenHeight - kNavigationBarHeight - segmentView.yy)];
+    UIScrollView *switchScrollV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, segmentView.yy + 0.5, kScreenWidth, kSuperViewHeight - segmentView.yy)];
     switchScrollV.pagingEnabled = YES;
     switchScrollV.contentSize = CGSizeMake(kScreenWidth * 3, switchScrollV.height);
     [self.view addSubview:switchScrollV];

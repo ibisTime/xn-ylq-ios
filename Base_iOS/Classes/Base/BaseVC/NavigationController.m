@@ -31,9 +31,12 @@
         btn.contentMode = UIViewContentModeScaleToFill;
         btn.frame = CGRectMake(-10, 0, 40, 40);
         [btn addTarget:self action:@selector(clickButton) forControlEvents:UIControlEventTouchUpInside];
-        self.navButton = btn;
+        
+        UIView *customView = [[UIView alloc] initWithFrame:btn.bounds];
+        [customView addSubview:btn];
+        
         viewController.hidesBottomBarWhenPushed = YES;
-        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];        
+        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:customView];
     }
     
     [super pushViewController:viewController animated:animated];

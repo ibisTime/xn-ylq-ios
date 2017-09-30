@@ -64,13 +64,13 @@
     
     if (!_bgSV) {
         
-        _bgSV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
+        _bgSV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
         
         _bgSV.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         
         _bgSV.backgroundColor = kBackgroundColor;
         
-        _bgSV.contentSize = CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight + 1);
+        _bgSV.contentSize = CGSizeMake(kScreenWidth, kSuperViewHeight + 1);
         
         [_bgSV adjustsContentInsets];
 

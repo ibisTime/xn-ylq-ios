@@ -47,7 +47,7 @@
 #pragma mark - Init
 - (void)initTableView {
     
-    self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) delegate:self dataSource:self];
+    self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) delegate:self dataSource:self];
     
     self.tableView.placeHolderView = self.placeHolderView;
     
@@ -61,7 +61,7 @@
     
     NSString *prompt = _statusType == CouponStatusTypeUse ? @"您目前没有优惠券": @"您目前没有失效优惠券";
     
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
+    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
 
     if (_statusType == CouponStatusTypeUse) {
     

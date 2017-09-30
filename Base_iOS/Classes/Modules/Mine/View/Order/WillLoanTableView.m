@@ -35,6 +35,8 @@
         
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         
+        [self adjustsContentInsets];
+
         [self initHeaderView];
 
     }
@@ -77,7 +79,7 @@
     
     [headerView addSubview:self.quotaLbl];
     
-    if ([self.order.status isEqualToString:@"1"]) {
+    if ([self.order.status isEqualToString:@"0"] || [self.order.status isEqualToString:@"1"]) {
         
         UILabel *remarkLbl = [UILabel labelWithText:@"" textColor:kTextColor3 textFont:15];
         

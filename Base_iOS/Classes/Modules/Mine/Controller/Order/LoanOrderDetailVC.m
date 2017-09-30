@@ -17,6 +17,7 @@
 #import "RenewalVC.h"
 #import "RenewalListVC.h"
 #import "ZHBankCardListVC.h"
+#import "LoanContractVC.h"
 
 @interface LoanOrderDetailVC ()
 
@@ -57,7 +58,7 @@
         {
             self.title = @"待审核详情";
             
-            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
+            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
             
             tableView.order = self.order;
             
@@ -70,7 +71,7 @@
         {
             self.title = @"待放款详情";
             
-            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
+            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
             
             tableView.order = self.order;
             
@@ -84,7 +85,7 @@
         {
             self.title = @"审核不通过";
             
-            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
+            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
             
             tableView.order = self.order;
             
@@ -97,17 +98,28 @@
         {
             self.title = @"待还款详情";
 
-            DidLoanTableView *tableView = [[DidLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - 65)];
+            DidLoanTableView *tableView = [[DidLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 65)];
             
             tableView.order = self.order;
             
-            tableView.renewalBlock = ^{
+            tableView.detailBlock = ^(OrderDetailType type) {
                 
-                RenewalListVC *renewalListVC = [RenewalListVC new];
-                
-                renewalListVC.code = weakSelf.order.code;
-
-                [weakSelf.navigationController pushViewController:renewalListVC animated:YES];
+                if (type == OrderDetailTypeLoanContract) {
+                    
+                    LoanContractVC *contractVC = [LoanContractVC new];
+                    
+                    contractVC.code = weakSelf.order.code;
+                    
+                    [weakSelf.navigationController pushViewController:contractVC animated:YES];
+                    
+                } else if (type == OrderDetailTypeRenewal) {
+                    
+                    RenewalListVC *renewalListVC = [RenewalListVC new];
+                    
+                    renewalListVC.code = weakSelf.order.code;
+                    
+                    [weakSelf.navigationController pushViewController:renewalListVC animated:YES];
+                }
             };
             
             [self.view addSubview:tableView];
@@ -121,17 +133,28 @@
         {
             self.title = @"已还款详情";
 
-            DidRepaymentTableView *tableView = [[DidRepaymentTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
+            DidRepaymentTableView *tableView = [[DidRepaymentTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
             
             tableView.order = self.order;
 
-            tableView.renewalBlock = ^{
+            tableView.detailBlock = ^(OrderDetailType type) {
                 
-                RenewalListVC *renewalListVC = [RenewalListVC new];
-                
-                renewalListVC.code = weakSelf.order.code;
-                
-                [weakSelf.navigationController pushViewController:renewalListVC animated:YES];
+                if (type == OrderDetailTypeLoanContract) {
+                    
+                    LoanContractVC *contractVC = [LoanContractVC new];
+                    
+                    contractVC.code = weakSelf.order.code;
+                    
+                    [weakSelf.navigationController pushViewController:contractVC animated:YES];
+                    
+                } else if (type == OrderDetailTypeRenewal) {
+                    
+                    RenewalListVC *renewalListVC = [RenewalListVC new];
+                    
+                    renewalListVC.code = weakSelf.order.code;
+                    
+                    [weakSelf.navigationController pushViewController:renewalListVC animated:YES];
+                }
             };
             
             [self.view addSubview:tableView];
@@ -142,17 +165,28 @@
         {
             self.title = @"已逾期详情";
 
-            OverdueTableView *tableView = [[OverdueTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
+            OverdueTableView *tableView = [[OverdueTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
             
             tableView.order = self.order;
             
-            tableView.renewalBlock = ^{
+            tableView.detailBlock = ^(OrderDetailType type) {
                 
-                RenewalListVC *renewalListVC = [RenewalListVC new];
-                
-                renewalListVC.code = weakSelf.order.code;
-                
-                [weakSelf.navigationController pushViewController:renewalListVC animated:YES];
+                if (type == OrderDetailTypeLoanContract) {
+                    
+                    LoanContractVC *contractVC = [LoanContractVC new];
+                    
+                    contractVC.code = weakSelf.order.code;
+                    
+                    [weakSelf.navigationController pushViewController:contractVC animated:YES];
+                    
+                } else if (type == OrderDetailTypeRenewal) {
+                    
+                    RenewalListVC *renewalListVC = [RenewalListVC new];
+                    
+                    renewalListVC.code = weakSelf.order.code;
+                    
+                    [weakSelf.navigationController pushViewController:renewalListVC animated:YES];
+                }
             };
 
             [self.view addSubview:tableView];
@@ -168,7 +202,7 @@
             
             self.title = @"打款失败";
             
-            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
+            WillLoanTableView *tableView = [[WillLoanTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
             
             tableView.order = self.order;
             
@@ -191,7 +225,7 @@
 
 - (void)initBottomButton {
 
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kNavigationBarHeight - 65, kScreenWidth, 65)];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kSuperViewHeight - 65, kScreenWidth, 65)];
     
     bottomView.backgroundColor = kWhiteColor;
     

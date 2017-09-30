@@ -67,7 +67,7 @@
     
     BaseWeakSelf;
     
-    self.identifierView = [[IdentifierAuthView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight)];
+    self.identifierView = [[IdentifierAuthView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
     
     self.identifierView.identifierBlock = ^(IdentifierAuthType type) {
         

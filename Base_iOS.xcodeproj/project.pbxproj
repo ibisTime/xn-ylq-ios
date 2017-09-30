@@ -155,6 +155,7 @@
 		216AB7F01F189F22006C26A1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */; };
 		216AB7F21F189F30006C26A1 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7F11F189F30006C26A1 /* libc++.tbd */; };
 		216AB7F41F189F39006C26A1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7F31F189F39006C26A1 /* libz.tbd */; };
+		21A6B1781F7F57DC004FE27E /* LoanContractVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B1771F7F57DC004FE27E /* LoanContractVC.m */; };
 		21F82C991F17719D0019B176 /* AppDelegate+Launch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F82B581F17719D0019B176 /* AppDelegate+Launch.m */; };
 		21F82C9A1F17719D0019B176 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21F82B5A1F17719D0019B176 /* AppDelegate.mm */; };
 		21F82C9B1F17719D0019B176 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F82B5E1F17719D0019B176 /* BaseModel.m */; };
@@ -584,6 +585,8 @@
 		216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		216AB7F11F189F30006C26A1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		216AB7F31F189F39006C26A1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		21A6B1761F7F57DC004FE27E /* LoanContractVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoanContractVC.h; sourceTree = "<group>"; };
+		21A6B1771F7F57DC004FE27E /* LoanContractVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoanContractVC.m; sourceTree = "<group>"; };
 		21F827CF1F1742E80019B176 /* Base_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Base_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F82B571F17719D0019B176 /* AppDelegate+Launch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Launch.h"; sourceTree = "<group>"; };
 		21F82B581F17719D0019B176 /* AppDelegate+Launch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Launch.m"; sourceTree = "<group>"; };
@@ -1301,6 +1304,8 @@
 				2151A11F1F4441B2002483CD /* CouponListVC.m */,
 				210B36381F7E388400CCC00B /* LoanProtocolVC.h */,
 				210B36391F7E388400CCC00B /* LoanProtocolVC.m */,
+				21A6B1761F7F57DC004FE27E /* LoanContractVC.h */,
+				21A6B1771F7F57DC004FE27E /* LoanContractVC.m */,
 			);
 			path = Quota;
 			sourceTree = "<group>";
@@ -3048,6 +3053,7 @@
 				21FB30C61F26E9EF0028ADEE /* UIView+Responder.m in Sources */,
 				2151A1291F4467D8002483CD /* SignContractVC.m in Sources */,
 				2117092A1F42ED81002EBF79 /* LoanSegmentView.m in Sources */,
+				21A6B1781F7F57DC004FE27E /* LoanContractVC.m in Sources */,
 				2122F7A01F43E57400A379C7 /* WillLoanTableView.m in Sources */,
 				21198F561F45B5AE00FDDCC4 /* PayFuncModel.m in Sources */,
 				21076C441F39629600725C76 /* MineVC.m in Sources */,

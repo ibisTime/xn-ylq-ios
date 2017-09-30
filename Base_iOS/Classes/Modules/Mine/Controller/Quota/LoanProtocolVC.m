@@ -66,7 +66,7 @@
     
     wkConfig.userContentController = wkUCC;
     
-    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) configuration:wkConfig];
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) configuration:wkConfig];
     
     _webView.backgroundColor = kWhiteColor;
     

@@ -9,12 +9,18 @@
 #import "TLTableView.h"
 #import "OrderModel.h"
 
-typedef void(^RenewalBlock)();
+typedef NS_ENUM(NSInteger, OrderDetailType) {
+    
+    OrderDetailTypeLoanContract = 0,    //借款合同
+    OrderDetailTypeRenewal,             //续期列表
+};
+
+typedef void(^OrderDetailBlock)(OrderDetailType type);
 
 @interface DidLoanTableView : TLTableView
 
 @property (nonatomic, strong) OrderModel *order;
 
-@property (nonatomic, copy) RenewalBlock renewalBlock;
+@property (nonatomic, copy) OrderDetailBlock detailBlock;
 
 @end

@@ -35,6 +35,8 @@
         
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         
+        [self adjustsContentInsets];
+
         [self initHeaderView];
         
     }
@@ -179,9 +181,9 @@
     
     cell.rightLabel.text = self.contentArr[indexPath.row];
     
-    cell.rightLabel.textColor = indexPath.row == self.contentArr.count - 2 ? kAppCustomMainColor: kTextColor;
+    cell.rightLabel.textColor = indexPath.row == 1 || indexPath.row == self.contentArr.count - 2 ? kAppCustomMainColor: kTextColor;
     
-    cell.arrowHidden = indexPath.row == self.contentArr.count - 1 ? NO: YES;
+    cell.arrowHidden = indexPath.row == 1 || indexPath.row == self.contentArr.count - 1 ? NO: YES;
 
     return cell;
     
@@ -193,11 +195,19 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == self.titleArr.count - 1) {
+    if (indexPath.row == 1) {
         
-        if (_renewalBlock) {
+        if (_detailBlock) {
             
-            _renewalBlock();
+            _detailBlock(OrderDetailTypeLoanContract);
+            
+        }
+        
+    }else if (indexPath.row == self.titleArr.count - 1) {
+        
+        if (_detailBlock) {
+            
+            _detailBlock(OrderDetailTypeRenewal);
         }
     }
 }

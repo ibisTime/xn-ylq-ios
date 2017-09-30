@@ -58,7 +58,7 @@
     
     self.titles = @[@"待审核", @"审核不通过", @"待放款", @"打款失败", @"待还款", @"已还款", @"已逾期"];
     
-    self.selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) itemTitles:self.titles];
+    self.selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:self.titles];
         
     [self.view addSubview:self.selectScrollView];
 }
@@ -69,7 +69,7 @@
         
         LoanOrderListVC *childVC = [[LoanOrderListVC alloc] init];
         
-        childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kScreenHeight - kNavigationBarHeight -40);
+        childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40);
         
 //        childVC.code = _models[i].dkey;
 //        childVC.kind = _models[i].parentKey;

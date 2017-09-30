@@ -35,7 +35,7 @@
     
     UIImage *image = [UIImage imageNamed:imgStr];
     
-    CGFloat scale = kScreenWidth > 375 ? 3: 2;
+    CGFloat scale = [UIScreen mainScreen].scale;
     
     CGFloat fixelW = CGImageGetWidth(image.CGImage)/(scale*1.0);
     CGFloat fixelH = CGImageGetHeight(image.CGImage)/(scale*1.0);

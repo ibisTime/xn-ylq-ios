@@ -41,7 +41,7 @@
     
     _titles = @[@"实时续期", @"线下续期"];
     
-    _selectView = [[SelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight) itemTitles:_titles];
+    _selectView = [[SelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:_titles];
     
     _selectView.selectBlock = ^(NSInteger index) {
         
@@ -61,7 +61,7 @@
             
             OnlineRenewalVC *childVC = [[OnlineRenewalVC alloc] init];
             
-            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kScreenHeight - kNavigationBarHeight -40);
+            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40);
         
             childVC.order = self.order;
 
@@ -81,7 +81,7 @@
             
             OfflineRenewalVC *childVC = [[OfflineRenewalVC alloc] init];
             
-            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kScreenHeight - kNavigationBarHeight -40);
+            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40);
             
             childVC.order = self.order;
 

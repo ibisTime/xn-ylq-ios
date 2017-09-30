@@ -156,7 +156,6 @@
     } else {
         
         return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
-        
     }
 }
 

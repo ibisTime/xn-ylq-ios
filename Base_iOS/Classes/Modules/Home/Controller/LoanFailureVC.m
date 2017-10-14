@@ -72,11 +72,13 @@
     
     self.resultLbl.numberOfLines = 0;
     
-    CGSize contentSize = [_good.approveNote calculateStringSize:CGSizeMake(kScreenWidth - 30, MAXFLOAT) font:Font(18.0)];
+    NSString *result = @"系统审核，请保证填写的资料为本人真实资料,如需再次申请，请7天后再提交审核";
+    
+    CGSize contentSize = [result calculateStringSize:CGSizeMake(kScreenWidth - 30, MAXFLOAT) font:Font(18.0)];
     
 //    [self.resultLbl labelWithTextString:_good.approveNote lineSpace:10];
     
-    self.resultLbl.text = _good.approveNote;
+    self.resultLbl.text = result;
     
     self.resultLbl.frame = CGRectMake(15, textLbl.yy + 25, kScreenWidth - 30, contentSize.height);
     

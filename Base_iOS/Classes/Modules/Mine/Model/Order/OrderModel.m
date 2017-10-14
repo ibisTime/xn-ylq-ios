@@ -29,6 +29,7 @@
         }break;
             
         case 1:
+        case 8:
         {
             resc = @"审核通过";
             imageStr = @"待放款";

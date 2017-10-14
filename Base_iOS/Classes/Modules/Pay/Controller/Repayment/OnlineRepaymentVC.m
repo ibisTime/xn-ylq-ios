@@ -105,7 +105,7 @@
     NSArray *imgs = @[@"alipay", @"baofu"];
     
     NSArray *payNames;
-    payNames  = @[@"支付宝", @"宝付"]; //余额(可用100)
+    payNames  = @[@"支付宝", @"银行卡"]; //余额(可用100)
     
     NSArray *payType = @[@(PayTypeAlipay), @(PayTypeBaoFu)];
     NSArray <NSNumber *>*status = @[@(YES), @(NO)];

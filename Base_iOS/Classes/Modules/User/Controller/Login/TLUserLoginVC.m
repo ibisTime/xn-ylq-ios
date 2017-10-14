@@ -8,12 +8,9 @@
 
 #import "TLUserLoginVC.h"
 #import "TLUserForgetPwdVC.h"
-#import <UMSocialCore/UMSocialCore.h>
-#import "UMSocialWechatHandler.h"
 #import "WXApi.h"
 #import "BindMobileVC.h"
 #import "TLUserRegisterVC.h"
-#import "UserDefaultsUtil.h"
 
 @interface TLUserLoginVC ()
 
@@ -169,7 +166,6 @@
 - (void)back {
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    
 }
 
 //登录成功
@@ -251,7 +247,6 @@
         
         NSDictionary *userInfo = responseObject[@"data"];
         
-        //保存用户信息
         [TLUser user].userId = userId;
         [TLUser user].token = token;
         [[TLUser user] saveToken:token];

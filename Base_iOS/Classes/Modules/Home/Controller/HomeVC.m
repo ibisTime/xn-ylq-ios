@@ -10,7 +10,6 @@
 #import "GoodView.h"
 #import "NSAttributedString+add.h"
 
-#import "TLUserLoginVC.h"
 #import "NavigationController.h"
 #import "TabbarViewController.h"
 #import "SelectMoneyVC.h"

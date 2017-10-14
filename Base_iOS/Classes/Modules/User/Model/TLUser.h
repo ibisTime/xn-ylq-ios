@@ -65,7 +65,7 @@
 
 @property (nonatomic, strong) TLUserExt *userExt;
 
-//健康e购
+//九州宝
 
 @property (nonatomic, strong) UserReferrer *referrer;
 

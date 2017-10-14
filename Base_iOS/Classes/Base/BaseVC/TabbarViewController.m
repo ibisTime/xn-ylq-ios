@@ -13,6 +13,8 @@
 #import <SDWebImageDownloader.h>
 #import <SDWebImageManager.h>
 #import "TLUserLoginVC.h"
+#import "BaseUserLoginVC.h"
+
 #import "CustomTabBar.h"
 
 @interface TabbarViewController () <UITabBarControllerDelegate, TabBarDelegate>
@@ -281,7 +283,7 @@
         {
             if ((idx == 1 || idx == 2) && ![TLUser user].isLogin) {
                 
-                TLUserLoginVC *loginVC = [TLUserLoginVC new];
+                BaseUserLoginVC *loginVC = [BaseUserLoginVC new];
                 
                 NavigationController *nav = [[NavigationController alloc] initWithRootViewController:loginVC];
                 

@@ -123,44 +123,44 @@
 }
 
 
-- (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
-                                                                      title:@"删除"
-                                                                    handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-                                                                        
-                                                                        [self deleteBankCardWithTableView:tableView index:indexPath];
-                                                                        
-                                                                    }];
-    
-    return @[action];
-    
-}
+//- (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+//
+//    UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
+//                                                                      title:@"删除"
+//                                                                    handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+//
+//                                                                        [self deleteBankCardWithTableView:tableView index:indexPath];
+//
+//                                                                    }];
+//
+//    return @[action];
+//
+//}
 
 //
 
 //
-- (void)deleteBankCardWithTableView:(UITableView *)tv index:(NSIndexPath *)indexPath {
-    
-    TLNetworking *http = [TLNetworking new];
-    http.showView = self.view;
-    http.code = @"802011";
-    http.parameters[@"token"] = [TLUser user].token;
-    http.parameters[@"code"] = self.banks[indexPath.row].code;
-    http.parameters[@"userId"] = [TLUser user].userId;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        [TLUser user].bankcardFlag = @"0";
-        //
-        [self.bankCardTV beginRefreshing];
-        
-    } failure:^(NSError *error) {
-        
-        
-    }];
-    
-}
+//- (void)deleteBankCardWithTableView:(UITableView *)tv index:(NSIndexPath *)indexPath {
+//
+//    TLNetworking *http = [TLNetworking new];
+//    http.showView = self.view;
+//    http.code = @"802011";
+//    http.parameters[@"token"] = [TLUser user].token;
+//    http.parameters[@"code"] = self.banks[indexPath.row].code;
+//    http.parameters[@"userId"] = [TLUser user].userId;
+//
+//    [http postWithSuccess:^(id responseObject) {
+//
+//        [TLUser user].bankcardFlag = @"0";
+//        //
+//        [self.bankCardTV beginRefreshing];
+//
+//    } failure:^(NSError *error) {
+//
+//
+//    }];
+//
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 

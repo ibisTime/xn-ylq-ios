@@ -96,7 +96,7 @@ NSString *const kUserInfoChange = @"kUserInfoChange_csw";
     
     http.parameters[@"loginName"] = self.userName;
     http.parameters[@"loginPwd"] = self.userPassward;
-    http.parameters[@"kind"] = @"C";
+    http.parameters[@"kind"] = [ApiConfig config].runMode == RunModeDis ? @"C": @"f1";
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -208,6 +208,48 @@ NSString *const kUserInfoChange = @"kUserInfoChange_csw";
     self.city = dict[@"city"];
     self.area = dict[@"area"];
     
+    NSDictionary *userExt = dict[@"userExt"];
+    if (userExt) {
+        if (userExt[@"photo"]) {
+            self.userExt.photo = userExt[@"photo"];
+        }
+        
+        if (userExt[@"province"]) {
+            self.userExt.province = userExt[@"province"];
+        }
+        
+        if (userExt[@"city"]) {
+            self.userExt.city = userExt[@"city"];
+        }
+        
+        if (userExt[@"area"]) {
+            self.userExt.area = userExt[@"area"];
+        }
+        
+        //性别
+        if (userExt[@"gender"]) {
+            self.userExt.gender = userExt[@"gender"];
+        }
+        
+        //生日
+        if (userExt[@"birthday"]) {
+            self.userExt.birthday = userExt[@"birthday"];
+        }
+        
+        //email
+        if (userExt[@"email"]) {
+            self.userExt.email = userExt[@"email"];
+        }
+        
+        //介绍
+        if (userExt[@"introduce"]) {
+            self.userExt.introduce = userExt[@"introduce"];
+        }
+        
+    }
+    
+    self.referrer = [UserReferrer mj_objectWithKeyValues:dict[@"referrer"]];
+    
 }
 
 - (void)saveUserName:(NSString *)userName pwd:(NSString *)pwd {
@@ -229,6 +271,45 @@ NSString *const kUserInfoChange = @"kUserInfoChange_csw";
     }
     return [NSString stringWithFormat:@"%@ %@ %@",self.province,self.city,self.area];
 
+}
+
+- (NSString *)userLevel:(NSString *)levelStr {
+    
+    NSInteger level = [levelStr integerValue];
+    
+    NSString *levelName;
+    
+    switch (level) {
+            
+        case 1:
+            levelName = @"新手上路";
+            break;
+            
+        case 2:
+            levelName = @"初级会员";
+            break;
+            
+        case 3:
+            levelName = @"中级会员";
+            break;
+            
+        case 4:
+            levelName = @"高级会员";
+            break;
+            
+        case 5:
+            levelName = @"金牌会员";
+            break;
+            
+        case 6:
+            levelName = @"论坛元老";
+            break;
+            
+        default:
+            break;
+    }
+    
+    return levelName;
 }
 
 @end

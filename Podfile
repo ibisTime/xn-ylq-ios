@@ -15,7 +15,7 @@ target ‘Base_iOS’ do
     pod 'SVProgressHUD',            '2.2'
 
     pod 'PYPhotoBrowser',           '1.1.5'
-    pod 'IQKeyboardManager',        '4.0.13'
+    pod 'IQKeyboardManager',        '5.0.2'
     pod 'TZImagePickerController',  '1.8.0'
     #七牛云
     pod 'Qiniu',                    '7.1.5'

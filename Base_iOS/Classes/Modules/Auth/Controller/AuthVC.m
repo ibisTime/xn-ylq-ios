@@ -660,42 +660,7 @@
                 //申请状态
                 self.isApply = responseObject[@"data"][@"toApproveFlag"];
                 
-                //认证结果查询
-                TLNetworking *http = [TLNetworking new];
-                
-                http.code = @"623050";
-                
-                http.parameters[@"userId"] = [TLUser user].userId;
-                
-                [http postWithSuccess:^(id responseObject) {
-                    
-                    self.authModel = [AuthModel mj_objectWithKeyValues:responseObject[@"data"]];
-                    
-                    self.dataView.authModel = self.authModel;
-                    
-                    [TLProgressHUD dismiss];
-                    
-                    [TLAlert alertWithTitle:@"" message:@"运营商认证成功" confirmMsg:@"OK" confirmAction:^{
-                        
-                        if ([self.isApply isEqualToString:@"1"]) {
-                            
-                            //进入系统审核界面
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                
-                                ManualAuditVC *auditVC = [ManualAuditVC new];
-                                
-                                auditVC.title = @"系统审核";
-                                
-                                [self.navigationController pushViewController:auditVC animated:YES];
-                            });
-                        }
-                        
-                    }];
-                    
-                } failure:^(NSError *error) {
-                    
-                    
-                }];
+                [self requestCarrierStatus];
                 
             } failure:^(NSError *error) {
                 
@@ -728,6 +693,60 @@
         //该任务失败按失败处理
         [TLAlert alertWithError:@"查询失败"];
     }
+}
+
+//获取运营商状态
+- (void)requestCarrierStatus {
+    
+    //认证结果查询
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"623050";
+    
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.authModel = [AuthModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        self.dataView.authModel = self.authModel;
+        
+        //运营商是否已认证
+        if ([self.authModel.infoCarrierFlag isEqualToString:@"1"]) {
+            
+            [TLProgressHUD dismiss];
+            
+            [TLAlert alertWithTitle:@"" message:@"运营商认证成功" confirmMsg:@"OK" confirmAction:^{
+                
+                if ([self.isApply isEqualToString:@"1"]) {
+                    
+                    //进入系统审核界面
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        
+                        ManualAuditVC *auditVC = [ManualAuditVC new];
+                        
+                        auditVC.title = @"系统审核";
+                        
+                        [self.navigationController pushViewController:auditVC animated:YES];
+                    });
+                }
+                
+            }];
+        } else {
+            
+            //重复调认证状态接口
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self requestCarrierStatus];
+
+            });
+        }
+        
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

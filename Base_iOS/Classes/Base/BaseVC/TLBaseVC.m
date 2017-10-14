@@ -8,6 +8,7 @@
 
 #import "TLBaseVC.h"
 #import "TLUserLoginVC.h"
+#import "BaseUserLoginVC.h"
 #import "NavigationController.h"
 
 @interface TLBaseVC ()
@@ -138,9 +139,26 @@
 
 - (void)showReLoginVC {
     
-    TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
-    NavigationController *nav = [[NavigationController alloc] initWithRootViewController:loginVC];
-    [self.navigationController presentViewController:nav animated:YES completion:nil];
+    switch ([ApiConfig config].runMode) {
+        case RunModeDis:
+            {
+                TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
+                NavigationController *nav = [[NavigationController alloc] initWithRootViewController:loginVC];
+                [self.navigationController presentViewController:nav animated:YES completion:nil];
+            }break;
+            
+        case RunModeReview:
+        {
+            BaseUserLoginVC *loginVC = [[BaseUserLoginVC alloc] init];
+            NavigationController *nav = [[NavigationController alloc] initWithRootViewController:loginVC];
+            [self.navigationController presentViewController:nav animated:YES completion:nil];
+            
+        }break;
+            
+        default:
+            break;
+    }
+    
     
 }
 

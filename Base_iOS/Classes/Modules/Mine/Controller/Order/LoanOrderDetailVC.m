@@ -68,6 +68,8 @@
         }break;
             
         case 1:
+        case 8://宝付代付
+
         {
             self.title = @"待放款详情";
             

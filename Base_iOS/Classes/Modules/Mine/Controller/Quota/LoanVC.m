@@ -46,7 +46,7 @@
         
         LoanOrderDetailVC *orderVC = [LoanOrderDetailVC new];
         
-        orderVC.code = self.borrowCode;
+        orderVC.code = weakSelf.borrowCode;
         
         [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };

@@ -39,32 +39,71 @@ void TLLog(NSString *format, ...) {
     
     _runEnv = runEnv;
     
-    self.companyCode = @"CD-YLQ000014";
-    self.systemCode = @"CD-YLQ000014";
-    
-    switch (_runEnv) {
+    switch ([ApiConfig config].runMode) {
+        case RunModeDis:
+        {
+            self.companyCode = @"CD-YLQ000014";
+            self.systemCode = @"CD-YLQ000014";
             
-        case RunEnvRelease: {
-            
-            self.qiniuDomain = @"http://oucrrtx1y.bkt.clouddn.com";
-            self.addr = @"http://116.62.193.233:3701";
-            
+            switch (_runEnv) {
+                    
+                case RunEnvRelease: {
+                    
+                    self.qiniuDomain = @"http://oucrrtx1y.bkt.clouddn.com";
+                    self.addr = @"http://116.62.193.233:3701";
+                    
+                }break;
+                    
+                case RunEnvDev: {
+                    
+                    self.qiniuDomain = @"http://oucrrtx1y.bkt.clouddn.com";
+                    self.addr = @"http://121.43.101.148:3701";
+                    
+                }break;
+                    
+                case RunEnvTest: {
+                    
+                    self.qiniuDomain = @"http://oucrrtx1y.bkt.clouddn.com";
+                    self.addr = @"http://118.178.124.16:3701";
+                    
+                }break;
+                    
+            }
         }break;
             
-        case RunEnvDev: {
+        case RunModeReview:
+        {
+            self.companyCode = @"CD-JKEG000011";
+            self.systemCode = @"CD-JKEG000011";
             
-            self.qiniuDomain = @"http://oucrrtx1y.bkt.clouddn.com";
-            self.addr = @"http://121.43.101.148:3701";
-            
+            switch (_runEnv) {
+                    
+                case RunEnvRelease: {
+                    
+                    self.qiniuDomain = @"http://or4e1nykg.bkt.clouddn.com";
+                    self.addr = @"http://116.62.114.86:8901";
+                    
+                }break;
+                    
+                case RunEnvDev: {
+                    
+                    self.qiniuDomain = @"http://or4e1nykg.bkt.clouddn.com";
+                    self.addr = @"http://121.43.101.148:3401";
+                    
+                }break;
+                    
+                case RunEnvTest: {
+                    
+                    self.qiniuDomain = @"http://or4e1nykg.bkt.clouddn.com";
+                    self.addr = @"http://118.178.124.16:3401";
+                    
+                }break;
+                    
+            }
         }break;
             
-        case RunEnvTest: {
-            
-            self.qiniuDomain = @"http://oucrrtx1y.bkt.clouddn.com";
-            self.addr = @"http://118.178.124.16:3701";
-            
-        }break;
-            
+        default:
+            break;
     }
     
 }

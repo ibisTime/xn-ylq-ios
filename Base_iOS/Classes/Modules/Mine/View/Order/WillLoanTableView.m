@@ -199,17 +199,9 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    UITableViewHeaderFooterView *hfV = (UITableViewHeaderFooterView *)view;
-    hfV.contentView.backgroundColor = [UIColor zh_backgroundColor];
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
-    
-    UITableViewHeaderFooterView *hfV = (UITableViewHeaderFooterView *)view;
-    hfV.contentView.backgroundColor = [UIColor zh_backgroundColor];
-    
+    return [UIView new];
 }
 
 @end

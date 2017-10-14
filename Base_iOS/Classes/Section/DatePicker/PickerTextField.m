@@ -55,7 +55,7 @@
     
     if (!self.pickerInput) {
         
-        UIPickerView *picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 180)];
+        UIPickerView *picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 215)];
         _pickerInput = picker;
         _pickerInput.delegate = self;
         _pickerInput.dataSource = self;

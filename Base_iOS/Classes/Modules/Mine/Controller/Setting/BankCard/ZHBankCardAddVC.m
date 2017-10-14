@@ -167,7 +167,7 @@
     
     if (self.bankCard) {//修改
         
-        http.code = @"802012";
+        http.code = @"623850";
         http.parameters[@"code"] = self.bankCard.code;
         http.parameters[@"status"] = @"1";
         

@@ -44,6 +44,10 @@
 		21176EFA1F33005C00C5217A /* AuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21176EF91F33005C00C5217A /* AuthVC.m */; };
 		21198F531F45B51400FDDCC4 /* PayInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21198F521F45B51400FDDCC4 /* PayInfoCell.m */; };
 		21198F561F45B5AE00FDDCC4 /* PayFuncModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21198F551F45B5AE00FDDCC4 /* PayFuncModel.m */; };
+		211997731F8DF44900AA59D7 /* BaseUserForgetPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211997651F8DEFFE00AA59D7 /* BaseUserForgetPwdVC.m */; };
+		211997741F8DF44900AA59D7 /* BaseUserLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211997671F8DEFFF00AA59D7 /* BaseUserLoginVC.m */; };
+		211997751F8DF44900AA59D7 /* BaseUserRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2119976A1F8DF00000AA59D7 /* BaseUserRegisterVC.m */; };
+		211997761F8DF44900AA59D7 /* BaseHTMLStrVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211997721F8DF32000AA59D7 /* BaseHTMLStrVC.m */; };
 		211D3F731F4EEE0D00451BA0 /* PickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 211D3F721F4EEE0D00451BA0 /* PickerButton.m */; };
 		211F66411F3AB90C00B10E9E /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 211F663B1F3AB90C00B10E9E /* libMoxieSDK.a */; };
 		211F66421F3AB90C00B10E9E /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 211F663D1F3AB90C00B10E9E /* mx_back@2x.png */; };
@@ -493,6 +497,16 @@
 		21198F521F45B51400FDDCC4 /* PayInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayInfoCell.m; sourceTree = "<group>"; };
 		21198F541F45B5AE00FDDCC4 /* PayFuncModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayFuncModel.h; sourceTree = "<group>"; };
 		21198F551F45B5AE00FDDCC4 /* PayFuncModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayFuncModel.m; sourceTree = "<group>"; };
+		211997651F8DEFFE00AA59D7 /* BaseUserForgetPwdVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseUserForgetPwdVC.m; sourceTree = "<group>"; };
+		211997661F8DEFFE00AA59D7 /* BaseUserLoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseUserLoginVC.h; sourceTree = "<group>"; };
+		211997671F8DEFFF00AA59D7 /* BaseUserLoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseUserLoginVC.m; sourceTree = "<group>"; };
+		211997681F8DEFFF00AA59D7 /* BaseUserForgetPwdVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseUserForgetPwdVC.h; sourceTree = "<group>"; };
+		211997691F8DEFFF00AA59D7 /* BaseUserRegisterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseUserRegisterVC.h; sourceTree = "<group>"; };
+		2119976A1F8DF00000AA59D7 /* BaseUserRegisterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseUserRegisterVC.m; sourceTree = "<group>"; };
+		2119976D1F8DF1CB00AA59D7 /* UserReferrer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UserReferrer.m; path = Base_iOS/Classes/Modules/User/Model/UserReferrer.m; sourceTree = SOURCE_ROOT; };
+		2119976E1F8DF1CB00AA59D7 /* UserReferrer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UserReferrer.h; path = Base_iOS/Classes/Modules/User/Model/UserReferrer.h; sourceTree = SOURCE_ROOT; };
+		211997711F8DF32000AA59D7 /* BaseHTMLStrVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseHTMLStrVC.h; sourceTree = "<group>"; };
+		211997721F8DF32000AA59D7 /* BaseHTMLStrVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseHTMLStrVC.m; sourceTree = "<group>"; };
 		211D3F711F4EEE0D00451BA0 /* PickerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerButton.h; sourceTree = "<group>"; };
 		211D3F721F4EEE0D00451BA0 /* PickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerButton.m; sourceTree = "<group>"; };
 		211F663A1F3AB90C00B10E9E /* MoxieSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoxieSDK.h; sourceTree = "<group>"; };
@@ -1529,6 +1543,55 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		211997631F8DEF6500AA59D7 /* 用户 */ = {
+			isa = PBXGroup;
+			children = (
+				2119976C1F8DF15400AA59D7 /* Model */,
+				2119976B1F8DF14F00AA59D7 /* View */,
+				211997641F8DEFB900AA59D7 /* Controller */,
+			);
+			path = "用户";
+			sourceTree = "<group>";
+		};
+		211997641F8DEFB900AA59D7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				211997681F8DEFFF00AA59D7 /* BaseUserForgetPwdVC.h */,
+				211997651F8DEFFE00AA59D7 /* BaseUserForgetPwdVC.m */,
+				211997661F8DEFFE00AA59D7 /* BaseUserLoginVC.h */,
+				211997671F8DEFFF00AA59D7 /* BaseUserLoginVC.m */,
+				211997691F8DEFFF00AA59D7 /* BaseUserRegisterVC.h */,
+				2119976A1F8DF00000AA59D7 /* BaseUserRegisterVC.m */,
+				211997701F8DF32000AA59D7 /* HTML */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2119976B1F8DF14F00AA59D7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2119976C1F8DF15400AA59D7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2119976E1F8DF1CB00AA59D7 /* UserReferrer.h */,
+				2119976D1F8DF1CB00AA59D7 /* UserReferrer.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		211997701F8DF32000AA59D7 /* HTML */ = {
+			isa = PBXGroup;
+			children = (
+				211997711F8DF32000AA59D7 /* BaseHTMLStrVC.h */,
+				211997721F8DF32000AA59D7 /* BaseHTMLStrVC.m */,
+			);
+			path = HTML;
+			sourceTree = "<group>";
+		};
 		211F66371F3AB90C00B10E9E /* MoxieSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -2074,6 +2137,7 @@
 		21A6B1831F7F81D6004FE27E /* 健康e购 */ = {
 			isa = PBXGroup;
 			children = (
+				211997631F8DEF6500AA59D7 /* 用户 */,
 				21A6B1841F7F81D6004FE27E /* 商品 */,
 				21A6B1BF1F7F81D7004FE27E /* 商城 */,
 				21A6B2311F7F81D7004FE27E /* 我的 */,
@@ -3819,6 +3883,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21216FCF1F380E30007C9855 /* UserReferrer.m in Sources */,
+				211997731F8DF44900AA59D7 /* BaseUserForgetPwdVC.m in Sources */,
+				211997741F8DF44900AA59D7 /* BaseUserLoginVC.m in Sources */,
+				211997751F8DF44900AA59D7 /* BaseUserRegisterVC.m in Sources */,
+				211997761F8DF44900AA59D7 /* BaseHTMLStrVC.m in Sources */,
 				21A6B27D1F7F8477004FE27E /* ZHDefaultGoodsVC.m in Sources */,
 				21A6B27E1F7F8477004FE27E /* ZHEvaluateListVC.m in Sources */,
 				21A6B27F1F7F8477004FE27E /* ZHGoodsCategoryVC.m in Sources */,
@@ -3926,7 +3995,6 @@
 				21FB30BD1F26E9EF0028ADEE /* UIControl+Block.m in Sources */,
 				21A6B17F1F7F8020004FE27E /* TableViewModel.m in Sources */,
 				212689691F3C45F100225267 /* BaseInfoModel.m in Sources */,
-				21216FCF1F380E30007C9855 /* UserReferrer.m in Sources */,
 				21FB30921F26E9EF0028ADEE /* SGScanningQRCodeVC.m in Sources */,
 				212170401F384E07007C9855 /* GoodView.m in Sources */,
 				21F82CA11F17719D0019B176 /* BaseTableView.m in Sources */,

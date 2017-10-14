@@ -48,12 +48,14 @@
         
         self.rightLabel = [UILabel labelWithText:@"" textColor:kTextColor textFont:14.0];
         
-        self.rightLabel.textAlignment = NSTextAlignmentRight;
+        self.rightLabel.numberOfLines = 0;
+        
+        self.rightLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.rightLabel];
         [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.width.mas_lessThanOrEqualTo(250);
-            make.height.mas_equalTo(15.0);
+            make.height.mas_lessThanOrEqualTo(45.0);
             make.right.mas_equalTo(-15);
             make.centerY.mas_equalTo(0);
             

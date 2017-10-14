@@ -34,6 +34,8 @@
 #import "TLProgressHUD.h"
 #import "TLAuthHelper.h"
 
+//Base
+#import "AccountTf.h"
 
 //Foundation
 #import "NSString+Extension.h"

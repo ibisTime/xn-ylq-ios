@@ -222,4 +222,8 @@
     return 10;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    return [UIView new];
+}
 @end

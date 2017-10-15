@@ -1,5 +1,5 @@
 //
-//  GoodModel.h
+//  ProductModel.h
 //  Base_iOS
 //
 //  Created by 蔡卓越 on 2017/8/11.
@@ -8,7 +8,7 @@
 
 #import "BaseModel.h"
 
-@interface GoodModel : BaseModel
+@interface ProductModel : BaseModel
 
 @property (nonatomic, copy) NSString *status;           //该产品针对当前用户的状态
 @property (nonatomic, copy) NSString *name;

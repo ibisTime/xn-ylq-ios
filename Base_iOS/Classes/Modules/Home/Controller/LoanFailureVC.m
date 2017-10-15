@@ -9,7 +9,7 @@
 #import "LoanFailureVC.h"
 
 #import "GoodView.h"
-#import "GoodModel.h"
+#import "ProductModel.h"
 
 #import "SelectMoneyVC.h"
 
@@ -50,7 +50,7 @@
     
     GoodView *goodView = [[GoodView alloc] initWithFrame:CGRectMake(leftMargin, topMargin, viewW, viewH)];
 
-    goodView.goodModel = self.good;
+    goodView.productModel = self.good;
     
     goodView.isCancel = YES;
     

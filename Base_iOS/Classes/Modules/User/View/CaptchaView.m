@@ -28,7 +28,7 @@
     CGFloat rightMargin = btnW + 15;
     
     //获得验证码按钮
-    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth - rightMargin, 0, rightMargin, frame.size.height)];
+    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(self.width - rightMargin, 0, rightMargin, frame.size.height)];
     
     rightView.backgroundColor = kWhiteColor;
     

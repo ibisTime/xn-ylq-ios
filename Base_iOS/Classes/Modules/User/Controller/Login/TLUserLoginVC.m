@@ -61,7 +61,6 @@
     CGFloat margin = ACCOUNT_MARGIN;
     CGFloat w = kScreenWidth - 2*margin;
     CGFloat h = ACCOUNT_HEIGHT;
-    CGFloat middleMargin = ACCOUNT_MIDDLE_MARGIN;
     
     CGFloat btnMargin = 15;
 

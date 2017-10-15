@@ -23,14 +23,14 @@
 
 #import "TLPageDataHelper.h"
 
-#import "GoodModel.h"
+#import "ProductModel.h"
 #import "UpdateModel.h"
 
 @interface HomeVC ()
 
 @property (nonatomic, strong) TLPageDataHelper *helper;
 
-@property (nonatomic, strong) NSArray <GoodModel *>*goods;
+@property (nonatomic, strong) NSArray <ProductModel *>*goods;
 
 @property (nonatomic, strong) GoodView *goodView;
 
@@ -101,9 +101,9 @@
         
         goodView.tag = 1220 + i;
         
-        goodView.goodModel = self.goods[i];
+        goodView.productModel = self.goods[i];
 
-        goodView.loanBlock = ^(LoanType loanType, GoodModel *good) {
+        goodView.loanBlock = ^(LoanType loanType, ProductModel *good) {
             
             [weakSelf loanEventWithType:loanType good:good];
         };
@@ -133,7 +133,7 @@
 }
 
 #pragma mark - Events
-- (void)loanEventWithType:(LoanType)loanType good:(GoodModel *)good {
+- (void)loanEventWithType:(LoanType)loanType good:(ProductModel *)good {
 
     BaseWeakSelf;
     
@@ -190,7 +190,7 @@
     }
 }
 
-- (void)loanStatusWithGood:(GoodModel *)good {
+- (void)loanStatusWithGood:(ProductModel *)good {
     
     NSInteger status = [good.userProductStatus integerValue];
     
@@ -302,7 +302,7 @@
     helper.code = @"623012";
     helper.parameters[@"userId"] = [TLUser user].userId;
     
-    [helper modelClass:[GoodModel class]];
+    [helper modelClass:[ProductModel class]];
     
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         

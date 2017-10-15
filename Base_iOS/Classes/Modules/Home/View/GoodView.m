@@ -170,31 +170,31 @@
 }
 
 #pragma mark - Setting
-- (void)setGoodModel:(GoodModel *)goodModel {
+- (void)setProductModel:(ProductModel *)productModel {
 
-    _goodModel = goodModel;
+    _productModel = productModel;
     
-    self.backgroundColor = [UIColor colorWithHexString:_goodModel.uiColor];
+    self.backgroundColor = [UIColor colorWithHexString:_productModel.uiColor];
     
-    [self.moneyLbl labelWithString:[NSString stringWithFormat:@"￥%@", [_goodModel.amount convertToSimpleRealMoney]] title:@"￥" font:Font(kWidth(17.0)) color:kWhiteColor];
+    [self.moneyLbl labelWithString:[NSString stringWithFormat:@"￥%@", [_productModel.amount convertToSimpleRealMoney]] title:@"￥" font:Font(kWidth(17.0)) color:kWhiteColor];
 
-    self.timeLbl.text = [NSString stringWithFormat:@"%ld天", _goodModel.duration];
+    self.timeLbl.text = [NSString stringWithFormat:@"%ld天", _productModel.duration];
     
-    self.levelLbl.text = [NSString stringWithFormat:@"LV%@", _goodModel.level];
+    self.levelLbl.text = [NSString stringWithFormat:@"LV%@", _productModel.level];
     
-    self.conditionLbl.text = [_goodModel.isLocked isEqualToString:@"0"] ? @"极速放款": _goodModel.slogan;
+    self.conditionLbl.text = [_productModel.isLocked isEqualToString:@"0"] ? @"极速放款": _productModel.slogan;
 
-    if ([_goodModel.isLocked isEqualToString:@"0"]) {
+    if ([_productModel.isLocked isEqualToString:@"0"]) {
         
         self.statusBtn.hidden = NO;
         
-        [self.statusBtn setTitle:_goodModel.statusStr forState:UIControlStateNormal];
+        [self.statusBtn setTitle:_productModel.statusStr forState:UIControlStateNormal];
         
         self.lockIV.hidden = YES;
         
         self.alpha = 1;
 
-        if ([_goodModel.userProductStatus isEqualToString:@"1"] || [_goodModel.userProductStatus isEqualToString:@"2"]) {
+        if ([_productModel.userProductStatus isEqualToString:@"1"] || [_productModel.userProductStatus isEqualToString:@"2"]) {
             
             self.conditionLbl.hidden = YES;
             
@@ -231,7 +231,7 @@
     
     if (self.loanBlock) {
         
-        self.loanBlock(LoanTypeSecondStep, self.goodModel);
+        self.loanBlock(LoanTypeSecondStep, self.productModel);
     }
 }
 
@@ -239,7 +239,7 @@
     
     if (self.loanBlock) {
         
-        self.loanBlock(LoanTypeCancel, self.goodModel);
+        self.loanBlock(LoanTypeCancel, self.productModel);
     }
 }
 
@@ -247,7 +247,7 @@
     
     if (self.loanBlock) {
         
-        self.loanBlock(LoanTypeFirstStep, self.goodModel);
+        self.loanBlock(LoanTypeFirstStep, self.productModel);
     }
 }
 

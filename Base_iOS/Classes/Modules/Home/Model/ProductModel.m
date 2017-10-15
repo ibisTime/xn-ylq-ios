@@ -1,14 +1,14 @@
 //
-//  GoodModel.m
+//  ProductModel.m
 //  Base_iOS
 //
 //  Created by 蔡卓越 on 2017/8/11.
 //  Copyright © 2017年 caizhuoyue. All rights reserved.
 //
 
-#import "GoodModel.h"
+#import "ProductModel.h"
 
-@implementation GoodModel
+@implementation ProductModel
 
 - (NSString *)statusStr {
 

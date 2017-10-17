@@ -171,23 +171,60 @@
         
     }];
     
+    UILabel *protocalLbl = [[UILabel alloc] initWithFrame:CGRectZero textAligment:NSTextAlignmentLeft backgroundColor:kClearColor font:Font(12.0) textColor:kAppCustomMainColor];
+    
+    protocalLbl.text = @"注册即代表同意";
+    
+    [self.bgSV addSubview:protocalLbl];
+    
+    [protocalLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(btnMargin);
+        make.width.mas_lessThanOrEqualTo(90);
+        make.height.mas_equalTo(30);
+        make.top.mas_equalTo(regBtn.mas_bottom).mas_equalTo(15);
+        
+    }];
+    
     //协议按钮
-    UIButton *protocalBtn = [[UIButton alloc] initWithFrame:CGRectMake(margin,regBtn.yy + 10, w, 25) title:@"注册即代表同意《借款服务与隐私协议》" backgroundColor:[UIColor clearColor]];
+    UIButton *protocalBtn = [[UIButton alloc] initWithFrame:CGRectMake(margin,regBtn.yy + 10, w, 25) title:@"《借款服务与隐私协议》" backgroundColor:[UIColor clearColor]];
     protocalBtn.titleLabel.font = FONT(12);
     [protocalBtn addTarget:self action:@selector(readProtocal) forControlEvents:UIControlEventTouchUpInside];
-    [self.bgSV addSubview:protocalBtn];
     protocalBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [protocalBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
     
+    [protocalBtn setEnlargeEdgeWithTop:10 right:0 bottom:0 left:0];
+
+    [self.bgSV addSubview:protocalBtn];
+    
     [protocalBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(btnMargin);
-        make.width.mas_equalTo(w);
-        make.height.mas_equalTo(30);
-        make.top.mas_equalTo(regBtn.mas_bottom).mas_equalTo(10);
+        make.left.mas_equalTo(protocalLbl.mas_right).mas_equalTo(0);
+        make.width.mas_lessThanOrEqualTo(140);
+        make.height.mas_lessThanOrEqualTo(13);
+        make.top.mas_equalTo(regBtn.mas_bottom).mas_equalTo(13);
         
     }];
-
+    
+    //信息收集及使用规则
+    UIButton *collectRuleBtn = [[UIButton alloc] initWithFrame:CGRectMake(margin,regBtn.yy + 10, w, 25) title:@"《信息收集及使用规则》" backgroundColor:[UIColor clearColor]];
+    collectRuleBtn.titleLabel.font = Font(12);
+    [collectRuleBtn addTarget:self action:@selector(collectRule) forControlEvents:UIControlEventTouchUpInside];
+    collectRuleBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [collectRuleBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
+    
+    [collectRuleBtn setEnlargeEdgeWithTop:0 right:0 bottom:10 left:0];
+    [self.bgSV addSubview:collectRuleBtn];
+    
+    [collectRuleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(protocalLbl.mas_right).mas_equalTo(0);
+        make.width.mas_lessThanOrEqualTo(150);
+        make.height.mas_lessThanOrEqualTo(13);
+        make.top.mas_equalTo(protocalBtn.mas_bottom).mas_equalTo(5);
+        
+    }];
+    
 //    UIButton *btn = [[UIButton alloc] initWithFrame:self.addressTf.frame];
 //    
 //    [bgView addSubview:btn];
@@ -440,7 +477,14 @@
     
 }
 
-
+- (void)collectRule {
+    
+    HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+    
+    htmlVC.type = HTMLTypeInfoRule;
+    
+    [self.navigationController pushViewController:htmlVC animated:YES];
+}
 
 
 @end

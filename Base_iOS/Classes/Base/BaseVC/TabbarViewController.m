@@ -101,7 +101,7 @@
         
         //对比本地版本和后台版本，当前版本为0
         
-        if ([showFlag isEqualToString:@"1"]) {
+        if ([showFlag isEqualToString:@"0"]) {
             
             [ApiConfig config].runMode = RunModeReview;
             

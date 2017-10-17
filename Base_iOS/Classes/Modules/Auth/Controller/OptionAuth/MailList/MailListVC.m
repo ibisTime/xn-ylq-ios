@@ -73,7 +73,7 @@
     
     [self.view addSubview:agreeLbl];
     
-    UIButton *authProtocolBtn = [UIButton buttonWithTitle:@"《通讯录授权协议》、" titleColor:[UIColor colorWithHexString:@"#4385b3"] backgroundColor:kClearColor titleFont:12];
+    UIButton *authProtocolBtn = [UIButton buttonWithTitle:@"《通讯录授权协议》" titleColor:[UIColor colorWithHexString:@"#4385b3"] backgroundColor:kClearColor titleFont:12];
     
     [authProtocolBtn setEnlargeEdge:10];
     
@@ -89,21 +89,21 @@
         
     }];
     
-    UIButton *infoRuleBtn = [UIButton buttonWithTitle:@"《信息收集及使用规则》" titleColor:[UIColor colorWithHexString:@"#4385b3"] backgroundColor:kClearColor titleFont:12];
-    
-    [infoRuleBtn setEnlargeEdge:10];
-    
-    [infoRuleBtn addTarget:self action:@selector(clickInfoRule) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:infoRuleBtn];
-    [infoRuleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.width.mas_lessThanOrEqualTo(200);
-        make.height.mas_equalTo(12);
-        make.left.mas_equalTo(authProtocolBtn.mas_right).mas_equalTo(0);
-        make.top.mas_equalTo(agreeLbl.y);
-        
-    }];
+//    UIButton *infoRuleBtn = [UIButton buttonWithTitle:@"《信息收集及使用规则》" titleColor:[UIColor colorWithHexString:@"#4385b3"] backgroundColor:kClearColor titleFont:12];
+//
+//    [infoRuleBtn setEnlargeEdge:10];
+//
+//    [infoRuleBtn addTarget:self action:@selector(clickInfoRule) forControlEvents:UIControlEventTouchUpInside];
+//
+//    [self.view addSubview:infoRuleBtn];
+//    [infoRuleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.width.mas_lessThanOrEqualTo(200);
+//        make.height.mas_equalTo(12);
+//        make.left.mas_equalTo(authProtocolBtn.mas_right).mas_equalTo(0);
+//        make.top.mas_equalTo(agreeLbl.y);
+//
+//    }];
     
     CGFloat leftMargin = 15;
 

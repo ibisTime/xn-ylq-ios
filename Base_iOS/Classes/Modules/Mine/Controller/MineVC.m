@@ -123,7 +123,7 @@
 
     CGFloat serviceH = 60;
     
-    UIView *serviceView = [[UIView alloc] initWithFrame:CGRectMake(0, kSuperViewHeight - 49 - serviceH, kScreenWidth, serviceH)];
+    UIView *serviceView = [[UIView alloc] initWithFrame:CGRectMake(0, kSuperViewHeight - 49 - kBottomInsetHeight - serviceH, kScreenWidth, serviceH)];
     
     [self.view addSubview:serviceView];
     

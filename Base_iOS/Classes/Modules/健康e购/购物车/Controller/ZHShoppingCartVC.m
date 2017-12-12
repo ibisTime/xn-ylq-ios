@@ -170,8 +170,6 @@
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     helper.code = @"808045"; //分页查询
     helper.limit = 30;
-    helper.parameters[@"userId"] = [TLUser user].userId;
-    helper.parameters[@"token"] = [TLUser user].token;
 
     helper.tableView = self.shoopingCartTableV;
     [helper modelClass:[ZHCartGoodsModel class]];
@@ -180,6 +178,9 @@
     __weak typeof(self) weakSelf = self;
     [self.shoopingCartTableV addRefreshAction:^{
         
+        helper.parameters[@"userId"] = [TLUser user].userId;
+        helper.parameters[@"token"] = [TLUser user].token;
+
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.items = objs;

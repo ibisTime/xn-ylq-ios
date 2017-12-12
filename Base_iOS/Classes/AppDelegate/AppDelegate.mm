@@ -43,7 +43,7 @@
     [self configZMOP];
     
     //配置地图
-    [self configMapKit];
+//    [self configMapKit];
     
     //配置微信
     [self configWeChat];
@@ -193,6 +193,16 @@
     //根控制器
     TabbarViewController *tabbarCtrl = [[TabbarViewController alloc] init];
     self.window.rootViewController = tabbarCtrl;
+    
+    //重新登录
+    if([TLUser user].isLogin) {
+        
+        //初始化用户信息
+        [[TLUser user] initUserData];
+        
+        [[TLUser user] reLogin];
+        
+    };
 }
 
 @end

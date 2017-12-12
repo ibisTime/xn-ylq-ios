@@ -18,22 +18,22 @@
     self.locationManage.delegate = self;
     
     // 请求定位授权
-    [self.locationManage requestWhenInUseAuthorization];
+//    [self.locationManage requestWhenInUseAuthorization];
     
-    //启动LocationService
-    if (![CLLocationManager locationServicesEnabled]) {
-        
-        [TLAlert alertWithTitle:@"提示" msg:@"定位失败，请前往“设置->九州宝->位置“中开启定位服务" confirmMsg:@"设置" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
-            
-        } confirm:^(UIAlertAction *action) {
-            
-            [TLAuthHelper openSetting];
-        }];
-        
-    }else {
-        
-        [self.locationManage startUpdatingLocation];
-    }
+//    //启动LocationService
+//    if (![CLLocationManager locationServicesEnabled]) {
+//
+//        [TLAlert alertWithTitle:@"提示" msg:@"定位失败，请前往“设置->九州宝->位置“中开启定位服务" confirmMsg:@"设置" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+//
+//        } confirm:^(UIAlertAction *action) {
+//
+//            [TLAuthHelper openSetting];
+//        }];
+//
+//    }else {
+//
+//        [self.locationManage startUpdatingLocation];
+//    }
 }
 
 #pragma mark - CLLocationManagerDelegate

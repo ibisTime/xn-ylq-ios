@@ -266,6 +266,7 @@
 		21A6B2E51F7F974D004FE27E /* TLBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B2E11F7F974C004FE27E /* TLBannerView.m */; };
 		21A6B2E61F7F974D004FE27E /* BannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B2E21F7F974D004FE27E /* BannerCell.m */; };
 		21A6B2E91F7F97AC004FE27E /* ApiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B2E81F7F97AC004FE27E /* ApiConfig.m */; };
+		21AC586C1FDE34BF00F19DE8 /* TongDunVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC586B1FDE34BF00F19DE8 /* TongDunVC.m */; };
 		21F82C991F17719D0019B176 /* AppDelegate+Launch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F82B581F17719D0019B176 /* AppDelegate+Launch.m */; };
 		21F82C9A1F17719D0019B176 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21F82B5A1F17719D0019B176 /* AppDelegate.mm */; };
 		21F82C9B1F17719D0019B176 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F82B5E1F17719D0019B176 /* BaseModel.m */; };
@@ -920,6 +921,8 @@
 		21A6B2E41F7F974D004FE27E /* BannerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerCell.h; sourceTree = "<group>"; };
 		21A6B2E71F7F97AC004FE27E /* ApiConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApiConfig.h; sourceTree = "<group>"; };
 		21A6B2E81F7F97AC004FE27E /* ApiConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApiConfig.m; sourceTree = "<group>"; };
+		21AC586A1FDE34BF00F19DE8 /* TongDunVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TongDunVC.h; sourceTree = "<group>"; };
+		21AC586B1FDE34BF00F19DE8 /* TongDunVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TongDunVC.m; sourceTree = "<group>"; };
 		21F827CF1F1742E80019B176 /* Base_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Base_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F82B571F17719D0019B176 /* AppDelegate+Launch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Launch.h"; sourceTree = "<group>"; };
 		21F82B581F17719D0019B176 /* AppDelegate+Launch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Launch.m"; sourceTree = "<group>"; };
@@ -1600,6 +1603,7 @@
 		211F66721F3AF21500B10E9E /* InfoAuth */ = {
 			isa = PBXGroup;
 			children = (
+				21AC58691FDE33F400F19DE8 /* TongDun */,
 				2126893C1F3C44A100225267 /* BaseInfo */,
 				212689411F3C44A100225267 /* Identifier */,
 				212689421F3C44A100225267 /* MoXie */,
@@ -2709,6 +2713,15 @@
 			path = TableView;
 			sourceTree = "<group>";
 		};
+		21AC58691FDE33F400F19DE8 /* TongDun */ = {
+			isa = PBXGroup;
+			children = (
+				21AC586A1FDE34BF00F19DE8 /* TongDunVC.h */,
+				21AC586B1FDE34BF00F19DE8 /* TongDunVC.m */,
+			);
+			path = TongDun;
+			sourceTree = "<group>";
+		};
 		21F827C61F1742E80019B176 = {
 			isa = PBXGroup;
 			children = (
@@ -3754,8 +3767,7 @@
 				TargetAttributes = {
 					21F827CE1F1742E80019B176 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = V9JFY59G9V;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -3946,6 +3958,7 @@
 				215ABF101F93B46C00B3E3BF /* ZHPayFuncModel.m in Sources */,
 				215ABF111F93B46C00B3E3BF /* TLCellModel.m in Sources */,
 				215ABF121F93B46C00B3E3BF /* TLGroupModel.m in Sources */,
+				21AC586C1FDE34BF00F19DE8 /* TongDunVC.m in Sources */,
 				215ABF131F93B46C00B3E3BF /* ZHPayInfoCell.m in Sources */,
 				215ABF141F93B46C00B3E3BF /* ZHPayFuncCell.m in Sources */,
 				215ABF151F93B46C00B3E3BF /* ZHCartManager.m in Sources */,
@@ -4319,7 +4332,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = V9JFY59G9V;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4354,7 +4368,7 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/Base_iOS/Extension/MoxieSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.ylq;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.jzb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4366,8 +4380,9 @@
 			baseConfigurationReference = 1D92F7998FE0FF842471AF8F /* Pods-Base_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = V9JFY59G9V;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = UUNGKSEUAM;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4402,9 +4417,10 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/Base_iOS/Extension/MoxieSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.ylq;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.jzb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "dfbc06a0-9fdf-4b96-a4c8-05e76a60533f";
+				PROVISIONING_PROFILE_SPECIFIER = jiuzhoubao;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

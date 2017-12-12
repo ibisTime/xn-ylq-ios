@@ -55,6 +55,9 @@
         
         [self setUpUI];
         
+        // 请求定位授权
+        [self.sysLocationManager requestWhenInUseAuthorization];
+        
         if (![TLAuthHelper isEnableLocation]) {
             
             [TLAlert alertWithTitle:@"" msg:@"为了更好的为您服务,请在设置中打开定位服务" confirmMsg:@"设置" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {

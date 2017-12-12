@@ -57,7 +57,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self configOpenSetting];
+    [self configTabBar];
+
+//    [self configOpenSetting];
     
 }
 
@@ -88,44 +90,41 @@
 }
 
 //配置开关
-- (void)configOpenSetting {
-    
-    TLNetworking *http = [TLNetworking new];
-    
-    http.code = @"805917";
-    http.parameters[@"ckey"] = @"iosShowFlag";
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        NSString *showFlag = responseObject[@"data"][@"cvalue"];
-        
-        //对比本地版本和后台版本，当前版本为0
-        
-        if ([showFlag isEqualToString:@"0"]) {
-            
-            [ApiConfig config].runMode = RunModeReview;
-            
-            [AppConfig config].runEnv = RunEnvDev;
-        }
-        
-        //重新登录
-        if([TLUser user].isLogin) {
-            
-            //初始化用户信息
-            [[TLUser user] initUserData];
-            
-            [[TLUser user] reLogin];
-            
-        };
-        
-        [self configTabBar];
-        
-        
-    } failure:^(NSError *error) {
-        
-        
-    }];
-}
+//- (void)configOpenSetting {
+//
+//    TLNetworking *http = [TLNetworking new];
+//
+//    http.code = @"805917";
+//    http.parameters[@"ckey"] = @"iosShowFlag";
+//
+//    [http postWithSuccess:^(id responseObject) {
+//
+//        NSString *showFlag = responseObject[@"data"][@"cvalue"];
+//
+//        //对比本地版本和后台版本，当前版本为0
+//
+//        if ([showFlag isEqualToString:@"0"]) {
+//
+//            [ApiConfig config].runMode = RunModeReview;
+//
+//            [AppConfig config].runEnv = RunEnvDev;
+//        }
+//
+//        //重新登录
+//        if([TLUser user].isLogin) {
+//
+//            //初始化用户信息
+//            [[TLUser user] initUserData];
+//
+//            [[TLUser user] reLogin];
+//
+//        };
+//
+//    } failure:^(NSError *error) {
+//
+//
+//    }];
+//}
 
 - (NavigationController*)createNavWithTitle:(NSString*)title imgNormal:(NSString*)imgNormal imgSelected:(NSString*)imgSelected vcName:(NSString*)vcName {
     

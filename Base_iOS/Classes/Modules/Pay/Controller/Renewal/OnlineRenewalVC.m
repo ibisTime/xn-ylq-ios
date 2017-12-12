@@ -119,7 +119,7 @@
     [self.headerView addSubview:topView];
     
     //起始时间
-    TLTextField *originDateTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, topView.yy, kScreenWidth, 44) leftTitle:@"起点日期" titleWidth:145 placeholder:@""];
+    TLTextField *originDateTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, topView.yy, kScreenWidth, 44) leftTitle:@"原到期还款日" titleWidth:145 placeholder:@""];
     
     originDateTF.textColor = [UIColor textColor];
     
@@ -161,7 +161,14 @@
     
     _order = order;
     
-    self.originDateTF.text = [_order.renewalStartDate convertDate];
+    //后台传来的日期
+    NSDate *originDate = [NSString dateFromString:_order.renewalStartDate formatter:@"MMM dd, yyyy hh:mm:ss aa"];
+    //一天前的日期
+    NSDate *date = [originDate dateByAddingTimeInterval:-24*60*60];
+    
+    NSString *renewalDate = [NSString stringFromDate:date formatter:@"MMM dd, yyyy hh:mm:ss aa"];
+    
+    self.originDateTF.text = [renewalDate convertDate];
     
     self.endDateTF.text = [_order.renewalEndDate convertDate];
     

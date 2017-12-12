@@ -45,6 +45,8 @@ void TLLog(NSString *format, ...) {
             self.companyCode = @"CD-YLQ000014";
             self.systemCode = @"CD-YLQ000014";
             
+            self.bottomInsetHeight = kDevice_Is_iPhoneX == YES ? 34: 0;
+            
             switch (_runEnv) {
                     
                 case RunEnvRelease: {
@@ -76,6 +78,8 @@ void TLLog(NSString *format, ...) {
             self.companyCode = @"CD-JKEG000011";
             self.systemCode = @"CD-JKEG000011";
             
+            self.bottomInsetHeight = kDevice_Is_iPhoneX == YES ? 34: 0;
+
             switch (_runEnv) {
                     
                 case RunEnvRelease: {

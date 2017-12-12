@@ -91,7 +91,7 @@
     
     CGFloat y = 0;
     
-    self.bgSV.height = kSuperViewHeight - 49;
+    self.bgSV.height = kSuperViewHeight - kTabBarHeight;
 
     self.bgSV.backgroundColor = kBackgroundColor;
     

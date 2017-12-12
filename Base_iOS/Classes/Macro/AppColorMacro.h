@@ -72,7 +72,7 @@
 #define kDevice_Is_iPhoneX (kScreenHeight == 812 ? YES : NO)
 #define kNavigationBarHeight  (kDevice_Is_iPhoneX == YES ? 88: 64)
 #define kTabBarHeight  (kDevice_Is_iPhoneX == YES ? 49: 49)
-#define kBottomInsetHeight  (kDevice_Is_iPhoneX == YES ? 34: 0)
+#define kBottomInsetHeight  [AppConfig config].bottomInsetHeight
 #define kSuperViewHeight    kScreenHeight - kNavigationBarHeight - kBottomInsetHeight
 
 #define kImage(I)     [UIImage imageNamed:I]

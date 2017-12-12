@@ -61,6 +61,9 @@
     
     if (![TLAuthHelper isEnableLocation]) {
         
+        // 请求定位授权
+        [self.sysLocationManager requestWhenInUseAuthorization];
+        
         [self setUpUI];
         
         [TLAlert alertWithTitle:@"" msg:@"为了更好的为您服务,请在设置中打开定位服务" confirmMsg:@"设置" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
@@ -86,7 +89,7 @@
     
     self.view.backgroundColor = kBackgroundColor;
 
-    NSInteger count = 3;
+    NSInteger count = 4;
     
     CGFloat margin = ACCOUNT_MARGIN;
     CGFloat w = kScreenWidth - 2*margin;
@@ -135,7 +138,7 @@
     addressTf.placeHolder = @"当前位置-自动定位";
     addressTf.leftIconView.image = [UIImage imageNamed:@"定位"];
     addressTf.enabled = NO;
-    addressTf.hidden = YES;
+//    addressTf.hidden = YES;
 
     [bgView addSubview:addressTf];
     self.addressTf = addressTf;

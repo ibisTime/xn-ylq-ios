@@ -12,10 +12,11 @@
 
 #import "BaseInfoVC.h"
 #import "ZMOPScoreVC.h"
-#import "MXOperatorAuthVC.h"
+//#import "MXOperatorAuthVC.h"
 #import "IdentifierVC.h"
 #import "ManualAuditVC.h"
 #import "MailListVC.h"
+#import "TongDunVC.h"
 
 #import "TLUserLoginVC.h"
 #import "NavigationController.h"
@@ -450,7 +451,11 @@
                 //判断是否在认证中,3为认证中状态
                 if (![self.authModel.infoCarrierFlag isEqualToString:@"3"]) {
                     
-                    [self initMXSDK];
+//                    [self initMXSDK];
+                    
+                    TongDunVC *tongDunVC = [TongDunVC new];
+                    
+                    [self.navigationController pushViewController:tongDunVC animated:YES];
                     
                 } else {
                     

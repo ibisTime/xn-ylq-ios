@@ -125,7 +125,7 @@
     
     UIButton *commitBtn = [UIButton buttonWithTitle:@"款项已在路上" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:btnH/2.0];
     
-    commitBtn.frame = CGRectMake(leftMargin, self.processView.yy, kScreenWidth - 2*leftMargin, btnH);
+    commitBtn.frame = CGRectMake(leftMargin, self.processView.yy + 40, kScreenWidth - 2*leftMargin, btnH);
     
     [commitBtn addTarget:self action:@selector(clickCommit) forControlEvents:UIControlEventTouchUpInside];
     

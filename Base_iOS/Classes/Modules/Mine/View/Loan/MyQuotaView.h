@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) QuotaModel *quotaModel;
 
+@property (nonatomic, strong) QuotaModel *Model;
+
 @end

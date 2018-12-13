@@ -37,7 +37,7 @@
 
     } else {
     
-        self.backgroundImageView.image = [UIImage imageNamed:@"ICBC_bg"];
+        self.backgroundImageView.image = [UIImage imageNamed:@"bank_bg"];
 
     }
     

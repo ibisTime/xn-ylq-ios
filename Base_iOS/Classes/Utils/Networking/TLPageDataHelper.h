@@ -21,6 +21,8 @@
 
 @property (nonatomic, assign) BOOL isList;
 
+@property (nonatomic, assign) BOOL isStage; //分期列表
+
 //设置改值后外界只需要 调用reloadData
 @property (nonatomic,weak) TLTableView *tableView;
 

@@ -76,6 +76,7 @@
 #define kSuperViewHeight    kScreenHeight - kNavigationBarHeight - kBottomInsetHeight
 
 #define kImage(I)     [UIImage imageNamed:I]
+#define AppName [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"]
 
 #define kLeftMargin 15
 #define kLineHeight 0.5

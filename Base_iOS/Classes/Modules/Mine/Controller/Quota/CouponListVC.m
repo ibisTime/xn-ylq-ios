@@ -159,9 +159,9 @@
     
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
-    http.code = @"805917";
+    http.code = @"623917";
     
-    http.parameters[@"ckey"] = @"couponRule";
+    http.parameters[@"key"] = @"couponRule";
     
     [http postWithSuccess:^(id responseObject) {
         

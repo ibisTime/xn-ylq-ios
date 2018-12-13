@@ -13,13 +13,25 @@
 
 #import "TLWXManager.h"
 #import "TLAlipayManager.h"
-
-@interface OnlineRepaymentVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+#import <WebKit/WebKit.h>
+@interface OnlineRepaymentVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,WKNavigationDelegate>
 
 @property (nonatomic,strong) TLTextField *amountTf;
+@property (nonatomic, strong) WKWebView *webView;
+
+@property (nonatomic,strong) TLTextField *accountNmme;
+
+@property (nonatomic,strong) TLTextField *accountNameCn;
+
+@property (nonatomic,strong) TLTextField *accountremark;
+
+@property (nonatomic,strong) TLTextField *receiveTf;
+
+@property (nonatomic, copy) NSString *htmlStr;
+
 
 @property (nonatomic,strong) TLTableView *tableView;
-
+@property (nonatomic,strong) UIButton *payBtn;
 @property (nonatomic,strong) NSMutableArray <PayFuncModel *>*pays;
 
 @end
@@ -37,7 +49,7 @@
     // Do any additional setup after loading the view.
     self.title = @"还款";
     
-    [self beginLoad];
+//    [self beginLoad];
     
     [self initSubviews];
     
@@ -67,6 +79,62 @@
 
 - (void)initSubviews {
     
+
+    self.accountNmme = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 50) leftTitle:@"还款金额:" titleWidth:100 placeholder:@""];
+    self.accountNmme.text = [self.order.totalAmount convertToSimpleRealMoney];
+
+    self.accountNmme.backgroundColor = [UIColor whiteColor];
+    self.accountNmme.textColor = [UIColor orangeColor];
+
+    self.accountNmme.delegate = self;
+    if (self.renewalModel) {
+        self.accountNmme.text = [self.renewalModel.amount convertToSimpleRealMoney];
+        [self loadUrl];
+    }else{
+        [self loadUrl];
+
+        self.accountNmme.text = [self.order.totalAmount convertToSimpleRealMoney];
+
+    }
+    
+    [self.view addSubview:self.accountNmme];
+    
+    UIView *line = [UIView new];
+    line.frame = CGRectMake(0, self.accountNmme.yy, kScreenWidth, 0.5);
+    line.backgroundColor = kLineColor;
+    [self.view addSubview:line];
+    
+    self.accountNameCn = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.accountNmme.yy+2, kScreenWidth, 50) leftTitle:@"还款期数:" titleWidth:100 placeholder:@""];
+    self.accountNameCn.text = [self.order.totalAmount convertToSimpleRealMoney];
+    
+    self.accountNameCn.backgroundColor = [UIColor whiteColor];
+    self.accountNameCn.delegate = self;
+    self.accountNameCn.textColor = [UIColor orangeColor];
+    if (self.renewalModel) {
+        self.accountNameCn.text = self.renewalModel.remark ;
+
+    }else{
+        self.accountNameCn.hidden = YES;
+
+    }
+    
+    [self.view addSubview:self.accountNameCn];
+    
+    UIView *line1 = [UIView new];
+    line1.backgroundColor = kLineColor;
+
+    line1.frame = CGRectMake(0, self.accountNameCn.yy, kScreenWidth, 0.5);
+    [self.view addSubview:line1];
+   
+    UIButton *payBtn = [UIButton buttonWithTitle:@"确定还款" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:18 cornerRadius:22.5];
+    CGFloat f ;
+    self.payBtn = payBtn;
+    
+    [payBtn addTarget:self action:@selector(repayment) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:payBtn];
+    return;
+
     self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) delegate:self dataSource:self];
     
     [self.view addSubview:self.tableView];
@@ -78,15 +146,92 @@
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
     
     //按钮
-    UIButton *payBtn = [UIButton buttonWithTitle:@"确定还款" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:18 cornerRadius:22.5];
-    
-    payBtn.frame = CGRectMake(15, 40, kScreenWidth - 30, 45);
-    
-    [payBtn addTarget:self action:@selector(repayment) forControlEvents:UIControlEventTouchUpInside];
-    
-    [footerView addSubview:payBtn];
+   
     
     self.tableView.tableFooterView = footerView;
+    
+}
+
+- (void)loadUrl
+{
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = USER_CKEY_CVALUE;
+    
+    http.parameters[@"key"] = @"repayOfflineAccount";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.htmlStr = responseObject[@"data"][@"cvalue"];
+        
+        [self initWebView];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
+- (void)initWebView {
+    
+    NSString *jS = [NSString stringWithFormat:@"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'); meta.setAttribute('width', %lf); document.getElementsByTagName('head')[0].appendChild(meta);",kScreenWidth];
+    
+    WKUserScript *wkUserScript = [[WKUserScript alloc] initWithSource:jS injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    
+    WKUserContentController *wkUCC = [WKUserContentController new];
+    
+    [wkUCC addUserScript:wkUserScript];
+    
+    WKWebViewConfiguration *wkConfig = [WKWebViewConfiguration new];
+    
+    wkConfig.userContentController = wkUCC;
+    if (self.renewalModel) {
+        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, self.accountNameCn.yy+10, kScreenWidth, 100) configuration:wkConfig];
+        self.payBtn.frame = CGRectMake(15, self.webView.yy+30, kScreenWidth - 30, 45);
+
+    }else{
+        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, self.accountNmme.yy+10, kScreenWidth, 100) configuration:wkConfig];
+        self.payBtn.frame = CGRectMake(15, self.webView.yy +30, kScreenWidth - 30, 45);
+
+    }
+   
+  
+    
+    _webView.backgroundColor = kWhiteColor;
+    
+    _webView.navigationDelegate = self;
+    
+    _webView.allowsBackForwardNavigationGestures = YES;
+    
+    [self.view addSubview:_webView];
+    
+    [self loadWebWithString:self.htmlStr];
+}
+
+- (void)loadWebWithString:(NSString *)string {
+    
+    NSString *html = [NSString stringWithFormat:@"<head><style>img{width:%lfpx !important;height:auto;margin: 0px auto;} p{word-wrap:break-word;overflow:hidden;}</style></head>%@",kScreenWidth - 16, string];
+    
+    [_webView loadHTMLString:html baseURL:nil];
+}
+
+#pragma mark - WKWebViewDelegate
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    
+    [webView evaluateJavaScript:@"document.body.scrollHeight" completionHandler:^(id _Nullable string, NSError * _Nullable error) {
+        
+        [self changeWebViewHeight:string];
+    }];
+    
+}
+
+- (void)changeWebViewHeight:(NSString *)heightStr {
+    
+    CGFloat height = [heightStr integerValue];
+    
+    // 改变webView和scrollView的高度
+    
+    _webView.scrollView.contentSize = CGSizeMake(kScreenWidth, height);
     
 }
 
@@ -142,12 +287,7 @@
         
     }];
     
-    if (![self.amountTf.text valid]) {
-        
-        [TLAlert alertWithInfo:@"请输入还款金额"];
-        return;
-        
-    }
+    
     
     NSString *payType;
     
@@ -185,37 +325,52 @@
 
 #pragma mark- 优店支付, 余额支付需要支付密码
 - (void)shopPay:(NSString *)payType payPwd:(nullable NSString *)pwd {
-    
+//    [self checkMoney];
+//    return;
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
-    http.code = @"623072";
-    //    http.parameters[@"userId"] = [TLUser user].userId;
-    http.parameters[@"code"] = self.order.code;
-    http.parameters[@"payType"] = payType;
+    if (self.renewalModel) {
+        http.parameters[@"stagingCode"] = self.renewalModel.stageCode;
+        http.code = @"623182";
+
+    }else{
+        http.parameters[@"orderCode"] = self.order.code;
+        http.code = @"623180";
+
+    }
     
     [http postWithSuccess:^(id responseObject) {
         
-        if ([payType isEqualToString: @"2"]) {
-            
-            [self wxPayWithInfo:responseObject[@"data"]];
-            
-        } else if([payType isEqualToString: @"3"]) {
-            
-            [self aliPayWithInfo:responseObject[@"data"]];
-            
-            
-        } else {
-            
+
             [TLAlert alertWithSucces:@"还款成功"];
-            
-            if (self.paySucces) {
-                self.paySucces();
-            }
-            
-        }
+        [self.navigationController popToRootViewControllerAnimated:YES];
+//            if (self.paySucces) {
+//                self.paySucces();
+//            }
+        
         
     } failure:^(NSError *error) {
         
+        
+    }];
+    
+}
+
+- (void)checkMoney
+{
+    
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = @"623181";
+    //    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"code"] = @"RA2018112314561249036343";
+    http.parameters[@"approver"] = @"test";
+    http.parameters[@"approveResult"] = @"1";
+    http.parameters[@"approveNote"] = self.order.code;
+
+    [http postWithSuccess:^(id responseObject) {
+        
+    } failure:^(NSError *error) {
         
     }];
     

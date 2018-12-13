@@ -133,7 +133,7 @@
     [btn addTarget:self action:@selector(chooseAddress) forControlEvents:UIControlEventTouchUpInside];
     
     //常住地址
-    self.addressTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.provinceTF.yy + 1, kScreenWidth, 45) leftTitle:@"详细地址" titleWidth:titleWidth placeholder:@"请输入详细地址"];
+    self.addressTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.provinceTF.yy + 1, kScreenWidth, 45) leftTitle:@"单位地址" titleWidth:titleWidth placeholder:@"请输入单位地址"];
     
     self.addressTF.text = infoOccupation.address;
     

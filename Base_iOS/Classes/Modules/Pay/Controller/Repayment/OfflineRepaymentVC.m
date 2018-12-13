@@ -151,9 +151,9 @@
     
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
-    http.code = @"805917";
+    http.code = @"623917";
     
-    http.parameters[@"ckey"] = @"repayOfflineAccount";
+    http.parameters[@"key"] = @"repayOfflineAccount";
     
     [http postWithSuccess:^(id responseObject) {
         

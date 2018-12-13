@@ -18,7 +18,7 @@
 
 #import "NavigationController.h"
 #import "TabbarViewController.h"
-
+#import <MoxieSDK.h>
 @interface AppDelegate ()
 
 @end
@@ -48,6 +48,7 @@
     //配置微信
     [self configWeChat];
     
+    [self configMoxie];
     //配置根控制器
     [self configRootViewController];
     
@@ -65,7 +66,8 @@
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    
+    [[MoxieSDK shared] applicationWillEnterForeground:application];
+
 }
 
 
@@ -159,13 +161,16 @@
 - (void)configServiceAddress {
     
     //配置环境
-    [AppConfig config].runEnv = RunEnvRelease;
-    
+    [AppConfig config].runEnv = RunEnvTest;
+    [AppConfig config].comPany = ComPanyALL;
+
 }
+
+
 
 - (void)configIQKeyboard {
     
-    //
+//
 //    [IQKeyboardManager sharedManager].enable = YES;
 //    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[ComposeVC class]];
 //    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[SendCommentVC class]];
@@ -182,7 +187,16 @@
     [[ALCreditService sharedService] resgisterApp];
 }
 
+-(void)configMoxie
+{
+    
+}
+
 - (void)configRootViewController {
+    
+    
+    
+    
     
     [UIApplication sharedApplication].statusBarHidden = NO;
     
@@ -193,16 +207,31 @@
     //根控制器
     TabbarViewController *tabbarCtrl = [[TabbarViewController alloc] init];
     self.window.rootViewController = tabbarCtrl;
-    
+    [self requestQiniu];
     //重新登录
     if([TLUser user].isLogin) {
         
         //初始化用户信息
         [[TLUser user] initUserData];
         
-        [[TLUser user] reLogin];
+//        [[TLUser user] reLogin];
         
     };
 }
-
+- (void)requestQiniu {
+    
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.window.rootViewController.view;
+    http.code = @"623917";
+    http.isSyComCode = YES;
+    http.parameters[@"key"] = @"qiniu_domain";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [AppConfig config].qiniuDomain = responseObject[@"data"][@"cvalue"];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
 @end

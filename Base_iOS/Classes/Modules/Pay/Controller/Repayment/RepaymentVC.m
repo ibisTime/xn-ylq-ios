@@ -27,9 +27,11 @@
 
     [super viewDidLoad];
     
-    self.title = @"实时还款";
+    self.title = @"还款";
     
-    [self initSelectView];
+    _titles = @[@"还款"];
+
+//    [self initSelectView];
     
     [self addSubViewController];
 }
@@ -40,7 +42,6 @@
     
     BaseWeakSelf;
     
-    _titles = @[@"实时还款", @"线下还款"];
     
     _selectView = [[SelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:_titles];
     
@@ -76,7 +77,7 @@
             
             [self addChildViewController:childVC];
             
-            [_selectView.scrollView addSubview:childVC.view];
+            [self.view addSubview:childVC.view];
             
         } else if (i == 1) {
             

@@ -164,7 +164,7 @@
     
     //    self.group.items = @[baseInfo, jobInfo, contact, bankCardAuth];
     
-    self.group.items = @[baseInfo, jobInfo, contact, contactAuth];
+    self.group.items = @[baseInfo, jobInfo, contact];
     
     
 }
@@ -204,8 +204,8 @@
     http.showView = self.view;
     http.code = @"623052";
     http.parameters[@"userId"] = [TLUser user].userId;
-    http.parameters[@"wifimac"] = [NSString getWifiMacAddress];
-    http.parameters[@"ip"] = [NSString getIPAddress:YES];
+//    http.parameters[@"wifimac"] = [NSString getWifiMacAddress];
+//    http.parameters[@"ip"] = [NSString getIPAddress:YES];
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -217,7 +217,7 @@
 //            
 //        });
 
-        [TLAlert alertWithTitle:@"" message:@"个人信息提交成功" confirmMsg:@"OK" confirmAction:^{
+        [TLAlert alertWithTitle:@"" message:@"基本信息提交成功" confirmMsg:@"OK" confirmAction:^{
            
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 

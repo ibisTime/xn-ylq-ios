@@ -85,8 +85,14 @@
 - (void)setOrder:(OrderModel *)order {
     
     _order = order;
+//    if ([order.isStage isEqualToString:@"0"]) {
+//        self.titleArr = @[@"签约时间", @"合同编号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"实际还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"到期还款额", @"状态说明"];
+//        }
     
-    self.titleArr = @[@"签约时间", @"合同编号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"实际还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"到期还款额", @"状态说明", @"续期次数"];
+//    else{
+         self.titleArr = @[@"签约时间", @"合同编号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"实际还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"到期还款额", @"状态说明",@"分期次数"];
+//    }
+   
     
     NSString *signDate = [_order.signDatetime convertDate];
     
@@ -133,7 +139,7 @@
     STRING_NIL_NULL(couponAmount);
     
     //到期还款额
-    NSString *totalAmount = [_order.totalAmount convertToSimpleRealMoney];
+    NSString *totalAmount = [_order.realHkAmount convertToSimpleRealMoney];
     STRING_NIL_NULL(totalAmount);
     
     //状态说明
@@ -141,10 +147,19 @@
     STRING_NIL_NULL(remark);
     
     //续期次数
-    NSString *renewalNum = [NSString stringWithFormat:@"%ld次", _order.renewalCount];
+    NSString *renewalNum = [NSString stringWithFormat:@"%@", _order.stageBatch];
     STRING_NIL_NULL(renewalNum);
-    
-    self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, realHkDatetime, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, totalAmount, remark, renewalNum];
+//    if ([order.isStage isEqualToString:@"0"]) {
+         self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, realHkDatetime, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, totalAmount, remark, renewalNum];
+       
+//    }else{
+//
+//        //续期次数
+//        NSString *renewa = [order.realHkAmount convertToSimpleRealMoney];
+//        STRING_NIL_NULL(renewa);
+//        self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, totalAmount, renewalNum,coupon,total,renewa];
+//    }
+   
     
     self.statusIV.image = kImage(_order.imageStr);
 
@@ -171,10 +186,16 @@
     cell.titleLbl.text = self.titleArr[indexPath.row];
     
     cell.rightLabel.text = self.contentArr[indexPath.row];
-    
-    cell.rightLabel.textColor = indexPath.row == 1 || indexPath.row == self.contentArr.count - 3 ? kAppCustomMainColor: kTextColor;
-
-    cell.arrowHidden = indexPath.row == 1 || indexPath.row == self.contentArr.count - 1 ? NO: YES;
+    if (self.order.info) {
+        cell.rightLabel.textColor =  indexPath.row == self.contentArr.count - 3 ? kAppCustomMainColor: kTextColor;
+        
+        cell.arrowHidden =  indexPath.row == self.contentArr.count - 3 ? NO: YES;
+    }else{
+        cell.rightLabel.textColor = kTextColor;
+        
+        cell.arrowHidden = YES;
+    }
+   
 
     return cell;
     
@@ -185,22 +206,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.row == 1) {
-        
-        if (_detailBlock) {
+    if (self.order.info) {
+        if (indexPath.row == self.titleArr.count - 3) {
             
-            _detailBlock(OrderDetailTypeLoanContract);
-            
-        }
-        
-    }else if (indexPath.row == self.titleArr.count - 1) {
-        
-        if (_detailBlock) {
-            
-            _detailBlock(OrderDetailTypeRenewal);
+            if (_detailBlock) {
+                
+                _detailBlock(OrderDetailTypeRenewal);
+            }
         }
     }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

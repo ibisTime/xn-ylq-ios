@@ -27,12 +27,18 @@
 
 @property (nonatomic, copy) NSString *infoIdentifyFlag;     //身份认证标识
 
+@property (nonatomic, copy) NSString *infoZqznFlag;
 @property (nonatomic, copy) NSString *infoAntifraudFlag;    //	基本信息全部提交标识
 @property (nonatomic, copy) NSString *infoZMCreditFlag;     //芝麻分
 
 @property (nonatomic, copy) NSString *infoCarrierFlag;      //运营商
 
 @property (nonatomic, copy) NSString *infoAddressBookFlag;  //通讯录
+
+@property (nonatomic, copy) NSString *infoPersonalFlag;  //个人信息
+
+
+@property (nonatomic, copy) NSString *infoZfbFlag;  //支付宝
 
 @property (nonatomic, strong) InfoBasic *infoBasic;
 
@@ -59,7 +65,7 @@
 
 @property (nonatomic, copy) NSString *liveTime;
 
-@property (nonatomic, copy) NSString *qq;
+@property (nonatomic, copy) NSString *wechat;
 
 @property (nonatomic, copy) NSString *childrenNum;
 

@@ -66,7 +66,7 @@
             
             make.width.mas_lessThanOrEqualTo(150);
             make.height.mas_equalTo(15.0);
-            make.right.mas_equalTo(-10);
+            make.right.equalTo(self.accessoryImageView.mas_left).offset(-10);
             make.centerY.mas_equalTo(0);
             
         }];
@@ -99,10 +99,33 @@
 }
 
 - (void)setSettingModel:(SettingModel *)settingModel {
-    
-    self.iconImageView.image = [UIImage imageNamed:settingModel.imgName];
+    if (settingModel.imgName.length > 0) {
+        self.iconImageView.image = [UIImage imageNamed:settingModel.imgName];
+
+    }else{
+        
+        [self.titleLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.mas_left).offset(20);
+            
+            make.centerY.equalTo(self.contentView.mas_centerY);
+            make.right.lessThanOrEqualTo(self.accessoryImageView.mas_left);
+        }];
+        [self layoutIfNeeded];
+    }
     self.titleLbl.text = settingModel.text;
-    
+    if (settingModel.subText.length > 0) {
+        self.rightLabel.text = settingModel.subText;
+    }
+    if ([settingModel.subText isEqualToString:@"已认证"]) {
+        self.rightLabel.textColor = [UIColor colorWithHexString:@"#0cb8ae"];
+    }else if([settingModel.subText isEqualToString:@"认证中"]){
+        self.rightLabel.textColor = RGB(254, 159, 9);
+
+    }else{
+        self.rightLabel.textColor = RGB(153, 153, 163);
+
+    }
+
 }
 
 @end

@@ -219,7 +219,7 @@
  *  @param soundID    系统声音ID
  *  @param clientData 回调时传递的数据
  */
-void soundCompleteCallback(SystemSoundID soundID,void * clientData){
+void soundCompleteCallback1(SystemSoundID soundID,void * clientData){
     NSLog(@"播放完成...");
 }
 
@@ -240,7 +240,7 @@ void soundCompleteCallback(SystemSoundID soundID,void * clientData){
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)(fileUrl), &soundID);
     
     // 如果需要在播放完之后执行某些操作，可以调用如下方法注册一个播放完成回调函数
-    AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, soundCompleteCallback, NULL);
+    AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, soundCompleteCallback1, NULL);
     
     // 2、播放音频
     AudioServicesPlaySystemSound(soundID); // 播放音效

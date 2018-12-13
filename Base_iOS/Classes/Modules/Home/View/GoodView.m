@@ -173,16 +173,20 @@
 - (void)setProductModel:(ProductModel *)productModel {
 
     _productModel = productModel;
-    
-    self.backgroundColor = [UIColor colorWithHexString:_productModel.uiColor];
+    if (![productModel.color hasPrefix:@"#"]) {
+        self.backgroundColor = [UIColor colorWithHexString:@"#0cb8ae"];
+    }else{
+        
+        self.backgroundColor = [UIColor colorWithHexString:productModel.color];
+
+    }
     
     [self.moneyLbl labelWithString:[NSString stringWithFormat:@"￥%@", [_productModel.amount convertToSimpleRealMoney]] title:@"￥" font:Font(kWidth(17.0)) color:kWhiteColor];
 
     self.timeLbl.text = [NSString stringWithFormat:@"%ld天", _productModel.duration];
     
     self.levelLbl.text = [NSString stringWithFormat:@"LV%@", _productModel.level];
-    
-    self.conditionLbl.text = [_productModel.isLocked isEqualToString:@"0"] ? @"极速放款": _productModel.slogan;
+    self.conditionLbl.text =  _productModel.slogan;
 
     if ([_productModel.isLocked isEqualToString:@"0"]) {
         
@@ -206,7 +210,7 @@
 
         }
         
-    } else {
+    } else if([_productModel.isLocked isEqualToString:@"1"]){
     
         self.statusBtn.hidden = YES;
 
@@ -215,8 +219,19 @@
         self.cancelBtn.hidden = YES;
 
         self.alpha = 0.5;
+    }else{
+        
+        self.statusBtn.hidden = NO;
+        
+        [self.statusBtn setTitle:_productModel.statusStr forState:UIControlStateNormal];
+        
+        self.lockIV.hidden = YES;
+        self.cancelBtn.hidden = YES;
+
+        self.alpha = 1;
+
     }
-    
+
 }
 
 - (void)setIsCancel:(BOOL)isCancel {

@@ -55,9 +55,16 @@
 
 #pragma mark - Init
 - (void)initSelectScrollView {
-    
-    self.titles = @[@"待审核", @"审核不通过", @"待放款", @"打款失败", @"待还款", @"已还款", @"已逾期"];
-    
+//    LoanOrderStatusWillAudit = 0,       //待审核
+//    LoanOrderStatusWillLoan = 1,    // 待放款
+//    LoanOrderStatusAuditFailure = 2,        //审核失败
+//    LoanOrderStatusDidLoan = 3,    // 待还款
+//    LoanOrderStatusDidRepayment = 4,    //已还款
+//    LoanOrderStatusDidOverdue = 5,      //已逾期款
+//    LoanOrderStatusMoneyFailure  = 7,         //打款失败
+    self.titles = @[@"全部",@"待审核",  @"审核不通过",@"待放款", @"打款失败", @"待还款", @"已还款", @"已逾期"];
+
+//    self.titles = @[@"待审核", @"待放款", @"审核不通过", @"待还款", @"已还款", @"已逾期", @"打款失败"];
     self.selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:self.titles];
         
     [self.view addSubview:self.selectScrollView];
@@ -73,6 +80,7 @@
         
 //        childVC.code = _models[i].dkey;
 //        childVC.kind = _models[i].parentKey;
+        
         childVC.status = i;
         
         [self addChildViewController:childVC];

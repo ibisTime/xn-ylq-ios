@@ -329,35 +329,35 @@
 #pragma mark - Events
 
 //--//
-- (void)sendCaptcha {
-    
-    if (![self.phoneTf.text isPhoneNum]) {
-        
-        [TLAlert alertWithInfo:@"请输入正确的手机号"];
-        
-        return;
-    }
-    
-    TLNetworking *http = [TLNetworking new];
-    http.showView = self.view;
-    http.code = CAPTCHA_CODE;
-    http.parameters[@"bizType"] = USER_REG_CODE;
-    http.parameters[@"mobile"] = self.phoneTf.text;
-    http.parameters[@"kind"] = @"f1";
-
-    [http postWithSuccess:^(id responseObject) {
-        
-        [TLAlert alertWithSucces:@"验证码已发送,请注意查收"];
-        
-        [self.captchaView.captchaBtn begin];
-        
-    } failure:^(NSError *error) {
-        
-        [TLAlert alertWithError:@"发送失败,请检查手机号"];
-        
-    }];
-    
-}
+//- (void)sendCaptcha {
+//
+//    if (![self.phoneTf.text isPhoneNum]) {
+//
+//        [TLAlert alertWithInfo:@"请输入正确的手机号"];
+//
+//        return;
+//    }
+//
+//    TLNetworking *http = [TLNetworking new];
+//    http.showView = self.view;
+//    http.code = CAPTCHA_CODE;
+//    http.parameters[@"bizType"] = USER_REG_CODE;
+//    http.parameters[@"mobile"] = self.phoneTf.text;
+//    http.parameters[@"kind"] = @"f1";
+//
+//    [http postWithSuccess:^(id responseObject) {
+//
+//        [TLAlert alertWithSucces:@"验证码已发送,请注意查收"];
+//
+//        [self.captchaView.captchaBtn begin];
+//
+//    } failure:^(NSError *error) {
+//
+//        [TLAlert alertWithError:@"发送失败,请检查手机号"];
+//
+//    }];
+//
+//}
 
 - (void)goReg {
     

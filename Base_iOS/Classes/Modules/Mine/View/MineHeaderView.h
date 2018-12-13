@@ -28,6 +28,8 @@ typedef NS_ENUM(NSUInteger, MineHeaderSeletedType) {
 @property (nonatomic, strong) UIImageView *genderImg;
 @property (nonatomic, strong) UIImageView *vipImg;
 
+@property (nonatomic, strong) UILabel *scoreLbl;
+
 @property (nonatomic, weak) id<MineHeaderSeletedDelegate> delegate;
 
 

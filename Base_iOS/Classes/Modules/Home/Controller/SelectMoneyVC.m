@@ -22,7 +22,6 @@
 #import "ProductModel.h"
 
 #import "PickerTextField.h"
-
 #define kFirstMoney     500
 #define kSecondMoney    1000
 #define kFirstDay       7
@@ -320,6 +319,9 @@
 
 - (void)clickNext:(UIButton *)sender {
     
+    
+    
+    
     if (![TLUser user].isLogin) {
         
         TLUserLoginVC *loginVC = [TLUserLoginVC new];
@@ -331,48 +333,57 @@
         return ;
     }
     
-    if (_selectType == SelectGoodTypeAuth) {
-        
-        TLNetworking *http = [TLNetworking new];
-        
-        http.showView = self.view;
-        http.code = @"623020";
-        http.parameters[@"applyUser"] = [TLUser user].userId;
-        http.parameters[@"productCode"] = _good.code;
-        
-        [http postWithSuccess:^(id responseObject) {
-            
-            NSString *status = responseObject[@"data"][@"status"];
-            
-            if ([status isEqualToString:@"1"]) {
-                
-                [TLAlert alertWithTitle:@"" message:@"您的信息未认证，请先完成认证" confirmMsg:@"OK" confirmAction:^{
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        
-                        TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
-                        
-                        tabbarVC.currentIndex = 1;
-                        
-                        [self.navigationController popToRootViewControllerAnimated:YES];
-                    });
-                }];
-                
-            } else if ([status isEqualToString:@"2"]) {
-            
-                ManualAuditVC *auditVC = [ManualAuditVC new];
-                
-                auditVC.title = @"系统审核";
-                
-                [self.navigationController pushViewController:auditVC animated:YES];
-            }
-            
-        } failure:^(NSError *error) {
-            
-            
-        }];
-        
-    } else if(_selectType == SelectGoodTypeSign) {
-        
+//    ZHRealNameAuthVC *authVC = [[ZHRealNameAuthVC alloc] init];
+//    [authVC setAuthSuccess:^{
+//
+//        [self realNameAuthAfterAction];
+//
+//    }];
+//    [self.navigationController pushViewController:authVC animated:YES];
+    
+    
+//    if (_selectType == SelectGoodTypeAuth) {
+//
+//        TLNetworking *http = [TLNetworking new];
+//
+//        http.showView = self.view;
+//        http.code = @"623020";
+//        http.parameters[@"applyUser"] = [TLUser user].userId;
+//        http.parameters[@"productCode"] = _good.code;
+//
+//        [http postWithSuccess:^(id responseObject) {
+//
+//            NSString *status = responseObject[@"data"][@"status"];
+//
+//            if ([status isEqualToString:@"1"]) {
+//
+//                [TLAlert alertWithTitle:@"" message:@"您的信息未认证，请先完成认证" confirmMsg:@"OK" confirmAction:^{
+//                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//                        TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+//
+//                        tabbarVC.currentIndex = 1;
+//
+//                        [self.navigationController popToRootViewControllerAnimated:YES];
+//                    });
+//                }];
+//
+//            } else if ([status isEqualToString:@"2"]) {
+//
+//                ManualAuditVC *auditVC = [ManualAuditVC new];
+//
+//                auditVC.title = @"系统审核";
+//
+//                [self.navigationController pushViewController:auditVC animated:YES];
+//            }
+//
+//        } failure:^(NSError *error) {
+//
+//
+//        }];
+//
+//    } else if(_selectType == SelectGoodTypeSign) {
+    
         SignContractVC *signContractVC = [SignContractVC new];
         
         signContractVC.good = self.good;
@@ -380,7 +391,7 @@
         signContractVC.coupon = self.selectCoupon;
         
         [self.navigationController pushViewController:signContractVC animated:YES];
-    }
+//    }
     
 }
 

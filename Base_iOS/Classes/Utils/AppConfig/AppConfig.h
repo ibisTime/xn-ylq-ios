@@ -14,6 +14,14 @@ typedef NS_ENUM(NSUInteger, RunEnv) {
     RunEnvTest
 };
 
+typedef NS_ENUM(NSUInteger, ComPany) {
+    ComPanyALL = 0, //业务全有
+    ComPanyNoLoad, //没有借款业务
+    ComPanyNoScore,//没有信用认证业务
+    ComPanyOnlyMine//只有个人中心业务
+
+};
+
 FOUNDATION_EXPORT void TLLog(NSString *format, ...);
 
 @interface AppConfig : NSObject
@@ -21,6 +29,8 @@ FOUNDATION_EXPORT void TLLog(NSString *format, ...);
 + (instancetype)config;
 
 @property (nonatomic,assign) RunEnv runEnv;
+
+@property (nonatomic,assign) ComPany comPany;
 
 @property (nonatomic, strong) NSString *systemCode;
 @property (nonatomic, strong) NSString *companyCode;

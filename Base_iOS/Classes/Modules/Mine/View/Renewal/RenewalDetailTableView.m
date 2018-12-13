@@ -80,45 +80,35 @@
     
     _renewal = renewal;
     
-    self.titleArr = @[@"续期日", @"续期期限", @"续期起点", @"续期终点", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"续期总费用"];
+    self.titleArr = @[@"本期应还", @"本金", @"利息", @"还款期数", @"借款时间"];
     
-    //续期日
-    NSString *renewalDate = [_renewal.createDatetime convertDate];
-    STRING_NIL_NULL(renewalDate);
+   
     
-    //续期期限
-    NSString *duration = [NSString stringWithFormat:@"%ld天", _renewal.step];
-    STRING_NIL_NULL(duration);
-    
-    //续期起点
-    NSString *oringinDate = [_renewal.startDate convertDate];
-    STRING_NIL_NULL(oringinDate);
-    
-    //续期终点
-    NSString *endDate = [_renewal.endDate convertDate];
-    STRING_NIL_NULL(endDate);
-    
-    //快速信审费
-    NSString *xsAmount = [_renewal.xsAmount convertToSimpleRealMoney];
+    //本期应还
+    NSString *xsAmount = [_renewal.amount convertToSimpleRealMoney];
     STRING_NIL_NULL(xsAmount);
+ 
     
-    //账户管理费
-    NSString *glAmount = [_renewal.glAmount convertToSimpleRealMoney];
+    //本金
+    NSString *glAmount = [_renewal.mainAmount convertToSimpleRealMoney];
     STRING_NIL_NULL(glAmount);
     
     //利息
-    NSString *lxAmount = [_renewal.lxAmount convertToSimpleRealMoney];
+    NSString *endDate = [_renewal.lxAmount convertToSimpleRealMoney];
+    STRING_NIL_NULL(endDate);
+    
+    //时间
+    NSString *lxAmount =  [NSString stringWithFormat:@"%@",_renewal.remark];
     STRING_NIL_NULL(lxAmount);
     
     //服务费
-    NSString *fwAmount = [_renewal.fwAmount convertToSimpleRealMoney];
+    NSString *fwAmount = _renewal.date;
     STRING_NIL_NULL(fwAmount);
     
-    //续期总费用
-    NSString *totalAmount = [_renewal.totalAmount convertToSimpleRealMoney];
-    STRING_NIL_NULL(totalAmount);
-    
-    self.contentArr = @[renewalDate, duration, oringinDate, endDate, xsAmount, glAmount, lxAmount, fwAmount, totalAmount];
+
+    //借款时间
+ 
+    self.contentArr = @[ xsAmount, glAmount,endDate,lxAmount,fwAmount];
     
 }
 

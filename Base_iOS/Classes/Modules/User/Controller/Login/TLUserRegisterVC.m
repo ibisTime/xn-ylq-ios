@@ -36,6 +36,7 @@
 
 @property (nonatomic,strong) AddressPickerView *addressPicker;
 
+@property (nonatomic,strong) UIButton *selectBtn;
 //
 @property (nonatomic,copy) NSString *province;
 @property (nonatomic,copy) NSString *city;
@@ -174,45 +175,63 @@
         
     }];
     
-    UILabel *protocalLbl = [[UILabel alloc] initWithFrame:CGRectZero textAligment:NSTextAlignmentLeft backgroundColor:kClearColor font:Font(12.0) textColor:kAppCustomMainColor];
-    
-    protocalLbl.text = @"注册即代表同意";
-    
-    [self.bgSV addSubview:protocalLbl];
-    
-    [protocalLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.mas_equalTo(btnMargin);
-        make.width.mas_lessThanOrEqualTo(90);
-        make.height.mas_equalTo(30);
-        make.top.mas_equalTo(regBtn.mas_bottom).mas_equalTo(15);
-        
-    }];
+//    UILabel *protocalLbl = [[UILabel alloc] initWithFrame:CGRectZero textAligment:NSTextAlignmentLeft backgroundColor:kClearColor font:Font(12.0) textColor:kAppCustomMainColor];
+//    
+//    protocalLbl.text = @"注册即代表同意";
+//    
+//    [self.bgSV addSubview:protocalLbl];
+//    
+//    [protocalLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.left.mas_equalTo(btnMargin);
+//        make.width.mas_lessThanOrEqualTo(90);
+//        make.height.mas_equalTo(30);
+//        make.top.mas_equalTo(regBtn.mas_bottom).mas_equalTo(15);
+//        
+//    }];
     
     //协议按钮
-    UIButton *protocalBtn = [[UIButton alloc] initWithFrame:CGRectMake(margin,regBtn.yy + 10, w, 25) title:@"《借款服务与隐私协议》" backgroundColor:[UIColor clearColor]];
-    protocalBtn.titleLabel.font = FONT(12);
-    [protocalBtn addTarget:self action:@selector(readProtocal) forControlEvents:UIControlEventTouchUpInside];
-    protocalBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [protocalBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
+//    UIButton *protocalBtn = [[UIButton alloc] initWithFrame:CGRectMake(margin,regBtn.yy + 10, w, 25) title:@"《信息收集及使用规则》" backgroundColor:[UIColor clearColor]];
+//    protocalBtn.titleLabel.font = FONT(12);
+//    [protocalBtn addTarget:self action:@selector(collectRule) forControlEvents:UIControlEventTouchUpInside];
+//    protocalBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//    [protocalBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
+//
+//    [protocalBtn setEnlargeEdgeWithTop:10 right:0 bottom:0 left:0];
+//
+//    [self.bgSV addSubview:protocalBtn];
+//
+//    [protocalBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.mas_equalTo(protocalLbl.mas_right).mas_equalTo(0);
+//        make.width.mas_lessThanOrEqualTo(140);
+//        make.height.mas_lessThanOrEqualTo(13);
+//        make.top.mas_equalTo(regBtn.mas_bottom).mas_equalTo(13);
+//
+//    }];
     
-    [protocalBtn setEnlargeEdgeWithTop:10 right:0 bottom:0 left:0];
-
-    [self.bgSV addSubview:protocalBtn];
+        UIButton *selectBtn = [UIButton buttonWithImageName:@"同意" selectedImageName:@"未同意"];
+        self.selectBtn = selectBtn;
+        selectBtn.tag = 1250;
     
-    [protocalBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        selectBtn.frame = CGRectMake(kWidth(100), regBtn.yy + kWidth(30), 14, 14);
+    
+        [selectBtn addTarget:self action:@selector(clickSelect:) forControlEvents:UIControlEventTouchUpInside];
+    
+        [self.bgSV addSubview:selectBtn];
+        [selectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(protocalLbl.mas_right).mas_equalTo(0);
-        make.width.mas_lessThanOrEqualTo(140);
-        make.height.mas_lessThanOrEqualTo(13);
-        make.top.mas_equalTo(regBtn.mas_bottom).mas_equalTo(13);
+            make.left.mas_equalTo(regBtn.mas_left).mas_equalTo(0);
+            make.width.mas_lessThanOrEqualTo(14);
+            make.height.mas_lessThanOrEqualTo(14);
+            make.top.mas_equalTo(regBtn.mas_bottom).mas_equalTo(20);
         
-    }];
+        }];
     
     //信息收集及使用规则
-    UIButton *collectRuleBtn = [[UIButton alloc] initWithFrame:CGRectMake(margin,regBtn.yy + 10, w, 25) title:@"《信息收集及使用规则》" backgroundColor:[UIColor clearColor]];
+    UIButton *collectRuleBtn = [[UIButton alloc] initWithFrame:CGRectMake(selectBtn.xx+20,regBtn.yy + 20, w, 25) title:@"《借款服务与隐私协议》" backgroundColor:[UIColor clearColor]];
     collectRuleBtn.titleLabel.font = Font(12);
-    [collectRuleBtn addTarget:self action:@selector(collectRule) forControlEvents:UIControlEventTouchUpInside];
+    [collectRuleBtn addTarget:self action:@selector(readProtocal) forControlEvents:UIControlEventTouchUpInside];
     collectRuleBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [collectRuleBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
     
@@ -221,10 +240,10 @@
     
     [collectRuleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(protocalLbl.mas_right).mas_equalTo(0);
+        make.left.mas_equalTo(selectBtn.mas_right).mas_offset(20);
         make.width.mas_lessThanOrEqualTo(150);
         make.height.mas_lessThanOrEqualTo(13);
-        make.top.mas_equalTo(protocalBtn.mas_bottom).mas_equalTo(5);
+        make.top.mas_equalTo(regBtn.mas_bottom).mas_equalTo(20);
         
     }];
     
@@ -240,6 +259,12 @@
         self.addressTf.text = [NSString stringWithFormat:@"%@ %@ %@",self.province,self.city,self.area];
         
     }
+}
+
+-(void)clickSelect:(UIButton*)btn
+{
+    btn.selected = !btn.selected;
+    
 }
 
 - (AddressPickerView *)addressPicker {
@@ -322,6 +347,15 @@
     
 }
 
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        
+        [self.sysLocationManager startUpdatingLocation];
+        
+    }
+}
+
 #pragma mark - Events
 
 //--//
@@ -333,22 +367,6 @@
         return;
     }
     
-    //检查手机号是否存在
-    TLNetworking *http = [TLNetworking new];
-    
-    http.showView = self.view;
-    
-    http.code = @"805040";
-    http.parameters[@"mobile"] = self.phoneTf.text;
-    http.parameters[@"kind"] = @"C";
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        //返回true代表可以注册，否则直接抛异常
-        BOOL isSuccess = responseObject[@"data"][@"isSuccess"];
-        
-        if (isSuccess) {
-            
             //发送验证码
             TLNetworking *http = [TLNetworking new];
             http.showView = self.view;
@@ -369,15 +387,17 @@
                 
             }];
 
-        }
-        
-    } failure:^(NSError *error) {
-        
-    }];
+    
+
     
 }
 
 - (void)goReg {
+    
+    if (self.selectBtn.selected == YES) {
+        [TLAlert alertWithInfo:@"请先同意借款协议"];
+        return;
+    }
     
     if (![self.phoneTf.text isPhoneNum]) {
         

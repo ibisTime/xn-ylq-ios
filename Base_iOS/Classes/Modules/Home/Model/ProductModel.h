@@ -11,11 +11,16 @@
 @interface ProductModel : BaseModel
 
 @property (nonatomic, copy) NSString *status;           //该产品针对当前用户的状态
+
 @property (nonatomic, copy) NSString *name;
 
 @property (nonatomic, copy) NSString *statusStr;        //产品状态
 
+@property (nonatomic, strong) NSNumber *hkDays;           //待还款或逾期天数
+
 @property (nonatomic, copy) NSString *uiColor;          //UI颜色
+
+@property (nonatomic, copy) NSString *color;          //UI颜色
 
 @property (nonatomic, strong) NSNumber *amount;         //借款金额
 

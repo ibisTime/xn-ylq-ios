@@ -71,7 +71,11 @@
 
 @property (nonatomic, copy) NSString *inviteCode;       //邀请码
 
-@property (nonatomic, copy) NSString *referrerNum;    //邀请人个数
+@property (nonatomic, assign) NSNumber *refereeCount;    //邀请人个数
+
+@property (nonatomic, strong) NSNumber *stageCount;       //分期次数
+
+@property (nonatomic, strong) NSNumber *couponCount;       //可用优惠券数
 
 //实名认证的 --- 临时参数
 @property (nonatomic, copy) NSString *tempBizNo;

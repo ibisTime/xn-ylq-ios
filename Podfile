@@ -22,5 +22,6 @@ target ‘Base_iOS’ do
     pod 'Realm',                    '2.8.0'
     pod 'FDFullscreenPopGesture',   '1.1'
     pod 'CDCommon', '1.0.3'
+    pod 'MoxieSDK-iOS'
     
 end

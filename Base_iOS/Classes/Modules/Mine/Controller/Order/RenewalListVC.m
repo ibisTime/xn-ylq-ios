@@ -12,7 +12,7 @@
 #import "RenewalListCell.h"
 
 #import "RenewalDetailVC.h"
-
+#import "OrderModel.h"
 @interface RenewalListVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) TLTableView *tableView;
@@ -20,6 +20,8 @@
 @property (nonatomic, strong) UIView *placeHolderView;
 
 @property (nonatomic,strong) NSMutableArray <RenewalModel *>*renewals;
+
+@property (nonatomic,strong) OrderModel *ordes;
 
 @property (nonatomic,assign) BOOL isFirst;
 
@@ -30,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"续期列表";
+    self.title = @"分期列表";
     
     [self initPlaceHolderView];
     
@@ -63,7 +65,7 @@
     
     [self.placeHolderView addSubview:couponIV];
     
-    UILabel *textLbl = [UILabel labelWithText:@"您还没有续期记录" textColor:kTextColor textFont:15];
+    UILabel *textLbl = [UILabel labelWithText:@"您还没有分期记录" textColor:kTextColor textFont:15];
     
     textLbl.frame = CGRectMake(0, couponIV.yy + 20, kScreenWidth, 15);
     
@@ -74,27 +76,38 @@
 
 #pragma mark - Data
 - (void)requestRenewalList {
-    
+//    self.amountLbl.text = [NSString stringWithFormat:@"%@元", [_renewal.totalAmount convertToSimpleRealMoney]];
+//
+//    self.dayLbl.text = [NSString stringWithFormat:@"%ld天", _renewal.step];
+//
+//    self.timeLbl.text = [_renewal.createDatetime convertDate]
+   
     BaseWeakSelf;
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
-    helper.code = @"623090";
-    helper.parameters[@"borrowCode"] = self.code;
-    
+    helper.code = @"623086";
+    helper.parameters[@"code"] = self.code;
+    helper.isList = YES;
     helper.isDeliverCompanyCode = NO;
-    
+    helper.isStage = YES;
     helper.tableView = self.tableView;
-    [helper modelClass:[RenewalModel class]];
+    [helper modelClass:[OrderModel class]];
     
     //-----//
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-        
-        weakSelf.renewals = objs;
-        [weakSelf.tableView reloadData_tl];
+       
+        if (self.renewals.count == 0) {
+            self.renewals = [NSMutableArray array];
+        }
+        self.ordes = (OrderModel*)objs;
+        self.renewals = self.ordes.stageList;
+
+        [self.tableView reloadData_tl];
+ 
         
     } failure:^(NSError *error) {
-        
+       
         
     }];
     
@@ -160,18 +173,18 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 60;
+    return 80;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return 0.01;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     //50
-    return 0.1;
+    return 0.01;
     
 }
 

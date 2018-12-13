@@ -8,6 +8,10 @@
 
 #import "BaseViewController.h"
 
+typedef void(^AuthRespBlock)(NSString *taskId);
+
 @interface TongDunVC : BaseViewController
+
+@property (nonatomic, copy) AuthRespBlock respBlock;
 
 @end

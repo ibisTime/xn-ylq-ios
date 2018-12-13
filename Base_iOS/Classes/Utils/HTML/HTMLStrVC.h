@@ -17,6 +17,8 @@ typedef NS_ENUM(NSUInteger, HTMLType) {
     HTMLTypeAuthProtocol,       //通讯录授权协议
     HTMLTypeInfoRule,           //信息收集及使用规则
     HTMLTypeContactCustomer,    //联系客服
+    HTMLTypePay,    //还款
+
 };
 
 @interface HTMLStrVC : TLBaseVC

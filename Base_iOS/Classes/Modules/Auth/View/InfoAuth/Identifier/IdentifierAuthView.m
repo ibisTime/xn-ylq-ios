@@ -10,7 +10,8 @@
 #import "NSAttributedString+add.h"
 #import "UIView+Custom.h"
 
-#define kIVWidth 140
+#define kIVWidth 165
+#define kIVHeight 120
 
 @interface IdentifierAuthView ()
 
@@ -61,32 +62,46 @@
     NSArray *titleArr = @[@"身份证正面照", @"身份证反面照", @"手持身份证照"];
     
     NSArray *imgArr = @[@"身份证正面", @"身份证反面", @"持证自拍"];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, kWidth(20), kScreenWidth,450)];
+    bgView.tag = 1390 ;
     
+    bgView.userInteractionEnabled = YES;
+    
+    [self.scrollView addSubview:bgView];
     for (int i = 0; i < titleArr.count; i++) {
         
         CGFloat centerX = self.width/2.0;
         
-        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, kWidth(i*220), kScreenWidth, kWidth(220))];
         
-        bgView.tag = 1390 + i;
-        
-        bgView.userInteractionEnabled = YES;
-        
-        [self.scrollView addSubview:bgView];
+   
         
         UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickIV:)];
         
         [bgView addGestureRecognizer:tapGR];
+        UIImageView *bgIV;
+        if (i==0) {
+            bgIV  = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, kWidth(kIVWidth), kWidth(kIVHeight))];
+        }else if(i == 1){
+             bgIV  = [[UIImageView alloc] initWithFrame:CGRectMake(15*3+kIVWidth, 15, kWidth(kIVWidth), kWidth(kIVHeight))];
+        }else{
+            
+            
+             bgIV  = [[UIImageView alloc] initWithFrame:CGRectMake(15, kIVHeight+30+30+30, kScreenWidth-30, kHeight(175))];
+        }
+   
         
-        UIImageView *bgIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, kWidth(36), kWidth(kIVWidth), kWidth(kIVWidth))];
-        
-        bgIV.centerX = centerX;
+//        bgIV.centerX = centerX;
         
         [bgView addSubview:bgIV];
+        if (i==1) {
+            UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(0, bgIV.yy + 40, kScreenWidth, 10)];
+            line1.backgroundColor = [UIColor zh_lineColor];
+            [bgView addSubview:line1];
+        }
         //画虚线
         [bgIV drawAroundLine:3 lineSpacing:3 lineColor:kLineColor];
         
-        CGFloat imageW = 110;
+        CGFloat imageW = 165;
         
         UIImageView *iv = [[UIImageView alloc] init];
         
@@ -94,19 +109,31 @@
         
         iv.image = kImage(imgArr[i]);
         
-        iv.frame = CGRectMake(15, 15, kWidth(imageW), kWidth(imageW));
+        iv.frame = CGRectMake(15, 15, kWidth(165), kWidth(120));
+        UILabel *label = [UILabel labelWithText:titleArr[i] textColor:kTextColor textFont:kWidth(14.0)];
         
+        if (i==0) {
+            
+            iv.frame  = CGRectMake(0, 0, kWidth(kIVWidth), kWidth(kIVHeight));
+            label.frame = CGRectMake(0, bgIV.yy+4 , kIVWidth, 22);
+
+        }else if(i == 1){
+            iv.frame  = CGRectMake(0, 0, kWidth(kIVWidth), kWidth(kIVHeight));
+            label.frame = CGRectMake(kIVWidth+45, bgIV.yy+4 , kIVWidth, 22);
+
+        }else{
+            iv.frame  = CGRectMake(0, 0, kScreenWidth-30, kHeight(175));
+            label.frame = CGRectMake(0, bgIV.yy+4 , kScreenWidth-30, 22);
+
+        }
         iv.tag = 1400 + i;
         
         [bgIV addSubview:iv];
         
         [self.ivArr addObject:iv];
         
-        UILabel *label = [UILabel labelWithText:titleArr[i] textColor:kTextColor textFont:kWidth(14.0)];
+      
         
-        label.frame = CGRectMake(0, bgIV.yy + kWidth(30), 110, 15);
-        
-        label.centerX = centerX;
         
         label.textAlignment = NSTextAlignmentCenter;
         
@@ -118,7 +145,7 @@
         
     }
     
-    UIView *bgView = [self viewWithTag:1390 + titleArr.count - 1];
+//    bgView = [self viewWithTag:1400 + titleArr.count ];
     
     CGFloat btnH = 45;
     
@@ -126,7 +153,7 @@
     
     UIButton *commitBtn = [UIButton buttonWithTitle:@"提交" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:btnH/2.0];
     
-    commitBtn.frame = CGRectMake(leftMargin, bgView.yy + kWidth(40), kScreenWidth - 2*leftMargin, btnH);
+    commitBtn.frame = CGRectMake(leftMargin, bgView.yy , kScreenWidth - 2*leftMargin, btnH);
     
     [commitBtn addTarget:self action:@selector(clickCommit) forControlEvents:UIControlEventTouchUpInside];
     

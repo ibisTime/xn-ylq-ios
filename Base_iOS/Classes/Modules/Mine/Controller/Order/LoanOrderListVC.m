@@ -21,6 +21,7 @@
 
 @property (nonatomic,assign) BOOL isFirst;
 
+
 @end
 
 @implementation LoanOrderListVC
@@ -77,9 +78,8 @@
 
 #pragma mark - Data
 - (void)requestOrderList {
-    
+
     BaseWeakSelf;
-    
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     helper.code = @"623087";
 //    helper.parameters[@"token"] = [TLUser user].token;
@@ -89,83 +89,96 @@
     helper.isDeliverCompanyCode = NO;
     
     NSArray *statusList;
+    //    self.titles = @[@"待审核0",  @"审核不通过2",@"待放款1", @"打款失败7", @"待还款3", @"已还款4", @"已逾期"5];
     
-    switch (self.status) {
+//    self.titles = @[@"待审核 0", @"待放款 1", @"审核不通过2", @"待还款3", @"已还款4", @"已逾期5", @"打款失败7"];
+    switch (self.status)
+    {
+        case LoanOrderStatusAll:
+        {
+            statusList = @[@""];
+        }break;
+    
         case LoanOrderStatusWillAudit:
         {
             statusList = @[@"0"];
         }break;
           
-        case LoanOrderStatusWillLoan:
-        {
-            statusList = @[@"1"];
+        case LoanOrderStatusWillLoan:{
+            statusList = @[@"2"];
             
         }break;
         
-        case LoanOrderStatusAuditFailure:
-        {
-            statusList = @[@"2"];
+        case LoanOrderStatusAuditFailure: {
+            statusList = @[@"1"];
             
         }break;
             
         case LoanOrderStatusDidLoan:
-        {
-            statusList = @[@"3"];
-            
-        }break;
-            
+            {
+                statusList = @[@"7"];
+                
+            }break;
+
         case LoanOrderStatusDidRepayment:
-        {
-            statusList = @[@"4"];
-            
-        }break;
-            
+            {
+                statusList = @[@"3"];
+                
+            }break;
+    
         case LoanOrderStatusDidOverdue:
+            {
+                statusList = @[@"4"];
+                
+            }break;
+        case LoanOrderStatusDidNO:
         {
             statusList = @[@"5"];
-            
-        }break;
-            
-        case LoanOrderStatusMoneyFailure:
-        {
-            statusList = @[@"7"];
 
         }break;
-            
+        case LoanOrderStatusMoneyFailure:
+            {
+                
+            }break;
+
         default:
             break;
     }
-    
-    helper.parameters[@"statusList"] = statusList;
+    if (self.status == 0) {
+        
+    }else{
+        helper.parameters[@"statusList"] = statusList;
+        }
     
     helper.tableView = self.tableView;
     [helper modelClass:[OrderModel class]];
     
     //-----//
-    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-        
-        weakSelf.orderGroups = objs;
-        [weakSelf.tableView reloadData_tl];
-        
-    } failure:^(NSError *error) {
-        
-        
-    }];
-    
-//    [self.tableView addRefreshAction:^{
+//    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
 //        
-//        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-//            
-//            weakSelf.orderGroups = objs;
-//            [weakSelf.tableView reloadData_tl];
-//            
-//        } failure:^(NSError *error) {
-//            
-//            
-//        }];
+//        weakSelf.orderGroups = objs;
+//        [weakSelf.tableView reloadData_tl];
+//        
+//    } failure:^(NSError *error) {
+//        
 //        
 //    }];
     
+    
+    [self.tableView addRefreshAction:^{
+        
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            weakSelf.orderGroups = objs;
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            
+        }];
+        
+    }];
+    [self.tableView beginRefreshing];
     [self.tableView addLoadMoreAction:^{
         
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {

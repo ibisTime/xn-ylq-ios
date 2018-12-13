@@ -119,7 +119,7 @@
     
     [bgView addSubview:self.nickNameLbl];
     
-    self.friendsLbl = [UILabel labelWithText:[NSString stringWithFormat:@"我的小伙伴: %@", [TLUser user].referrerNum] textColor:[UIColor textColor2] textFont:15.0];
+    self.friendsLbl = [UILabel labelWithText:[NSString stringWithFormat:@"我的小伙伴: %@", [TLUser user].refereeCount] textColor:[UIColor textColor2] textFont:15.0];
     
     self.friendsLbl.frame = CGRectMake(self.nickNameLbl.x, self.nickNameLbl.yy + kWidth(12), 200, 16);
     

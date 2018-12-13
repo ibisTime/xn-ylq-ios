@@ -79,7 +79,10 @@
     
     self.imageStr = imageStr;
 }
-
++ (NSDictionary *)mj_objectClassInArray
+{
+    return @{@"stageList": [RenewalModel class]};
+}
 @end
 
 @implementation UserInfo

@@ -12,6 +12,8 @@
 
 @property (nonatomic,strong) NSString *imgName;
 @property (nonatomic,strong) NSString *text;
+@property (nonatomic,strong) NSString *subText;
+
 @property (nonatomic,strong) void(^action)();
 
 @end

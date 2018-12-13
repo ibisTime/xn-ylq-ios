@@ -85,8 +85,13 @@
 - (void)setOrder:(OrderModel *)order {
     
     _order = order;
-    
-    self.titleArr = @[@"签约时间", @"合同编号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"逾期天数", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"罚息", @"到期还款额"];
+    if (order.stageBatch >0) {
+        self.titleArr = @[@"签约时间", @"借款单号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"逾期天数", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"逾期金额", @"到期还款额",@"分期次数"];
+        
+    }else{
+         self.titleArr = @[@"签约时间", @"借款单号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"逾期天数", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"逾期金额", @"到期还款额"];
+    }
+   
     
     //签约时间
     NSString *signDate = [_order.signDatetime convertDate];
@@ -140,7 +145,7 @@
     NSString *couponAmount = [_order.yhAmount convertToSimpleRealMoney];
     STRING_NIL_NULL(couponAmount);
     
-    //罚息
+    //逾期金额
     NSString *fxAmount = [_order.yqlxAmount convertToSimpleRealMoney];
     STRING_NIL_NULL(fxAmount);
     
@@ -149,7 +154,7 @@
     STRING_NIL_NULL(totalAmount);
 
     //续期次数
-    NSString *renewalNum = [NSString stringWithFormat:@"%ld次", _order.renewalCount];
+    NSString *renewalNum = [NSString stringWithFormat:@"%@次", _order.stageBatch];
     STRING_NIL_NULL(renewalNum);
     
     self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, yqDays, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, fxAmount, totalAmount, renewalNum];
@@ -181,9 +186,13 @@
     
     cell.rightLabel.text = self.contentArr[indexPath.row];
     
-    cell.rightLabel.textColor = indexPath.row == 1 || indexPath.row == self.contentArr.count - 2 ? kAppCustomMainColor: kTextColor;
     
-    cell.arrowHidden = indexPath.row == 1 || indexPath.row == self.contentArr.count - 1 ? NO: YES;
+    if (self.order.stageBatch > 0) {
+
+        cell.rightLabel.textColor =  indexPath.row == self.titleArr.count-1 ? kAppCustomMainColor:kTextColor ;
+    }else{
+        cell.rightLabel.textColor =  indexPath.row == self.titleArr.count ? kAppCustomMainColor:kTextColor ;
+    }
 
     return cell;
     
@@ -195,21 +204,25 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 1) {
-        
-        if (_detailBlock) {
+//    if (indexPath.row == 1) {
+//        
+//        if (_detailBlock) {
+//            
+//            _detailBlock(OrderDetailTypeLoanContract);
+//            
+//        }
+//        
+//    }else
+    if (self.order.stageBatch > 0) {
+        if (indexPath.row == self.titleArr.count - 1) {
             
-            _detailBlock(OrderDetailTypeLoanContract);
-            
-        }
-        
-    }else if (indexPath.row == self.titleArr.count - 1) {
-        
-        if (_detailBlock) {
-            
-            _detailBlock(OrderDetailTypeRenewal);
+//            if (_detailBlock) {
+//
+//                _detailBlock(OrderDetailTypeRenewal);
+//            }
         }
     }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

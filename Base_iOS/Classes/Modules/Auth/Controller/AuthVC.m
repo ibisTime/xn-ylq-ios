@@ -25,17 +25,38 @@
 
 #import <ZMCreditSDK/ALCreditService.h>
 #import "MoxieSDK.h"
-
+#import "MyQuotaView.h"
+#import "QuotaModel.h"
+#import "TabbarViewController.h"
+#import "SelectMoneyVC.h"
+#import "UIView+Custom.h"
+#import "NewAuthVC.h"
 @interface AuthVC ()<MoxieSDKDelegate>
 
 @property (nonatomic, strong) DataView *dataView;
 
 @property (nonatomic, strong) UIView *topView;
 
+@property (nonatomic, strong) UIView *contentView;
+
 @property (nonatomic, strong) AuthModel *authModel;
 
 @property (nonatomic, copy) NSString *isApply;     //是否有申请单
+//
+@property (nonatomic, assign) BOOL isFirst;
 
+@property (nonatomic, strong) MyQuotaView *quotaView;
+
+@property (nonatomic, strong) QuotaModel *quota;
+
+@property (nonatomic, strong) UIButton *quotaBtn;
+
+@property (nonatomic, strong) UILabel *Creditcoin;
+@property (nonatomic, strong) UILabel *Creditcoin1;
+@property (nonatomic, strong) UILabel *Creditcoin2;
+
+//信用分状态
+@property (nonatomic, assign) NSInteger flag;
 @end
 
 @implementation AuthVC
@@ -45,11 +66,10 @@
     [super viewWillAppear:animated];
     
     if ([TLUser user].isLogin) {
-        
+        //查看认证状态
         [self requestAuthStatus];
-        
-//        [self requestApplyStatus];
-        
+        [self requestQuota];
+
     } else {
         
         AuthModel *authModel = [AuthModel new];
@@ -65,19 +85,30 @@
         self.dataView.authModel = authModel;
         
     }
-    
+   
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"认证引导";
+    self.title = @"信用分";
     
     [self initTopView];
+    if ([AppConfig config].comPany == ComPanyNoLoad) {
+        if (![TLUser user].isLogin) {
+            TLUserLoginVC *loginVC = [TLUserLoginVC new];
+            
+            NavigationController *nav = [[NavigationController alloc] initWithRootViewController:loginVC];
+            
+            [self presentViewController:nav animated:YES completion:nil];
+            
+            return ;
+        }
+    }
     
-    [self initDataView];
-    
-    [self requestMXApiKey];
+//    [self initDataView];
+//
+//    [self requestMXApiKey];
     
 }
 
@@ -87,43 +118,561 @@
     
     CGFloat topH = kScreenWidth > 375 ? kHeight(30): 30;
     
-    self.topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, topH)];
+    self.quotaView = [[MyQuotaView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 160)];
     
-    self.topView.backgroundColor = [UIColor colorWithHexString:@"#fdfbed"];
+    self.quotaView.backgroundColor = kAppCustomMainColor;
     
-    [self.bgSV addSubview:self.topView];
+    [self.view addSubview:self.quotaView];
+    CGFloat quotaBtnH = 45;
     
-    UILabel *promptLbl = [UILabel labelWithText:@"请如实填写本人信息，提高审核成功率" textColor:[UIColor colorWithHexString:@"#ffae00"] textFont:12.0];
+   
+}
+
+- (void)requestQuota {
     
-    promptLbl.frame = CGRectMake(0, 0, kScreenWidth, 30);
+    //--//
+    //刷新信用分状态
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
     
-    promptLbl.textAlignment = NSTextAlignmentCenter;
+    http.code = @"623033";
+    http.parameters[@"userId"] = [TLUser user].userId;
     
-    [self.topView addSubview:promptLbl];
-    
-    UIButton *cancelBtn = [UIButton buttonWithImageName:@"删除"];
-    
-    [cancelBtn addTarget:self action:@selector(clickCancel) forControlEvents:UIControlEventTouchUpInside];
-    
-    [cancelBtn setEnlargeEdge:15];
-    
-    [self.topView addSubview:cancelBtn];
-    [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [http postWithSuccess:^(id responseObject) {
         
-        make.width.height.mas_equalTo(15);
-        make.centerY.mas_equalTo(0);
-        make.right.mas_equalTo(-15);
+        NSInteger flag = [responseObject[@"data"][@"status"] integerValue];
+        self.flag = flag;
+        self.quota = [QuotaModel new];
+        NSString *title = @"";
+        self.quota.flag = responseObject[@"data"][@"status"];
+//        self.quota.sxAmount = responseObject[@"data"][@"list"][0][@"creditScore"];
+        switch (flag) {
+            case 0:
+            {
+                //未认证
+      [self.quotaBtn setTitle:title forState:UIControlStateNormal];
+
+                [self creatIntroduce];
+                
+
+            }break;
+                
+            case 1:
+            {
+                //认证中
+
+                [self initSubviews];
+
+            }break;
+                
+            case 2:
+            {
+                //待审核
+                [self initSubviewsCheck];
+                title = @"请耐心等待";
+                [self.quotaBtn setTitle:title forState:UIControlStateNormal];
+//                title = @"重新申请额度";
+//                [self rewenRequest];
+
+            }break;
+            case 3:
+            {
+                //审核失败
+
+                [self.quotaBtn setTitle:title forState:UIControlStateNormal];
+                [self rewenRequest];
+                self.Creditcoin1.text = [NSString stringWithFormat:@"失败理由: %@",responseObject[@"data"][@"apply"][@"approveNote"]];
+
+            }break;
+            case 4:
+            {
+               
+                [self beginUser];
+                self.quota.sxAmount = responseObject[@"data"][@"creditScore"];
+                
+                title = @"使用信用分";
+                self.quota.validDays = [responseObject[@"data"][@"validDays"] integerValue];
+
+                [self.quotaBtn setTitle:title forState:UIControlStateNormal];
+                
+            }break;
+                
+            case 5:
+            {
+              
+                [self beginUser];
+                self.quota.sxAmount = responseObject[@"data"][@"creditScore"];
+
+                title = @"重新申请";
+                [self.quotaBtn setTitle:title forState:UIControlStateNormal];
+            }break;
+            case 6:
+            {
+               
+                [self beginUser];
+                self.quota.sxAmount = responseObject[@"data"][@"creditScore"];
+                title = @"重新申请";
+                [self.quotaBtn setTitle:title forState:UIControlStateNormal];
+                
+            }break;
+            default:
+                break;
+                
+
+        }
+        
+        self.quotaView.quotaModel = self.quota;
+
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
+- (void)requestScore
+{
+  
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    
+    http.code = @"623020";
+    http.parameters[@"applyUser"] = [TLUser user].userId;
+    [http postWithSuccess:^(id responseObject) {
+        [TLAlert alertWithInfo:@"信用分申请成功"];
+        [self requestQuota];
+        [self requestGood];
+    } failure:^(NSError *error) {
+        
+    }];
+
+    
+}
+
+
+- (void)rewenRequest
+{
+    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    self.contentView.hidden = YES;
+
+    self.contentView = [UIView new];
+
+    self.contentView.frame = CGRectMake(0, self.quotaView.yy, kScreenWidth, kScreenHeight);
+    [self.view addSubview:self.contentView];
+    UILabel *Creditcoin = [UILabel labelWithText:@"认证失败" textColor:[UIColor redColor] textFont:14.0];
+    self.Creditcoin = Creditcoin;
+    Creditcoin.frame = CGRectMake(15, 20, kScreenWidth-30, 30);
+    Creditcoin.textAlignment = NSTextAlignmentCenter;
+    [self.contentView addSubview:Creditcoin];
+    
+    UILabel *Creditcoin1 = [UILabel labelWithText:@"失败理由:核准失败" textColor:kTextColor textFont:14.0];
+    self.Creditcoin1 = Creditcoin1;
+    [self.contentView addSubview:self.Creditcoin1];
+    Creditcoin1.frame = CGRectMake(15, Creditcoin.yy+16, kScreenWidth-30, 30);
+    Creditcoin1.textAlignment = NSTextAlignmentCenter;
+    [self.contentView addSubview:Creditcoin1];
+    CGFloat quotaBtnH = 45;
+    
+    self.quotaBtn = [UIButton buttonWithTitle:@"重新提交" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
+    
+    self.quotaBtn.frame = CGRectMake(15, Creditcoin1.yy + 62, kScreenWidth - 30, quotaBtnH);
+    
+    [self.quotaBtn addTarget:self action:@selector(clickUseQuota:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.contentView addSubview:self.quotaBtn];
+    
+}
+
+
+- (void)beginUser
+{
+        [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        self.contentView.hidden = YES;
+    
+        self.contentView = [UIView new];
+
+        self.contentView.frame = CGRectMake(0, self.quotaView.yy, kScreenWidth, kScreenHeight);
+        [self.view addSubview:self.contentView];
+        CGFloat quotaBtnH = 45;
+
+        self.quotaBtn = [UIButton buttonWithTitle:@"使用信用分" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
+    
+        self.quotaBtn.frame = CGRectMake(15,  100, kScreenWidth - 30, quotaBtnH);
+    
+        [self.quotaBtn addTarget:self action:@selector(clickUseQuota:) forControlEvents:UIControlEventTouchUpInside];
+    
+        [self.contentView addSubview:self.quotaBtn];
+//        TLNetworking *http = [TLNetworking new];
+//        http.code = @"623051";
+//        http.parameters[@"userId"] = [TLUser user].userId;
+//
+//        [http postWithSuccess:^(id responseObject) {
+//
+//            QuotaModel *model = [QuotaModel mj_objectWithKeyValues:responseObject[@"data"]];
+//            self.quota= model;
+//            self.quotaView.Model = model;
+//
+//    } failure:^(NSError *error) {
+//
+//
+//    }];
+}
+
+- (void)beginDissmiss
+{
+    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    self.contentView.hidden = YES;
+    
+    self.contentView = [UIView new];
+    
+    self.contentView.frame = CGRectMake(0, self.quotaView.yy, kScreenWidth, kScreenHeight);
+    [self.view addSubview:self.contentView];
+    CGFloat quotaBtnH = 45;
+    
+    self.quotaBtn = [UIButton buttonWithTitle:@"重新申请" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
+    
+    self.quotaBtn.frame = CGRectMake(15,  100, kScreenWidth - 30, quotaBtnH);
+    
+    [self.quotaBtn addTarget:self action:@selector(clickUseQuota:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.contentView addSubview:self.quotaBtn];
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"623051";
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        QuotaModel *model = [QuotaModel mj_objectWithKeyValues:responseObject[@"data"]];
+        self.quota= model;
+        self.quotaView.Model = model;
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
+- (void)beginrenw
+{
+    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    self.contentView.hidden = YES;
+    
+    self.contentView = [UIView new];
+    
+    self.contentView.frame = CGRectMake(0, self.quotaView.yy, kScreenWidth, kScreenHeight);
+    [self.view addSubview:self.contentView];
+    CGFloat quotaBtnH = 45;
+    
+    self.quotaBtn = [UIButton buttonWithTitle:@"重新申请" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
+    
+    self.quotaBtn.frame = CGRectMake(15,  100, kScreenWidth - 30, quotaBtnH);
+    
+    [self.quotaBtn addTarget:self action:@selector(clickUseQuota:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.contentView addSubview:self.quotaBtn];
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"623051";
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        QuotaModel *model = [QuotaModel mj_objectWithKeyValues:responseObject[@"data"]];
+        self.quota= model;
+        self.quotaView.Model = model;
+        
+    } failure:^(NSError *error) {
+        
         
     }];
 }
 
+
+- (void)initSubviewsCheck {
+    
+    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    self.contentView.hidden = YES;
+    
+    self.contentView = [UIView new];
+    
+    self.contentView.frame = CGRectMake(0, self.quotaView.yy, kScreenWidth, kScreenHeight);
+    [self.view addSubview:self.contentView];
+    
+    NSArray *imgArr = @[@"期望额度", @"select", @"人工审核灰"];
+    
+    NSArray *titleArr = @[@"资料填写", @"待审核", @"信用核准"];
+    
+    for (int i = 0; i < 3; i++) {
+        
+        CGFloat imgViewW = 21;
+        
+        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgArr[i]]];
+        
+        iv.frame = CGRectMake(kWidth(100), kHeight(58) + i*(21 + kHeight(65)), imgViewW, imgViewW);
+        
+        iv.layer.cornerRadius = imgViewW/2.0;
+        
+        iv.clipsToBounds = YES;
+        
+        [self.contentView addSubview:iv];
+        
+        UILabel *textLbl = [UILabel labelWithText:titleArr[i] textColor:kTextColor textFont:15.0];
+        
+        textLbl.frame = CGRectMake(iv.xx + kWidth(20),kHeight(58) + i*(21 + kHeight(65)), 70, 16);
+        
+        [self.contentView addSubview:textLbl];
+        
+        if (i != 2) {
+            
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(iv.centerX, iv.yy, 1, kHeight(65))];
+            
+            UIColor *color = i == 0 ? kAppCustomMainColor : [UIColor colorWithHexString:@"#cccccc"];
+            
+            [self.contentView addSubview:lineView];
+            
+            [lineView drawDashLine:3 lineSpacing:2 lineColor:color];
+            
+        }
+    }
+    
+    CGFloat btnH = 45;
+    
+    CGFloat leftMargin = 15;
+    
+    UIButton *commitBtn = [UIButton buttonWithTitle:@"请耐心等待" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:btnH/2.0];
+    self.quotaBtn = commitBtn;
+    commitBtn.frame = CGRectMake(leftMargin, kHeight(280), kScreenWidth - 2*leftMargin, btnH);
+    
+    [commitBtn addTarget:self action:@selector(clickUseQuota:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.contentView addSubview:commitBtn];
+    
+}
+
+- (void)initSubviews {
+    
+    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    self.contentView.hidden = YES;
+    
+    self.contentView = [UIView new];
+
+    self.contentView.frame = CGRectMake(0, self.quotaView.yy, kScreenWidth, kScreenHeight);
+    [self.view addSubview:self.contentView];
+    
+    NSArray *imgArr = @[@"期望额度", @"unselect", @"人工审核灰"];
+    
+    NSArray *titleArr = @[@"资料填写", @"待审核", @"信用核准"];
+    
+    for (int i = 0; i < 3; i++) {
+        
+        CGFloat imgViewW = 21;
+        
+        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgArr[i]]];
+        
+        iv.frame = CGRectMake(kWidth(100), kHeight(58) + i*(21 + kHeight(65)), imgViewW, imgViewW);
+        
+        iv.layer.cornerRadius = imgViewW/2.0;
+        
+        iv.clipsToBounds = YES;
+        
+        [self.contentView addSubview:iv];
+        
+        UILabel *textLbl = [UILabel labelWithText:titleArr[i] textColor:kTextColor textFont:15.0];
+        
+        textLbl.frame = CGRectMake(iv.xx + kWidth(20),kHeight(58) + i*(21 + kHeight(65)), 70, 16);
+        
+        [self.contentView addSubview:textLbl];
+        
+        if (i != 2) {
+            
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(iv.centerX, iv.yy, 1, kHeight(65))];
+            
+            UIColor *color = i == 0 ? kAppCustomMainColor : [UIColor colorWithHexString:@"#cccccc"];
+            
+            [self.contentView addSubview:lineView];
+            
+            [lineView drawDashLine:3 lineSpacing:2 lineColor:color];
+            
+        }
+    }
+    
+    CGFloat btnH = 45;
+    
+    CGFloat leftMargin = 15;
+    
+    UIButton *commitBtn = [UIButton buttonWithTitle:@"完善资料" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:btnH/2.0];
+    self.quotaBtn = commitBtn;
+    commitBtn.frame = CGRectMake(leftMargin, kHeight(280), kScreenWidth - 2*leftMargin, btnH);
+    
+    [commitBtn addTarget:self action:@selector(clickUseQuota:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.contentView addSubview:commitBtn];
+    
+}
+
+- (void)creatIntroduce
+{
+        self.contentView.hidden = YES;
+
+        self.contentView = [UIView new];
+        self.contentView.frame = CGRectMake(0, self.quotaView.yy, kScreenWidth, kScreenHeight);
+        [self.view addSubview:self.contentView];
+        UILabel *Creditcoin = [UILabel labelWithText:@"信用分用途" textColor:RGB(153, 153, 153) textFont:14.0];
+        self.Creditcoin = Creditcoin;
+        [self.view addSubview:self.quotaView];
+        Creditcoin.frame = CGRectMake(15, 23, kScreenWidth-30, 30);
+        Creditcoin.textAlignment = NSTextAlignmentLeft;
+        [self.contentView addSubview:Creditcoin];
+
+        UILabel *Creditcoin1 = [UILabel labelWithText:@"1 信用分即额度,可申请贷款" textColor:RGB(153, 153, 153) textFont:14.0];
+        self.Creditcoin1 = Creditcoin1;
+        [self.view addSubview:self.Creditcoin1];
+        Creditcoin1.frame = CGRectMake(15, self.Creditcoin.yy+13, kScreenWidth-30, 30);
+        Creditcoin1.textAlignment = NSTextAlignmentLeft;
+        [self.contentView addSubview:Creditcoin1];
+    
+        UILabel *Creditcoin2 = [UILabel labelWithText:@"2 信用分越多借款额越多" textColor:RGB(153, 153, 153) textFont:14.0];
+        self.Creditcoin2 = Creditcoin2;
+        [self.view addSubview:self.Creditcoin2];
+        Creditcoin2.frame = CGRectMake(15, self.Creditcoin1.yy+13, kScreenWidth-30, 30);
+        Creditcoin2.textAlignment = NSTextAlignmentLeft;
+        [self.contentView addSubview:Creditcoin2];
+        CGFloat quotaBtnH = 45;
+
+        self.quotaBtn = [UIButton buttonWithTitle:@"去认证" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
+    
+        self.quotaBtn.frame = CGRectMake(15, Creditcoin2.yy + 44, kScreenWidth - 30, quotaBtnH);
+    
+        [self.quotaBtn addTarget:self action:@selector(clickUseQuota:) forControlEvents:UIControlEventTouchUpInside];
+    
+        [self.contentView addSubview:self.quotaBtn];
+
+}
+
+- (void)BegincreatIntroduce
+{
+    
+    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    self.contentView = [UIView new];
+
+    self.contentView.frame = CGRectMake(0, self.quotaView.yy, kScreenWidth, kScreenHeight);
+    [self.view addSubview:self.contentView];
+    CGFloat quotaBtnH = 45;
+    
+    self.quotaBtn = [UIButton buttonWithTitle:@"继续认证" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
+    
+    self.quotaBtn.frame = CGRectMake(15,  80, kScreenWidth - 30, quotaBtnH);
+    
+    [self.quotaBtn addTarget:self action:@selector(clickUseQuota:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.contentView addSubview:self.quotaBtn];
+}
+
+
+#pragma mark - Events
+- (void)clickUseQuota:(UIButton *)sender {
+    //根据额度状态进行不同的跳转
+    
+    switch (self.flag) {
+        case 0:
+        {
+            //调用申请信用分
+            [self requestScore];
+
+            
+        }break;
+            
+        case 1:
+        {
+            //完善资料
+            [self requestGood];
+
+           
+        }break;
+            
+        case 2:
+        {
+            //请耐心等待
+//            [self requestGood];
+            
+            
+        }break;
+            
+        case 3:
+        {
+            //重新提交
+            [self requestScore];
+            
+        }break;
+        case 4:
+        {
+            //使用信用分
+
+            TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+            
+            tabbarVC.currentIndex = 0;
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        }break;
+        case 5:
+        {
+            //重新申请
+            [self requestScore];
+
+        }break;
+       
+        case 6:
+        {
+            //重新申请
+            [self requestScore];
+            
+        }break;
+        default:
+            break;
+    }
+    
+}
+
+- (void)requestGood {
+    
+//    TLNetworking *http = [TLNetworking new];
+//
+//    http.code = @"623013";
+//
+//    http.parameters[@"userId"] = [TLUser user].userId;
+//
+//    [http postWithSuccess:^(id responseObject) {
+//
+//        if([responseObject[@"errorCode"] isEqual:@"0"]){ //成功
+//
+////            SelectMoneyVC *moneyVC = [SelectMoneyVC new];
+            NewAuthVC * authVC = [NewAuthVC new];
+            authVC.title = @"认证";
+            
+//            authVC.selectType = SelectGoodTypeSign;
+            
+            [self.navigationController pushViewController:authVC animated:YES];
+            
+//        }
+//
+//    } failure:^(NSError *error) {
+////        SelectMoneyVC *moneyVC = [SelectMoneyVC new];
+//        NewAuthVC * authVC = [NewAuthVC new];
+//
+//        authVC.title = @"认证";
+//
+////        authVC.selectType = SelectGoodTypeSign;
+//
+//        [self.navigationController pushViewController:authVC animated:YES];
+//
+//    }];
+    
+}
 - (void)initDataView {
     
     BaseWeakSelf;
     
     self.bgSV.height -= 49;
     
-    self.dataView = [[DataView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth, kSuperViewHeight - 49)];
+    self.dataView = [[DataView alloc] initWithFrame:CGRectMake(0, self.quotaView.yy, kScreenWidth, kSuperViewHeight - 49)];
     
     self.dataView.dataBlock = ^(SectionModel *section) {
         
@@ -153,26 +702,26 @@
     //            }，
     
     InfoIdentify *identify = self.authModel.infoIdentify;
-    
-    [MoxieSDK shared].delegate = self;
-    [MoxieSDK shared].mxUserId = kMoXieUserID;
-    [MoxieSDK shared].mxApiKey = [TLUser user].mxApiKey;
-    [MoxieSDK shared].fromController = self;
-    
-    [MoxieSDK shared].taskType = @"carrier";
-    //跳过输入身份证和姓名界面
-    [MoxieSDK shared].carrier_phone = [TLUser user].mobile;
-    [MoxieSDK shared].carrier_name = identify.realName;
-    [MoxieSDK shared].carrier_idcard = identify.idNo;
-//    [MoxieSDK shared].carrier_editable = YES;
-    
-    [MoxieSDK shared].backImageName = @"返回";
-    
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    //开始运营商认证
-    [[MoxieSDK shared] startFunction];
+//
+//    [MoxieSDK shared].delegate = self;
+//    [MoxieSDK shared].mxUserId = kMoXieUserID;
+//    [MoxieSDK shared].mxApiKey = [TLUser user].mxApiKey;
+//    [MoxieSDK shared].fromController = self;
+//
+//    [MoxieSDK shared].taskType = @"carrier";
+//    //跳过输入身份证和姓名界面
+//    [MoxieSDK shared].carrier_phone = [TLUser user].mobile;
+//    [MoxieSDK shared].carrier_name = identify.realName;
+//    [MoxieSDK shared].carrier_idcard = identify.idNo;
+////    [MoxieSDK shared].carrier_editable = YES;
+//
+//    [MoxieSDK shared].backImageName = @"返回";
+//
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//
+//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+//    //开始运营商认证
+//    [[MoxieSDK shared] startFunction];
     
 }
 
@@ -183,6 +732,11 @@
     
     http.code = @"623050";
     
+    if (!self.isFirst) {
+        
+        http.showView = self.view;
+    }
+    
     http.parameters[@"userId"] = [TLUser user].userId;
     
     [http postWithSuccess:^(id responseObject) {
@@ -191,28 +745,22 @@
         
         self.dataView.authModel = self.authModel;
         
+        self.isFirst = YES;
+        //如果运营商状态是认证中，就不停刷定时器
+        if ([self.authModel.infoCarrierFlag isEqualToString:@"3"]) {
+            
+//            [TLProgressHUD show];
+            //查看认证状态
+            [self requestCarrierStatus];
+            //获取用户当前正在进行的申请记录
+            [self requestToApproveFlag];
+        }
+        
     } failure:^(NSError *error) {
         
         
     }];
 }
-
-//- (void)requestApplyStatus {
-//    //获取用户当前正在进行的申请记录
-//    TLNetworking *http = [TLNetworking new];
-//    
-//    http.code = @"623032";
-//    
-//    http.parameters[@"userId"] = [TLUser user].userId;
-//    
-//    [http postWithSuccess:^(id responseObject) {
-//        
-//        self.isApply = responseObject[@"data"][@"toApproveFlag"];
-//        
-//    } failure:^(NSError *error) {
-//        
-//    }];
-//}
 
 - (void)requestMXApiKey {
 
@@ -229,6 +777,25 @@
         
     }];
 
+}
+
+- (void)requestToApproveFlag {
+    
+    //获取用户当前正在进行的申请记录
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"623032";
+    
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        //申请状态
+        self.isApply = responseObject[@"data"][@"toApproveFlag"];
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - Events
@@ -450,10 +1017,16 @@
                 
                 //判断是否在认证中,3为认证中状态
                 if (![self.authModel.infoCarrierFlag isEqualToString:@"3"]) {
+//                if (self.authModel.infoCarrierFlag) {
                     
 //                    [self initMXSDK];
                     
                     TongDunVC *tongDunVC = [TongDunVC new];
+                    
+                    tongDunVC.respBlock = ^(NSString *taskId) {
+                        
+                        [weakSelf authRespWithTaskId:taskId];
+                    };
                     
                     [self.navigationController pushViewController:tongDunVC animated:YES];
                     
@@ -470,141 +1043,12 @@
             
         }break;
             
-//        case DataTypeTXLRZ:
-//        {
-//            if (![TLUser user].isLogin) {
-//
-//                TLUserLoginVC *loginVC = [TLUserLoginVC new];
-//
-//                loginVC.loginSuccess = ^{
-//
-//                    //                    if (!isIdent) {
-//                    //
-//                    //                        [TLAlert alertWithInfo:@"请先进行身份认证"];
-//                    //                        return;
-//                    //
-//                    //                    } else if (!isBasic) {
-//                    //
-//                    //                        [TLAlert alertWithInfo:@"请先提交个人信息"];
-//                    //                        return;
-//                    //
-//                    //                    }else if (!isZMScore) {
-//                    //
-//                    //                        [TLAlert alertWithInfo:@"请先认证芝麻分"];
-//                    //                        return;
-//                    //
-//                    //                    } else if (!isYYS) {
-//                    //
-//                    //                        [TLAlert alertWithInfo:@"请先认证运营商"];
-//                    //                        return;
-//                    //                    }
-//
-//                    MailListVC *mailListVC = [MailListVC new];
-//
-//                    [self.navigationController pushViewController:mailListVC animated:YES];
-//                };
-//
-//                NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
-//
-//                [weakSelf.navigationController presentViewController:navi animated:YES completion:nil];
-//
-//                return ;
-//            }
-//
-//            //            if (!isIdent) {
-//            //
-//            //                [TLAlert alertWithInfo:@"请先进行身份认证"];
-//            //                return;
-//            //
-//            //            } else if (!isBasic) {
-//            //
-//            //                [TLAlert alertWithInfo:@"请先提交个人信息"];
-//            //                return;
-//            //
-//            //            }else if (!isZMScore) {
-//            //
-//            //                [TLAlert alertWithInfo:@"请先认证芝麻分"];
-//            //                return;
-//            //
-//            //            } else if (!isYYS) {
-//            //
-//            //                [TLAlert alertWithInfo:@"请先认证运营商"];
-//            //                return;
-//            //            }
-//
-//            MailListVC *mailListVC = [MailListVC new];
-//
-//            [self.navigationController pushViewController:mailListVC animated:YES];
-//
-//        }break;
-//
-//        case DataTypeWXRZ:
-//        {
-//            if (![TLUser user].isLogin) {
-//
-//                TLUserLoginVC *loginVC = [TLUserLoginVC new];
-//
-//                loginVC.loginSuccess = ^{
-//
-//                    if (!isIdent) {
-//
-//                        [TLAlert alertWithInfo:@"请先进行身份认证"];
-//                        return;
-//
-//                    } else if (!isBasic) {
-//
-//                        [TLAlert alertWithInfo:@"请先提交个人信息"];
-//                        return;
-//
-//                    }else if (!isZMScore) {
-//
-//                        [TLAlert alertWithInfo:@"请先认证芝麻分"];
-//                        return;
-//
-//                    } else if (!isYYS) {
-//
-//                        [TLAlert alertWithInfo:@"请先认证运营商"];
-//                        return;
-//                    }
-//
-//                };
-//
-//                NavigationController *navi = [[NavigationController alloc] initWithRootViewController:loginVC];
-//
-//                [weakSelf.navigationController presentViewController:navi animated:YES completion:nil];
-//
-//                return ;
-//            }
-//
-//            if (!isIdent) {
-//
-//                [TLAlert alertWithInfo:@"请先进行身份认证"];
-//                return;
-//
-//            } else if (!isBasic) {
-//
-//                [TLAlert alertWithInfo:@"请先提交个人信息"];
-//                return;
-//
-//            }else if (!isZMScore) {
-//
-//                [TLAlert alertWithInfo:@"请先认证芝麻分"];
-//                return;
-//
-//            } else if (!isYYS) {
-//
-//                [TLAlert alertWithInfo:@"请先认证运营商"];
-//                return;
-//            }
-//
-//        }break;
-            
         default:
             break;
     }
 }
 
-- (void)result:(NSMutableDictionary*)dic{
+- (void)result:(NSMutableDictionary*)dic {
     NSLog(@"result ");
     
     NSString* system  = [[UIDevice currentDevice] systemVersion];
@@ -616,7 +1060,7 @@
 
 #pragma mark - MoxieSDKDelegate
 
--(void)receiveMoxieSDKResult:(NSDictionary*)resultDictionary {
+- (void)receiveMoxieSDKResult:(NSDictionary*)resultDictionary {
     
     int code = [resultDictionary[@"code"] intValue];
     NSString *taskType = resultDictionary[@"taskType"];
@@ -632,46 +1076,8 @@
 //        [TLAlert alertWithInfo:@"继续查询该任务进展"];
         
     } else if(code == 1) {
+        
         //code是1则成功
-        
-        [TLProgressHUD show];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //            魔蝎运营商认证
-            //            TLNetworking *http = [TLNetworking new];
-            //
-            //            http.code = @"623048";
-            //            http.parameters[@"userId"] = [TLUser user].userId;
-            //            http.parameters[@"taskId"] = taskId;
-            //
-            //            [http postWithSuccess:^(id responseObject) {
-            //
-            //
-            //
-            //            } failure:^(NSError *error) {
-            //
-            //
-            //            }];
-            
-            //获取用户当前正在进行的申请记录
-            TLNetworking *http = [TLNetworking new];
-            
-            http.code = @"623032";
-            
-            http.parameters[@"userId"] = [TLUser user].userId;
-            
-            [http postWithSuccess:^(id responseObject) {
-                
-                //申请状态
-                self.isApply = responseObject[@"data"][@"toApproveFlag"];
-                
-                [self requestCarrierStatus];
-                
-            } failure:^(NSError *error) {
-                
-            }];
-        
-        });
         
     } else if(code == -1) {
         //用户没有做任何操作
@@ -700,6 +1106,27 @@
     }
 }
 
+#pragma mark - 同盾回调
+- (void)authRespWithTaskId:(NSString *)taskId {
+    
+    //获取用户当前正在进行的申请记录
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"623056";
+    
+    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"taskId"] = taskId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [self requestCarrierStatus];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+
 //获取运营商状态
 - (void)requestCarrierStatus {
     
@@ -707,7 +1134,6 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"623050";
-    
     http.parameters[@"userId"] = [TLUser user].userId;
     
     [http postWithSuccess:^(id responseObject) {
@@ -720,24 +1146,24 @@
         if ([self.authModel.infoCarrierFlag isEqualToString:@"1"]) {
             
             [TLProgressHUD dismiss];
-            
-            [TLAlert alertWithTitle:@"" message:@"运营商认证成功" confirmMsg:@"OK" confirmAction:^{
-                
-                if ([self.isApply isEqualToString:@"1"]) {
-                    
-                    //进入系统审核界面
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        
-                        ManualAuditVC *auditVC = [ManualAuditVC new];
-                        
-                        auditVC.title = @"系统审核";
-                        
-                        [self.navigationController pushViewController:auditVC animated:YES];
-                    });
-                }
-                
-            }];
-        } else {
+
+//            [TLAlert alertWithTitle:@"" message:@"运营商认证成功" confirmMsg:@"OK" confirmAction:^{
+//
+//                if ([self.isApply isEqualToString:@"1"]) {
+//
+//                    //进入系统审核界面
+//                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//                        ManualAuditVC *auditVC = [ManualAuditVC new];
+//
+//                        auditVC.title = @"系统审核";
+//
+//                        [self.navigationController pushViewController:auditVC animated:YES];
+//                    });
+//                }
+//
+//            }];
+        } else if([self.authModel.infoCarrierFlag isEqualToString:@"3"]){
             
             //重复调认证状态接口
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -753,6 +1179,7 @@
         
     }];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

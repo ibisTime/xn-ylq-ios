@@ -57,9 +57,49 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self configTabBar];
+    [self requestList];
 
 //    [self configOpenSetting];
+    
+}
+
+- (void)requestList
+{
+    
+    TLNetworking *helper = [[TLNetworking alloc] init];
+    
+    helper.code = @"630118";
+    helper.parameters[@"companyCode"] = [AppConfig config].companyCode;
+    [helper postWithSuccess:^(id responseObject) {
+        
+        NSString *type1 = responseObject[@"data"][@"isFk"];
+        NSString *type2 = responseObject[@"data"][@"isJt"];
+        if ([type1 isEqualToString:@"1"] && [type2 isEqualToString:@"1"]) {
+            [AppConfig config].comPany = ComPanyALL;
+            [self configTabBar];
+
+        }else if ([type1 isEqualToString:@"1"] && [type2 isEqualToString:@"0"] )
+        {
+            [AppConfig config].comPany = ComPanyNoLoad;
+
+            [self configTabBar];
+
+        }else if ([type1 isEqualToString:@"0"] && [type2 isEqualToString:@"1"] ){
+            [AppConfig config].comPany = ComPanyNoScore;
+
+            [self configTabBar];
+
+        }else
+        {
+            [AppConfig config].comPany = ComPanyOnlyMine;
+            [self configTabBar];
+
+        }
+
+        
+    } failure:^(NSError *error) {
+        [self requestList];
+    }];
     
 }
 
@@ -163,27 +203,108 @@
     switch ([ApiConfig config].runMode) {
         case RunModeDis:
         {
-            NSArray *titles = @[@"借钱", @"认证", @"我的"];
             
-            NSArray *normalImages = @[@"loan", @"auth", @"mine"];
+            switch ([AppConfig config].comPany) {
+                case ComPanyALL:
+                {
+                    NSArray *titles = @[@"借钱", @"信用分", @"我的"];
+                    
+                    NSArray *normalImages = @[@"loan", @"auth", @"mine"];
+                    
+                    NSArray *selectImages = @[@"loan_select", @"auth_select", @"mine_select"];
+                    
+                    NSArray *vcNames = @[@"Home", @"Auth", @"Mine"];
+                    
+                    self.tabBarItems = [NSMutableArray array];
+                    
+                    // 借款
+                    NavigationController *healthManageNav = [self createNavWithTitle:titles[0] imgNormal:normalImages[0] imgSelected:selectImages[0] vcName:vcNames[0]];
+                    
+                    // 认证
+                    NavigationController *healthCircleNav = [self createNavWithTitle:titles[1] imgNormal:normalImages[1] imgSelected:selectImages[1] vcName:vcNames[1]];
+                    
+                    // 我的
+                    NavigationController *nearbyNav = [self createNavWithTitle:titles[2] imgNormal:normalImages[2] imgSelected:selectImages[2] vcName:vcNames[2]];
+                    
+                    self.viewControllers = @[healthManageNav, healthCircleNav, nearbyNav];
+                    
+                }
+                    break;
+                case ComPanyNoLoad:
+                    {
+                        NSArray *titles = @[ @"信用分", @"我的"];
+                        
+                        NSArray *normalImages = @[ @"auth", @"mine"];
+                        
+                        NSArray *selectImages = @[ @"auth_select", @"mine_select"];
+                        
+                        NSArray *vcNames = @[ @"Auth", @"Mine"];
+                        
+                        self.tabBarItems = [NSMutableArray array];
+                        
+//                        // 借款
+//                        NavigationController *healthManageNav = [self createNavWithTitle:titles[0] imgNormal:normalImages[0] imgSelected:selectImages[0] vcName:vcNames[0]];
+                        
+                        // 认证
+                        NavigationController *healthCircleNav = [self createNavWithTitle:titles[0] imgNormal:normalImages[1] imgSelected:selectImages[0] vcName:vcNames[0]];
+                        
+                        // 我的
+                        NavigationController *nearbyNav = [self createNavWithTitle:titles[1] imgNormal:normalImages[1] imgSelected:selectImages[1] vcName:vcNames[1]];
+                        
+                        self.viewControllers = @[ healthCircleNav, nearbyNav];
+                        
+                    }
+                    break;
+                case ComPanyNoScore:
+                {
+                    NSArray *titles = @[@"借钱", @"我的"];
+                    
+                    NSArray *normalImages = @[@"loan", @"mine"];
+                    
+                    NSArray *selectImages = @[@"loan_select", @"mine_select"];
+                    
+                    NSArray *vcNames = @[@"Home", @"Mine"];
+                    
+                    self.tabBarItems = [NSMutableArray array];
+                    
+                    // 借款
+                    NavigationController *healthManageNav = [self createNavWithTitle:titles[0] imgNormal:normalImages[0] imgSelected:selectImages[0] vcName:vcNames[0]];
+                    
+//                    // 认证
+//                    NavigationController *healthCircleNav = [self createNavWithTitle:titles[1] imgNormal:normalImages[1] imgSelected:selectImages[1] vcName:vcNames[1]];
+                    
+                    // 我的
+                    NavigationController *nearbyNav = [self createNavWithTitle:titles[1] imgNormal:normalImages[1] imgSelected:selectImages[1] vcName:vcNames[1]];
+                    
+                    self.viewControllers = @[healthManageNav, nearbyNav];
+                    
+                }
+                    break;
+                case ComPanyOnlyMine:
+                {
+                    NSArray *titles = @[ @"我的"];
+                    
+                    NSArray *normalImages = @[ @"mine"];
+                    
+                    NSArray *selectImages = @[ @"mine_select"];
+                    
+                    NSArray *vcNames = @[ @"Mine"];
+                    
+                    self.tabBarItems = [NSMutableArray array];
+                    
+                  
+                    // 我的
+                    NavigationController *nearbyNav = [self createNavWithTitle:titles[0] imgNormal:normalImages[0] imgSelected:selectImages[0] vcName:vcNames[0]];
+                    
+                    self.viewControllers = @[ nearbyNav];
+                    
+                }
+                    break;
+                default:
+                    break;
+            }
             
-            NSArray *selectImages = @[@"loan_select", @"auth_select", @"mine_select"];
-            
-            NSArray *vcNames = @[@"Home", @"Auth", @"Mine"];
-            
-            self.tabBarItems = [NSMutableArray array];
-            
-            // 借款
-            NavigationController *healthManageNav = [self createNavWithTitle:titles[0] imgNormal:normalImages[0] imgSelected:selectImages[0] vcName:vcNames[0]];
-            
-            // 认证
-            NavigationController *healthCircleNav = [self createNavWithTitle:titles[1] imgNormal:normalImages[1] imgSelected:selectImages[1] vcName:vcNames[1]];
-            
-            // 我的
-            NavigationController *nearbyNav = [self createNavWithTitle:titles[2] imgNormal:normalImages[2] imgSelected:selectImages[2] vcName:vcNames[2]];
-            
-            self.viewControllers = @[healthManageNav, healthCircleNav, nearbyNav];
-            
+     
         }break;
             
         case RunModeReview:
@@ -265,7 +386,8 @@
     switch ([ApiConfig config].runMode) {
         case RunModeDis:
         {
-            if (idx == 2 && ![TLUser user].isLogin) {
+            
+            if ((idx == 1 || idx == 2) && ![TLUser user].isLogin) {
                 
                 TLUserLoginVC *loginVC = [TLUserLoginVC new];
                 

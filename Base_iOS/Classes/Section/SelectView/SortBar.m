@@ -10,7 +10,6 @@
 
 #define widthItem (kScreenWidth/5.0)
 #define btnFont MIN(kWidth(15.0), 15)
-
 static const float kAnimationdDuration = 0.3;
 
 @interface SortBar ()

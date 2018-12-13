@@ -170,12 +170,11 @@
     
     [self.view addSubview:self.liveTimeTF];
     
-    //QQ
-    self.qqTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.liveTimeTF.yy + 1, kScreenWidth, 45) leftTitle:@"QQ" titleWidth:titleWidth placeholder:@"请输入QQ号码(选填)"];
+    //微信
+    self.qqTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.liveTimeTF.yy + 1, kScreenWidth, 45) leftTitle:@"微信" titleWidth:titleWidth placeholder:@"请输入微信号码(选填)"];
     
-    self.qqTF.text = infoBasic.qq;
+    self.qqTF.text = infoBasic.wechat;
     
-    self.qqTF.keyboardType = UIKeyboardTypeNumberPad;
 
     [self.view addSubview:self.qqTF];
     
@@ -376,11 +375,11 @@
     
     if ([self.qqTF.text valid]) {
         
-        if (self.qqTF.text.length < 6) {
-            
-            [TLAlert alertWithInfo:@"请输入正确的QQ号码"];
-            return ;
-        }
+//        if (self.qqTF.text.length < 6) {
+//
+//            [TLAlert alertWithInfo:@"请输入正确的QQ号码"];
+//            return ;
+//        }
     }
 //    if (![self.qqTF.text valid]) {
 //        
@@ -411,7 +410,7 @@
     http.parameters[@"liveTime"] = self.selectLiveTime;
     http.parameters[@"marriage"] = self.selectMarriage;
     http.parameters[@"provinceCity"] = self.liveProvinceTF.text;
-    http.parameters[@"qq"] = self.qqTF.text;
+    http.parameters[@"wechat"] = self.qqTF.text;
     
     [http postWithSuccess:^(id responseObject) {
         

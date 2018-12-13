@@ -20,15 +20,19 @@
 #import "LoanOrderDetailVC.h"
 #import "RepaymentVC.h"
 #import "NoticeVC.h"
-
+#import "LoanOrderVC.h"
 #import "TLPageDataHelper.h"
 
 #import "ProductModel.h"
 #import "UpdateModel.h"
-
-@interface HomeVC ()
+#import "QuotaModel.h"
+#import "TLUserLoginVC.h"
+#import "TLTableView.h"
+@interface HomeVC ()<RefreshDelegate,UITableViewDataSource,UITableViewDelegate>;
 
 @property (nonatomic, strong) TLPageDataHelper *helper;
+
+@property (nonatomic, strong) TLTableView *tableView;
 
 @property (nonatomic, strong) NSArray <ProductModel *>*goods;
 
@@ -39,6 +43,8 @@
 @property (nonatomic, strong) OrderModel *order;
 
 @property (nonatomic, strong) NSArray <UpdateModel *>*updates;
+
+@property (nonatomic, strong) QuotaModel *quota;
 
 @end
 
@@ -59,7 +65,6 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    
     [self reuqestGoods];
 }
 
@@ -67,15 +72,32 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.navigationItem.titleView = [UIButton buttonWithTitle:@"九州宝" titleColor:kTextColor backgroundColor:kClearColor titleFont:kWidth(18.0)];
+    self.navigationItem.titleView = [UIButton buttonWithTitle:[NSString stringWithFormat:@
+                                                               "%@",AppName] titleColor:[UIColor colorWithHexString:@"#0cb8ae"] backgroundColor:kClearColor titleFont:kWidth(18.0)];
 
-    [UIBarButtonItem addRightItemWithImageName:@"消息" frame:CGRectMake(0, 0, 18, 13) vc:self action:@selector(notice)];
+   
+//    [UIBarButtonItem addRightItemWithTitle:@"借款记录" frame:CGRectMake(0, 0, 18, 13) vc:self action:@selector(notice)];
+
+    UIButton *butn = [UIButton buttonWithTitle:@"借款记录" titleColor:[UIColor colorWithHexString:@"#0cb8ae"] backgroundColor:kWhiteColor titleFont:16];
+    [butn addTarget:self action:@selector(notice) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:butn];
+    //
+    TLTableView *tableView = [TLTableView tableViewWithFrame:CGRectMake(0,0, kScreenWidth, 0.1) delegate:self dataSource:self];
+    self.tableView = tableView;
+    tableView.refreshDelegate = self;
+    [self.view addSubview:tableView];
+    
     
     _isFirst = YES;
     
-    [self configUpdate];
-
+//    [self configUpdate];
+//    [self requestQiniu];
+    if ([TLUser user].isLogin) {
+            [self requestQuota];
+        }
+    
 }
+
 
 - (void)initGoodView {
 
@@ -137,6 +159,17 @@
 
     BaseWeakSelf;
     
+        if (![TLUser user].isLogin) {
+    
+            TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+            [self presentViewController:nav animated:YES completion:nil];
+            loginVC.loginSuccess = ^(){
+    
+            };
+            return;
+        }
+    
     switch (loanType) {
         case LoanTypeFirstStep:
         {
@@ -149,6 +182,10 @@
                 [TLAlert alertWithTitle:@"" message:@"尊敬的用户,该款产品,您还不能申请" confirmMsg:@"OK" confirmAction:^{
                     
                 }];
+            }else{
+                
+                [self loanStatusWithGood:good];
+
             }
             
         }break;
@@ -190,24 +227,111 @@
     }
 }
 
+
+- (void)requestQuota {
+    
+    //--//
+    //刷新额度
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    
+    http.code = @"623051";
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.quota = [QuotaModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+      
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
+
+
+
 - (void)loanStatusWithGood:(ProductModel *)good {
+    
+    
+    
+    SelectMoneyVC *moneyVC = [SelectMoneyVC new];
+    
+    moneyVC.title = @"产品详情";
+    
+    moneyVC.selectType = SelectGoodTypeAuth;
+    
+    moneyVC.code = good.code;
+    
+    [self.navigationController pushViewController:moneyVC animated:YES];
+    return;
     
     NSInteger status = [good.userProductStatus integerValue];
     
     switch (status) {
         case 0:
         {
-            //选择产品
-            SelectMoneyVC *moneyVC = [SelectMoneyVC new];
             
-            moneyVC.title = @"产品详情";
+//            NSInteger flag = [self.quota.flag integerValue];
+//            NSInteger money = [[self.quota.sxAmount convertToSimpleRealMoney] integerValue];
+//
+//            NSString *title = @"";
+//
+//            switch (flag) {
+//                case 0:
+//                {
+//
+//                    TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+//
+//                    tabbarVC.currentIndex = 1;
+//
+//                    [self.navigationController popToRootViewControllerAnimated:YES];
+//
+//
+//                }break;
+//
+//                case 1:
+//                {
+//                    if (money > 0) {
+//
+                    //选择产品
+                    SelectMoneyVC *moneyVC = [SelectMoneyVC new];
+                    
+                    moneyVC.title = @"产品详情";
+                    
+                    moneyVC.selectType = SelectGoodTypeAuth;
+                    
+                    moneyVC.code = good.code;
+                    
+                    [self.navigationController pushViewController:moneyVC animated:YES];
+//                        }
+//                    else{
+//                        TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+//                        
+//                        tabbarVC.currentIndex = 1;
+//                        
+//                        [self.navigationController popToRootViewControllerAnimated:YES];
+//                    }
+//                    
+//                }break;
+//                    
+//                case 2:
+//                {
+//                    TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
+//                    
+//                    tabbarVC.currentIndex = 1;
+//                    
+//                    [self.navigationController popToRootViewControllerAnimated:YES];
+//                }break;
+//                    
+//                default:
+//                    break;
+//            }
+//            
             
-            moneyVC.selectType = SelectGoodTypeAuth;
             
-            moneyVC.code = good.code;
-            
-            [self.navigationController pushViewController:moneyVC animated:YES];
-            
+         
         
         }break;
             
@@ -249,7 +373,7 @@
             //已有额度
             MyQuotaVC *quotaVC = [[MyQuotaVC alloc] init];
             
-            quotaVC.title = @"我的额度";
+            quotaVC.title = @"信用分";
             
             [self.navigationController pushViewController:quotaVC animated:YES];
         }break;
@@ -282,54 +406,98 @@
 }
 
 - (void)notice {
-
-    NoticeVC *noticeVC = [NoticeVC new];
+    if ( ![TLUser user].isLogin) {
+        
+        TLUserLoginVC *loginVC = [TLUserLoginVC new];
+        
+        NavigationController *nav = [[NavigationController alloc] initWithRootViewController:loginVC];
+        
+        [self presentViewController:nav animated:YES completion:nil];
+        
+        return;
+    }
+    LoanOrderVC *noticeVC = [LoanOrderVC new];
     
     [self.navigationController pushViewController:noticeVC animated:YES];
 }
 
 #pragma mark - Data
 - (void)reuqestGoods {
-
+    [self.tableView beginRefreshing];
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    
-    if (_isFirst) {
-        
-        helper.showView = self.view;
-
-    }
-    
+//
+//    if (_isFirst) {
+//
+//        helper.showView = self.view;
+//
+//    }
     helper.code = @"623012";
-    helper.parameters[@"userId"] = [TLUser user].userId;
-    
+    if ([[TLUser user] isLogin]) {
+        helper.parameters[@"userId"] = [TLUser user].userId;
+
+    }else{
+//        return;
+    }
     [helper modelClass:[ProductModel class]];
+    helper.tableView = self.tableView;
     
-    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-        
-        if (objs.count > 0) {
+    [self.tableView addRefreshAction:^{
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
-            self.goods = objs;
-            
-            _isFirst = NO;
-            
-            for (UIView *subview in self.bgSV.subviews) {
+            if (objs.count > 0) {
                 
-                [subview removeFromSuperview];
+                self.goods = objs;
+                
+                _isFirst = NO;
+                
+                for (UIView *subview in self.bgSV.subviews) {
+                    
+                    [subview removeFromSuperview];
+                }
+                [self.tableView endRefreshingWithNoMoreData_tl];
+
+                [self initGoodView];
+                
             }
             
-            [self initGoodView];
+        } failure:^(NSError *error) {
             
-        }
-        
-    } failure:^(NSError *error) {
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self reuqestGoods];
+            });
             
-            [self reuqestGoods];
-        });
-        
+        }];
     }];
-    
+    [self.tableView addLoadMoreAction:^{
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            if (objs.count > 0) {
+                
+                self.goods = objs;
+                
+                _isFirst = NO;
+                
+                for (UIView *subview in self.bgSV.subviews) {
+                    
+                    [subview removeFromSuperview];
+                }
+                [self.tableView endRefreshingWithNoMoreData_tl];
+
+                [self initGoodView];
+                
+            }
+            
+        } failure:^(NSError *error) {
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self reuqestGoods];
+            });
+            
+        }];
+    }];
+    [self.tableView beginRefreshing];
 }
 
 - (void)requestOrderWithCode:(NSString *)code {
@@ -390,6 +558,58 @@
     }];
     
 }
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return 1;
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCellId"];
+    if (!cell) {
+        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"UITableViewCellId"];
+        
+        cell.textLabel.font = FONT(15);
+        cell.textLabel.textColor = [UIColor textColor];
+        cell.detailTextLabel.textAlignment = NSTextAlignmentRight;
+        cell.detailTextLabel.textColor = [UIColor textColor];
+        cell.detailTextLabel.font = FONT(14);
+        
+    }
+
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    return cell;
+    
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    return 0.01;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

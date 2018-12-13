@@ -11,6 +11,8 @@
 #import "ZMScoreModel.h"
 #import "ZMOPScoreResultVC.h"
 
+#import "NavigationController.h"
+
 @interface ZMOPScoreVC ()
 
 @property (nonatomic, strong) TLTextField *realName;    //真实姓名
@@ -28,11 +30,17 @@
     // Do any additional setup after loading the view.
     
     [self initSubviews];
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 
+    [super viewWillAppear:animated];
+    
+    NavigationController *navi = (NavigationController *)self.navigationController;
+    
+    navi.isHidden = NO;
+    
     self.navigationController.navigationBar.translucent = NO;
     
     [self.navigationController.navigationBar setBackgroundImage:[UIColor createImageWithColor:kAppCustomMainColor] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
@@ -41,6 +49,8 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
 
+    [super viewDidDisappear:animated];
+    
     self.navigationController.navigationBar.translucent = YES;
     
     if (!_isAuth) {
@@ -121,10 +131,7 @@
     
     http.isShowMsg = NO;
     http.showView = self.view;
-
     http.code = @"623047";
-//    http.parameters[@"idNo"] = self.idCard.text;
-//    http.parameters[@"realName"] = self.realName.text;
     http.parameters[@"userId"] = [TLUser user].userId;
     
     [http postWithSuccess:^(id responseObject) {
@@ -145,18 +152,7 @@
             if (scoreModel.authorized) {
                 
                 _isAuth = YES;
-                
-//                scoreResultVC.result = YES;
-//                
-//                scoreResultVC.scoreModel = scoreModel;
-                
-//                [TLAlert alertWithSucces:@"认证成功"];
-                
-//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                    
-//                    [self.navigationController popViewControllerAnimated:YES];
-//                });
-                
+            
                 [TLAlert alertWithTitle:@"" message:@"芝麻分认证成功" confirmMsg:@"OK" confirmAction:^{
                     
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -173,12 +169,14 @@
                 _isAuth = NO;
                 
                 NSString *appId = scoreModel.appId;
-                
                 NSString *sign = scoreModel.signature;
-                
                 NSString *params = scoreModel.param;
                 
                 if (appId && sign && params) {
+                    
+                    NavigationController *navi = (NavigationController *)self.navigationController;
+                    
+                    navi.isHidden = YES;
                     
                     [[ALCreditService sharedService] queryUserAuthReq:appId sign:sign params:params extParams:nil selector:@selector(result:) target:self];
                     
@@ -211,7 +209,7 @@
 
     NSLog(@"result %@", dic);
     
-    if (dic[@"authResult"]) {
+    if ([dic[@"authResult"] valid]) {
         
         TLNetworking *http = [TLNetworking new];
         
@@ -235,12 +233,6 @@
             
             if ([responseObject[@"errorCode"] isEqual:@"0"]) {
                 
-//                [TLAlert alertWithSucces:@"认证成功"];
-//                
-//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                    
-//                    [self.navigationController popViewControllerAnimated:YES];
-//                });
                 [TLAlert alertWithTitle:@"" message:@"芝麻分认证成功" confirmMsg:@"OK" confirmAction:^{
                     
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -266,11 +258,7 @@
             
         }];
         
-    } else {
-    
-        [TLAlert alertWithError:@"授权失败"];
     }
-
 }
 
 - (void)next:(UITextField *)sender {

@@ -9,5 +9,6 @@
 #import "TLBaseVC.h"
 
 @interface ZHBankCardListVC : TLBaseVC
+@property (nonatomic,copy)  void(^addSuccess)();
 
 @end

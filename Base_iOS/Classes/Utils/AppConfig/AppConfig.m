@@ -42,8 +42,9 @@ void TLLog(NSString *format, ...) {
     switch ([ApiConfig config].runMode) {
         case RunModeDis:
         {
-            self.companyCode = @"CD-YLQ000014";
-            self.systemCode = @"CD-YLQ000014";
+            
+            self.companyCode = @"GS2018121313302485137074";
+            self.systemCode = @"GS2018112119133810071833";
             
             self.bottomInsetHeight = kDevice_Is_iPhoneX == YES ? 34: 0;
             
@@ -59,14 +60,14 @@ void TLLog(NSString *format, ...) {
                 case RunEnvDev: {
                     
                     self.qiniuDomain = @"http://oucrrtx1y.bkt.clouddn.com";
-                    self.addr = @"http://121.43.101.148:3701";
+                    self.addr = @"http://120.26.6.213:7901";
                     
                 }break;
                     
                 case RunEnvTest: {
                     
                     self.qiniuDomain = @"http://oucrrtx1y.bkt.clouddn.com";
-                    self.addr = @"http://118.178.124.16:3701";
+                    self.addr = @"http://47.99.163.139:3701";
                     
                 }break;
                     
@@ -75,7 +76,7 @@ void TLLog(NSString *format, ...) {
             
         case RunModeReview:
         {
-            self.companyCode = @"CD-JKEG000011";
+            self.companyCode = @"GS2018112119133810071833";
             self.systemCode = @"CD-JKEG000011";
             
             self.bottomInsetHeight = kDevice_Is_iPhoneX == YES ? 34: 0;
@@ -92,7 +93,10 @@ void TLLog(NSString *format, ...) {
                 case RunEnvDev: {
                     
                     self.qiniuDomain = @"http://or4e1nykg.bkt.clouddn.com";
-                    self.addr = @"http://121.43.101.148:3401";
+//                    self.addr = @"http://121.43.101.148:3401";
+                     self.addr = @"http://120.26.6.213:7901";
+
+                    
                     
                 }break;
                     

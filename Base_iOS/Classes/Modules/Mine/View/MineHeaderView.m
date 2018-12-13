@@ -26,7 +26,7 @@
         CGFloat photoW = 60;
         
         self.userPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(15, (self.height - photoW)/2.0 - 10, photoW, photoW)];
-        
+       
         self.userPhoto.image = [UIImage imageNamed:@"头像"];
         self.userPhoto.layer.cornerRadius = photoW/2.0;
         self.userPhoto.layer.masksToBounds = YES;
@@ -64,7 +64,16 @@
             make.left.equalTo(self.userPhoto.mas_right).offset(15);
             
         }];
+        self.scoreLbl = [UILabel labelWithText:@"" textColor:kWhiteColor textFont:16.0];
         
+        self.scoreLbl.backgroundColor = kClearColor;
+        
+        [self addSubview:self.scoreLbl];
+        [self.scoreLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.nameLbl.mas_bottom).offset(5);
+            make.left.equalTo(self.userPhoto.mas_right).offset(15);
+            
+        }];
         //
         self.genderImg = [[UIImageView alloc] init];
         
@@ -88,7 +97,7 @@
             make.centerY.equalTo(self.userPhoto.mas_centerY).offset(0);
             
         }];
-        
+        arrowImageView.hidden = YES;
         //线
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, self.userPhoto.yy + 17, kScreenWidth, 0.5)];
         line.backgroundColor = [UIColor lineColor];
@@ -99,7 +108,7 @@
         CGFloat y = line.yy;
         CGFloat w = kScreenWidth/2.0;
         CGFloat h = 45;
-        NSArray *typeNames = @[@"优惠券:",@"我的额度:"];
+        NSArray *typeNames = @[@"优惠券",@"我的推荐"];
         
         self.lbls = [[NSMutableArray alloc] init];
         __block UIButton *lastBtn;
@@ -117,6 +126,24 @@
             lastBtn = btn;
             
             //
+            UILabel *numLbl = [UILabel labelWithText:@"0" textColor:[UIColor colorWithHexString:@"#fba72a"] textFont:15.0];
+            if (idx == 0) {
+                numLbl.textColor = [UIColor colorWithHexString:@"#fba72a"];
+            }else{
+                numLbl.textColor = [UIColor colorWithHexString:@"#0cb8ae"];
+
+            }
+            numLbl.textAlignment = NSTextAlignmentCenter;
+            numLbl.backgroundColor = kClearColor;
+            [btn addSubview:numLbl];
+            [numLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(btn.mas_centerX);
+                make.top.equalTo(@5);
+                make.width.mas_lessThanOrEqualTo(100);
+                make.height.mas_equalTo(20);
+                
+            }];
+            [self.lbls addObject:numLbl];
             UILabel *typeNameLbl = [UILabel labelWithText:@"" textColor:[UIColor colorWithHexString:@"#666666"] textFont:13.0];
             
             typeNameLbl.textAlignment = NSTextAlignmentCenter;
@@ -126,26 +153,14 @@
             [typeNameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
 
                 make.width.mas_lessThanOrEqualTo(100);
-                make.centerY.mas_equalTo(0);
-                make.centerX.mas_equalTo(-30);
+                make.centerX.equalTo(btn.mas_centerX);
+                make.top.equalTo(numLbl.mas_bottom).offset(2);
                 make.height.mas_lessThanOrEqualTo(20);
                 
             }];
             
             //
-            UILabel *numLbl = [UILabel labelWithText:@"0" textColor:[UIColor textColor] textFont:15.0];
-            
-            numLbl.textAlignment = NSTextAlignmentCenter;
-            numLbl.backgroundColor = kClearColor;
-            [btn addSubview:numLbl];
-            [numLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(typeNameLbl.mas_right).mas_equalTo(10);
-                make.width.mas_lessThanOrEqualTo(100);
-                make.centerY.mas_equalTo(btn.mas_centerY);
-                make.height.mas_equalTo(20);
-                
-            }];
-            [self.lbls addObject:numLbl];
+          
             
             
             
@@ -165,6 +180,12 @@
             make.width.mas_equalTo(0.5);
             make.bottom.mas_equalTo(-5);
         }];
+        if ([TLUser user].photo) {
+            NSString *userPhotoStr = [[TLUser user].photo convertImageUrl];
+            
+            //
+            [self.userPhoto sd_setImageWithURL:[NSURL URLWithString:userPhotoStr] placeholderImage:[UIImage imageNamed:@"头像"]];
+        }
     }
     return self;
 }
@@ -178,14 +199,14 @@
     
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedWithType:idx:)]) {
-        
-        [self.delegate didSelectedWithType:MineHeaderSeletedTypeDefault idx:0];
-    }
-    
-}
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedWithType:idx:)]) {
+//
+//        [self.delegate didSelectedWithType:MineHeaderSeletedTypeDefault idx:0];
+//    }
+//
+//}
 
 - (void)goFlowDetal:(UIButton *)btn {
     
@@ -199,15 +220,16 @@
             
         }
         
-    } else if (index == 1) {
-    
+    }
+    else if (index == 1) {
+
         if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedWithType:idx:)]) {
-            
+
             [self.delegate didSelectedWithType:MineHeaderSeletedTypeQuota idx:btn.tag - 100];
-            
+
         }
     }
-    
+
     
     
 }

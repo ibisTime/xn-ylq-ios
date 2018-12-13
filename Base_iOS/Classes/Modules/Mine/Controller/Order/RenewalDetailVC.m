@@ -8,11 +8,11 @@
 
 #import "RenewalDetailVC.h"
 #import "RenewalDetailTableView.h"
-
+#import "RenwalListView.h"
 @interface RenewalDetailVC ()
 
 @property (nonatomic, strong) RenewalDetailTableView *tableView;
-
+@property (nonatomic, strong)RenwalListView *mineHeaderView;
 @end
 
 @implementation RenewalDetailVC
@@ -21,7 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    self.title = @"续期详情";
+    self.title = @"分期详情";
     
     [self initTableView];
 }
@@ -34,6 +34,12 @@
     self.tableView.renewal = self.renewal;
     
     [self.view addSubview:self.tableView];
+    RenwalListView *mineHeaderView = [[RenwalListView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 160)];
+    self.tableView.tableHeaderView = mineHeaderView;
+    
+    self.mineHeaderView = mineHeaderView;
+    self.mineHeaderView.quotaModel = self.renewal;
+    
 }
 
 - (void)didReceiveMemoryWarning {

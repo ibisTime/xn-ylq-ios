@@ -7,7 +7,7 @@
 //
 
 #import "BaseModel.h"
-
+#import "RenewalModel.h"
 @class UserInfo;
 
 @interface OrderModel : BaseModel
@@ -73,6 +73,20 @@
 
 @property (nonatomic, assign) NSInteger renewalCount;   //续期次数
 
+@property (nonatomic, copy) NSString *isStage; //是否分期
+
+@property (nonatomic, copy) NSString* stageCount;   //当前期数
+
+@property (nonatomic, copy) NSNumber *realHkAmount; //总还款
+
+@property (nonatomic, copy) NSNumber *stageBatch; //分期数
+
+
+@property (nonatomic ,strong) NSMutableArray *stageList;
+@property (nonatomic ,strong) RenewalModel *info;
+
+
+
 @end
 
 @interface UserInfo : NSObject
@@ -94,6 +108,9 @@
 @property (nonatomic, copy) NSString *photo;
 
 @property (nonatomic, copy) NSString *systemCode;
+
+
+
 
 @end
 

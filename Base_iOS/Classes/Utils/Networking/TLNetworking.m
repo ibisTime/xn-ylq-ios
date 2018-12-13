@@ -104,8 +104,14 @@
             self.parameters[@"token"] = [TLUser user].token;
             
         }
-        
-        self.parameters[@"companyCode"] = [[self class] companyCode];
+        if (self.isSyComCode == YES) {
+            self.parameters[@"companyCode"] = @"CD-YLQ000014";
+
+        }else{
+            
+            self.parameters[@"companyCode"] = [[self class] companyCode];
+
+        }
         
         NSData *data = [NSJSONSerialization dataWithJSONObject:self.parameters options:NSJSONWritingPrettyPrinted error:nil];
         self.parameters = [NSMutableDictionary dictionaryWithCapacity:2];
@@ -126,7 +132,7 @@
     
     [HttpLogger logDebugInfoWithRequest:request apiName:self.code requestParams:self.parameters httpMethod:@"POST"];
     
-  return [self.manager POST:self.url parameters:self.parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    return [self.manager POST:self.url parameters:self.parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
       
       [HttpLogger logDebugInfoWithResponse:task.response apiName:self.code resposeString:responseObject request:task.originalRequest error:nil];
 

@@ -58,7 +58,7 @@
     
     __weak typeof(self) weakSelf = self;
     TLPageDataHelper *pageDataHelper = [[TLPageDataHelper alloc] init];
-    pageDataHelper.code = @"802015";
+    pageDataHelper.code = @"802025";
     pageDataHelper.tableView = bankCardTV;
     pageDataHelper.parameters[@"token"] = [TLUser user].token;
     pageDataHelper.parameters[@"userId"] = [TLUser user].userId;
@@ -116,6 +116,7 @@
     bankCardAddVC.addSuccess = ^(ZHBankCard *card){
     
         [weakSelf.bankCardTV beginRefreshing];
+        
         
     };
     [self.navigationController pushViewController:bankCardAddVC animated:YES];
@@ -180,6 +181,8 @@
         displayAddVC.bankCard = self.banks[indexPath.row];
     }
     displayAddVC.addSuccess = ^(ZHBankCard *card){
+        
+        
         
         [weakSelf.bankCardTV beginRefreshing];
         

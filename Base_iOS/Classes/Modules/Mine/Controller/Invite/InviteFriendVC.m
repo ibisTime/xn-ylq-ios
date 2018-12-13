@@ -8,7 +8,7 @@
 
 #import "InviteFriendVC.h"
 #import "ShareView.h"
-
+#import "TLQrCodeVC.h"
 #import "HistoryInviteVC.h"
 
 @interface InviteFriendVC ()
@@ -30,8 +30,8 @@
     // Do any additional setup after loading the view.
     self.title = @"邀请好友";
     
-    [UIBarButtonItem addRightItemWithTitle:@"推荐历史" frame:CGRectMake(0, 0, 70, 30) vc:self action:@selector(historyFriends)];
-    
+//    [UIBarButtonItem addRightItemWithTitle:@"推荐历史" frame:CGRectMake(0, 0, 70, 30) vc:self action:@selector(historyFriends)];
+//    
     [self initSubviews];
     
     [self requestActivityRule];
@@ -132,24 +132,26 @@
 
 - (void)inviteFriend {
 
-    ShareView *shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) shareBlock:^(BOOL isSuccess, int errorCode) {
-        
-        if (isSuccess) {
-            
-            [TLAlert alertWithSucces:@"分享成功"];
-            
-        } else {
-            
-            [TLAlert alertWithError:@"分享失败"];
-        }
-        
-    }];
-    
-    shareView.shareTitle = @"邀请好友";
-    shareView.shareDesc = @"邀好友送优惠券 多邀多得";
-    shareView.shareURL = self.shareUrl;
-    
-    [self.view addSubview:shareView];
+    TLQrCodeVC *service = [TLQrCodeVC new];
+    [self.navigationController pushViewController:service animated:YES];
+//    ShareView *shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) shareBlock:^(BOOL isSuccess, int errorCode) {
+//        
+//        if (isSuccess) {
+//            
+//            [TLAlert alertWithSucces:@"分享成功"];
+//            
+//        } else {
+//            
+//            [TLAlert alertWithError:@"分享失败"];
+//        }
+//        
+//    }];
+//    
+//    shareView.shareTitle = @"邀请好友";
+//    shareView.shareDesc = @"邀好友送优惠券 多邀多得";
+//    shareView.shareURL = self.shareUrl;
+//    
+//    [self.view addSubview:shareView];
 }
 
 #pragma mark - Data
@@ -157,9 +159,9 @@
 
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
-    http.code = @"805917";
+    http.code = @"623917";
     
-    http.parameters[@"ckey"] = @"activityRule";
+    http.parameters[@"key"] = @"activityRule";
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -174,8 +176,8 @@
     
     TLNetworking *http = [TLNetworking new];
     
-    http.code = @"805917";
-    http.parameters[@"ckey"] = @"domainUrl";
+    http.code = @"623917";
+    http.parameters[@"key"] = @"domainUrl";
     
     [http postWithSuccess:^(id responseObject) {
         

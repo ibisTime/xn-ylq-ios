@@ -49,4 +49,20 @@
 @property (nonatomic, strong) NSNumber *totalAmount;        //续期金额
 @property (nonatomic, strong) NSNumber *xsAmount;
 
+@property (nonatomic, strong) NSNumber *mainAmount;
+
+@property (nonatomic, strong) NSNumber *amount;
+
+
+
+@property (nonatomic, copy) NSString *remark;
+
+@property (nonatomic, copy) NSString *date;
+@property (nonatomic, copy) NSString *stageCode;
+@property (nonatomic, copy) NSString *startTime;
+@property (nonatomic, copy) NSString *endTime;
+@property (nonatomic, copy) NSString *stageCount;//总期数
+
+
+
 @end

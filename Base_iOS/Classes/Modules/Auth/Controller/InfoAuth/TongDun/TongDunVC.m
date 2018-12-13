@@ -9,11 +9,18 @@
 #import "TongDunVC.h"
 
 #import <WebKit/WebKit.h>
+
 #import "AuthModel.h"
+
+#import "ManualAuditVC.h"
 
 @interface TongDunVC ()<WKNavigationDelegate>
 
 @property (nonatomic, strong) WKWebView *webView;
+//
+@property (nonatomic, strong) AuthModel *authModel;
+//是否有申请单
+@property (nonatomic, copy) NSString *isApply;
 
 @end
 
@@ -26,10 +33,17 @@
     self.title = @"运营商认证";
     
     [self initWebView];
+    
+    [self initBackItem];
 
 }
 
 #pragma mark - Init
+- (void)initBackItem {
+    
+    [UIBarButtonItem addLeftItemWithImageName:@"" frame:CGRectMake(-10, 0, 40, 44) vc:self action:@selector(back)];
+}
+
 - (void)initWebView {
     
     WKWebViewConfiguration *wkConfig = [WKWebViewConfiguration new];
@@ -46,7 +60,9 @@
     
     NSString *token = @"5613A6F334DC4E12944AF748EE11FDEA";
     
-    NSString *htmlStr = [NSString stringWithFormat:@"https://open.shujumohe.com/box/yys?box_token=%@&real_name=%@&identity_code=%@&user_mobile=%@", token, [TLUser user].realName,[TLUser user].idNo, [TLUser user].mobile];
+    NSString *cb = @"http://www.baidu.com";
+    
+    NSString *htmlStr = [NSString stringWithFormat:@"https://open.shujumohe.com/box/yys?box_token=%@&real_name=%@&identity_code=%@&user_mobile=%@&cb=%@", token, [TLUser user].realName,[TLUser user].idNo, [TLUser user].mobile, cb];
     
     [self loadWebWithUrl:[htmlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
 }
@@ -56,6 +72,17 @@
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
 
     [_webView loadRequest:urlRequest];
+}
+
+#pragma mark - Events
+- (void)back {
+    
+//    //获取认证回调
+//    if (self.respBlock) {
+//
+//        self.respBlock();
+//    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - WKNavigationDelegate
@@ -72,19 +99,35 @@
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 
-    NSURL *URL = navigationAction.request.URL;
-    NSString *scheme = [URL scheme]; //webView尝试访问链接时，会被此处拦截处理
-    if ([scheme isEqualToString:@"somescheme"]) {
-        NSString *host = [URL host];
+    NSURL *url = navigationAction.request.URL;
+    NSString *scheme = [url scheme]; //webView尝试访问链接时，会被此处拦截处理
+    if ([scheme isEqualToString:@"http"]) {
+        NSString *host = [url host];
         //判断host
-        if ([host isEqualToString:@"somehost"]) {
-            //拦截后做处理
-
-            NSLog(@"拦截了");
+        if ([host isEqualToString:@"www.baidu.com"]) {
+            //获取taskId
+            NSArray *arr = [url.absoluteString componentsSeparatedByString:@"task_id="];
+            
+            NSString *taskId = @"";
+            
+            if (arr.count > 1) {
+                
+                taskId = arr[1];
+            }
+            
+            //返回NO,阻止页面继续跳转到不存在的url地址
+            decisionHandler(WKNavigationActionPolicyCancel);
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+            //获取认证回调
+            if (self.respBlock) {
+                
+                self.respBlock(taskId);
+            }
+        
+            return ;
         }
-        //返回NO,阻止页面继续跳转到不存在的url地址
-        decisionHandler(WKNavigationActionPolicyCancel);
-
     }
 
     decisionHandler(WKNavigationActionPolicyAllow);

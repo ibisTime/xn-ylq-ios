@@ -26,7 +26,7 @@
 #import "InviteFriendVC.h"
 #import "SettingVC.h"
 #import "HTMLStrVC.h"
-
+#import "HistoryInviteVC.h"
 @interface MineVC ()<UITableViewDataSource,UITableViewDelegate,MineHeaderSeletedDelegate>
 
 @property (nonatomic, strong) MineHeaderView *headerView;
@@ -64,12 +64,13 @@
     if ([TLUser user].userId) {
         
         [self requestUserInfo];
-        
+        [self requestScore];
         [self requestCouponList];
-        
+//        [self requestFriendList];
         [self requestServiceTime];
         
         [self requestServiceMobile];
+        
     }
     
 }
@@ -153,6 +154,11 @@
     [[TLUser user] updateUserInfo];
     
     //刷新额度
+    if (![TLUser user].isLogin) {
+        return;
+    }
+    
+    return;
     TLNetworking *http = [TLNetworking new];
     http.code = @"623051";
     http.parameters[@"userId"] = [TLUser user].userId;
@@ -162,6 +168,24 @@
         QuotaModel *model = [QuotaModel mj_objectWithKeyValues:responseObject[@"data"]];
         
         self.headerView.quotaNum = [model.sxAmount convertToSimpleRealMoney];
+
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
+
+- (void)requestScore
+{
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"623051";
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        QuotaModel *model = [QuotaModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        self.headerView.scoreLbl.text =[NSString stringWithFormat:@"信用分: %@", [model.sxAmount convertToSimpleRealMoney]];
         
     } failure:^(NSError *error) {
         
@@ -182,7 +206,8 @@
     [helper modelClass:[CouponModel class]];
     
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-        
+        TLUser *user = [TLUser user];
+        NSLog(@"%@",user.province);
         self.headerView.couponNum = [NSString stringWithFormat:@"%ld", objs.count];
         
     } failure:^(NSError *error) {
@@ -195,9 +220,9 @@
     
     TLNetworking *http = [TLNetworking new];
 
-    http.code = @"805917";
+    http.code = @"623917";
     
-    http.parameters[@"ckey"] = @"time";
+    http.parameters[@"key"] = @"time";
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -212,9 +237,9 @@
     
     TLNetworking *http = [TLNetworking new];
 
-    http.code = @"805917";
+    http.code = @"623917";
     
-    http.parameters[@"ckey"] = @"telephone";
+    http.parameters[@"key"] = @"telephone";
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -253,10 +278,15 @@
     NSString *userPhotoStr = [[TLUser user].photo convertImageUrl];
     
     //
-    [self.headerView.userPhoto sd_setImageWithURL:[NSURL URLWithString:userPhotoStr] placeholderImage:[UIImage imageNamed:@"头像"]];
-    
+//    [self.headerView.userPhoto sd_setImageWithURL:[NSURL URLWithString:userPhotoStr] placeholderImage:[UIImage imageNamed:@"头像"]];
+//
     self.headerView.nameLbl.text = [TLUser user].mobile;
+    TLUser * u = [TLUser user];
+    self.headerView.quotaNum = [NSString stringWithFormat:@"%ld",(long)[[TLUser user].refereeCount integerValue]];
+    self.headerView.couponNum = [NSString stringWithFormat:@"%ld",(long)[[TLUser user].couponCount integerValue]];
 
+//    [self.headerView setNeedsDisplay];
+//    [self.headerView setNeedsLayout];
 }
 
 #pragma mark- 修改头像
@@ -270,17 +300,19 @@
             TLNetworking *getUploadToken = [TLNetworking new];
             getUploadToken.showView = weakSelf.view;
             getUploadToken.code = IMG_UPLOAD_CODE;
+            //630091
             getUploadToken.parameters[@"token"] = [TLUser user].token;
             [getUploadToken postWithSuccess:^(id responseObject) {
                 
                 [TLProgressHUD showWithStatus:@""];
 
                 QNUploadManager *uploadManager = [[QNUploadManager alloc] initWithConfiguration:[QNConfiguration build:^(QNConfigurationBuilder *builder) {
-                    builder.zone = [QNZone zone2];
+                    builder.zone = [QNZone zone0];
                     
                 }]];
+//                NSString *token = responseObject[@"data"][@"uploadToken"];
                 NSString *token = responseObject[@"data"][@"uploadToken"];
-                
+
                 UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
                 NSData *imgData = UIImageJPEGRepresentation(image, 0.4);
                 
@@ -298,7 +330,8 @@
                         
                         [TLAlert alertWithSucces:@"修改头像成功"];
                         [TLUser user].photo = key;
-                        weakSelf.headerView.userPhoto.image = image;
+                        [weakSelf.headerView.userPhoto sd_setImageWithURL:[NSURL URLWithString:[key convertImageUrl]]];
+                        [weakSelf.headerView setNeedsDisplay];
                         
                     } failure:^(NSError *error) {
                         
@@ -342,9 +375,17 @@
         case MineHeaderSeletedTypeQuota:
         {
         
-            MyQuotaVC *myQuotaVC = [MyQuotaVC new];
+            HistoryInviteVC *myQuotaVC = [HistoryInviteVC new];
             
             [self.navigationController pushViewController:myQuotaVC animated:YES];
+            
+        }break;
+        case MineHeaderSeletedTypeDefault:
+        {
+            
+            SettingVC *settingVC = [SettingVC new];
+            
+            [self.navigationController pushViewController:settingVC animated:YES];
             
         }break;
             
@@ -363,7 +404,7 @@
         
         _group = [[SettingGroup alloc] init];
         
-        NSArray *names = @[@[@"借款记录", @"邀请好友", @"帮助中心", @"联系客服"], @[@"个人设置"]];
+        NSArray *names = @[@[@"邀请好友", @"帮助中心", @"联系客服"], @[@"个人设置"]];
 
         //借款记录
         SettingModel *loanRecordItem = [SettingModel new];
@@ -372,14 +413,15 @@
         [loanRecordItem setAction:^{
             
             LoanOrderVC *loanOrderVC = [LoanOrderVC new];
-            
+
             [weakSelf.navigationController pushViewController:loanOrderVC animated:YES];
+
         }];
         
         //邀请好友
         SettingModel *inviteFriendItem = [SettingModel new];
-        inviteFriendItem.imgName = names[0][1];
-        inviteFriendItem.text  = names[0][1];
+        inviteFriendItem.imgName = names[0][0];
+        inviteFriendItem.text  = names[0][0];
         [inviteFriendItem setAction:^{
             
             InviteFriendVC *inviteVC = [InviteFriendVC new];
@@ -389,8 +431,8 @@
         
         //帮助中心
         SettingModel *helpItem = [SettingModel new];
-        helpItem.imgName = names[0][2];
-        helpItem.text  = names[0][2];
+        helpItem.imgName = names[0][1];
+        helpItem.text  = names[0][1];
         [helpItem setAction:^{
             
             HTMLStrVC *htmlVC = [HTMLStrVC new];
@@ -403,8 +445,8 @@
         
         //联系客服
         SettingModel *contactItem = [SettingModel new];
-        contactItem.imgName = names[0][3];
-        contactItem.text  = names[0][3];
+        contactItem.imgName = names[0][2];
+        contactItem.text  = names[0][2];
         [contactItem setAction:^{
             
             HTMLStrVC *htmlVC = [HTMLStrVC new];
@@ -427,13 +469,31 @@
             
         }];
         
-        _group.groups = @[@[loanRecordItem, inviteFriendItem, helpItem, contactItem], @[settingItem]];
+        _group.groups = @[@[ inviteFriendItem, helpItem, contactItem], @[settingItem]];
         
     }
     return _group;
     
 }
 
+- (void)requestFriendList {
+    
+    BaseWeakSelf;
+    
+    TLNetworking *helper = [[TLNetworking alloc] init];
+    
+    helper.code = @"805120";
+    helper.parameters[@"userReferee"] = [TLUser user].userId;
+    //    helper.parameters[@"token"] = [TLUser user].token;
+    [helper postWithSuccess:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+    
+}
 
 
 #pragma mark- delegate

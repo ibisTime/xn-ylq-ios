@@ -13,7 +13,7 @@
 
 #import "LoanProtocolVC.h"
 #import "ZHBankCardAddVC.h"
-
+#import "ZHBankCardListVC.h"
 @interface SignContractVC ()
 
 @property (nonatomic,strong) NSMutableArray <ZHBankCard *>*banks;
@@ -28,16 +28,7 @@
     
     if ([[TLUser user].bankcardFlag isEqualToString:@"0"]) {
         
-        [TLAlert alertWithTitle:@"" message:@"您还未绑定银行卡, 请先绑定银行卡" confirmMsg:@"OK" confirmAction:^{
-            
-            ZHBankCardAddVC *bankCardAddVC= [[ZHBankCardAddVC alloc] init];
-            bankCardAddVC.title = @"添加银行卡";
-            
-            [self.navigationController pushViewController:bankCardAddVC animated:YES];
-            
-        }];
-        
-        return ;
+     
         
     } else if ([[TLUser user].bankcardFlag isEqualToString:@"1"]) {
         
@@ -48,10 +39,25 @@
     
 }
 
+-(void)setCore
+{
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"623024";
+    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"creditScore"] = @"2000000";
+    [http postWithSuccess:^(id responseObject) {
+        [TLAlert alertWithSucces:@"设置成功"];
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"签约";
+    self.title = @"借款";
     
     [self initSubviews];
 }
@@ -123,7 +129,7 @@
     
     NSArray *contentArr = @[realName, money, day, total, effectAmountStr, plan, yqStr];
     
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, topView.yy, kScreenWidth, 330)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, topView.yy, kScreenWidth, 350)];
     
     contentView.backgroundColor = kWhiteColor;
     
@@ -150,43 +156,43 @@
     }
     
     //借款协议
-    UIButton *selectBtn = [UIButton buttonWithImageName:@"同意" selectedImageName:@"未同意"];
-    
-    selectBtn.tag = 1250;
-    
-    selectBtn.frame = CGRectMake(kWidth(100), contentView.yy + kWidth(30), 14, 14);
-    
-    [selectBtn addTarget:self action:@selector(clickSelect:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.bgSV addSubview:selectBtn];
-    
-    UILabel *agreeLbl = [UILabel labelWithText:@"我同意" textColor:kTextColor textFont:12];
-    
-    agreeLbl.frame = CGRectMake(selectBtn.xx + 7, selectBtn.y, 40, 12);
-    
-    [self.bgSV addSubview:agreeLbl];
-    
-    UIButton *agreeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"《%@-借款协议》", [TLUser user].realName] titleColor:[UIColor colorWithHexString:@"#4385b3"] backgroundColor:kClearColor titleFont:12];
-    
-    //    agreeBtn.frame = CGRectMake(agreeLbl.xx, agreeLbl.y, 200, 12);
-    
-    [agreeBtn setEnlargeEdge:10];
-    
-    [agreeBtn addTarget:self action:@selector(agreement) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.bgSV addSubview:agreeBtn];
-    [agreeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.width.mas_lessThanOrEqualTo(200);
-        make.height.mas_equalTo(12);
-        make.left.mas_equalTo(agreeLbl.xx);
-        make.top.mas_equalTo(agreeLbl.y);
-        
-    }];
+//    UIButton *selectBtn = [UIButton buttonWithImageName:@"同意" selectedImageName:@"未同意"];
+//
+//    selectBtn.tag = 1250;
+//
+//    selectBtn.frame = CGRectMake(kWidth(100), contentView.yy + kWidth(30), 14, 14);
+//
+//    [selectBtn addTarget:self action:@selector(clickSelect:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    [self.bgSV addSubview:selectBtn];
+//
+//    UILabel *agreeLbl = [UILabel labelWithText:@"我同意" textColor:kTextColor textFont:12];
+//
+//    agreeLbl.frame = CGRectMake(selectBtn.xx + 7, selectBtn.y, 40, 12);
+//
+//    [self.bgSV addSubview:agreeLbl];
+//
+//    UIButton *agreeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"《%@-借款协议》", [TLUser user].realName] titleColor:[UIColor colorWithHexString:@"#4385b3"] backgroundColor:kClearColor titleFont:12];
+//
+//    //    agreeBtn.frame = CGRectMake(agreeLbl.xx, agreeLbl.y, 200, 12);
+//
+//    [agreeBtn setEnlargeEdge:10];
+//
+//    [agreeBtn addTarget:self action:@selector(agreement) forControlEvents:UIControlEventTouchUpInside];
+//
+//    [self.bgSV addSubview:agreeBtn];
+//    [agreeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.width.mas_lessThanOrEqualTo(200);
+//        make.height.mas_equalTo(12);
+//        make.left.mas_equalTo(agreeLbl.xx);
+//        make.top.mas_equalTo(agreeLbl.y);
+//
+//    }];
     //确认借款
     UIButton *confirmBtn = [UIButton buttonWithTitle:@"确认借款" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:18 cornerRadius:22.5];
     
-    confirmBtn.frame = CGRectMake(15, agreeLbl.yy + kWidth(30), kScreenWidth - 30, 45);
+    confirmBtn.frame = CGRectMake(15, contentView.yy, kScreenWidth - 30, 45);
     
     [confirmBtn addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
     
@@ -211,59 +217,91 @@
     
     [self.navigationController pushViewController:loanProtocolVC animated:YES];
 }
+
+
+
 //签约
 - (void)confirm {
     
     //判断是否绑定银行卡，是就进入放款中，否就绑定银行卡
     if ([[TLUser user].bankcardFlag isEqualToString:@"1"]) {
-        
-        ZHBankCard *bankCard = self.banks[0];
-        
-        [TLAlert alertWithTitle:@"请确认银行卡信息是否正确" msg:[NSString stringWithFormat:@"户名: %@\n开户行: %@\n银行卡号: %@", bankCard.realName, bankCard.bankName, bankCard.bankcardNumber] confirmMsg:@"确定" cancleMsg:@"修改" cancle:^(UIAlertAction *action) {
+        BaseWeakSelf;
+        TLPageDataHelper *pageDataHelper = [[TLPageDataHelper alloc] init];
+        pageDataHelper.code = @"802025";
+        pageDataHelper.parameters[@"token"] = [TLUser user].token;
+        pageDataHelper.parameters[@"userId"] = [TLUser user].userId;
+        [pageDataHelper modelClass:[ZHBankCard class]];
+        [pageDataHelper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
-            ZHBankCardAddVC *bankCardVC = [ZHBankCardAddVC new];
+            weakSelf.banks = objs;
+            ZHBankCard *bankCard = self.banks[0];
             
-            bankCardVC.bankCard = bankCard;
-            
-            [self.navigationController pushViewController:bankCardVC animated:YES];
-            
-        } confirm:^(UIAlertAction *action) {
-            
-            UIButton *btn = [self.view viewWithTag:1250];
-            
-            if (btn.selected) {
+            [TLAlert alertWithTitle:@"请确认银行卡信息是否正确" msg:[NSString stringWithFormat:@"户名: %@\n开户行: %@\n银行卡号: %@", bankCard.realName, bankCard.bankName, bankCard.bankcardNumber] confirmMsg:@"确定" cancleMsg:@"修改" cancle:^(UIAlertAction *action) {
                 
-                [TLAlert alertWithInfo:@"同意借款协议才能签约"];
-                return ;
-            }
-            
-            TLNetworking *http = [TLNetworking new];
-            
-            http.code = @"623070";
-            http.parameters[@"userId"] = [TLUser user].userId;
-            http.parameters[@"couponId"] = self.coupon.couponId;
-            
-            [http postWithSuccess:^(id responseObject) {
+                ZHBankCardAddVC *bankCardVC = [ZHBankCardAddVC new];
                 
-                [TLAlert alertWithSucces:@"签约成功"];
+                bankCardVC.bankCard = bankCard;
                 
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController pushViewController:bankCardVC animated:YES];
+                
+            } confirm:^(UIAlertAction *action) {
+                
+                UIButton *btn = [self.view viewWithTag:1250];
+                
+                if (btn.selected) {
                     
-                    LoanVC *loanVC = [LoanVC new];
-                    
-                    loanVC.borrowCode = responseObject[@"data"][@"code"];
-                    
-                    [self.navigationController pushViewController:loanVC animated:YES];
-                    
-                });
+                    [TLAlert alertWithInfo:@"同意借款协议才能借款"];
+                    return ;
+                }
                 
-            } failure:^(NSError *error) {
+                TLNetworking *http = [TLNetworking new];
                 
-                
+                http.code = @"623070";
+                http.parameters[@"userId"] = [TLUser user].userId;
+                http.parameters[@"productCode"] = self.good.code;
+                if (self.coupon.couponId.length>0) {
+                    http.parameters[@"couponId"] = self.coupon.couponId;
+                    
+                }
+                [http postWithSuccess:^(id responseObject) {
+                    
+                    [TLAlert alertWithSucces:@"借款成功"];
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        
+                        LoanVC *loanVC = [LoanVC new];
+                        
+                        loanVC.borrowCode = responseObject[@"data"][@"code"];
+                        
+                        [self.navigationController pushViewController:loanVC animated:YES];
+                        
+                    });
+                    
+                } failure:^(NSError *error) {
+                    
+                    
+                }];
             }];
+            
+            return ;
+            
+        } failure:^(NSError *error) {
+            
+            
         }];
         
-        return ;
+        
+      
+    }else{
+        [TLAlert alertWithTitle:@"提示！" message:@"您还没有银行卡,请先绑定银行卡" confirmAction:^(UIAlertAction *action) {
+            ZHBankCardListVC *bankCardAddVC= [[ZHBankCardListVC alloc] init];
+            [self requestBankCard];
+            
+            [self.navigationController pushViewController:bankCardAddVC animated:YES];
+        }];
+        
+      
+        
     }
     
     
@@ -275,13 +313,14 @@
     BaseWeakSelf;
     
     TLPageDataHelper *pageDataHelper = [[TLPageDataHelper alloc] init];
-    pageDataHelper.code = @"802015";
+    pageDataHelper.code = @"802025";
     pageDataHelper.parameters[@"token"] = [TLUser user].token;
     pageDataHelper.parameters[@"userId"] = [TLUser user].userId;
     [pageDataHelper modelClass:[ZHBankCard class]];
     [pageDataHelper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         
         weakSelf.banks = objs;
+    
         
     } failure:^(NSError *error) {
         

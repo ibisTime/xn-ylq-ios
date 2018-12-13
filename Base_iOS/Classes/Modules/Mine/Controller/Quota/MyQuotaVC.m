@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"我的额度";
+    self.title = @"信用分";
     
     [self initQuotaView];
     
@@ -83,19 +83,19 @@
             case 0:
             {
                 
-                title = @"申请额度";
+                title = @"申请信用分";
                 
             }break;
                 
             case 1:
             {
-                title = @"签约";
+                title = @"使用信用分";
                 
             }break;
                 
             case 2:
             {
-                title = @"重新申请额度";
+                title = @"重新申请";
                 
             }break;
                 
@@ -121,6 +121,8 @@
     switch (flag) {
         case 0:
         {
+            [self requestGood];
+            return;
             TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
             
             tabbarVC.currentIndex = 0;
@@ -137,6 +139,8 @@
             
         case 2:
         {
+            [self requestGood];
+            return;
             TabbarViewController *tabbarVC = (TabbarViewController *)self.tabBarController;
             
             tabbarVC.currentIndex = 0;
@@ -174,7 +178,13 @@
         }
         
     } failure:^(NSError *error) {
+        SelectMoneyVC *moneyVC = [SelectMoneyVC new];
         
+        moneyVC.title = @"额度使用";
+        
+        moneyVC.selectType = SelectGoodTypeSign;
+        
+        [self.navigationController pushViewController:moneyVC animated:YES];
         
     }];
     

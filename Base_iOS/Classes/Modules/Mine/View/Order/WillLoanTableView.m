@@ -137,7 +137,8 @@
     NSString *duration = [NSString stringWithFormat:@"%ld天", _order.duration];
     //状态说明
     NSString *remark = [_order.status isEqualToString:@"2"] ? _order.approveNote: _order.remark;
-    
+    STRING_NIL_NULL(remark);
+
     self.contentArr = @[signDate, code, amount, duration, remark];
     
     self.statusIV.image = kImage(_order.imageStr);

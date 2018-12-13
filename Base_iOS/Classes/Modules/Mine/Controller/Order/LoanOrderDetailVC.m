@@ -18,21 +18,28 @@
 #import "RenewalListVC.h"
 #import "ZHBankCardListVC.h"
 #import "LoanContractVC.h"
-
+#import "HTMLStrVC.h"
+#import "RenewalListVC.h"
+#import "OnlineRepaymentVC.h"
 @interface LoanOrderDetailVC ()
 
 @property (nonatomic, strong) TLTableView *tableView;
+
+@property (nonatomic, assign) BOOL  isChange;
 
 @end
 
 @implementation LoanOrderDetailVC
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+//    if (!self.order) {
+//
+//        [self requestOrder];
+//    }
+//    [self initSubviews];
+    [self requestOrder];
 
-    if (!self.order) {
-        
-        [self requestOrder];
-    }
 }
 
 - (void)viewDidLoad {
@@ -40,12 +47,28 @@
     // Do any additional setup after loading the view.
     
     if (self.order) {
-        
-        [self initSubviews];
+         [self initSubviews];
     }
-    
+//    [self stage];
 }
 
+-(void)stage
+{
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"623075";
+    http.parameters[@"code"] = self.order.code;
+    http.parameters[@"stageRuleCode"] = @"SR2018112716314357157077";
+    http.parameters[@"updater"] = @"test";
+    http.parameters[@"remarkQUERY"] = @"申请分期";
+    [http postWithSuccess:^(id responseObject) {
+        NSLog(@"分期成功");
+    } failure:^(NSError *error) {
+        
+    }];
+
+
+}
 #pragma mark - Init
 - (void)initSubviews {
 
@@ -167,7 +190,7 @@
         {
             self.title = @"已逾期详情";
 
-            OverdueTableView *tableView = [[OverdueTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
+            OverdueTableView *tableView = [[OverdueTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 65)];
             
             tableView.order = self.order;
             
@@ -239,7 +262,7 @@
     
     [bottomView addSubview:lineView];
     
-    CGFloat btnW = (kScreenWidth - 3*15)/2.0;
+    CGFloat btnW = (kScreenWidth - 2*15);
     
     UIButton *repayBtn = [UIButton buttonWithTitle:@"还款" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:18 cornerRadius:10];
     
@@ -248,41 +271,66 @@
     [repayBtn addTarget:self action:@selector(clickRepay) forControlEvents:UIControlEventTouchUpInside];
     
     [bottomView addSubview:repayBtn];
+//    UIButton *Renewal = [UIButton buttonWithTitle:@"分期" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:18 cornerRadius:10];
+//
+//    Renewal.frame = CGRectMake(15*2+btnW, 10, btnW, 45);
+//
+//    [Renewal addTarget:self action:@selector(clickRenewal) forControlEvents:UIControlEventTouchUpInside];
+//
+//    [bottomView addSubview:Renewal];
     
-    UIButton *renewalBtn = [UIButton buttonWithTitle:@"续期" titleColor:kWhiteColor backgroundColor:kTextColor3 titleFont:18 cornerRadius:10];
-    
-    renewalBtn.frame = CGRectMake(kScreenWidth/2.0 + 5, 10, btnW, 45);
-    
-    [renewalBtn addTarget:self action:@selector(clickRenewal) forControlEvents:UIControlEventTouchUpInside];
-    
-    [bottomView addSubview:renewalBtn];
+   
 }
 
 #pragma mark - Events
 
 - (void)clickRepay {
+   
+    //分期
+    if ([self.order.isStage isEqualToString:@"1"]) {
+//        [self clickRenewal];
+        [TLAlert alertWithTitle:@"请确认还款信息是否正确" msg:[NSString stringWithFormat:@"期数: %@\n本金: %@\n利息: %@", self.order.info.remark, [self.order.info.mainAmount convertToSimpleRealMoney], [self.order.info.lxAmount convertToSimpleRealMoney]] confirmMsg:@"确定" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+            return ;
+        } confirm:^(UIAlertAction *action) {
+            
+            OnlineRepaymentVC *pay = [OnlineRepaymentVC new];
+//            HTMLStrVC *htmlVC = [HTMLStrVC new];
+//
+//            htmlVC.type = HTMLTypePay;
+            pay.renewalModel = self.order.info;
+            [self.navigationController pushViewController:pay animated:YES];
+        }];
 
-    RepaymentVC *repaymentVC = [RepaymentVC new];
+    }else{
+        //未分期
+//
+//        HTMLStrVC *htmlVC = [HTMLStrVC new];
+//
+//        htmlVC.type = HTMLTypePay;
+        RepaymentVC *repaymentVC = [RepaymentVC new];
+
+        repaymentVC.order = self.order;
+//
+        [self.navigationController pushViewController:repaymentVC animated:YES];
+    }
     
-    repaymentVC.order = self.order;
-    
-    [self.navigationController pushViewController:repaymentVC animated:YES];
+   
 }
 
 - (void)clickRenewal {
 
-    RenewalVC *renewalVC = [RenewalVC new];
+    RenewalListVC *ListVC = [RenewalListVC new];
     
-    renewalVC.order = self.order;
+    ListVC.code = self.order.code;
     
-    [self.navigationController pushViewController:renewalVC animated:YES];
+    [self.navigationController pushViewController:ListVC animated:YES];
 }
 
 - (void)clickResubmit {
     
     TLNetworking *http = [TLNetworking new];
     
-    http.code = @"623079";
+    http.code = @"623073";
     http.parameters[@"code"] = self.order.code;
     
     [http postWithSuccess:^(id responseObject) {
@@ -307,7 +355,14 @@
     
     http.showView = self.view;
     http.code = @"623086";
-    http.parameters[@"code"] = self.code;
+    if (!self.order.code) {
+        http.parameters[@"code"] = self.code;
+
+    }else
+    {
+        http.parameters[@"code"] = self.order.code;
+
+    }
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -321,16 +376,50 @@
     
 }
 
+- (void)requestFail {
+    
+    TLNetworking *http = [[TLNetworking alloc] init];
+    
+    http.showView = self.view;
+    http.code = @"623086";
+    if (!self.order.code) {
+        http.parameters[@"code"] = self.code;
+        
+    }else
+    {
+        http.parameters[@"code"] = self.order.code;
+        
+    }
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.order = [OrderModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
+
 #pragma mark - Events
 - (void)alertFailureInfo {
-    
+    BaseWeakSelf;
+    if (self.isChange == YES) {
+        [self clickResubmit];
+        return;
+    }
     [TLAlert alertWithTitle:@"提示" msg:@"打款失败, 请核对银行卡信息" confirmMsg:@"确定" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
         
         
     } confirm:^(UIAlertAction *action) {
        
         ZHBankCardListVC *vc = [[ZHBankCardListVC alloc] init];
-        
+        vc.addSuccess = ^{
+            weakSelf.isChange = YES;
+
+            [weakSelf requestFail];
+        };
         [self.navigationController pushViewController:vc animated:YES];
     }];
 

@@ -123,7 +123,7 @@
     
     promptLbl.frame = CGRectMake(leftMargin, authBtn.yy + 20, kScreenWidth - 2*leftMargin, 100);
     
-    [promptLbl labelWithTextString:@"温馨提示\n1.请使用您本人的手机授权。\n2.提供通讯录信息，有助于您通过审核。\n3.九州宝将严格遵守协议，保护用户隐私。" lineSpace:10];
+    [promptLbl labelWithTextString:[NSString stringWithFormat:@"温馨提示\n1.请使用您本人的手机授权。\n2.提供通讯录信息，有助于您通过审核。\n3.%@将严格遵守协议，保护用户隐私。",AppName] lineSpace:10];
 
     [self.view addSubview:promptLbl];
     
@@ -145,7 +145,7 @@
             
         } else if (code == -1) {
         
-            [TLAlert alertWithTitle:@"提示" msg:@"通讯录未授权，请前往“设置->九州宝->通讯录“中开启通讯录" confirmMsg:@"设置" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+            [TLAlert alertWithTitle:@"提示" msg:[NSString stringWithFormat:@"通讯录未授权，请前往“设置->%@->通讯录“中开启通讯录",AppName] confirmMsg:@"设置" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
                 
             } confirm:^(UIAlertAction *action) {
                 
@@ -214,9 +214,9 @@
             
             name = [NSString stringWithFormat:@"%@%@", lastName, firstName];
             
-            if (name == nil) {
+            if (![name valid]) {
                 
-                name = @"无";
+                continue ;
             }
         }
         
@@ -228,6 +228,11 @@
             
             mobile = stringModel.content;
 
+            //如果mobile为空就跳过本次循环
+            if (![mobile valid]) {
+                
+                continue ;
+            }
         }
         
         dic = @{@"name": name,
@@ -265,7 +270,7 @@
 
     if (![TLAuthHelper isEnableContact]) {
         
-        [TLAlert alertWithTitle:@"提示" msg:@"通讯录未授权，请前往“设置->九州宝->通讯录“中开启通讯录" confirmMsg:@"设置" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+        [TLAlert alertWithTitle:@"提示" msg:@"通讯录未授权，请前往“设置->双龙->通讯录“中开启通讯录" confirmMsg:@"设置" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
             
         } confirm:^(UIAlertAction *action) {
             

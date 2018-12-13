@@ -33,7 +33,7 @@
 #pragma markv - Init
 - (void)initSubviews {
     
-    UILabel *textLbl = [UILabel labelWithText:@"当前额度(元)" textColor:kWhiteColor textFont:12.0];
+    UILabel *textLbl = [UILabel labelWithText:@"当前信用分" textColor:kWhiteColor textFont:12.0];
     
     textLbl.frame = CGRectMake(0, 50, 100, 14);
     
@@ -134,6 +134,14 @@
     [[self layer] addSublayer:shapeLayer];
 }
 
+
+-(void)setModel:(QuotaModel *)Model
+{
+    _Model = Model;
+    self.totalLbl.text = [Model.sxAmount convertToSimpleRealMoney];
+
+}
+
 #pragma mark - Setting
 - (void)setQuotaModel:(QuotaModel *)quotaModel {
 
@@ -149,30 +157,61 @@
         case 0:
         {
             
-            promptStr = @"您还没有额度";
-            
+            promptStr = @"未认证";
+            self.totalLbl.text = @"0";
         }break;
             
         case 1:
         {
-            if ([[_quotaModel.sxAmount convertToSimpleRealMoney] isEqualToString:@"0"]) {
-                
-                promptStr = @"您的额度已用完";
-                
-            } else {
-            
-                promptStr = [NSString stringWithFormat:@"还有%ld天，当前额度失效", _quotaModel.validDays];
-
-            }
+            promptStr = @"认证中";
+            self.totalLbl.text = @"0";
 
         }break;
             
         case 2:
         {
-            promptStr = @"当前额度已失效, 请重新申请";
+            
+            promptStr = @"待审核";
+            self.totalLbl.text = @"0";
 
         }break;
+        case 3:
+        {
             
+            promptStr = @"核准失败";
+            self.totalLbl.text = @"0";
+            
+        }break;
+        case 4:
+        {
+            
+            promptStr = @"已核准";
+            self.totalLbl.text = [_quotaModel.sxAmount convertToSimpleRealMoney];
+
+            if ([[_quotaModel.sxAmount convertToSimpleRealMoney] isEqualToString:@"0"]) {
+                promptStr = @"已核准";
+                
+                
+            } else {
+                
+                promptStr = [NSString stringWithFormat:@"还有%ld天，当前信用分失效", _quotaModel.validDays];
+
+            }
+        }break;
+        case 5:
+        {
+            
+            promptStr = @"信用分失效";
+            self.totalLbl.text = [_quotaModel.sxAmount convertToSimpleRealMoney];
+            
+        }break;
+        case 6:
+        {
+            
+            promptStr = @"重新申请";
+            self.totalLbl.text = [_quotaModel.sxAmount convertToSimpleRealMoney];
+            
+        }break;
         default:
             break;
     }

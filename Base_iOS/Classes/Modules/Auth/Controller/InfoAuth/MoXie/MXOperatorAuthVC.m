@@ -44,25 +44,25 @@
     
     InfoIdentify *identify = self.authModel.infoIdentify;
     
-    [MoxieSDK shared].delegate = self;
-    [MoxieSDK shared].mxUserId = kMoXieUserID;
-    [MoxieSDK shared].mxApiKey = [TLUser user].mxApiKey;
-    [MoxieSDK shared].fromController = self;
-    
-    [MoxieSDK shared].taskType = @"carrier";
-    //跳过输入身份证和姓名界面
-    [MoxieSDK shared].carrier_phone = [TLUser user].mobile;
-    [MoxieSDK shared].carrier_name = identify.realName;
-    [MoxieSDK shared].carrier_idcard = identify.idNo;
-    [MoxieSDK shared].carrier_editable = YES;
-    
-    [MoxieSDK shared].backImageName = @"返回";
-    
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    //开始运营商认证
-    [[MoxieSDK shared] startFunction];
+//    [MoxieSDK shared].delegate = self;
+//    [MoxieSDK shared].mxUserId = kMoXieUserID;
+//    [MoxieSDK shared].mxApiKey = [TLUser user].mxApiKey;
+//    [MoxieSDK shared].fromController = self;
+//
+//    [MoxieSDK shared].taskType = @"carrier";
+//    //跳过输入身份证和姓名界面
+//    [MoxieSDK shared].carrier_phone = [TLUser user].mobile;
+//    [MoxieSDK shared].carrier_name = identify.realName;
+//    [MoxieSDK shared].carrier_idcard = identify.idNo;
+//    [MoxieSDK shared].carrier_editable = YES;
+//
+//    [MoxieSDK shared].backImageName = @"返回";
+//
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//
+//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+//    //开始运营商认证
+//    [[MoxieSDK shared] startFunction];
     
     
 }
@@ -104,9 +104,9 @@
 #pragma mark - Events
 - (void)reloadUser {
 
-    [MoxieSDK shared].taskType = @"carrier";
+//    [MoxieSDK shared].taskType = @"carrier";
     
-    [[MoxieSDK shared] startFunction];
+//    [[MoxieSDK shared] startFunction];
 }
 
 #pragma mark - MoxieSDKDelegate

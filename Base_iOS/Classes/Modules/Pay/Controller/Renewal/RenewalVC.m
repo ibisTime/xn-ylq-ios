@@ -26,9 +26,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"实时续期";
+    self.title = @"实时分期";
     
-    [self initSelectView];
+    _titles = @[@"实时分期"];
+
+//    [self initSelectView];
     
     [self addSubViewController];
 }
@@ -38,8 +40,6 @@
 - (void)initSelectView {
     
     BaseWeakSelf;
-    
-    _titles = @[@"实时续期", @"线下续期"];
     
     _selectView = [[SelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:_titles];
     
@@ -57,7 +57,7 @@
     
     for (NSInteger i = 0; i < _titles.count; i++) {
         
-        if (i == 0) {
+        if (i == 1) {
             
             OnlineRenewalVC *childVC = [[OnlineRenewalVC alloc] init];
             
@@ -75,7 +75,7 @@
             
             [self addChildViewController:childVC];
             
-            [_selectView.scrollView addSubview:childVC.view];
+            [self.view addSubview:childVC.view];
             
         } else if (i == 1) {
             

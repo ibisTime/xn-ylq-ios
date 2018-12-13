@@ -8,9 +8,11 @@
 
 #import "BaseViewController.h"
 #import "OrderModel.h"
-
+#import "RenewalModel.h"
 @interface RepaymentVC : BaseViewController
 
 @property (nonatomic, strong) OrderModel *order;
+
+@property (nonatomic, strong) RenewalModel *renewalModel;
 
 @end

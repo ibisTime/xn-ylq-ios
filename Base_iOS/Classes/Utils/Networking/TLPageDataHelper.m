@@ -64,8 +64,14 @@
             
             newObjs = responseObject[@"data"];
         }
-        
-        NSMutableArray *objs = [_className mj_objectArrayWithKeyValuesArray:newObjs];
+        NSMutableArray *objs;
+        if (self.isStage == YES) {
+            objs = [_className mj_objectWithKeyValues:newObjs];
+
+        }else{
+            objs = [_className mj_objectArrayWithKeyValuesArray:newObjs];
+
+        }
         
         if (self.dealWithPerModel) {
             

@@ -129,7 +129,8 @@ NSString *const kUserInfoChange = @"kUserInfoChange_csw";
     self.bankcardFlag = nil;
     self.blacklistFlag = nil;
     self.level = nil;
-
+    self.stageCount = nil;
+    self.couponCount = nil;
 //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID_KEY];
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:TOKEN_ID_KEY];
@@ -207,7 +208,10 @@ NSString *const kUserInfoChange = @"kUserInfoChange_csw";
     self.province = dict[@"province"];
     self.city = dict[@"city"];
     self.area = dict[@"area"];
-    
+    self.stageCount = dict[@"stageCount"];
+    self.couponCount = dict[@"couponCount"];
+    self.refereeCount = dict[@"refereeCount"];
+
     NSDictionary *userExt = dict[@"userExt"];
     if (userExt) {
         if (userExt[@"photo"]) {

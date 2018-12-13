@@ -35,7 +35,7 @@
 //七牛图片上传
 #define IMG_UPLOAD_CODE         [ApiConfig config].imgUploadCode
 //用户信息
-#define USER_INFO       [ApiConfig config].userInfo
+#define USER_INFO               [ApiConfig config].userInfo
 
 
 #endif /* APICodeMacro_h */

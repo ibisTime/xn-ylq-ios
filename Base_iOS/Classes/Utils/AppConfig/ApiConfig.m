@@ -41,7 +41,7 @@
                 //忘记密码
                 self.userFindPwdCode = @"805063";
                 //验证码
-                self.captchaCode = @"805950";
+                self.captchaCode = @"630090";
                 //修改手机号
                 self.userChangeMobile = @"805061";
                 //修改登录名
@@ -53,9 +53,9 @@
                 // 修改头像
                 self.userChangeUserPhoto = @"805080";
                 //根据ckey查询系统参数
-                self.userCkeyCvalue = @"805917";
+                self.userCkeyCvalue = @"623917";
                 //七牛图片上传
-                self.imgUploadCode = @"805951";
+                self.imgUploadCode = @"630091";
                 //用户信息
                 self.userInfo = @"805121";
                 
@@ -89,7 +89,7 @@
             //根据ckey查询系统参数
             self.userCkeyCvalue = @"";
             //七牛图片上传
-            self.imgUploadCode = @"807900";
+            self.imgUploadCode = @"630091";
             //用户信息
             self.userInfo = @"805056";
             

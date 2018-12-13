@@ -8,7 +8,7 @@
 
 #import "DidLoanTableView.h"
 #import "LoanOrderDetailCell.h"
-
+#import "RenewalModel.h"
 @interface DidLoanTableView ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UILabel *quotaLbl;        //额度
@@ -85,8 +85,13 @@
 - (void)setOrder:(OrderModel *)order {
     
     _order = order;
-    
-    self.titleArr = @[@"签约时间", @"合同编号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"到期还款额", @"续期次数"];
+    if (order.info) {
+          self.titleArr = @[@"签约时间", @"借款单号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"到期还款额", @"分期情况", @"开始还款时间", @"最晚还款时间", @"今日应还本息"];
+    }else{
+        
+         self.titleArr = @[@"签约时间", @"借款单号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"到期还款额"];
+    }
+  
 
     //签约时间
     NSString *signDate = [_order.signDatetime convertDate];
@@ -139,16 +144,38 @@
     //到期还款额
     NSString *totalAmount = [_order.totalAmount convertToSimpleRealMoney];
     STRING_NIL_NULL(totalAmount);
+    NSString *renewalNum;
+    if (order.info.remark == nil) {
+        order.info.remark = @"";
+        //续期次数
+       renewalNum = @"";
+    }else{
+        
+        renewalNum = [NSString stringWithFormat:@"%@/%@", order.info.stageCount,order.stageCount];
+        STRING_NIL_NULL(renewalNum);
+    }
+  
+    if (order.info) {
+        NSString *coupon = [order.info.startTime convertDate];
+        STRING_NIL_NULL(coupon);
+        
+        //到期还款额
+        NSString *total = [order.info.endTime convertDate];
+        STRING_NIL_NULL(total);
+        
+        //续期次数
+        NSString *renewa = [order.info.amount convertToSimpleRealMoney];
+        STRING_NIL_NULL(renewa);
+        self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, totalAmount, renewalNum,coupon,total,renewa];
+    }else{
+        
+       self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, totalAmount];
+    }
     
-    //续期次数
-    NSString *renewalNum = [NSString stringWithFormat:@"%ld次", _order.renewalCount];
-    STRING_NIL_NULL(renewalNum);
-    
-    self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, totalAmount, renewalNum];
 
     self.statusIV.image = kImage(_order.imageStr);
     
-    self.quotaLbl.text = [_order.amount convertToSimpleRealMoney];
+    self.quotaLbl.text = [order.amount convertToSimpleRealMoney];
 }
 
 #pragma mark - UITableViewDataSource
@@ -172,10 +199,21 @@
     cell.titleLbl.text = self.titleArr[indexPath.row];
     
     cell.rightLabel.text = self.contentArr[indexPath.row];
-    
-    cell.rightLabel.textColor = indexPath.row == 1 || indexPath.row == self.contentArr.count - 2? kAppCustomMainColor: kTextColor;
+    if (self.order.info) {
+        cell.rightLabel.textColor = indexPath.row == self.contentArr.count - 4? kAppCustomMainColor: kTextColor;
+    }else{
+        cell.rightLabel.textColor = kTextColor;
+        if (indexPath.row == self.contentArr.count-1) {
+            cell.rightLabel.textColor = kAppCustomMainColor;
+        }
+    }
+   
+    if (self.order.info) {
+        cell.arrowHidden = indexPath.row == self.contentArr.count - 4 ? NO: YES;
 
-    cell.arrowHidden = indexPath.row == 1 || indexPath.row == self.contentArr.count - 1 ? NO: YES;
+    }else{
+        cell.arrowHidden = YES;
+    }
     
     return cell;
     
@@ -187,21 +225,18 @@
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 1) {
-        
-        if (_detailBlock) {
+    if (self.order.info) {
+        if (indexPath.row == self.titleArr.count - 4) {
             
-            _detailBlock(OrderDetailTypeLoanContract);
-
+            if (_detailBlock) {
+                
+                _detailBlock(OrderDetailTypeRenewal);
+            }
         }
+    }else{
         
-    }else if (indexPath.row == self.titleArr.count - 1) {
-        
-        if (_detailBlock) {
-            
-            _detailBlock(OrderDetailTypeRenewal);
-        }
     }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

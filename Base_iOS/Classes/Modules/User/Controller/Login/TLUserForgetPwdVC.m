@@ -8,13 +8,14 @@
 
 #import "TLUserForgetPwdVC.h"
 #import "CaptchaView.h"
-
+#import "TLTextField.h"
+#import "TLCaptchaView.h"
 @interface TLUserForgetPwdVC ()
 
-@property (nonatomic,strong) AccountTf *phoneTf;
-@property (nonatomic,strong) AccountTf *pwdTf;
-@property (nonatomic,strong) AccountTf *rePwdTf;
-@property (nonatomic, strong) CaptchaView *captchaView;
+@property (nonatomic,strong) TLTextField *phoneTf;
+@property (nonatomic,strong) TLTextField *pwdTf;
+@property (nonatomic,strong) TLTextField *rePwdTf;
+@property (nonatomic, strong) TLCaptchaView *captchaView;
 
 @end
 
@@ -53,35 +54,32 @@
     }];
     
     //账号
-    AccountTf *phoneTf = [[AccountTf alloc] initWithFrame:CGRectMake(margin, 0, w, h)];
-    phoneTf.placeHolder = @"请输入手机号";
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 0, w, h) leftTitle:@"手机号" titleWidth:100 placeholder:@"请输入手机号"];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
-    phoneTf.leftIconView.image = [UIImage imageNamed:@"用户名"];
     [bgView addSubview:phoneTf];
     self.phoneTf = phoneTf;
     
     //验证码
-    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(margin, phoneTf.yy + middleMargin, w, h)];
+    
+    TLCaptchaView *captchaView = [[TLCaptchaView alloc] initWithFrame:CGRectMake(margin, phoneTf.yy + middleMargin, w, h)];
+//    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(margin, phoneTf.yy + middleMargin, w, h)];
     [bgView addSubview:captchaView];
-    captchaView.captchaTf.placeHolder = @"请输入验证码";
-    captchaView.captchaTf.leftIconView.image = [UIImage imageNamed:@"验证码"];
+    
     [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
     self.captchaView = captchaView;
     
     //密码
-    AccountTf *pwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(margin, captchaView.yy + middleMargin, w, h)];
+    
+    
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + middleMargin, w, h) leftTitle:@"新密码" titleWidth:100 placeholder:@"请输入密码"];
     pwdTf.secureTextEntry = YES;
-    pwdTf.placeHolder = @"请输入密码";
-    pwdTf.leftIconView.image = [UIImage imageNamed:@"密码"];
     [bgView addSubview:pwdTf];
     self.pwdTf = pwdTf;
     
     //re密码
-    AccountTf *rePwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + middleMargin, w, h)];
+    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + middleMargin, w, h) leftTitle:@"确认密码" titleWidth:100 placeholder:@"请确认密码"];
     rePwdTf.secureTextEntry = YES;
-    rePwdTf.placeHolder = @"重新输入";
     [bgView addSubview:rePwdTf];
-    rePwdTf.leftIconView.image = [UIImage imageNamed:@"密码"];
     self.rePwdTf = rePwdTf;
     
     for (int i = 0; i < 4; i++) {
@@ -179,7 +177,7 @@
     http.code = USER_FIND_PWD_CODE;
     http.parameters[@"mobile"] = self.phoneTf.text;
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
-    http.parameters[@"loginPwdStrength"] = @"2";
+    http.parameters[@"kind"] = @"C";
     http.parameters[@"newLoginPwd"] = self.pwdTf.text;
     
     [http postWithSuccess:^(id responseObject) {

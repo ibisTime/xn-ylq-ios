@@ -35,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"绑定银行卡";
     //只能添加本人银行卡
 //    if ([TLUser user].realName && [TLUser user].idNo) {
 //        
@@ -45,12 +45,12 @@
     
 //        ZHRealNameAuthVC *authVC = [[ZHRealNameAuthVC alloc] init];
 //        [authVC setAuthSuccess:^{
-//            
+//
 //            [self realNameAuthAfterAction];
-//            
+//
 //        }];
 //        [self.navigationController pushViewController:authVC animated:YES];
-        
+//
     
 //    }
  
@@ -130,7 +130,7 @@
 - (void)bindCard {
 
     if (![self.realNameTf.text valid]) {
-        [TLAlert alertWithInfo:@"请输入姓名"];
+        [TLAlert alertWithInfo:@"请输入开户名"];
         return;
     }
     
@@ -140,10 +140,10 @@
         return;
     }
     
-//    if (![self.subbranchTf.text valid]) {
-//        [TLAlert alertWithInfo:@"请填写开户支行"];
-//        return;
-//    }
+    if (![self.subbranchTf.text valid]) {
+        [TLAlert alertWithInfo:@"请填写开户支行"];
+        return;
+    }
     
     if (![self.bankCardTf.text valid]) {
         [TLAlert alertWithInfo:@"请填写银行卡号"];
@@ -167,19 +167,26 @@
     
     if (self.bankCard) {//修改
         
-        http.code = @"623850";
+        http.code = @"802022";
         http.parameters[@"code"] = self.bankCard.code;
         http.parameters[@"status"] = @"1";
         
     } else {//绑定
     
-       http.code = @"802010";
+       http.code = @"802020";
     
     }
 
     http.parameters[@"token"] = [TLUser user].token;
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"realName"] = self.realNameTf.text;
+    http.parameters[@"smsCaptcha"] = @"3342";
+    http.parameters[@"type"] = @"C";
+    http.parameters[@"subbranch"] = self.subbranchTf.text;
+    http.parameters[@"bankcardNumber"] = self.bankCardTf.text;
+    http.parameters[@"currency"] = @"CNY";
+    http.parameters[@"bindMobile"] = [TLUser user].mobile;
+
     
     NSString *bankName = self.bankNameTf.text;
   __block  ZHBank *bank = nil;
@@ -208,11 +215,6 @@
     http.parameters[@"bankName"] = self.bankNameTf.text;
     http.parameters[@"bankCode"] = bankCode;
 
-    http.parameters[@"subbranch"] = self.subbranchTf.text;//支行
-    http.parameters[@"bankcardNumber"] = self.bankCardTf.text; //卡号
-    http.parameters[@"bindMobile"] = self.mobileTf.text; //绑定的手机号
-    http.parameters[@"currency"] = @"CNY"; //币种
-    http.parameters[@"type"] = @"C"; //b端用户
 
 
 //  C=C端用户 B=B端用户 1=保证金账户；2=进钱账户；3=出钱账户；4=走账户
@@ -221,11 +223,13 @@
         if (self.bankCard) {
             
             [TLAlert alertWithSucces:@"修改成功"];
-
+            [TLUser user].bankcardFlag = @"1";
+            [[TLUser user] updateUserInfo];
         } else {
             
             [TLUser user].bankcardFlag = @"1";
-            
+            [[TLUser user] updateUserInfo];
+
             [TLAlert alertWithSucces:@"绑定成功"];
         }
         
@@ -235,7 +239,8 @@
             
             ZHBankCard *card = [[ZHBankCard alloc] init];
             card.bankName = self.bankNameTf.text;
-//            card.bankCode = responseObject[@"data"];
+            card.bankCode = bankCode;
+            card.realName = self.realNameTf.text;
             card.bankcardNumber = self.bankCardTf.text;
             if (self.addSuccess) {
                 self.addSuccess(card);
@@ -256,8 +261,8 @@
     CGFloat margin = 0.5;
     
     //户名
-    TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45) leftTitle:@"户名" titleWidth:leftW placeholder:@"请输入银行卡所属人姓名"];
-    nameTf.enabled = NO;
+    TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45) leftTitle:@"开户名" titleWidth:leftW placeholder:@"请输入开户名"];
+//    nameTf.enabled = NO;
     
     [self.bgSV addSubview:nameTf];
     self.realNameTf = nameTf;
@@ -267,33 +272,31 @@
     [self.bgSV addSubview:bankPick];
     self.bankNameTf = bankPick;
     
-    //开户支行
+//    开户支行
+     TLTextField *subbranchTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, bankPick.yy + margin, kScreenWidth, 45) leftTitle:@"开户支行" titleWidth:leftW placeholder:@"请输入开户支行"];
 //    TLTextField *subbranchTf = [[TLTextField alloc] initWithframe:CGRectMake(0, bankPick.yy + margin, kScreenWidth, 45) leftTitle:@"开户支行" titleWidth:leftW placeholder:@"请输入开户支行"];
-//    [self.bgSV addSubview:subbranchTf];
-//    self.subbranchTf = subbranchTf;
+    [self.bgSV addSubview:subbranchTf];
+    self.subbranchTf = subbranchTf;
     
     //卡号
-    TLTextField *bankCardTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, bankPick.yy + margin, kScreenWidth, 45) leftTitle:@"银行卡号  " titleWidth:leftW placeholder:@"银行卡号(最低输入16位)"];
+    TLTextField *bankCardTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, subbranchTf.yy + margin, kScreenWidth, 45) leftTitle:@"银行卡号  " titleWidth:leftW placeholder:@"请输入银行卡号(最低输入16位)"];
     [self.bgSV addSubview:bankCardTf];
     bankCardTf.keyboardType = UIKeyboardTypeNumberPad;
     self.bankCardTf = bankCardTf;
     
-    //
-    UIButton *addBtn = [UIButton zhBtnWithFrame:CGRectMake(15, bankCardTf.yy + 30, kScreenWidth - 30, 45) title:@"添加"];
-    [self.bgSV addSubview:addBtn];
-    [addBtn addTarget:self action:@selector(bindCard) forControlEvents:UIControlEventTouchUpInside];
-    self.operationBtn = addBtn;
+    UILabel *promptLbl = [UILabel labelWithText:@"" textColor:kTextColor textFont:14.0];
     
-    UILabel *promptLbl = [UILabel labelWithText:@"" textColor:kThemeColor textFont:14.0];
-    
-    promptLbl.frame = CGRectMake(15, addBtn.yy + 30, kScreenWidth - 2*15, 50);
+    promptLbl.frame = CGRectMake(15, bankCardTf.yy + 20, kScreenWidth - 2*15, 50);
     
     promptLbl.numberOfLines = 0;
     
-    [promptLbl labelWithTextString:@"请仔细核对银行信息，确保银行账户有效，以免耽误资金使用" lineSpace:5];
+    [promptLbl labelWithTextString:@"请如实填写本人银行卡，否则放款将不成功" lineSpace:5];
     
     [self.bgSV addSubview:promptLbl];
-
+    UIButton *addBtn = [UIButton zhBtnWithFrame:CGRectMake(15, promptLbl.yy + 30, kScreenWidth - 30, 45) title:@"确认"];
+    [self.bgSV addSubview:addBtn];
+    [addBtn addTarget:self action:@selector(bindCard) forControlEvents:UIControlEventTouchUpInside];
+    self.operationBtn = addBtn;
 }
 
 - (void)didReceiveMemoryWarning {

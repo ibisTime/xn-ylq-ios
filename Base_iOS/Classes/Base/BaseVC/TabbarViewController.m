@@ -345,7 +345,6 @@
     tabBar.delegate = self;
     tabBar.backgroundColor = [UIColor orangeColor];
     
-    [self setValue:tabBar forKey:@"tabBar"];
     
     tabBar.itemNum = self.tabBarItems.count;
     
@@ -354,6 +353,8 @@
     tabBar.tabBarItems = self.tabBarItems.copy;
     
     self.customTabbar = tabBar;
+    [self setValue:tabBar forKey:@"tabBar"];
+
     
 }
 

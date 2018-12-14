@@ -27,6 +27,7 @@
 @interface CustomTabBar : UITabBar
 
 @property (nonatomic, weak) id<TabBarDelegate> delegate;
+@property (nonatomic, strong) UIView *falseTabBar;
 
 @property (nonatomic, copy) NSArray <TabBarModel *>*tabBarItems;
 @property (nonatomic, assign) NSInteger itemNum;

@@ -56,7 +56,7 @@
     
     TabbarViewController *tabbar = (TabbarViewController*)self.tabBarController;
     if (tabbar) {
-       // [tabbar removeOriginTabbarButton];
+//        [tabbar removeOriginTabbarButton];
     }
 }
 

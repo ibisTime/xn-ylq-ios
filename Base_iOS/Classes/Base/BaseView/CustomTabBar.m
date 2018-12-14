@@ -12,7 +12,6 @@
 
 @interface CustomTabBar ()
 
-@property (nonatomic, strong) UIView *falseTabBar;
 @property (nonatomic, strong) NSMutableArray <BarButton *>*btns;
 
 @end

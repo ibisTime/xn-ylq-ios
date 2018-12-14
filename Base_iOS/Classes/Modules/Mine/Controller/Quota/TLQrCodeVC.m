@@ -430,13 +430,12 @@
 //    switch (sender.tag - 100) {
 //        case 0:
 //        {
-            [TLAlert alertWithSucces:@"保存成功!"];
 
             UIGraphicsBeginImageContextWithOptions(self.bgView1.bounds.size, NO, [[UIScreen mainScreen] scale]);
             [self.bgView1.layer renderInContext:UIGraphicsGetCurrentContext()];
             UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
-            UIImageWriteToSavedPhotosAlbum(viewImage, nil, nil, nil);
+            UIImageWriteToSavedPhotosAlbum(viewImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 
 //        }
 //            break;
@@ -499,6 +498,20 @@
 //            break;
 //    }
 }
+#pragma mark -- <保存到相册>
+-(void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    NSString *msg = nil ;
+    if(error){
+        msg = @"保存图片失败" ;
+        [TLAlert alertWithError:msg];
+
+    }else{
+        msg = @"保存图片成功" ;
+        [TLAlert alertWithSucces:msg];
+
+    }
+}
+
 
 //复制
 -(void)copyButtonClick

@@ -248,6 +248,24 @@
     
 }
 
+- (void)requestScoreAgain
+{
+    
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    
+    http.code = @"623020";
+    http.parameters[@"applyUser"] = [TLUser user].userId;
+    [http postWithSuccess:^(id responseObject) {
+        [TLAlert alertWithInfo:@"信用分申请成功"];
+        [self requestQuota];
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+}
+
 
 - (void)rewenRequest
 {
@@ -598,7 +616,7 @@
         case 3:
         {
             //重新提交
-            [self requestScore];
+            [self requestScoreAgain];
             
         }break;
         case 4:
@@ -615,14 +633,16 @@
         case 5:
         {
             //重新申请
-            [self requestScore];
+            [self requestScoreAgain];
 
         }break;
        
         case 6:
         {
             //重新申请
-            [self requestScore];
+//            [self requestScore];
+            [self requestScoreAgain];
+
             
         }break;
         default:

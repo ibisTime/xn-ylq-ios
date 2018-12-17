@@ -43,7 +43,7 @@ void TLLog(NSString *format, ...) {
         case RunModeDis:
         {
             
-            self.companyCode = @"GS2018121313302485137074";
+            self.companyCode = @"GS2018121523455430340257";
             self.systemCode = @"GS2018112119133810071833";
             
             self.bottomInsetHeight = kDevice_Is_iPhoneX == YES ? 34: 0;

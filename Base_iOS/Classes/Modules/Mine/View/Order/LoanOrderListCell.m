@@ -104,7 +104,7 @@
 
     _orderModel = orderModel;
     
-    _amountLbl.text = [NSString stringWithFormat:@"%@元", [_orderModel.amount convertToSimpleRealMoney]];
+    _amountLbl.text = [NSString stringWithFormat:@"%@元", [_orderModel.borrowAmount convertToSimpleRealMoney]];
     
     _dayLbl.text = [NSString stringWithFormat:@"%ld天", _orderModel.duration];
     

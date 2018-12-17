@@ -90,15 +90,25 @@
 //        }
     
 //    else{
-         self.titleArr = @[@"签约时间", @"合同编号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"实际还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"到期还款额", @"状态说明",@"分期次数"];
+         self.titleArr = @[@"签约时间", @"合同编号", @"借款金额",@"已打款金额",@"已还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"实际还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"状态说明",@"分期次数"];
 //    }
    
     
     NSString *signDate = [_order.signDatetime convertDate];
     
     NSString *code = _order.code;
+    //借款金额
+    NSString *borrow = [_order.borrowAmount convertToSimpleRealMoney];
+    STRING_NIL_NULL(borrow);
     
-    NSString *amount = [_order.amount convertToSimpleRealMoney];
+    //实际打款金额
+    NSString *getAmount = [_order.realGetAmount convertToSimpleRealMoney];
+    STRING_NIL_NULL(getAmount);
+    
+    //已还款金额
+    NSString *realHk = [_order.realHkAmount convertToSimpleRealMoney];
+    STRING_NIL_NULL(realHk);
+    NSString *amount = [_order.totalAmount convertToSimpleRealMoney];
     
     NSString *duration = [NSString stringWithFormat:@"%ld天", _order.duration];
     
@@ -150,7 +160,7 @@
     NSString *renewalNum = [NSString stringWithFormat:@"%@", _order.stageBatch];
     STRING_NIL_NULL(renewalNum);
 //    if ([order.isStage isEqualToString:@"0"]) {
-         self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, realHkDatetime, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, totalAmount, remark, renewalNum];
+         self.contentArr = @[signDate, code,borrow,getAmount,realHk, amount, duration, fkDate, jxDate, hkDate, realHkDatetime, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, remark, renewalNum];
        
 //    }else{
 //
@@ -163,7 +173,7 @@
     
     self.statusIV.image = kImage(_order.imageStr);
 
-    self.quotaLbl.text = [_order.amount convertToSimpleRealMoney];
+    self.quotaLbl.text = [_order.totalAmount convertToSimpleRealMoney];
 }
 
 #pragma mark - UITableViewDataSource

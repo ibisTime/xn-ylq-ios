@@ -86,10 +86,10 @@
     
     _order = order;
     if (order.stageBatch >0) {
-        self.titleArr = @[@"签约时间", @"借款单号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"逾期天数", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"逾期金额", @"到期还款额",@"分期次数"];
+        self.titleArr = @[@"签约时间", @"借款单号",@"借款金额",@"已打款金额",@"已还款金额", @"剩余还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"逾期天数", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"逾期金额",@"分期次数"];
         
     }else{
-         self.titleArr = @[@"签约时间", @"借款单号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"逾期天数", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"逾期金额", @"到期还款额"];
+         self.titleArr = @[@"签约时间", @"借款单号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"逾期天数", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"逾期金额"];
     }
    
     
@@ -101,8 +101,19 @@
     NSString *code = _order.code;
     STRING_NIL_NULL(code);
     
+    //借款金额
+    NSString *borrow = [_order.borrowAmount convertToSimpleRealMoney];
+    STRING_NIL_NULL(borrow);
+    
+    //实际打款金额
+    NSString *getAmount = [_order.realGetAmount convertToSimpleRealMoney];
+    STRING_NIL_NULL(getAmount);
+    
+    //已还款金额
+    NSString *realHk = [_order.realHkAmount convertToSimpleRealMoney];
+    STRING_NIL_NULL(realHk);
     //金额
-    NSString *amount = [_order.amount convertToSimpleRealMoney];
+    NSString *amount = [_order.totalAmount convertToSimpleRealMoney];
     STRING_NIL_NULL(amount);
     
     //期限
@@ -157,11 +168,11 @@
     NSString *renewalNum = [NSString stringWithFormat:@"%@次", _order.stageBatch];
     STRING_NIL_NULL(renewalNum);
     
-    self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, yqDays, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, fxAmount, totalAmount, renewalNum];
+    self.contentArr = @[signDate, code,borrow,getAmount,realHk,amount, duration, fkDate, jxDate, hkDate, yqDays, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, fxAmount, renewalNum];
     
     self.statusIV.image = kImage(_order.imageStr);
 
-    self.quotaLbl.text = [_order.amount convertToSimpleRealMoney];
+    self.quotaLbl.text = [_order.totalAmount convertToSimpleRealMoney];
 }
 
 #pragma mark - UITableViewDataSource

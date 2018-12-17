@@ -132,7 +132,7 @@
     //合同编号
     NSString *code = _order.code;
     //金额
-    NSString *amount = [_order.amount convertToSimpleRealMoney];
+    NSString *amount = [_order.totalAmount convertToSimpleRealMoney];
     //期限
     NSString *duration = [NSString stringWithFormat:@"%ld天", _order.duration];
     //状态说明
@@ -143,7 +143,7 @@
     
     self.statusIV.image = kImage(_order.imageStr);
     
-    self.quotaLbl.text = [_order.amount convertToSimpleRealMoney];
+    self.quotaLbl.text = [_order.totalAmount convertToSimpleRealMoney];
     
     if ([_order.status isEqualToString:@"7"]) {
         

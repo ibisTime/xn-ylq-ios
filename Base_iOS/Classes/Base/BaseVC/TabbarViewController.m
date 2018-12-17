@@ -354,7 +354,7 @@
     
     self.customTabbar = tabBar;
     [self setValue:tabBar forKey:@"tabBar"];
-
+   
     
 }
 

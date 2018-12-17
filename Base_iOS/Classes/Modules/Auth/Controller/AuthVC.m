@@ -259,6 +259,8 @@
     [http postWithSuccess:^(id responseObject) {
         [TLAlert alertWithInfo:@"信用分申请成功"];
         [self requestQuota];
+        [self requestGood];
+
     } failure:^(NSError *error) {
         
     }];

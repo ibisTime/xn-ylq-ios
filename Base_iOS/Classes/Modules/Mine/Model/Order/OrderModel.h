@@ -30,6 +30,11 @@
 
 @property (nonatomic, strong) NSNumber *yqlxAmount;     //逾期利息
 
+@property (nonatomic, strong) NSNumber *borrowAmount;    //借款金额
+@property (nonatomic, strong) NSNumber *realGetAmount;    //实际打款金额
+@property (nonatomic, strong) NSNumber *realHkAmount;    //实际已还款金额
+
+
 @property (nonatomic, assign) CGFloat rate1;
 
 @property (nonatomic, copy) NSString *code;
@@ -77,7 +82,6 @@
 
 @property (nonatomic, copy) NSString* stageCount;   //当前期数
 
-@property (nonatomic, copy) NSNumber *realHkAmount; //总还款
 
 @property (nonatomic, copy) NSNumber *stageBatch; //分期数
 

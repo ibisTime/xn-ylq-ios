@@ -35,7 +35,7 @@
                 //注册
                 self.userRegCode = @"805041";
                 //邀请注册
-                self.userInviteRegCode = @"623800";
+                self.userInviteRegCode = @"805041";
                 //登录
                 self.userLoginCode = @"805050";
                 //忘记密码

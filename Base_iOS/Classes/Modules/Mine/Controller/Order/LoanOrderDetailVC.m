@@ -287,7 +287,7 @@
 - (void)clickRepay {
    
     //分期
-    if ([self.order.isStage isEqualToString:@"1"]) {
+    if ([self.order.isStage isEqualToString:@"1"] && ![self.order.status isEqualToString:@"5"] ) {
 //        [self clickRenewal];
         [TLAlert alertWithTitle:@"请确认还款信息是否正确" msg:[NSString stringWithFormat:@"期数: %@\n本金: %@\n利息: %@", self.order.info.remark, [self.order.info.mainAmount convertToSimpleRealMoney], [self.order.info.lxAmount convertToSimpleRealMoney]] confirmMsg:@"确定" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
             return ;

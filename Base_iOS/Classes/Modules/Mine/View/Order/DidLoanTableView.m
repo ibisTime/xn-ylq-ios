@@ -86,10 +86,15 @@
     
     _order = order;
     if (order.info) {
-          self.titleArr = @[@"签约时间", @"借款单号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"到期还款额", @"分期情况", @"开始还款时间", @"最晚还款时间", @"今日应还本息"];
-    }else{
+          self.titleArr = @[@"签约时间", @"借款单号",@"借款金额",@"已打款金额",@"已还款金额", @"剩余还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"分期情况", @"开始还款时间", @"最晚还款时间", @"今日应还本息"];
         
-         self.titleArr = @[@"签约时间", @"借款单号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"到期还款额"];
+    }else{
+        if ([order.status isEqualToString:@"5"]) {
+            self.titleArr = @[@"签约时间", @"借款单号", @"借款金额",@"已打款金额",@"已还款金额", @"剩余还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免"];
+        }else{
+            self.titleArr = @[@"签约时间", @"借款单号", @"借款金额",@"已打款金额",@"已还款金额", @"剩余还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"到期还款额"];
+        }
+        
     }
   
 
@@ -101,8 +106,19 @@
     NSString *code = _order.code;
     STRING_NIL_NULL(code);
     
+    //借款金额
+    NSString *borrow = [_order.borrowAmount convertToSimpleRealMoney];
+    STRING_NIL_NULL(borrow);
+    
+    //实际打款金额
+    NSString *getAmount = [_order.realGetAmount convertToSimpleRealMoney];
+    STRING_NIL_NULL(getAmount);
+    
+    //已还款金额
+    NSString *realHk = [_order.realHkAmount convertToSimpleRealMoney];
+    STRING_NIL_NULL(realHk);
     //金额
-    NSString *amount = [_order.amount convertToSimpleRealMoney];
+    NSString *amount = [_order.totalAmount convertToSimpleRealMoney];
     STRING_NIL_NULL(amount);
     
     //期限
@@ -155,7 +171,7 @@
         STRING_NIL_NULL(renewalNum);
     }
   
-    if (order.info) {
+    if (order.info ) {
         NSString *coupon = [order.info.startTime convertDate];
         STRING_NIL_NULL(coupon);
         
@@ -166,16 +182,21 @@
         //续期次数
         NSString *renewa = [order.info.amount convertToSimpleRealMoney];
         STRING_NIL_NULL(renewa);
-        self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, totalAmount, renewalNum,coupon,total,renewa];
+        self.contentArr = @[signDate, code,borrow,getAmount,realHk ,amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, renewalNum,coupon,total,renewa];
     }else{
+        if ( [order.status isEqualToString:@"5"]) {
+             self.contentArr = @[signDate, code,borrow,getAmount,realHk, amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount];
+        }else{
+            self.contentArr = @[signDate, code,borrow,getAmount,realHk, amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, totalAmount];
+        }
         
-       self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, totalAmount];
+      
     }
     
 
     self.statusIV.image = kImage(_order.imageStr);
     
-    self.quotaLbl.text = [order.amount convertToSimpleRealMoney];
+    self.quotaLbl.text = [order.totalAmount convertToSimpleRealMoney];
 }
 
 #pragma mark - UITableViewDataSource
@@ -203,7 +224,7 @@
         cell.rightLabel.textColor = indexPath.row == self.contentArr.count - 4? kAppCustomMainColor: kTextColor;
     }else{
         cell.rightLabel.textColor = kTextColor;
-        if (indexPath.row == self.contentArr.count-1) {
+        if (indexPath.row == self.contentArr.count) {
             cell.rightLabel.textColor = kAppCustomMainColor;
         }
     }

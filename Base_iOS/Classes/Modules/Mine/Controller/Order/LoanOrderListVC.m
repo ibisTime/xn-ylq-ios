@@ -96,7 +96,7 @@
     {
         case LoanOrderStatusAll:
         {
-            statusList = @[@""];
+            statusList = @[@"0",@"2",@"1",@"7",@"3",@"4",@"5",];
         }break;
     
         case LoanOrderStatusWillAudit:
@@ -145,7 +145,8 @@
             break;
     }
     if (self.status == 0) {
-        
+        helper.parameters[@"statusList"] = statusList;
+
     }else{
         helper.parameters[@"statusList"] = statusList;
         }

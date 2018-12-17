@@ -215,7 +215,7 @@
 {
     UIImageView *iconImage = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenWidth-103)/2, kHeight(kNavigationBarHeight + 16), 103, 103)];
     iconImage.contentMode = UIViewContentModeScaleToFill;
-    iconImage.image = kImage(@"logo1");
+    iconImage.image = kImage(@"logo2");
     //    iconImage.backgroundColor = [UIColor redColor];
     [_bgView addSubview:iconImage];
 
@@ -318,7 +318,7 @@
     bgView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenHeight);
     UIImageView *iconImage = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenWidth-103)/2, kHeight(kNavigationBarHeight + 16), 103, 103)];
     iconImage.contentMode = UIViewContentModeScaleToFill;
-    iconImage.image = kImage(@"logo1");
+    iconImage.image = kImage(@"logo2");
     //    iconImage.backgroundColor = [UIColor redColor];
     [self.bgView1 addSubview:iconImage];
     

@@ -18,4 +18,6 @@
 
 - (NSString *)convertToCountMoney;
 
+- (NSString *)convertRealMoney;
+
 @end

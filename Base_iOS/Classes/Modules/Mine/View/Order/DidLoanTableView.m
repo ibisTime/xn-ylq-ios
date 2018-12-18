@@ -86,13 +86,13 @@
     
     _order = order;
     if (order.info) {
-          self.titleArr = @[@"签约时间", @"借款单号",@"借款金额",@"已打款金额",@"已还款金额", @"剩余还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"分期情况", @"开始还款时间", @"最晚还款时间", @"今日应还本息"];
+          self.titleArr = @[@"签约时间", @"借款单号",@"借款金额",@"已打款金额",@"已还款金额", @"剩余还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费",@"服务费", @"利息", @"优惠券减免",@"分期次数", @"分期情况", @"开始还款时间", @"最晚还款时间", @"今日应还本息"];
         
     }else{
         if ([order.status isEqualToString:@"5"]) {
-            self.titleArr = @[@"签约时间", @"借款单号", @"借款金额",@"已打款金额",@"已还款金额", @"剩余还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免"];
+            self.titleArr = @[@"签约时间", @"借款单号", @"借款金额",@"已打款金额",@"已还款金额", @"剩余还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"服务费", @"利息", @"优惠券减免"];
         }else{
-            self.titleArr = @[@"签约时间", @"借款单号", @"借款金额",@"已打款金额",@"已还款金额", @"剩余还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"到期还款额"];
+            self.titleArr = @[@"签约时间", @"借款单号", @"借款金额",@"已打款金额",@"已还款金额", @"剩余还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"快速信审费", @"账户管理费", @"服务费", @"利息", @"优惠券减免", @"到期还款额"];
         }
         
     }
@@ -146,11 +146,11 @@
     STRING_NIL_NULL(glAmount);
     
     //利息
-    NSString *lxAmount = [_order.lxAmount convertToSimpleRealMoney];
+    NSString *lxAmount = [_order.fwAmount convertToSimpleRealMoney];
     STRING_NIL_NULL(lxAmount);
     
     //服务费
-    NSString *fwAmount = [_order.fwAmount convertToSimpleRealMoney];
+    NSString *fwAmount = [_order.lxAmount convertToSimpleRealMoney];
     STRING_NIL_NULL(fwAmount);
     
     //优惠券减免
@@ -182,7 +182,10 @@
         //续期次数
         NSString *renewa = [order.info.amount convertToSimpleRealMoney];
         STRING_NIL_NULL(renewa);
-        self.contentArr = @[signDate, code,borrow,getAmount,realHk ,amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, renewalNum,coupon,total,renewa];
+        //分期次数
+        NSString *fenNum = [NSString stringWithFormat:@"%@次", order.stageBatch];
+        STRING_NIL_NULL(fenNum);
+        self.contentArr = @[signDate, code,borrow,getAmount,realHk ,amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount,fenNum, renewalNum,coupon,total,renewa];
     }else{
         if ( [order.status isEqualToString:@"5"]) {
              self.contentArr = @[signDate, code,borrow,getAmount,realHk, amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount];

@@ -41,6 +41,8 @@
 
 @property (nonatomic, strong) UILabel *serviceTimeLbl;
 
+@property (nonatomic, copy) NSString *phone;
+
 @end
 
 @implementation MineVC
@@ -125,10 +127,15 @@
     CGFloat serviceH = 60;
     
     UIView *serviceView = [[UIView alloc] initWithFrame:CGRectMake(0, kSuperViewHeight - 49 - kBottomInsetHeight - serviceH, kScreenWidth, serviceH)];
-    
+    UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickPhone)];
+    [serviceView addGestureRecognizer:ta];
+    serviceView.userInteractionEnabled = YES;
+
     [self.view addSubview:serviceView];
-    
+
     self.mobileLbl = [UILabel labelWithFrame:CGRectMake(0, 0, kScreenWidth, 16) textAligment:NSTextAlignmentCenter backgroundColor:kClearColor font:Font(15) textColor:kTextColor];
+    self.mobileLbl.userInteractionEnabled = YES;
+   
     
     [serviceView addSubview:self.mobileLbl];
     
@@ -147,6 +154,23 @@
 }
 
 #pragma mark - Data
+- (void)clickPhone
+{
+    if (self.mobileLbl.text > 0) {
+        NSString *callPhone = [NSString stringWithFormat:@"telprompt://%@",self.phone];
+        CGFloat version = [[[UIDevice currentDevice]systemVersion]floatValue];
+        if (version >= 10.0) {
+            /// 大于等于10.0系统使用此openURL方法
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callPhone] options:@{} completionHandler:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callPhone]];
+        }
+        
+    }
+    
+}
+
+
 
 - (void)requestUserInfo {
 
@@ -185,7 +209,7 @@
         
         QuotaModel *model = [QuotaModel mj_objectWithKeyValues:responseObject[@"data"]];
         
-        self.headerView.scoreLbl.text =[NSString stringWithFormat:@"信用分: %@", [model.sxAmount convertToSimpleRealMoney]];
+        self.headerView.scoreLbl.text =[NSString stringWithFormat:@"信用分: %@", [model.sxAmount convertRealMoney]];
         
     } failure:^(NSError *error) {
         
@@ -244,6 +268,7 @@
     [http postWithSuccess:^(id responseObject) {
         
         NSAttributedString *mobileAttr = [NSAttributedString getAttributedStringWithImgStr:@"电话" index:0 string:[NSString stringWithFormat:@" %@", responseObject[@"data"][@"cvalue"]] labelHeight:self.mobileLbl.height];
+        self.phone = responseObject[@"data"][@"cvalue"];
         
         self.mobileLbl.attributedText = mobileAttr;
         

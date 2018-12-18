@@ -98,5 +98,12 @@
     
     
 }
+- (NSString *)convertRealMoney
+{
+    long long m = [self longLongValue];
+    double value = m/1000.0;
+    return [NSString stringWithFormat:@"%.0f",value];
+    
+}
 
 @end

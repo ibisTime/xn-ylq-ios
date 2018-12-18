@@ -86,10 +86,10 @@
     
     _order = order;
     if (order.stageBatch >0) {
-        self.titleArr = @[@"签约时间", @"借款单号",@"借款金额",@"已打款金额",@"已还款金额", @"剩余还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"逾期天数", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"逾期金额",@"分期次数"];
+        self.titleArr = @[@"签约时间", @"借款单号",@"借款金额",@"已打款金额",@"已还款金额", @"剩余还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"逾期天数", @"快速信审费", @"账户管理费", @"服务费",@"利息" , @"优惠券减免", @"逾期金额",@"分期次数"];
         
     }else{
-         self.titleArr = @[@"签约时间", @"借款单号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"逾期天数", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"逾期金额"];
+         self.titleArr = @[@"签约时间", @"借款单号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"逾期天数", @"快速信审费", @"账户管理费", @"服务费",@"利息", @"优惠券减免", @"逾期金额"];
     }
    
     
@@ -145,11 +145,11 @@
     STRING_NIL_NULL(glAmount);
     
     //利息
-    NSString *lxAmount = [_order.lxAmount convertToSimpleRealMoney];
+    NSString *lxAmount = [_order.fwAmount convertToSimpleRealMoney];
     STRING_NIL_NULL(lxAmount);
     
     //服务费
-    NSString *fwAmount = [_order.fwAmount convertToSimpleRealMoney];
+    NSString *fwAmount = [_order.lxAmount convertToSimpleRealMoney];
     STRING_NIL_NULL(fwAmount);
     
     //优惠券减免

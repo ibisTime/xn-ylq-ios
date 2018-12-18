@@ -138,7 +138,7 @@
 -(void)setModel:(QuotaModel *)Model
 {
     _Model = Model;
-    self.totalLbl.text = [Model.sxAmount convertToSimpleRealMoney];
+    self.totalLbl.text = [Model.sxAmount convertRealMoney];
 
 }
 
@@ -147,7 +147,7 @@
 
     _quotaModel = quotaModel;
     
-    self.totalLbl.text = [_quotaModel.sxAmount convertToSimpleRealMoney];
+    self.totalLbl.text = [_quotaModel.sxAmount convertRealMoney];
     
     NSInteger flag = [self.quotaModel.flag integerValue];
     
@@ -186,7 +186,7 @@
         {
             
             promptStr = @"已核准";
-            self.totalLbl.text = [_quotaModel.sxAmount convertToSimpleRealMoney];
+            self.totalLbl.text = [_quotaModel.sxAmount convertRealMoney];
 
             if ([[_quotaModel.sxAmount convertToSimpleRealMoney] isEqualToString:@"0"]) {
                 promptStr = @"已核准";
@@ -202,14 +202,14 @@
         {
             
             promptStr = @"信用分失效";
-            self.totalLbl.text = [_quotaModel.sxAmount convertToSimpleRealMoney];
+            self.totalLbl.text = [_quotaModel.sxAmount convertRealMoney];
             
         }break;
         case 6:
         {
             
             promptStr = @"重新申请";
-            self.totalLbl.text = [_quotaModel.sxAmount convertToSimpleRealMoney];
+            self.totalLbl.text = [_quotaModel.sxAmount convertRealMoney];
             
         }break;
         default:

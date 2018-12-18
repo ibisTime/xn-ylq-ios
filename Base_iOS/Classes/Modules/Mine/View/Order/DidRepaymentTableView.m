@@ -85,13 +85,14 @@
 - (void)setOrder:(OrderModel *)order {
     
     _order = order;
-//    if ([order.isStage isEqualToString:@"0"]) {
-//        self.titleArr = @[@"签约时间", @"合同编号", @"金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"实际还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"到期还款额", @"状态说明"];
-//        }
+    if ([order.isStage isEqualToString:@"0"]) {
+      
+         self.titleArr = @[@"签约时间", @"合同编号", @"借款金额",@"已打款金额",@"已还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"实际还款日", @"快速信审费", @"账户管理费",  @"服务费",@"利息", @"优惠券减免",@"到期还款额",@"状态说明",@"分期次数"];
+        }
     
-//    else{
-         self.titleArr = @[@"签约时间", @"合同编号", @"借款金额",@"已打款金额",@"已还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"实际还款日", @"快速信审费", @"账户管理费", @"利息", @"服务费", @"优惠券减免", @"状态说明",@"分期次数"];
-//    }
+    else{
+         self.titleArr = @[@"签约时间", @"合同编号", @"借款金额",@"已打款金额",@"已还款金额", @"期限", @"打款日", @"计息日", @"约定还款日", @"实际还款日", @"快速信审费", @"账户管理费",  @"服务费",@"利息", @"优惠券减免", @"状态说明",@"分期次数"];
+    }
    
     
     NSString *signDate = [_order.signDatetime convertDate];
@@ -136,12 +137,12 @@
     NSString *glAmount = [_order.glAmount convertToSimpleRealMoney];
     STRING_NIL_NULL(glAmount);
     
-    //利息
-    NSString *lxAmount = [_order.lxAmount convertToSimpleRealMoney];
-    STRING_NIL_NULL(lxAmount);
-    
     //服务费
-    NSString *fwAmount = [_order.fwAmount convertToSimpleRealMoney];
+    NSString *lxAmount = [_order.fwAmount convertToSimpleRealMoney];
+    STRING_NIL_NULL(lxAmount);
+     //利息
+   
+    NSString *fwAmount = [_order.lxAmount convertToSimpleRealMoney];
     STRING_NIL_NULL(fwAmount);
     
     //优惠券减免
@@ -153,22 +154,24 @@
     STRING_NIL_NULL(totalAmount);
     
     //状态说明
-    NSString *remark = _order.remark;
+    NSString *remark = @"已正常还款";
     STRING_NIL_NULL(remark);
     
     //续期次数
     NSString *renewalNum = [NSString stringWithFormat:@"%@", _order.stageBatch];
     STRING_NIL_NULL(renewalNum);
-//    if ([order.isStage isEqualToString:@"0"]) {
-         self.contentArr = @[signDate, code,borrow,getAmount,realHk, amount, duration, fkDate, jxDate, hkDate, realHkDatetime, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, remark, renewalNum];
+    if ([order.isStage isEqualToString:@"0"]) {
+         self.contentArr = @[signDate, code,borrow,getAmount,realHk, duration, fkDate, jxDate, hkDate, realHkDatetime, xsAmount, glAmount, lxAmount, fwAmount, couponAmount ,totalAmount,remark,renewalNum];
        
-//    }else{
-//
-//        //续期次数
-//        NSString *renewa = [order.realHkAmount convertToSimpleRealMoney];
-//        STRING_NIL_NULL(renewa);
-//        self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount, totalAmount, renewalNum,coupon,total,renewa];
-//    }
+    }else{
+
+        //续期次数
+        NSString *renewa = [order.realHkAmount convertToSimpleRealMoney];
+        STRING_NIL_NULL(renewa);
+        self.contentArr = @[signDate, code,borrow,getAmount,realHk, amount, duration, fkDate, jxDate, hkDate, realHkDatetime, xsAmount, glAmount, lxAmount, fwAmount, couponAmount,remark,renewa];
+
+//        self.contentArr = @[signDate, code, amount, duration, fkDate, jxDate, hkDate, xsAmount, glAmount, lxAmount, fwAmount, couponAmount,remark,renewa];
+    }
    
     
     self.statusIV.image = kImage(_order.imageStr);

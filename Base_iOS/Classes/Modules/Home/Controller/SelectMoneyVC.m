@@ -292,9 +292,9 @@
     
     self.accountManageFeeLbl.text = [NSString stringWithFormat:@"账户管理费：%@元", [_good.glAmount convertToSimpleRealMoney]];
 
-    self.interestFeeLbl.text = [NSString stringWithFormat:@"利息：%@元", [_good.lxAmount convertToSimpleRealMoney]];
+    self.interestFeeLbl.text = [NSString stringWithFormat:@"服务费：%@元", [_good.fwAmount convertToSimpleRealMoney]];
 
-    self.serviceFeeLbl.text = [NSString stringWithFormat:@"服务费：%@元", [_good.fwAmount convertToSimpleRealMoney]];
+    self.serviceFeeLbl.text = [NSString stringWithFormat:@"利息：%@元", [_good.lxAmount convertToSimpleRealMoney]];
 
     [self calculateMoneyWithCoupon:@(0)];
     

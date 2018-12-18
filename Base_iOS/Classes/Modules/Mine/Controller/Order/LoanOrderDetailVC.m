@@ -47,7 +47,7 @@
     // Do any additional setup after loading the view.
     
     if (self.order) {
-         [self initSubviews];
+//         [self initSubviews];
     }
 //    [self stage];
 }
@@ -237,10 +237,10 @@
             };
             
             [self.view addSubview:tableView];
-            
+
             //弹窗
             [self alertFailureInfo];
-            
+          
         }break;
             
         default:
@@ -405,23 +405,10 @@
 #pragma mark - Events
 - (void)alertFailureInfo {
     BaseWeakSelf;
-    if (self.isChange == YES) {
-        [self clickResubmit];
-        return;
-    }
-    [TLAlert alertWithTitle:@"提示" msg:@"打款失败, 请核对银行卡信息" confirmMsg:@"确定" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
-        
-        
-    } confirm:^(UIAlertAction *action) {
-       
-        ZHBankCardListVC *vc = [[ZHBankCardListVC alloc] init];
-        vc.addSuccess = ^{
-            weakSelf.isChange = YES;
+    [TLAlert alertWithError:@"打款失败, 请核对银行卡信息"];
 
-            [weakSelf requestFail];
-        };
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
+ 
+    
 
 }
 

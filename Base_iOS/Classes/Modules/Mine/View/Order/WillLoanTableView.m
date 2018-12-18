@@ -63,7 +63,7 @@
 
     UILabel *textLbl = [UILabel labelWithText:@"金额(元)" textColor:kTextColor textFont:15];
     
-    textLbl.frame = CGRectMake(0, 30, kWidth(150), 16);
+    textLbl.frame = CGRectMake(0, 20, kWidth(150), 16);
     
     textLbl.textAlignment = NSTextAlignmentCenter;
     
@@ -73,7 +73,7 @@
     
     self.quotaLbl = [UILabel labelWithText:@"" textColor:kTextColor3 textFont:32];
     
-    self.quotaLbl.frame = CGRectMake(0, textLbl.yy + 20, kScreenWidth, 32);
+    self.quotaLbl.frame = CGRectMake(0, textLbl.yy + 10, kScreenWidth, 32);
     
     self.quotaLbl.textAlignment = NSTextAlignmentCenter;
     
@@ -83,7 +83,7 @@
         
         UILabel *remarkLbl = [UILabel labelWithText:@"" textColor:kTextColor3 textFont:15];
         
-        remarkLbl.frame = CGRectMake(0, self.quotaLbl.yy + 20, 150, 16);
+        remarkLbl.frame = CGRectMake(0, self.quotaLbl.yy + 10, 150, 16);
         
         remarkLbl.textAlignment = NSTextAlignmentCenter;
         
@@ -150,6 +150,24 @@
         [self initFooterView];
 
     }
+    if ([self.order.status isEqualToString:@"0"] || [self.order.status isEqualToString:@"1"]) {
+        
+        UILabel *remarkLbl = [UILabel labelWithText:@"" textColor:kTextColor3 textFont:15];
+        
+        remarkLbl.frame = CGRectMake(0, self.quotaLbl.yy + 10, 150, 16);
+        
+        remarkLbl.textAlignment = NSTextAlignmentCenter;
+        CGFloat centerX = kScreenWidth /2.0;
+
+        remarkLbl.centerX = centerX;
+        
+        NSAttributedString *promptAttrStr = [NSAttributedString getAttributedStringWithImgStr:@"款项在路上" index:0 string:[NSString stringWithFormat:@" %@", @"款项已经在路上"] labelHeight:remarkLbl.height];
+        
+        remarkLbl.attributedText = promptAttrStr;
+        
+        [self.tableHeaderView addSubview:remarkLbl];
+    }
+    
 }
 
 #pragma mark - Events

@@ -64,11 +64,11 @@
     
     NSString *prompt = _statusType == CouponStatusTypeUse ? @"您目前没有优惠券": @"您目前没有已失效的优惠券";
     
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kNavigationBarHeight)];
+    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 45)];
 
     if (_statusType == CouponStatusTypeUse) {
     
-        UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 60)];
+        UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 45)];
         
         topView.tag = 1200;
         
@@ -88,14 +88,14 @@
         
         promptLbl.numberOfLines = 0;
         
-        promptLbl.frame = CGRectMake(40, 0, kScreenWidth - 40, 60);
+        promptLbl.frame = CGRectMake(40, 0, kScreenWidth - 40, 45);
         
         [topView addSubview:promptLbl];
         
         self.promptLbl = promptLbl;
     }
     
-    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60 + 90, 80, 80)];
+    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 45 + 90, 80, 80)];
     
     couponIV.image = kImage(@"暂无优惠券");
     self.couponIV = couponIV;
@@ -138,9 +138,12 @@
         if (objs.count > 0) {
             weakSelf.couponIV.hidden = YES;
              weakSelf.textLbl.hidden = YES;
+            weakSelf.tableView.rowHeight = 100;
+
         }else{
             weakSelf.couponIV.hidden = NO;
              weakSelf.textLbl.hidden = NO;
+            weakSelf.tableView.rowHeight = 0;
 
         }
         [weakSelf.tableView reloadData_tl];

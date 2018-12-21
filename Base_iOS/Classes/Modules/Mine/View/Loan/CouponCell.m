@@ -53,7 +53,7 @@
     
     UIImageView *bgView = [[UIImageView alloc] init];
     
-    bgView.frame = CGRectMake(leftMargin, 10, kScreenWidth - 2*leftMargin, bgViewH);
+    bgView.frame = CGRectMake(leftMargin, 0, kScreenWidth - 2*leftMargin, bgViewH);
     
     [self addSubview:bgView];
     

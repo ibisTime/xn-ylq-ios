@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) NSArray <InviteModel *>*friends;
 
+@property (nonatomic, strong) UIView *placeHolderView;
+
 @end
 
 @implementation HistoryInviteVC
@@ -39,11 +41,32 @@ static NSString *identifierCell = @"HistoryFriendCellID";
 
     self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) delegate:self dataSource:self];
     
-    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无推荐历史"];
+//    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无推荐历史"];
     
     [self.tableView registerClass:[HistoryFriendCell class] forCellReuseIdentifier:identifierCell];
     
     [self.view addSubview:self.tableView];
+}
+
+- (void)initPlaceHolderView {
+    
+    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
+    
+    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 80, 80)];
+    
+    couponIV.image = kImage(@"推荐历史");
+    
+    couponIV.centerX = kScreenWidth/2.0;
+    
+    [self.placeHolderView addSubview:couponIV];
+    
+    UILabel *textLbl = [UILabel labelWithText:@"暂无推荐历史" textColor:kTextColor textFont:15];
+    textLbl.frame = CGRectMake(0, couponIV.yy + 20, kScreenWidth, 15);
+    
+    textLbl.textAlignment = NSTextAlignmentCenter;
+    
+    [self.placeHolderView addSubview:textLbl];
+    [self.view addSubview:self.placeHolderView];
 }
 
 #pragma mark - Data
@@ -62,8 +85,12 @@ static NSString *identifierCell = @"HistoryFriendCellID";
     [helper modelClass:[InviteModel class]];
     
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-        
+        if (objs.count == 0) {
+            [self initPlaceHolderView];
+            return ;
+        }
         weakSelf.friends = objs;
+        
         
         [weakSelf.tableView reloadData_tl];
         
@@ -74,7 +101,10 @@ static NSString *identifierCell = @"HistoryFriendCellID";
     [self.tableView addLoadMoreAction:^{
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-            
+            if (objs.count == 0) {
+                [self initPlaceHolderView];
+                return ;
+            }
             weakSelf.friends = objs;
             
             [weakSelf.tableView reloadData_tl];

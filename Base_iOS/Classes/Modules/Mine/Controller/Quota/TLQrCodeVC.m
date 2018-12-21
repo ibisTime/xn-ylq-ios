@@ -328,7 +328,7 @@
     
     UILabel *name = [UILabel labelWithFrame:CGRectMake(kWidth(23), kHeight(2), kScreenWidth - kWidth(186), kHeight(36)) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(16) textColor:kWhiteColor];
     
-    name.text = @"双龙";
+    name.text = AppName;
     [titleBackImage addSubview:name];
     
     UILabel *introduceLabel = [UILabel labelWithFrame:CGRectMake(kWidth(23), name.yy+20, kScreenWidth - kWidth(186), kHeight(36)) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(16) textColor:kWhiteColor];

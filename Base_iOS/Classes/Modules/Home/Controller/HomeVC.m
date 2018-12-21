@@ -46,6 +46,9 @@
 
 @property (nonatomic, strong) QuotaModel *quota;
 
+@property (nonatomic, strong) UIView *placeHolderView
+;
+
 @end
 
 @implementation HomeVC
@@ -98,7 +101,26 @@
     
 }
 
-
+- (void)initPlaceHolderView {
+    
+    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
+    
+    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 80, 80)];
+    
+    couponIV.image = kImage(@"暂无产品");
+    
+    couponIV.centerX = kScreenWidth/2.0;
+    
+    [self.placeHolderView addSubview:couponIV];
+    
+    UILabel *textLbl = [UILabel labelWithText:@"暂无产品" textColor:kTextColor textFont:15];
+    textLbl.frame = CGRectMake(0, couponIV.yy + 20, kScreenWidth, 15);
+    
+    textLbl.textAlignment = NSTextAlignmentCenter;
+    
+    [self.placeHolderView addSubview:textLbl];
+    [self.view addSubview:self.placeHolderView];
+}
 - (void)initGoodView {
 
     BaseWeakSelf;
@@ -458,6 +480,8 @@
 
                 [self initGoodView];
                 
+            }else{
+                [self initPlaceHolderView];
             }
             
         } failure:^(NSError *error) {
@@ -486,6 +510,8 @@
 
                 [self initGoodView];
                 
+            }else{
+                [self initPlaceHolderView];
             }
             
         } failure:^(NSError *error) {

@@ -161,7 +161,7 @@
     [self addSubview:self.conditionLbl];
     [self.conditionLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.mas_equalTo(-15);
+        make.centerX.mas_equalTo(self.mas_centerX);
         make.bottom.mas_equalTo(-10);
         make.width.mas_lessThanOrEqualTo(300);
         make.height.mas_lessThanOrEqualTo(18);

@@ -158,13 +158,11 @@
         {
             
             promptStr = @"未认证";
-            self.totalLbl.text = @"0";
         }break;
             
         case 1:
         {
             promptStr = @"认证中";
-            self.totalLbl.text = @"0";
 
         }break;
             
@@ -172,14 +170,12 @@
         {
             
             promptStr = @"待审核";
-            self.totalLbl.text = @"0";
 
         }break;
         case 3:
         {
             
             promptStr = @"核准失败";
-            self.totalLbl.text = @"0";
             
         }break;
         case 4:

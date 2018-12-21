@@ -22,6 +22,9 @@
 
 @property (nonatomic, strong) UILabel *promptLbl;
 
+@property (nonatomic, strong)  UIImageView *couponIV;
+
+@property (nonatomic, strong) UILabel *textLbl;
 @end
 
 @implementation CouponListVC
@@ -49,7 +52,7 @@
     
     self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) delegate:self dataSource:self];
     
-    self.tableView.placeHolderView = self.placeHolderView;
+    self.tableView.tableHeaderView = self.placeHolderView;
     
     self.tableView.rowHeight = 100;
     
@@ -61,7 +64,7 @@
     
     NSString *prompt = _statusType == CouponStatusTypeUse ? @"您目前没有优惠券": @"您目前没有已失效的优惠券";
     
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
+    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kNavigationBarHeight)];
 
     if (_statusType == CouponStatusTypeUse) {
     
@@ -95,7 +98,7 @@
     UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60 + 90, 80, 80)];
     
     couponIV.image = kImage(@"暂无优惠券");
-    
+    self.couponIV = couponIV;
     couponIV.centerX = kScreenWidth/2.0;
     
     [self.placeHolderView addSubview:couponIV];
@@ -105,6 +108,7 @@
     textLbl.frame = CGRectMake(0, couponIV.yy + 20, kScreenWidth, 15);
     
     textLbl.textAlignment = NSTextAlignmentCenter;
+    self.textLbl = textLbl;
     
     [self.placeHolderView addSubview:textLbl];
     
@@ -131,7 +135,14 @@
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         
         weakSelf.coupons = objs;
-        
+        if (objs.count > 0) {
+            weakSelf.couponIV.hidden = YES;
+             weakSelf.textLbl.hidden = YES;
+        }else{
+            weakSelf.couponIV.hidden = NO;
+             weakSelf.textLbl.hidden = NO;
+
+        }
         [weakSelf.tableView reloadData_tl];
         
     } failure:^(NSError *error) {
@@ -143,7 +154,15 @@
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.coupons = objs;
-            
+            if (objs.count > 0) {
+                 weakSelf.textLbl.hidden = YES;
+
+                weakSelf.couponIV.hidden = YES;
+            }else{
+                weakSelf.couponIV.hidden = NO;
+                 weakSelf.textLbl.hidden = NO;
+
+            }
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {

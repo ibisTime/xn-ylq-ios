@@ -153,7 +153,9 @@
       [self.quotaBtn setTitle:title forState:UIControlStateNormal];
 
                 [self creatIntroduce];
-                
+                [self requestScoreIntroduce];
+                self.quota.sxAmount = responseObject[@"data"][@"creditScore"];
+
 
             }break;
                 
@@ -162,6 +164,8 @@
                 //认证中
 
                 [self initSubviews];
+                self.quota.sxAmount = responseObject[@"data"][@"creditScore"];
+
 
             }break;
                 
@@ -170,6 +174,8 @@
                 //待审核
                 [self initSubviewsCheck];
                 title = @"请耐心等待";
+                self.quota.sxAmount = responseObject[@"data"][@"creditScore"];
+
                 [self.quotaBtn setTitle:title forState:UIControlStateNormal];
 //                title = @"重新申请额度";
 //                [self rewenRequest];
@@ -181,6 +187,8 @@
 
                 [self.quotaBtn setTitle:title forState:UIControlStateNormal];
                 [self rewenRequest];
+                self.quota.sxAmount = responseObject[@"data"][@"creditScore"];
+
                 self.Creditcoin1.text = [NSString stringWithFormat:@"失败理由: %@",responseObject[@"data"][@"apply"][@"approveNote"]];
 
             }break;
@@ -247,7 +255,25 @@
 
     
 }
-
+- (void)requestScoreIntroduce {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = USER_CKEY_CVALUE;
+    
+    http.parameters[@"key"] = @"creditScore";
+    
+    [http postWithSuccess:^(id responseObject) {
+        self.Creditcoin1.text = responseObject[@"data"][@"cvalue"];
+        NSLog(@"%@",responseObject[@"data"][@"cvalue"]);
+        [self.Creditcoin1 sizeToFit];
+          self.quotaBtn.frame = CGRectMake(15,self.Creditcoin1.yy + 44, kScreenWidth - 30, 50);
+//    self.mobileLbl.text = responseObject[@"data"][@"cvalue"];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
 - (void)requestScoreAgain
 {
     
@@ -286,6 +312,7 @@
     
     UILabel *Creditcoin1 = [UILabel labelWithText:@"失败理由:核准失败" textColor:kTextColor textFont:14.0];
     self.Creditcoin1 = Creditcoin1;
+    [self.Creditcoin1 sizeToFit];
     [self.contentView addSubview:self.Creditcoin1];
     Creditcoin1.frame = CGRectMake(15, Creditcoin.yy+16, kScreenWidth-30, 30);
     Creditcoin1.textAlignment = NSTextAlignmentCenter;
@@ -536,29 +563,31 @@
         [self.view addSubview:self.contentView];
         UILabel *Creditcoin = [UILabel labelWithText:@"信用分用途" textColor:RGB(153, 153, 153) textFont:14.0];
         self.Creditcoin = Creditcoin;
+    
         [self.view addSubview:self.quotaView];
         Creditcoin.frame = CGRectMake(15, 23, kScreenWidth-30, 30);
-        Creditcoin.textAlignment = NSTextAlignmentLeft;
+        Creditcoin.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:Creditcoin];
 
-        UILabel *Creditcoin1 = [UILabel labelWithText:@"1 信用分即额度,可申请贷款" textColor:RGB(153, 153, 153) textFont:14.0];
+        UILabel *Creditcoin1 = [UILabel labelWithText:@"" textColor:RGB(153, 153, 153) textFont:14.0];
+        Creditcoin1.numberOfLines = 0;
         self.Creditcoin1 = Creditcoin1;
         [self.view addSubview:self.Creditcoin1];
-        Creditcoin1.frame = CGRectMake(15, self.Creditcoin.yy+13, kScreenWidth-30, 30);
+        Creditcoin1.frame = CGRectMake(15, self.Creditcoin.yy+13, kScreenWidth-30, 90);
         Creditcoin1.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:Creditcoin1];
     
-        UILabel *Creditcoin2 = [UILabel labelWithText:@"2 信用分越多借款额越多" textColor:RGB(153, 153, 153) textFont:14.0];
-        self.Creditcoin2 = Creditcoin2;
-        [self.view addSubview:self.Creditcoin2];
-        Creditcoin2.frame = CGRectMake(15, self.Creditcoin1.yy+13, kScreenWidth-30, 30);
-        Creditcoin2.textAlignment = NSTextAlignmentLeft;
-        [self.contentView addSubview:Creditcoin2];
+//        UILabel *Creditcoin2 = [UILabel labelWithText:@"2 信用分越多借款额越多" textColor:RGB(153, 153, 153) textFont:14.0];
+//        self.Creditcoin2 = Creditcoin2;
+//        [self.view addSubview:self.Creditcoin2];
+//        Creditcoin2.frame = CGRectMake(15, self.Creditcoin1.yy+13, kScreenWidth-30, 30);
+//        Creditcoin2.textAlignment = NSTextAlignmentLeft;
+//        [self.contentView addSubview:Creditcoin2];
         CGFloat quotaBtnH = 45;
 
         self.quotaBtn = [UIButton buttonWithTitle:@"去认证" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:quotaBtnH/2.0];
     
-        self.quotaBtn.frame = CGRectMake(15, Creditcoin2.yy + 44, kScreenWidth - 30, quotaBtnH);
+        self.quotaBtn.frame = CGRectMake(15, Creditcoin1.yy + 44, kScreenWidth - 30, quotaBtnH);
     
         [self.quotaBtn addTarget:self action:@selector(clickUseQuota:) forControlEvents:UIControlEventTouchUpInside];
     

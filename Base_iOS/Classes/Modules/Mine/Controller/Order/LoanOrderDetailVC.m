@@ -336,7 +336,8 @@
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:@"重新提交成功"];
-        
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"CardIsChange"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             [self.navigationController popViewControllerAnimated:YES];
@@ -405,10 +406,16 @@
 #pragma mark - Events
 - (void)alertFailureInfo {
     BaseWeakSelf;
+    BOOL isChange  = [[NSUserDefaults standardUserDefaults] boolForKey:@"CardIsChange"];
+    if (isChange == YES) {
+        return;
+    }
     [TLAlert alertWithError:@"打款失败, 请核对银行卡信息"];
-
- 
     
+ 
+    ZHBankCardListVC *listVC = [ZHBankCardListVC new];
+    
+    [self.navigationController pushViewController:listVC animated:YES];
 
 }
 

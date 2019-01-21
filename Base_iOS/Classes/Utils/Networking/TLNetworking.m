@@ -21,7 +21,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    manager.requestSerializer.timeoutInterval = 15.0;
+    manager.requestSerializer.timeoutInterval = 25.0;
     NSSet *set = manager.responseSerializer.acceptableContentTypes;
     
     set = [set setByAddingObject:@"text/plain"];
@@ -153,7 +153,7 @@
       } else {
           
           if (failure) {
-              failure(nil);
+              failure(responseObject[@"errorInfo"]);
           }
           
           if ([responseObject[@"errorCode"] isEqual:@"4"]) {
@@ -169,8 +169,12 @@
           
           if(self.isShowMsg) { //异常也是失败
               
-              [TLAlert alertWithInfo:responseObject[@"errorInfo"]];
+              if ([responseObject[@"errorInfo"] isEqualToString:@"您已经有一条待审核的打款申请，请勿重复提交"]) {
+                  return ;
+              }else{
+                  [TLAlert alertWithInfo:responseObject[@"errorInfo"]];
 
+              }
           }
       
       

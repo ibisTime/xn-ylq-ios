@@ -159,11 +159,9 @@
 
 #pragma mark - Config
 - (void)configServiceAddress {
-    
     //配置环境
     [AppConfig config].runEnv = RunEnvRelease;
     [AppConfig config].comPany = ComPanyALL;
-
 }
 
 

@@ -10,10 +10,12 @@
 
 #import "PayInfoCell.h"
 #import "PayFuncModel.h"
-
+#import "UILable+convience.h"
 #import "TLWXManager.h"
 #import "TLAlipayManager.h"
 #import <WebKit/WebKit.h>
+#import <SDWebImage/SDWebImageManager.h>
+#import "UIView+Custom.h"
 @interface OnlineRepaymentVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,WKNavigationDelegate>
 
 @property (nonatomic,strong) TLTextField *amountTf;
@@ -29,7 +31,8 @@
 
 @property (nonatomic, copy) NSString *htmlStr;
 
-
+@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, copy) NSString *scannedResult;
 @property (nonatomic,strong) TLTableView *tableView;
 @property (nonatomic,strong) UIButton *payBtn;
 @property (nonatomic,strong) NSMutableArray <PayFuncModel *>*pays;
@@ -41,13 +44,21 @@
 - (void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
-    
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"还款";
+    self.title = @"支付宝还款";
     
 //    [self beginLoad];
     
@@ -79,62 +90,112 @@
 
 - (void)initSubviews {
     
-
-    self.accountNmme = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 50) leftTitle:@"还款金额:" titleWidth:100 placeholder:@""];
-    self.accountNmme.text = [self.order.totalAmount convertToSimpleRealMoney];
-
+    UIView *topView = [UIView new];
+    topView.backgroundColor =RGB(253, 151, 18);
+    topView.frame = CGRectMake(0, 0, kScreenWidth, 100+kNavigationBarHeight);
+    [self.view addSubview:topView];
+    
+    UILabel *titleLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:18];
+    [topView addSubview:titleLable];
+    titleLable.frame = CGRectMake((kScreenWidth-120)/2, kStatusBarHeight, 120, 44);
+    titleLable.text = @"支付宝还款";
+    UIButton *backButton = [UIButton buttonWithImageName:@"返回"];
+    backButton.frame = CGRectMake(15, kStatusBarHeight, 30, 30);
+    [self.view addSubview:backButton];
+    backButton.centerY = titleLable.centerY;
+    [backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    UIView *contentView = [UIView new];
+    contentView.backgroundColor = kWhiteColor;
+    contentView.frame = CGRectMake(20, kNavigationBarHeight, kScreenWidth-40, kScreenHeight-kNavigationBarHeight);
+    self.contentView = contentView;
+    [self.view addSubview:contentView];
+    
+    self.accountNmme = [[TLTextField alloc] initWithFrame:CGRectMake((kScreenWidth-120)/2, 20, 120, 44) leftTitle:@"" titleWidth:0 placeholder:@""];
+    self.accountNmme.textAlignment = NSTextAlignmentLeft;
+    self.accountNmme.text = @"待还款";
     self.accountNmme.backgroundColor = [UIColor whiteColor];
-    self.accountNmme.textColor = [UIColor orangeColor];
-
+    self.accountNmme.textColor = [UIColor blackColor];
     self.accountNmme.delegate = self;
-    if (self.renewalModel) {
-        self.accountNmme.text = [self.renewalModel.amount convertToSimpleRealMoney];
-        [self loadUrl];
-    }else{
-        [self loadUrl];
+    self.accountNmme.font = [UIFont systemFontOfSize:17];
+    [self.contentView addSubview:self.accountNmme];
+    UIImageView *image = [[UIImageView alloc] init];
+    image.frame = CGRectMake((kScreenWidth-120)/2-30, 20, 18, 18);
+    image.image = kImage(@"待支付-详情");
+    [self.contentView addSubview:image];
+    image.centerY = self.accountNmme.centerY;
+   
+    self.accountNameCn = [[TLTextField alloc] initWithFrame:CGRectMake((kScreenWidth-120)/2, self.accountNmme.yy+30, 120, 44) leftTitle:@"" titleWidth:0 placeholder:@""];
+    self.accountNameCn.textAlignment = NSTextAlignmentLeft;
 
-        self.accountNmme.text = [self.order.totalAmount convertToSimpleRealMoney];
-
-    }
-    
-    [self.view addSubview:self.accountNmme];
-    
-    UIView *line = [UIView new];
-    line.frame = CGRectMake(0, self.accountNmme.yy, kScreenWidth, 0.5);
-    line.backgroundColor = kLineColor;
-    [self.view addSubview:line];
-    
-    self.accountNameCn = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.accountNmme.yy+2, kScreenWidth, 50) leftTitle:@"还款期数:" titleWidth:100 placeholder:@""];
-    self.accountNameCn.text = [self.order.totalAmount convertToSimpleRealMoney];
-    
     self.accountNameCn.backgroundColor = [UIColor whiteColor];
     self.accountNameCn.delegate = self;
     self.accountNameCn.textColor = [UIColor orangeColor];
+    [self.accountNameCn setFont:[UIFont fontWithName:@"Helvetica-Bold" size:20]];
     if (self.renewalModel) {
-        self.accountNameCn.text = self.renewalModel.remark ;
-
+        self.accountNameCn.text = [self.renewalModel.amount convertToSimpleRealMoney];
+        [self loadUrl];
     }else{
-        self.accountNameCn.hidden = YES;
-
+        [self loadUrl];
+        
+        self.accountNameCn.text = [self.order.totalAmount convertToSimpleRealMoney];
+        
     }
-    
-    [self.view addSubview:self.accountNameCn];
-    
-    UIView *line1 = [UIView new];
-    line1.backgroundColor = kLineColor;
+    [self.contentView addSubview:self.accountNameCn];
+    UIView *lineView = [UIView new];
+    lineView.frame = CGRectMake(35, self.accountNameCn.yy, kScreenWidth-70, 2);
+    [self.view addSubview:lineView];
+    [self drawDashLine:lineView lineLength:2 lineSpacing:2 lineColor:kLineColor];
 
-    line1.frame = CGRectMake(0, self.accountNameCn.yy, kScreenWidth, 0.5);
-    [self.view addSubview:line1];
-   
-    UIButton *payBtn = [UIButton buttonWithTitle:@"确定还款" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:18 cornerRadius:22.5];
-    CGFloat f ;
+    UIImageView *zhifuImage =[[UIImageView alloc] init];
+    zhifuImage.frame = CGRectMake(15, lineView.yy, 49, 25);
+    zhifuImage.image = kImage(@"详情-支付背景");
+    [self.contentView addSubview:zhifuImage];
+    UIImageView *baoImage =[[UIImageView alloc] init];
+    baoImage.frame = CGRectMake(15, lineView.yy, 18, 13);
+    baoImage.image = kImage(@"支付宝-详情");
+    baoImage.center = zhifuImage.center;
+    [self.contentView addSubview:baoImage];
+    
+    UILabel *payLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:14];
+    [self.contentView addSubview:payLab];
+    payLab.frame = CGRectMake(zhifuImage.xx, lineView.yy, 120, 25);
+    payLab.text = @"支付宝";
+    payLab.textAlignment = NSTextAlignmentLeft;
+    [self.contentView addSubview:payLab];
+    UIView *lineView1 = [UIView new];
+    lineView1.backgroundColor = [UIColor blueColor];
+    
+    lineView1.frame = CGRectMake(15, zhifuImage.yy, kScreenWidth-70, 1);
+    [self.contentView addSubview:lineView1];
+    UIImageView *contentImage = [[UIImageView alloc] init];
+    contentImage.image = kImage(@"支付宝付款教程");
+    contentImage.frame = CGRectMake((kScreenWidth-198-40)/2, lineView1.yy, 198, 200);
+    [self.contentView addSubview:contentImage];
+    UIImageView *authImage = [[UIImageView alloc] init];
+    authImage.image = kImage(@"认证(1)");
+    authImage.frame = CGRectMake(25,  contentImage.yy+20, 20, 24);
+    [self.contentView addSubview:authImage];
+    UILabel *bottomLable = [UILabel labelWithBackgroundColor:kClearColor textColor:RGB(132, 161, 117) font:14];
+    [self.contentView addSubview:bottomLable];
+    bottomLable.frame = CGRectMake(50, contentImage.yy+10, kScreenWidth-120, 44);
+    bottomLable.text = @"收款账号经过平台认证,请放心付款";
+    bottomLable.textAlignment = NSTextAlignmentLeft;
+    bottomLable.centerY = authImage.centerY;
+    UIButton *payBtn = [UIButton buttonWithTitle:@"确定还款" titleColor:kWhiteColor backgroundColor:RGB(253, 151, 18) titleFont:18 cornerRadius:22.5];
     self.payBtn = payBtn;
-    
-    [payBtn addTarget:self action:@selector(repayment) forControlEvents:UIControlEventTouchUpInside];
-    
+  
+//    payBtn.frame = CGRectMake(40, kHeight(500), kScreenWidth-120, 45);
+    payBtn.layer.cornerRadius = 22.5;
+    payBtn.clipsToBounds = YES;
     [self.view addSubview:payBtn];
+    [payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bottomLable.mas_bottom).offset(10);
+        make.left.equalTo(@40);
+        make.width.equalTo(@(kScreenWidth-120));
+        make.height.equalTo(@45);
+    }];
+    [payBtn addTarget:self action:@selector(loadPayUrl) forControlEvents:UIControlEventTouchUpInside];
     return;
-
     self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) delegate:self dataSource:self];
     
     [self.view addSubview:self.tableView];
@@ -151,6 +212,31 @@
     self.tableView.tableFooterView = footerView;
     
 }
+- (void)drawDashLine:(UIView *)lineView lineLength:(int)lineLength lineSpacing:(int)lineSpacing lineColor:(UIColor *)lineColor {
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    [shapeLayer setBounds:lineView.bounds];
+    [shapeLayer setPosition:CGPointMake(CGRectGetWidth(lineView.frame) / 2, CGRectGetHeight(lineView.frame))];
+    [shapeLayer setFillColor:[UIColor clearColor].CGColor];
+    //  设置虚线颜色
+    [shapeLayer setStrokeColor:lineColor.CGColor];
+    //  设置虚线宽度
+    [shapeLayer setLineWidth:CGRectGetHeight(lineView.frame)];
+    [shapeLayer setLineJoin:kCALineJoinRound];
+    //  设置线宽，线间距
+    [shapeLayer setLineDashPattern:[NSArray arrayWithObjects:[NSNumber numberWithInt:lineLength], [NSNumber numberWithInt:lineSpacing], nil]];
+    //  设置路径
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, 0, 0);
+    CGPathAddLineToPoint(path, NULL, CGRectGetWidth(lineView.frame), 0);
+    [shapeLayer setPath:path];
+    CGPathRelease(path);
+    //  把绘制好的虚线添加上来
+    [lineView.layer addSublayer:shapeLayer];
+}
+- (void)backButtonClick
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)loadUrl
 {
@@ -164,7 +250,7 @@
         
         self.htmlStr = responseObject[@"data"][@"cvalue"];
         
-        [self initWebView];
+//        [self initWebView];
         
     } failure:^(NSError *error) {
         
@@ -274,6 +360,44 @@
     
 }
 
+- (void)loadPayUrl
+{
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = @"623218";
+    [http postWithSuccess:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSString *imageUrl = responseObject[@"data"][@"pict"];
+        imageUrl  = [imageUrl convertImageUrl];
+        CIDetector*detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{ CIDetectorAccuracy : CIDetectorAccuracyHigh }];
+            UIImageView *newImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+        
+        [newImage sd_setImageWithURL:[NSURL URLWithString:imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            CGImageRef ref = newImage.image.CGImage;
+            //2. 扫描获取的特征组
+            NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:ref]];
+            //3. 获取扫描结果
+            if (features.count>0) {
+                CIQRCodeFeature *feature = [features objectAtIndex:0];
+                NSString *scannedResult = feature.messageString;
+                self.scannedResult = scannedResult;
+                [self repayment];
+            }else{
+                [self loadPayUrl];
+            }
+        }];
+        
+        
+        
+        
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+        
+    }];
+
+}
+
 - (void)repayment {
     
     __block PayType type;
@@ -340,17 +464,34 @@
     }
     
     [http postWithSuccess:^(id responseObject) {
-        
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:self.scannedResult]]) {
+//            [self repayment];
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.scannedResult]];
+        }else{
+            [TLAlert alertWithInfo:@"请先下载支付宝App"];
+            return ;
+        }
 
-            [TLAlert alertWithSucces:@"还款成功"];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-//            if (self.paySucces) {
-//                self.paySucces();
-//            }
-        
+        [TLAlert alertWithSucces:@"申请还款成功"];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+
         
     } failure:^(NSError *error) {
         
+        NSLog(@"%@",error);
+        if ([error.mj_JSONString isEqualToString:@"此次分期还未到开始还款日期，无法提前还款"]) {
+            return ;
+        }else{
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:self.scannedResult]]) {
+//                [self repayment];
+                
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.scannedResult]];
+            }else{
+                [TLAlert alertWithInfo:@"请先下载支付宝App"];
+                return ;
+            }
+        }
         
     }];
     
@@ -534,14 +675,11 @@
 }
 
 - (void)dealloc {
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

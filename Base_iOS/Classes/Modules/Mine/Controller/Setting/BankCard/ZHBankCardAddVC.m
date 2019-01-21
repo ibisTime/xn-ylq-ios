@@ -225,6 +225,8 @@
             [TLAlert alertWithSucces:@"修改成功"];
             [TLUser user].bankcardFlag = @"1";
             [[TLUser user] updateUserInfo];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"CardIsChange"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         } else {
             
             [TLUser user].bankcardFlag = @"1";

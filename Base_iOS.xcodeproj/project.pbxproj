@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F19ABFB2201B1930090BF84 /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F19ABF32201B1930090BF84 /* Resource.bundle */; };
+		1F19ABFC2201B1930090BF84 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F19ABF42201B1930090BF84 /* opencv2.framework */; };
+		1F19ABFD2201B1930090BF84 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F19ABF52201B1930090BF84 /* libjpeg.a */; };
+		1F19ABFE2201B1940090BF84 /* libZQPlusFaceu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F19ABF82201B1930090BF84 /* libZQPlusFaceu.a */; };
+		1F19AC0E2201B1DB0090BF84 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F19AC012201B1DB0090BF84 /* SGQRCode.bundle */; };
+		1F19AC0F2201B1DB0090BF84 /* SGQRCodeHelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F19AC022201B1DB0090BF84 /* SGQRCodeHelperTool.m */; };
+		1F19AC102201B1DB0090BF84 /* SGQRCodeScanningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F19AC032201B1DB0090BF84 /* SGQRCodeScanningView.m */; };
+		1F19AC112201B1DB0090BF84 /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F19AC042201B1DB0090BF84 /* SGQRCodeScanManager.m */; };
+		1F19AC122201B1DB0090BF84 /* SGQRCodeGenerateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F19AC052201B1DB0090BF84 /* SGQRCodeGenerateManager.m */; };
+		1F19AC132201B1DB0090BF84 /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F19AC0B2201B1DB0090BF84 /* SGQRCodeAlbumManager.m */; };
+		1F19AC142201B1DB0090BF84 /* UIImage+ImageSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F19AC0C2201B1DB0090BF84 /* UIImage+ImageSize.m */; };
 		21026F441F413585005F121A /* QuotaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21026F431F413585005F121A /* QuotaModel.m */; };
 		21076C391F395E6700725C76 /* SettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 21076C361F395E6700725C76 /* SettingGroup.m */; };
 		21076C3A1F395E6700725C76 /* SettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21076C381F395E6700725C76 /* SettingModel.m */; };
@@ -418,13 +429,6 @@
 		297C531BBC795ED661A638F6 /* libPods-Base_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E041B8AEBBDCC121169B52FB /* libPods-Base_iOS.a */; };
 		B80CF0B421A5372A005D22E6 /* ContactService.m in Sources */ = {isa = PBXBuildFile; fileRef = B80CF0B321A5372A005D22E6 /* ContactService.m */; };
 		B80CF0B721A53B13005D22E6 /* TLQrCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B80CF0B621A53B11005D22E6 /* TLQrCodeVC.m */; };
-		B80CF0C721A53BDF005D22E6 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B80CF0BA21A53BDF005D22E6 /* SGQRCode.bundle */; };
-		B80CF0C821A53BDF005D22E6 /* SGQRCodeHelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B80CF0BB21A53BDF005D22E6 /* SGQRCodeHelperTool.m */; };
-		B80CF0C921A53BDF005D22E6 /* SGQRCodeScanningView.m in Sources */ = {isa = PBXBuildFile; fileRef = B80CF0BC21A53BDF005D22E6 /* SGQRCodeScanningView.m */; };
-		B80CF0CA21A53BDF005D22E6 /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B80CF0BD21A53BDF005D22E6 /* SGQRCodeScanManager.m */; };
-		B80CF0CB21A53BDF005D22E6 /* SGQRCodeGenerateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B80CF0BE21A53BDF005D22E6 /* SGQRCodeGenerateManager.m */; };
-		B80CF0CC21A53BDF005D22E6 /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B80CF0C421A53BDF005D22E6 /* SGQRCodeAlbumManager.m */; };
-		B80CF0CD21A53BDF005D22E6 /* UIImage+ImageSize.m in Sources */ = {isa = PBXBuildFile; fileRef = B80CF0C521A53BDF005D22E6 /* UIImage+ImageSize.m */; };
 		B867FDC9219EA653003C0447 /* NewAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B867FDC8219EA653003C0447 /* NewAuthVC.m */; };
 		B867FDCC219EA695003C0447 /* NewAuthTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B867FDCB219EA695003C0447 /* NewAuthTableView.m */; };
 		B867FDCF219EAF55003C0447 /* IDCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B867FDCE219EAF55003C0447 /* IDCardVC.m */; };
@@ -439,15 +443,32 @@
 		B8E4267121B520F5004F4D3B /* BouncedPasteView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E4267021B520F4004F4D3B /* BouncedPasteView.m */; };
 		B8E4267421B521BF004F4D3B /* ZJAnimationPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E4267321B521BF004F4D3B /* ZJAnimationPopView.m */; };
 		B8E4267721B52271004F4D3B /* UILable+convience.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E4267621B52271004F4D3B /* UILable+convience.m */; };
-		B8E51FED21C2012B0031E86F /* libZQPlusFaceu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E51FE721C2012A0031E86F /* libZQPlusFaceu.a */; };
-		B8E51FEE21C2012B0031E86F /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B8E51FEA21C2012A0031E86F /* Resource.bundle */; };
-		B8E51FEF21C2012B0031E86F /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E51FEB21C2012A0031E86F /* opencv2.framework */; };
-		B8E51FF021C2012B0031E86F /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E51FEC21C2012A0031E86F /* libjpeg.a */; };
 		B8EA85D221BA363C0003A27B /* MoxieAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EA85D121BA363C0003A27B /* MoxieAuthVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1D92F7998FE0FF842471AF8F /* Pods-Base_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Base_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Base_iOS/Pods-Base_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		1F19ABF32201B1930090BF84 /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
+		1F19ABF42201B1930090BF84 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		1F19ABF52201B1930090BF84 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjpeg.a; sourceTree = "<group>"; };
+		1F19ABF72201B1930090BF84 /* ZQFaceAuthEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQFaceAuthEngine.h; sourceTree = "<group>"; };
+		1F19ABF82201B1930090BF84 /* libZQPlusFaceu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libZQPlusFaceu.a; sourceTree = "<group>"; };
+		1F19ABF92201B1930090BF84 /* ZQFaceDataDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQFaceDataDefine.h; sourceTree = "<group>"; };
+		1F19ABFA2201B1930090BF84 /* ZQOCRScanEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQOCRScanEngine.h; sourceTree = "<group>"; };
+		1F19AC002201B1DB0090BF84 /* SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCode.h; sourceTree = "<group>"; };
+		1F19AC012201B1DB0090BF84 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
+		1F19AC022201B1DB0090BF84 /* SGQRCodeHelperTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeHelperTool.m; sourceTree = "<group>"; };
+		1F19AC032201B1DB0090BF84 /* SGQRCodeScanningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanningView.m; sourceTree = "<group>"; };
+		1F19AC042201B1DB0090BF84 /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
+		1F19AC052201B1DB0090BF84 /* SGQRCodeGenerateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeGenerateManager.m; sourceTree = "<group>"; };
+		1F19AC062201B1DB0090BF84 /* UIImage+ImageSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageSize.h"; sourceTree = "<group>"; };
+		1F19AC072201B1DB0090BF84 /* SGQRCodeAlbumManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeAlbumManager.h; sourceTree = "<group>"; };
+		1F19AC082201B1DB0090BF84 /* SGQRCodeHelperTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeHelperTool.h; sourceTree = "<group>"; };
+		1F19AC092201B1DB0090BF84 /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
+		1F19AC0A2201B1DB0090BF84 /* SGQRCodeScanManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanManager.h; sourceTree = "<group>"; };
+		1F19AC0B2201B1DB0090BF84 /* SGQRCodeAlbumManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeAlbumManager.m; sourceTree = "<group>"; };
+		1F19AC0C2201B1DB0090BF84 /* UIImage+ImageSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageSize.m"; sourceTree = "<group>"; };
+		1F19AC0D2201B1DB0090BF84 /* SGQRCodeGenerateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeGenerateManager.h; sourceTree = "<group>"; };
 		21026F421F413585005F121A /* QuotaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuotaModel.h; sourceTree = "<group>"; };
 		21026F431F413585005F121A /* QuotaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotaModel.m; sourceTree = "<group>"; };
 		21076C351F395E6700725C76 /* SettingGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingGroup.h; sourceTree = "<group>"; };
@@ -1237,20 +1258,6 @@
 		B80CF0B321A5372A005D22E6 /* ContactService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactService.m; sourceTree = "<group>"; };
 		B80CF0B521A53B10005D22E6 /* TLQrCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLQrCodeVC.h; sourceTree = "<group>"; };
 		B80CF0B621A53B11005D22E6 /* TLQrCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLQrCodeVC.m; sourceTree = "<group>"; };
-		B80CF0B921A53BDF005D22E6 /* SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCode.h; sourceTree = "<group>"; };
-		B80CF0BA21A53BDF005D22E6 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
-		B80CF0BB21A53BDF005D22E6 /* SGQRCodeHelperTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeHelperTool.m; sourceTree = "<group>"; };
-		B80CF0BC21A53BDF005D22E6 /* SGQRCodeScanningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanningView.m; sourceTree = "<group>"; };
-		B80CF0BD21A53BDF005D22E6 /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
-		B80CF0BE21A53BDF005D22E6 /* SGQRCodeGenerateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeGenerateManager.m; sourceTree = "<group>"; };
-		B80CF0BF21A53BDF005D22E6 /* UIImage+ImageSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageSize.h"; sourceTree = "<group>"; };
-		B80CF0C021A53BDF005D22E6 /* SGQRCodeAlbumManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeAlbumManager.h; sourceTree = "<group>"; };
-		B80CF0C121A53BDF005D22E6 /* SGQRCodeHelperTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeHelperTool.h; sourceTree = "<group>"; };
-		B80CF0C221A53BDF005D22E6 /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
-		B80CF0C321A53BDF005D22E6 /* SGQRCodeScanManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanManager.h; sourceTree = "<group>"; };
-		B80CF0C421A53BDF005D22E6 /* SGQRCodeAlbumManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeAlbumManager.m; sourceTree = "<group>"; };
-		B80CF0C521A53BDF005D22E6 /* UIImage+ImageSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageSize.m"; sourceTree = "<group>"; };
-		B80CF0C621A53BDF005D22E6 /* SGQRCodeGenerateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeGenerateManager.h; sourceTree = "<group>"; };
 		B867FDC7219EA653003C0447 /* NewAuthVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewAuthVC.h; sourceTree = "<group>"; };
 		B867FDC8219EA653003C0447 /* NewAuthVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewAuthVC.m; sourceTree = "<group>"; };
 		B867FDCA219EA695003C0447 /* NewAuthTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewAuthTableView.h; sourceTree = "<group>"; };
@@ -1274,13 +1281,6 @@
 		B8E4267321B521BF004F4D3B /* ZJAnimationPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJAnimationPopView.m; sourceTree = "<group>"; };
 		B8E4267521B52270004F4D3B /* UILable+convience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILable+convience.h"; sourceTree = "<group>"; };
 		B8E4267621B52271004F4D3B /* UILable+convience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILable+convience.m"; sourceTree = "<group>"; };
-		B8E51FE621C2012A0031E86F /* ZQFaceAuthEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQFaceAuthEngine.h; sourceTree = "<group>"; };
-		B8E51FE721C2012A0031E86F /* libZQPlusFaceu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libZQPlusFaceu.a; sourceTree = "<group>"; };
-		B8E51FE821C2012A0031E86F /* ZQFaceDataDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQFaceDataDefine.h; sourceTree = "<group>"; };
-		B8E51FE921C2012A0031E86F /* ZQOCRScanEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQOCRScanEngine.h; sourceTree = "<group>"; };
-		B8E51FEA21C2012A0031E86F /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
-		B8E51FEB21C2012A0031E86F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
-		B8E51FEC21C2012A0031E86F /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjpeg.a; sourceTree = "<group>"; };
 		B8EA85D021BA363C0003A27B /* MoxieAuthVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoxieAuthVC.h; sourceTree = "<group>"; };
 		B8EA85D121BA363C0003A27B /* MoxieAuthVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoxieAuthVC.m; sourceTree = "<group>"; };
 		E041B8AEBBDCC121169B52FB /* libPods-Base_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Base_iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1302,19 +1302,18 @@
 				211F66681F3AD9F700B10E9E /* WebKit.framework in Frameworks */,
 				211F66661F3AD9F100B10E9E /* CoreTelephony.framework in Frameworks */,
 				211F66641F3AD9E700B10E9E /* SystemConfiguration.framework in Frameworks */,
+				1F19ABFD2201B1930090BF84 /* libjpeg.a in Frameworks */,
 				21176EEA1F32FC9800C5217A /* CoreMotion.framework in Frameworks */,
-				B8E51FEF21C2012B0031E86F /* opencv2.framework in Frameworks */,
-				B8E51FF021C2012B0031E86F /* libjpeg.a in Frameworks */,
 				211F66621F3AD9D700B10E9E /* AssetsLibrary.framework in Frameworks */,
 				211F66601F3AD9C400B10E9E /* EventKit.framework in Frameworks */,
 				211F665E1F3AD9B300B10E9E /* MessageUI.framework in Frameworks */,
 				211F665C1F3AD9AB00B10E9E /* CFNetwork.framework in Frameworks */,
+				1F19ABFC2201B1930090BF84 /* opencv2.framework in Frameworks */,
 				216AB7F41F189F39006C26A1 /* libz.tbd in Frameworks */,
 				216AB7F21F189F30006C26A1 /* libc++.tbd in Frameworks */,
 				216AB7F01F189F22006C26A1 /* libsqlite3.tbd in Frameworks */,
 				216AB7EE1F189F11006C26A1 /* libresolv.tbd in Frameworks */,
 				216AB7EC1F189F04006C26A1 /* libstdc++.6.0.9.tbd in Frameworks */,
-				B8E51FED21C2012B0031E86F /* libZQPlusFaceu.a in Frameworks */,
 				21F82D8F1F1772BA0019B176 /* Fabric.framework in Frameworks */,
 				21F82D861F1772BA0019B176 /* libSocialQQ.a in Frameworks */,
 				21F82D981F1772BA0019B176 /* UMSocialNetwork.framework in Frameworks */,
@@ -1339,6 +1338,7 @@
 				21F82D831F1772BA0019B176 /* FBSDKLoginKit.framework in Frameworks */,
 				21F82D7C1F1772BA0019B176 /* libSocialAlipayShare.a in Frameworks */,
 				21F82D801F1772BA0019B176 /* libSocialEmail.a in Frameworks */,
+				1F19ABFE2201B1940090BF84 /* libZQPlusFaceu.a in Frameworks */,
 				21F82D8B1F1772BA0019B176 /* libWeiboSDK.a in Frameworks */,
 				21F82D841F1772BA0019B176 /* FBSDKShareKit.framework in Frameworks */,
 				21F82D811F1772BA0019B176 /* Bolts.framework in Frameworks */,
@@ -1359,6 +1359,57 @@
 				1D92F7998FE0FF842471AF8F /* Pods-Base_iOS.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		1F19ABF12201B1930090BF84 /* OCR */ = {
+			isa = PBXGroup;
+			children = (
+				1F19ABF22201B1930090BF84 /* OpenCV */,
+				1F19ABF62201B1930090BF84 /* Lib */,
+			);
+			path = OCR;
+			sourceTree = "<group>";
+		};
+		1F19ABF22201B1930090BF84 /* OpenCV */ = {
+			isa = PBXGroup;
+			children = (
+				1F19ABF32201B1930090BF84 /* Resource.bundle */,
+				1F19ABF42201B1930090BF84 /* opencv2.framework */,
+				1F19ABF52201B1930090BF84 /* libjpeg.a */,
+			);
+			path = OpenCV;
+			sourceTree = "<group>";
+		};
+		1F19ABF62201B1930090BF84 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				1F19ABF72201B1930090BF84 /* ZQFaceAuthEngine.h */,
+				1F19ABF82201B1930090BF84 /* libZQPlusFaceu.a */,
+				1F19ABF92201B1930090BF84 /* ZQFaceDataDefine.h */,
+				1F19ABFA2201B1930090BF84 /* ZQOCRScanEngine.h */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		1F19ABFF2201B1DB0090BF84 /* New Group1 */ = {
+			isa = PBXGroup;
+			children = (
+				1F19AC002201B1DB0090BF84 /* SGQRCode.h */,
+				1F19AC012201B1DB0090BF84 /* SGQRCode.bundle */,
+				1F19AC022201B1DB0090BF84 /* SGQRCodeHelperTool.m */,
+				1F19AC032201B1DB0090BF84 /* SGQRCodeScanningView.m */,
+				1F19AC042201B1DB0090BF84 /* SGQRCodeScanManager.m */,
+				1F19AC052201B1DB0090BF84 /* SGQRCodeGenerateManager.m */,
+				1F19AC062201B1DB0090BF84 /* UIImage+ImageSize.h */,
+				1F19AC072201B1DB0090BF84 /* SGQRCodeAlbumManager.h */,
+				1F19AC082201B1DB0090BF84 /* SGQRCodeHelperTool.h */,
+				1F19AC092201B1DB0090BF84 /* SGQRCodeScanningView.h */,
+				1F19AC0A2201B1DB0090BF84 /* SGQRCodeScanManager.h */,
+				1F19AC0B2201B1DB0090BF84 /* SGQRCodeAlbumManager.m */,
+				1F19AC0C2201B1DB0090BF84 /* UIImage+ImageSize.m */,
+				1F19AC0D2201B1DB0090BF84 /* SGQRCodeGenerateManager.h */,
+			);
+			path = "New Group1";
 			sourceTree = "<group>";
 		};
 		21026F411F413553005F121A /* Quota */ = {
@@ -2953,7 +3004,7 @@
 		21F82C911F17719D0019B176 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				B8E51FE521C2012A0031E86F /* V0.0.1.11.08 */,
+				1F19ABF12201B1930090BF84 /* OCR */,
 				211F66521F3AB9E600B10E9E /* 芝麻信用 */,
 				211F664D1F3AB9DB00B10E9E /* 芝麻认证 */,
 				21F82D241F1772BA0019B176 /* Alipay */,
@@ -3453,7 +3504,7 @@
 		21FB2FFA1F26E9EF0028ADEE /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				B80CF0B821A53BDF005D22E6 /* SQR */,
+				1F19ABFF2201B1DB0090BF84 /* New Group1 */,
 				21FB2FFB1F26E9EF0028ADEE /* AFNetworkingTool */,
 				21FB30061F26E9EF0028ADEE /* AppConfig */,
 				21FB30091F26E9EF0028ADEE /* Category */,
@@ -3800,41 +3851,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B80CF0B821A53BDF005D22E6 /* SQR */ = {
-			isa = PBXGroup;
-			children = (
-				B80CF0B921A53BDF005D22E6 /* SGQRCode.h */,
-				B80CF0BA21A53BDF005D22E6 /* SGQRCode.bundle */,
-				B80CF0BB21A53BDF005D22E6 /* SGQRCodeHelperTool.m */,
-				B80CF0BC21A53BDF005D22E6 /* SGQRCodeScanningView.m */,
-				B80CF0BD21A53BDF005D22E6 /* SGQRCodeScanManager.m */,
-				B80CF0BE21A53BDF005D22E6 /* SGQRCodeGenerateManager.m */,
-				B80CF0BF21A53BDF005D22E6 /* UIImage+ImageSize.h */,
-				B80CF0C021A53BDF005D22E6 /* SGQRCodeAlbumManager.h */,
-				B80CF0C121A53BDF005D22E6 /* SGQRCodeHelperTool.h */,
-				B80CF0C221A53BDF005D22E6 /* SGQRCodeScanningView.h */,
-				B80CF0C321A53BDF005D22E6 /* SGQRCodeScanManager.h */,
-				B80CF0C421A53BDF005D22E6 /* SGQRCodeAlbumManager.m */,
-				B80CF0C521A53BDF005D22E6 /* UIImage+ImageSize.m */,
-				B80CF0C621A53BDF005D22E6 /* SGQRCodeGenerateManager.h */,
-			);
-			path = SQR;
-			sourceTree = "<group>";
-		};
-		B8E51FE521C2012A0031E86F /* V0.0.1.11.08 */ = {
-			isa = PBXGroup;
-			children = (
-				B8E51FE621C2012A0031E86F /* ZQFaceAuthEngine.h */,
-				B8E51FE721C2012A0031E86F /* libZQPlusFaceu.a */,
-				B8E51FE821C2012A0031E86F /* ZQFaceDataDefine.h */,
-				B8E51FE921C2012A0031E86F /* ZQOCRScanEngine.h */,
-				B8E51FEA21C2012A0031E86F /* Resource.bundle */,
-				B8E51FEB21C2012A0031E86F /* opencv2.framework */,
-				B8E51FEC21C2012A0031E86F /* libjpeg.a */,
-			);
-			path = V0.0.1.11.08;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3868,7 +3884,7 @@
 				TargetAttributes = {
 					21F827CE1F1742E80019B176 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = VQPS9BLJYN;
+						DevelopmentTeam = 3ZCW993X44;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -3896,18 +3912,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B80CF0C721A53BDF005D22E6 /* SGQRCode.bundle in Resources */,
 				21FB30841F26E9EF0028ADEE /* photo_selected@2x.png in Resources */,
 				21F82D201F17719D0019B176 /* Main.storyboard in Resources */,
 				21FB30A01F26E9EF0028ADEE /* MovieAddComment1.xib in Resources */,
 				21FB30961F26E9EF0028ADEE /* QRCodebottomLeft@2x.png in Resources */,
 				211F66571F3AB9E600B10E9E /* H5Service.bundle in Resources */,
+				1F19AC0E2201B1DB0090BF84 /* SGQRCode.bundle in Resources */,
 				21F82D1C1F17719D0019B176 /* Assets.xcassets in Resources */,
 				21F82D961F1772BA0019B176 /* README.txt in Resources */,
 				21FB30991F26E9EF0028ADEE /* QRCodeTopLeft@2x.png in Resources */,
 				21F82D951F1772BA0019B176 /* read_me.txt in Resources */,
 				21FB308B1F26E9EF0028ADEE /* toolbar_icon_camera@3x.png in Resources */,
-				B8E51FEE21C2012B0031E86F /* Resource.bundle in Resources */,
+				1F19ABFB2201B1930090BF84 /* Resource.bundle in Resources */,
 				211F66701F3ADAB700B10E9E /* Poseidon.bundle in Resources */,
 				21FB30971F26E9EF0028ADEE /* QRCodebottomRight@2x.png in Resources */,
 				21FB30851F26E9EF0028ADEE /* photo_unselected@2x.png in Resources */,
@@ -4081,6 +4097,7 @@
 				215ABF1F1F93B46C00B3E3BF /* ZHEvaluateListVC.m in Sources */,
 				215ABF201F93B46C00B3E3BF /* ZHGoodsDetailVC.m in Sources */,
 				215ABF211F93B46C00B3E3BF /* ZHCategoryModel.m in Sources */,
+				1F19AC112201B1DB0090BF84 /* SGQRCodeScanManager.m in Sources */,
 				215ABF221F93B46C00B3E3BF /* ZHGoodsKeyValue.m in Sources */,
 				215ABF231F93B46C00B3E3BF /* CDGoodsParameterModel.m in Sources */,
 				215ABF241F93B46C00B3E3BF /* ZHEvaluateModel.m in Sources */,
@@ -4090,12 +4107,14 @@
 				215ABF281F93B46C00B3E3BF /* ZHEvaluateView.m in Sources */,
 				215ABF291F93B46C00B3E3BF /* ZHProgressView.m in Sources */,
 				215ABF2A1F93B46C00B3E3BF /* ZHDoubleTitleView.m in Sources */,
+				1F19AC132201B1DB0090BF84 /* SGQRCodeAlbumManager.m in Sources */,
 				215ABF2B1F93B46C00B3E3BF /* CDGoodsParameterChooseView.m in Sources */,
 				215ABF2C1F93B46C00B3E3BF /* CDSingleParamView.m in Sources */,
 				215ABF2D1F93B46C00B3E3BF /* ZHBuyerCell.m in Sources */,
 				215ABF2E1F93B46C00B3E3BF /* ZHGoodsCell.m in Sources */,
 				215ABF2F1F93B46C00B3E3BF /* ZHEvaluateCell.m in Sources */,
 				215ABF301F93B46C00B3E3BF /* ZHOrderGoodsCell.m in Sources */,
+				1F19AC122201B1DB0090BF84 /* SGQRCodeGenerateManager.m in Sources */,
 				215ABF311F93B46C00B3E3BF /* ZHParameterCell.m in Sources */,
 				215ABF321F93B46C00B3E3BF /* BaseAddressChooseView.m in Sources */,
 				215ABF331F93B46C00B3E3BF /* ZHShoppingCartCell.m in Sources */,
@@ -4106,9 +4125,7 @@
 				21570C1D1F5F939100E1C164 /* OfflineRepaymentVC.m in Sources */,
 				21FB30731F26E9EF0028ADEE /* TLAlert.m in Sources */,
 				21FB30BD1F26E9EF0028ADEE /* UIControl+Block.m in Sources */,
-				B80CF0C921A53BDF005D22E6 /* SGQRCodeScanningView.m in Sources */,
 				21A6B17F1F7F8020004FE27E /* TableViewModel.m in Sources */,
-				B80CF0CC21A53BDF005D22E6 /* SGQRCodeAlbumManager.m in Sources */,
 				212689691F3C45F100225267 /* BaseInfoModel.m in Sources */,
 				21FB30921F26E9EF0028ADEE /* SGScanningQRCodeVC.m in Sources */,
 				212170401F384E07007C9855 /* GoodView.m in Sources */,
@@ -4132,7 +4149,6 @@
 				21FB30AF1F26E9EF0028ADEE /* NSObject+Custom.m in Sources */,
 				21FB30751F26E9EF0028ADEE /* TLComposeTextView.m in Sources */,
 				21FB30711F26E9EF0028ADEE /* CustomDatePicker.m in Sources */,
-				B80CF0CA21A53BDF005D22E6 /* SGQRCodeScanManager.m in Sources */,
 				212170021F380FB9007C9855 /* BindMobileVC.m in Sources */,
 				B8BC7D9721AD35E500D111DC /* RenwalListView.m in Sources */,
 				2126897A1F3C463600225267 /* DataView.m in Sources */,
@@ -4145,6 +4161,7 @@
 				212170431F386C51007C9855 /* SelectMoneyVC.m in Sources */,
 				21FB307D1F26E9EF0028ADEE /* TLTextStorage.m in Sources */,
 				21F82C9B1F17719D0019B176 /* BaseModel.m in Sources */,
+				1F19AC102201B1DB0090BF84 /* SGQRCodeScanningView.m in Sources */,
 				21F82CA01F17719D0019B176 /* BaseCollectionView.m in Sources */,
 				2126894B1F3C44A100225267 /* BaseInfoVC.m in Sources */,
 				21570C2B1F5FD11800E1C164 /* RenewalModel.m in Sources */,
@@ -4184,6 +4201,7 @@
 				2126896A1F3C45F100225267 /* ZMScoreModel.m in Sources */,
 				21FB30B31F26E9EF0028ADEE /* NSString+TextView.m in Sources */,
 				21076C541F39634400725C76 /* ZHBankCardListVC.m in Sources */,
+				1F19AC142201B1DB0090BF84 /* UIImage+ImageSize.m in Sources */,
 				21158E431F1C4F4D00A07266 /* CustomTabBar.m in Sources */,
 				2122F7AC1F43E88500A379C7 /* LoanOrderDetailCell.m in Sources */,
 				214EED9F1F3EE888008A02F9 /* ManualAuditVC.m in Sources */,
@@ -4216,6 +4234,7 @@
 				21570C1A1F5F937A00E1C164 /* OnlineRepaymentVC.m in Sources */,
 				B80CF0B721A53B13005D22E6 /* TLQrCodeVC.m in Sources */,
 				21364E961F5D4FC900E94CEB /* NoticeDetailVC.m in Sources */,
+				1F19AC0F2201B1DB0090BF84 /* SGQRCodeHelperTool.m in Sources */,
 				212689671F3C45F100225267 /* DataModel.m in Sources */,
 				21FB30791F26E9EF0028ADEE /* TLPlaceholderView.m in Sources */,
 				212170051F380FB9007C9855 /* TLPwdRelatedVC.m in Sources */,
@@ -4275,7 +4294,6 @@
 				210FCCA21F3C8F1A005B8194 /* IdentifierVC.m in Sources */,
 				2126894C1F3C44A100225267 /* MXOperatorAuthVC.m in Sources */,
 				211709311F42FAF4002EBF79 /* LoanOrderListCell.m in Sources */,
-				B80CF0CB21A53BDF005D22E6 /* SGQRCodeGenerateManager.m in Sources */,
 				211709121F42C970002EBF79 /* MineHeaderView.m in Sources */,
 				21FB308E1F26E9EF0028ADEE /* SelectView.m in Sources */,
 				21FB30B21F26E9EF0028ADEE /* NSString+Extension.m in Sources */,
@@ -4308,7 +4326,6 @@
 				21158E491F1C502400A07266 /* BarButton.m in Sources */,
 				B80CF0B421A5372A005D22E6 /* ContactService.m in Sources */,
 				21570C231F5FCF4700E1C164 /* RenewalDetailVC.m in Sources */,
-				B80CF0C821A53BDF005D22E6 /* SGQRCodeHelperTool.m in Sources */,
 				211F70821F4D314D007BB638 /* MailListVC.m in Sources */,
 				212170041F380FB9007C9855 /* TLChangeMobileVC.m in Sources */,
 				21FB30831F26E9EF0028ADEE /* WTReTextField.m in Sources */,
@@ -4324,7 +4341,6 @@
 				21F82CA31F17719D0019B176 /* TLAuthHelper.m in Sources */,
 				21A6B17E1F7F801E004FE27E /* TableViewManager.m in Sources */,
 				21FB306F1F26E9EF0028ADEE /* Province.m in Sources */,
-				B80CF0CD21A53BDF005D22E6 /* UIImage+ImageSize.m in Sources */,
 				21FB309D1F26E9EF0028ADEE /* ShareFunction.m in Sources */,
 				21FB30B51F26E9EF0028ADEE /* LKViewAttribute.m in Sources */,
 				21570C341F5FD54C00E1C164 /* RenewalDetailTableView.m in Sources */,
@@ -4454,7 +4470,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VQPS9BLJYN;
+				DEVELOPMENT_TEAM = 3ZCW993X44;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4470,6 +4486,7 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/芝麻信用",
 					"$(PROJECT_DIR)/Base_iOS/Extension/V0.0.1.11.08",
 					"\"$(SRCROOT)/Base_iOS/Extension/V0.0.1.11.08/opencv2.framework\"",
+					"$(PROJECT_DIR)/Base_iOS/Extension/OCR/OpenCV",
 				);
 				GCC_PREFIX_HEADER = Base_iOS/Resource/BasePrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/Base_iOS/Resource/Info.plist";
@@ -4491,6 +4508,8 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/Base_iOS/Extension/MoxieSDK",
 					"$(PROJECT_DIR)/Base_iOS/Extension/V0.0.1.11.08",
+					"$(PROJECT_DIR)/Base_iOS/Extension/OCR/OpenCV",
+					"$(PROJECT_DIR)/Base_iOS/Extension/OCR/Lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.shuang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4506,7 +4525,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VQPS9BLJYN;
+				DEVELOPMENT_TEAM = 3ZCW993X44;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4522,6 +4541,7 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/芝麻信用",
 					"$(PROJECT_DIR)/Base_iOS/Extension/V0.0.1.11.08",
 					"\"$(SRCROOT)/Base_iOS/Extension/V0.0.1.11.08/opencv2.framework\"",
+					"$(PROJECT_DIR)/Base_iOS/Extension/OCR/OpenCV",
 				);
 				GCC_PREFIX_HEADER = Base_iOS/Resource/BasePrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/Base_iOS/Resource/Info.plist";
@@ -4543,6 +4563,8 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/Base_iOS/Extension/MoxieSDK",
 					"$(PROJECT_DIR)/Base_iOS/Extension/V0.0.1.11.08",
+					"$(PROJECT_DIR)/Base_iOS/Extension/OCR/OpenCV",
+					"$(PROJECT_DIR)/Base_iOS/Extension/OCR/Lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.shuang;
 				PRODUCT_NAME = "$(TARGET_NAME)";

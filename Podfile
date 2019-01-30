@@ -19,7 +19,7 @@ target ‘Base_iOS’ do
     pod 'TZImagePickerController',  '1.8.0'
     #七牛云
     pod 'Qiniu',                    '7.1.5'
-    pod 'Realm',                    '2.8.0'
+ #   pod 'Realm'
     pod 'FDFullscreenPopGesture',   '1.1'
     pod 'CDCommon', '1.0.3'
     pod 'MoxieSDK-iOS'

@@ -287,7 +287,6 @@
 		21F82CA41F17719D0019B176 /* TLCurrencyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F82B7A1F17719D0019B176 /* TLCurrencyHelper.m */; };
 		21F82CA51F17719D0019B176 /* TLWXManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F82B7C1F17719D0019B176 /* TLWXManager.m */; };
 		21F82D1C1F17719D0019B176 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21F82C931F17719D0019B176 /* Assets.xcassets */; };
-		21F82D1D1F17719D0019B176 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21F82C951F17719D0019B176 /* Info.plist */; };
 		21F82D1E1F17719D0019B176 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21F82C961F17719D0019B176 /* LaunchScreen.storyboard */; };
 		21F82D1F1F17719D0019B176 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F82C971F17719D0019B176 /* main.m */; };
 		21F82D201F17719D0019B176 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21F82C981F17719D0019B176 /* Main.storyboard */; };
@@ -3932,7 +3931,6 @@
 				21F82D1E1F17719D0019B176 /* LaunchScreen.storyboard in Resources */,
 				21F82D8C1F1772BA0019B176 /* WeiboSDK.bundle in Resources */,
 				211F66501F3AB9DB00B10E9E /* ZMCert.bundle in Resources */,
-				21F82D1D1F17719D0019B176 /* Info.plist in Resources */,
 				21FB306C1F26E9EF0028ADEE /* address.txt in Resources */,
 				21F82D771F1772BA0019B176 /* AlipaySDK.bundle in Resources */,
 				21FB309A1F26E9EF0028ADEE /* QRCodeTopRight@2x.png in Resources */,
